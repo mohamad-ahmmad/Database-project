@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="601.0" prefWidth="188.0" styleClass="Slide" stylesheets="@../../CSS/OwnerPage/Owner-form.css">
          <children>
@@ -20,7 +19,7 @@
                </image>
             </ImageView>
             <Separator layoutX="-12.0" layoutY="143.0" prefWidth="200.0" />
-            <Label alignment="CENTER" layoutY="196.0" prefHeight="38.0" prefWidth="188.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Home" textFill="#f3c108">
+            <Label alignment="CENTER" layoutY="196.0" prefHeight="38.0" prefWidth="188.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Home" textFill="#f8a918">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -35,7 +34,7 @@
                   <Insets right="70.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" layoutY="251.0" prefHeight="38.0" prefWidth="188.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Profits" textFill="#f3c108">
+            <Label alignment="CENTER" layoutY="251.0" prefHeight="38.0" prefWidth="188.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Profits" textFill="#f8a918">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -50,7 +49,22 @@
                   <Insets right="70.0" />
                </padding>
             </Label>
-            <Label alignment="CENTER" layoutY="308.0" prefHeight="38.0" prefWidth="182.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Departements" textFill="#f3c108">
+            <Label alignment="CENTER" layoutY="308.0" prefHeight="38.0" prefWidth="182.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Departements" textFill="#f8a918">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../ICONS/OwnerPage/Departments.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="20.0" right="40.0" />
+               </padding>
+            </Label>
+            <Label alignment="CENTER" layoutX="3.0" layoutY="365.0" prefHeight="38.0" prefWidth="182.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Departements" textFill="#f8a918">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -68,5 +82,10 @@
          </children>
       </AnchorPane>
       <MFXLegacyTableView layoutX="188.0" layoutY="143.0" prefHeight="457.0" prefWidth="612.0" styleClass="Table" stylesheets="@../../CSS/OwnerPage/Owner-form.css" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="600.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../ICONS/login/Daragmeh.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
