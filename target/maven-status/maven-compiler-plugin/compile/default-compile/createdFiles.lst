@@ -1,3 +1,3 @@
 module-info.class
-com\app\garage\App.class
 com\app\garage\controllers\login\LoginController.class
+com\app\garage\App.class

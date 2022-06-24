@@ -13,11 +13,12 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
- 
+    
+    //public static Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/login/login-form.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/owner-form.fxml"));
         Parent root = loader.load();
         stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/ICONS/AppIcon/main.png"))));
         stage.setTitle("Daragmeh Center");
