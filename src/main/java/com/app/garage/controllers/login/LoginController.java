@@ -21,6 +21,16 @@ import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+
+
+
+
+/**
+ *
+ * @author USER-M
+ */
+
+
 public class LoginController implements Initializable {
     
     @FXML
