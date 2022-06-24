@@ -7,6 +7,9 @@
     -fx-border-color: Black;
     -fx-border-color: #F8A918;
 }
+.labels:pressed{
+    -fx-background-color: #202020;
+}
 .Table{
       -fx-background-color: #2A398C;
 }
