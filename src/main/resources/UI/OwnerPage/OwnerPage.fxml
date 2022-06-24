@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyTableView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
@@ -9,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="601.0" prefWidth="188.0" styleClass="Slide" stylesheets="@../../CSS/OwnerPage/Owner-form.css">
          <children>
@@ -33,6 +35,9 @@
                <padding>
                   <Insets right="70.0" />
                </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
             <Label alignment="CENTER" layoutY="251.0" prefHeight="38.0" prefWidth="188.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Profits" textFill="#f8a918">
                <font>
@@ -48,6 +53,9 @@
                <padding>
                   <Insets right="70.0" />
                </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
             <Label alignment="CENTER" layoutY="308.0" prefHeight="38.0" prefWidth="182.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Departements" textFill="#f8a918">
                <font>
@@ -63,6 +71,9 @@
                <padding>
                   <Insets left="20.0" right="40.0" />
                </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
             <Label alignment="CENTER" layoutX="3.0" layoutY="365.0" prefHeight="38.0" prefWidth="182.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Departements" textFill="#f8a918">
                <font>
@@ -78,14 +89,15 @@
                <padding>
                   <Insets left="20.0" right="40.0" />
                </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
+            <Label layoutX="45.0" layoutY="488.0" prefHeight="26.0" prefWidth="85.0" text="Contact Us" textFill="WHITE" />
+            <FontAwesomeIcon fill="WHITE" glyphName="PHONE" layoutX="16.0" layoutY="546.0" selectionFill="BLACK" />
+            <Label layoutX="30.0" layoutY="534.0" text="065008383/0775008282" textFill="WHITE" />
          </children>
       </AnchorPane>
       <MFXLegacyTableView layoutX="188.0" layoutY="143.0" prefHeight="457.0" prefWidth="612.0" styleClass="Table" stylesheets="@../../CSS/OwnerPage/Owner-form.css" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="600.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../ICONS/login/Daragmeh.jpg" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
