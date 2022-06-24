@@ -4,6 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,7 +19,10 @@
                   <Image url="@../../ICONS/AppIcon/Main-noBackground.png" />
                </image>
             </ImageView>
-            <Separator layoutX="-12.0" layoutY="143.0" prefWidth="200.0" />
+            <Separator layoutX="-12.0" layoutY="144.0" prefWidth="200.0">
+               <effect>
+                  <ColorAdjust brightness="1.0" contrast="1.0" hue="1.0" saturation="1.0" />
+               </effect></Separator>
             <Label alignment="CENTER" layoutY="196.0" prefHeight="40.0" prefWidth="188.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="   Home" textFill="#f8a918">
                <font>
                   <Font name="Arial" size="14.0" />
@@ -154,7 +158,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="188.0" prefHeight="144.0" prefWidth="880.0" styleClass="Slide" stylesheets="@../../CSS/OwnerPage/Owner-form.css">
+      <AnchorPane layoutX="187.0" prefHeight="144.0" prefWidth="894.0" styleClass="Slide" stylesheets="@../../CSS/OwnerPage/Owner-form.css">
          <children>
             <ImageView fitHeight="69.0" fitWidth="152.0" layoutX="714.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
                <image>
