@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-image: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-image: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane prefHeight="601.0" prefWidth="188.0" styleClass="Slide" stylesheets="@../../CSS/OwnerPage/Owner-form.css">
          <children>
@@ -82,10 +82,5 @@
          </children>
       </AnchorPane>
       <MFXLegacyTableView layoutX="188.0" layoutY="143.0" prefHeight="457.0" prefWidth="612.0" styleClass="Table" stylesheets="@../../CSS/OwnerPage/Owner-form.css" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="600.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../ICONS/login/Daragmeh.jpg" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

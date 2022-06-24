@@ -39,7 +39,7 @@ Main-colours:
      -fx-border-color:#333333;
      -fx-border-width:3;
      -fx-text-fill:#333333;
-     
+}
 
 .login-btn:hover{
      -fx-background-color: black;
@@ -52,11 +52,7 @@ Main-colours:
 
 
 }
-.underline {
-    -fx-border-color: skyblue;
-   -fx-border-width: 0  0 1.5 0;    
-    
-}
+
 
 .banner {
     

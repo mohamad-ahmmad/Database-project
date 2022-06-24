@@ -72,7 +72,7 @@
                         <Insets left="40.0" />
                      </padding>
                      <textFill>
-                        <Color red="0.5392228960990906" green="0.6105263233184814" blue="0.22159844636917114" opacity="0.8700000047683716" />
+                        <Color red="0.010526316240429878" green="0.010526316240429878" blue="0.010526316240429878" opacity="0.8700000047683716" />
                      </textFill>
                   </MFXTextField>
                   <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="5.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
