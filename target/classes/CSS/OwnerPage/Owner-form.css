@@ -1,0 +1,11 @@
+.Slide{
+    -fx-background-color: #333333;
+}
+.labels:hover{
+    -fx-background-color: #2d2c2c;
+    -fx-border-width: 0 0 0 5;
+    -fx-border-color: Black;
+}
+.Table{
+      -fx-background-color: #2A398C;
+}

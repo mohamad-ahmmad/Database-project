@@ -33,12 +33,24 @@ Main-colours:
     -fx-text-fill:white;
 
 }
+
 .login-btn:pressed{
      -fx-background-color: white;
      -fx-border-color:#333333;
      -fx-border-width:3;
      -fx-text-fill:#333333;
      
+
+.login-btn:hover{
+     -fx-background-color: black;
+}
+
+.login-btn:pressed{
+    -fx-background-color: #ffffff; 
+    -fx-text-fill:#333333;
+    -fx-border-color:#333333;
+
+
 }
 .underline {
     -fx-border-color: skyblue;
