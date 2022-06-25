@@ -1,5 +1,6 @@
 package com.app.garage.controllers.Owner;
 
+import com.app.garage.App;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import javafx.animation.KeyFrame;
@@ -36,7 +37,9 @@ public class OwnerController {
     @FXML
     private AnchorPane viewPanel;
     
-    private Stage logout;
+    
+    
+    private Stage currentStage;
 
     @FXML
     void openProfitsPanel(MouseEvent event) throws IOException {
@@ -101,8 +104,9 @@ public class OwnerController {
         viewPanel.getChildren().add(root);
     }
      @FXML
-      void Logout() throws IOException {
-           logout = new Stage();
+      void Logout(MouseEvent e) throws IOException {
+          currentStage = (Stage)((Node) e.getSource()).getScene().getWindow();
+           Stage logout = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Logout.fxml"));
             Scene logoutScene = new Scene(root);
             
@@ -131,8 +135,15 @@ public class OwnerController {
     }
         @FXML
     void Confirm(ActionEvent event) throws IOException {
-     
-
+         //Closing Logout Stage
+       Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+        
+       Parent root = FXMLLoader.load(getClass().getResource("/UI/login/login-form.fxml"));
+       Scene temp = new Scene(root);
+       App.setMainScene(temp);
+       
+      
     }
 
     

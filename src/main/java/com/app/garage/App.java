@@ -14,18 +14,24 @@ import javafx.stage.Stage;
 public class App extends Application {
 
     
-    //public static Stage stage;
-
+    private static Stage ss;
+    
+    public static void setMainScene(Scene temp){
+        ss.setScene(temp);
+    }
+    
     @Override
     public void start(Stage stage) throws Exception {
+        stage.close();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/owner-form.fxml"));
         Parent root = loader.load();
-        stage.getIcons().add(new Image(String.valueOf(getClass().getResource("/ICONS/AppIcon/main.png"))));
-        stage.setTitle("Daragmeh Center");
+        ss = new Stage();
+        ss.getIcons().add(new Image(String.valueOf(getClass().getResource("/ICONS/AppIcon/main.png"))));
+        ss.setTitle("Daragmeh Center");
         Scene s = new Scene(root);
-        stage.setScene(s);
-        stage.setResizable(false);
-        stage.show();
+        ss.setScene(s);
+        ss.setResizable(false);
+        ss.show();
     }
   
     public static void main(String[] args) {
