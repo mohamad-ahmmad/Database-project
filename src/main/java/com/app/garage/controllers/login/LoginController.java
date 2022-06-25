@@ -4,7 +4,9 @@
  */
 package com.app.garage.controllers.login;
 
+import com.app.garage.App;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.io.IOException;
 
 import java.net.URL;
 
@@ -14,7 +16,10 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -71,9 +76,12 @@ public class LoginController implements Initializable {
     }
     
    @FXML
-   public void loginPressed(ActionEvent e){
-       
-       
+   public void loginPressed(ActionEvent e) throws IOException{
+       /*
+       Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
+       Scene temp = new Scene(root);
+       App.stage.setScene(temp);
+       */
        
        
        

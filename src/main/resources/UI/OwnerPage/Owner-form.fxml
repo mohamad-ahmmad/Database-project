@@ -28,8 +28,10 @@
                   </DropShadow>
                </effect>
             </ImageView>
+
             <Separator layoutY="143.0" prefWidth="190.0" />
-            <Label fx:id="labelHome" alignment="CENTER" layoutY="196.0" onMouseClicked="#openHomePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="   Home" textFill="#f8a918">
+            <Label alignment="CENTER" layoutY="196.0" onMouseClicked="#openHomePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="   Home" textFill="#f8a918">
+
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -162,7 +164,9 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
+
             <Label layoutX="33.0" layoutY="102.0" text="Welcome, Ahmad" textFill="WHITE">
+
                <font>
                   <Font size="14.0" />
                </font>
