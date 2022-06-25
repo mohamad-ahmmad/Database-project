@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="120.0" prefWidth="300.0" styleClass="panel" stylesheets="@../../CSS/OwnerPage/Logout.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.OwnerController">
+   <children>
+      <AnchorPane prefHeight="123.0" prefWidth="391.0" style="-fx-border-color: #F8A918;">
+         <children>
+            <Label layoutX="163.0" layoutY="17.0" styleClass="loggingOut" stylesheets="@../../CSS/OwnerPage/Logout.css" text="Logging out">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="130.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../ICONS/OwnerPage/confirm.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="48.0" layoutY="42.0" prefHeight="30.0" prefWidth="295.0" text="Are you sure you want to logout?" textFill="#f8a918">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btnConfirm" layoutX="61.0" layoutY="79.0" onAction="#Confirm" prefHeight="27.0" prefWidth="85.0" styleClass="confirmBtn" stylesheets="@../../CSS/OwnerPage/Logout.css" text="Confirm">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnCancel" layoutX="249.0" layoutY="79.0" onAction="#Cancel" prefHeight="27.0" prefWidth="85.0" styleClass="cancelBtn" stylesheets="@../../CSS/OwnerPage/Logout.css" text="Cancel">
+               <font>
+                  <Font name="Arial" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

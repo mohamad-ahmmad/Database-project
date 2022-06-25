@@ -17,3 +17,10 @@
     -fx-background-radius:5;
     -fx-border-radius:5;
 }
+.devs{
+     -fx-background-color: transparent;
+}
+.devs:hover{
+    -fx-text-fill: #F8A918;
+    -fx-underline: true;
+}

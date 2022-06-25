@@ -29,7 +29,7 @@
                </effect>
             </ImageView>
             <Separator layoutY="143.0" prefWidth="190.0" />
-            <Label alignment="CENTER" layoutY="196.0" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="   Home" textFill="#f8a918">
+            <Label fx:id="labelHome" alignment="CENTER" layoutY="196.0" onMouseClicked="#openHomePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="   Home" textFill="#f8a918">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -65,7 +65,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label alignment="CENTER" layoutY="308.0" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="  Departements" textFill="#f8a918">
+            <Label fx:id="labelDepartments" alignment="CENTER" layoutY="308.0" onMouseClicked="#openDepartmentPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="  Departements" textFill="#f8a918">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -83,7 +83,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label alignment="CENTER" layoutY="365.0" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="  Employees" textFill="#f8a918">
+            <Label fx:id="labelEmployees" alignment="CENTER" layoutY="365.0" onMouseClicked="#openEmployeePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="  Employees" textFill="#f8a918">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -101,7 +101,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label alignment="CENTER" layoutY="598.0" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Mohammad Ahmad" textFill="WHITE">
+            <Label alignment="CENTER" layoutY="598.0" prefHeight="40.0" prefWidth="190.0" styleClass="devs" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Mohammad Ahmad" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -126,7 +126,7 @@
                <font>
                   <Font name="System Bold Italic" size="10.0" />
                </font></Label>
-            <Label alignment="CENTER" layoutY="628.0" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Mohammad Bdair" textFill="WHITE">
+            <Label alignment="CENTER" layoutY="628.0" prefHeight="40.0" prefWidth="190.0" styleClass="devs" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Mohammad Bdair" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -144,7 +144,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label alignment="CENTER" layoutY="419.0" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="  Log out" textFill="#f8a918">
+            <Label fx:id="labelLogout" alignment="CENTER" layoutY="419.0" onMouseClicked="#Logout" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="  Log out" textFill="#f8a918">
                <font>
                   <Font name="Arial" size="14.0" />
                </font>
@@ -172,6 +172,13 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="viewPanel" layoutX="190.0" prefHeight="700.0" prefWidth="810.0" />
+      <AnchorPane fx:id="viewPanel" layoutX="190.0" prefHeight="700.0" prefWidth="810.0">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="776.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../ICONS/OwnerPage/Notification.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
    </children>
 </AnchorPane>

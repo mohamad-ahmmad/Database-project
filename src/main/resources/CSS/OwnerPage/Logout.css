@@ -1,0 +1,25 @@
+.confirmBtn{
+    -fx-background-color: #F8A918;
+    -fx-text-fill: white;
+}
+.cancelBtn{
+    -fx-background-color: white;
+    -fx-text-fill: #F8A918;
+}
+.panel{
+    -fx-background-color: #333333;
+    -fx-alignment: center ;
+}
+.loggingOut{
+    -fx-text-fill: white;
+}
+.confirmBtn:pressed{
+     -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+.cancelBtn:pressed{
+     -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
