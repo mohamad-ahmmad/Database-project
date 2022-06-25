@@ -35,6 +35,8 @@ public class OwnerController {
 
     @FXML
     private AnchorPane viewPanel;
+    
+    private Stage logout;
 
     @FXML
     void openProfitsPanel(MouseEvent event) throws IOException {
@@ -100,7 +102,13 @@ public class OwnerController {
     }
      @FXML
       void Logout() throws IOException {
-          Timeline t = new Timeline();
+           logout = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Logout.fxml"));
+            Scene logoutScene = new Scene(root);
+            
+       logout.setScene(logoutScene);
+       logout.show();
+       /*   Timeline t = new Timeline();
         Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Logout.fxml"));
         root.scaleXProperty().set(0.8);
         root.scaleYProperty().set(0.8);
@@ -113,12 +121,13 @@ public class OwnerController {
         mainPanel.getChildren().add(root);
         Node node = mainPanel.getChildren().get(2);
         node.setTranslateX(400);
-        node.setTranslateY(250);
+        node.setTranslateY(250);*/
     }
 
      @FXML
     void Cancel(ActionEvent e) throws IOException {
-       mainPanel.getChildren().remove(2);
+        Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+        stage.close();
     }
         @FXML
     void Confirm(ActionEvent event) throws IOException {
