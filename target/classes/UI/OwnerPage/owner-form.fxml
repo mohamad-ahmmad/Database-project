@@ -5,7 +5,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
@@ -18,15 +17,6 @@
    <children>
       <AnchorPane fx:id="menuPanel" prefHeight="700.0" prefWidth="190.0">
          <children>
-            <AnchorPane prefHeight="700.0" prefWidth="190.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <effect>
-                  <DropShadow height="0.0" radius="18.785" spread="0.39" width="77.14">
-                     <color>
-                        <Color red="0.410526305437088" green="0.410526305437088" blue="0.410526305437088" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </AnchorPane>
             <ImageView fitHeight="80.0" fitWidth="58.0" layoutX="57.0" layoutY="13.0" pickOnBounds="true">
                <image>
                   <Image url="@../../ICONS/AppIcon/Main-noBackground.png" />
@@ -190,9 +180,6 @@
                      <image>
                         <Image url="@../../ICONS/OwnerPage/logout.png" />
                      </image>
-                     <effect>
-                        <ColorAdjust brightness="-1.0" contrast="1.0" />
-                     </effect>
                   </ImageView>
                </graphic>
                <padding>

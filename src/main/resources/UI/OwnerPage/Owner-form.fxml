@@ -5,7 +5,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
@@ -44,7 +43,7 @@
             <Label fx:id="labelHome" alignment="CENTER" layoutY="196.0" onMouseClicked="#openHomePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Home" textFill="#f8a918">
 
                <font>
-                  <Font name="Berlin Sans FB" size="14.0" />
+                  <Font name="Berlin Sans FB" size="15.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
@@ -190,9 +189,6 @@
                      <image>
                         <Image url="@../../ICONS/OwnerPage/logout.png" />
                      </image>
-                     <effect>
-                        <ColorAdjust brightness="-1.0" contrast="1.0" />
-                     </effect>
                   </ImageView>
                </graphic>
                <padding>
