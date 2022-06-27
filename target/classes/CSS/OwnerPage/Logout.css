@@ -14,12 +14,8 @@
     -fx-text-fill: white;
 }
 .confirmBtn:pressed{
-     -fx-padding: 5px;
-    -fx-border-insets: 5px;
-    -fx-background-insets: 5px;
+
 }
 .cancelBtn:pressed{
-     -fx-padding: 5px;
-    -fx-border-insets: 5px;
-    -fx-background-insets: 5px;
+
 }

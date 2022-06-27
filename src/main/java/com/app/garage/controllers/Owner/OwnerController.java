@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class OwnerController {
@@ -24,9 +25,16 @@ public class OwnerController {
 
     @FXML
     private JFXButton btnConfirm;
-
+    @FXML
+    private Label labelEmployees;
+    @FXML
+    private Label labelDepartments;
+    @FXML
+    private Label labelLogout;
     @FXML
     private Label labelProfits;
+    @FXML
+    private Label labelHome;
 
     @FXML
     private AnchorPane mainPanel;
@@ -43,6 +51,8 @@ public class OwnerController {
 
     @FXML
     void openProfitsPanel(MouseEvent event) throws IOException {
+                clearStyles();
+        labelProfits.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
          Timeline t = new Timeline();
         Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/ProfitsPage.fxml"));
         root.scaleXProperty().set(0.8);
@@ -60,6 +70,9 @@ public class OwnerController {
     }
     @FXML
     void openHomePanel() throws IOException {
+               clearStyles();
+        labelHome.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
+       
      Timeline t = new Timeline();
         Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/HomePage.fxml"));
         root.scaleXProperty().set(0.8);
@@ -73,8 +86,17 @@ public class OwnerController {
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
     }
+    private void clearStyles(){
+        labelHome.setStyle("");
+        labelProfits.setStyle("");
+        labelDepartments.setStyle("");
+        labelLogout.setStyle("");
+        labelEmployees.setStyle("");
+    }
     @FXML
     void openDepartmentPanel() throws IOException {
+        clearStyles();
+        labelDepartments.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
          Timeline t = new Timeline();
         Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/DepartmentsPage.fxml"));
         root.scaleXProperty().set(0.8);
@@ -90,6 +112,8 @@ public class OwnerController {
     }
     @FXML
      void openEmployeePanel() throws IOException {
+                 clearStyles();
+        labelEmployees.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
           Timeline t = new Timeline();
         Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/EmployeesPage.fxml"));
         root.scaleXProperty().set(0.8);
@@ -105,11 +129,13 @@ public class OwnerController {
     }
      @FXML
       void Logout(MouseEvent e) throws IOException {
+                  clearStyles();
+        labelLogout.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
           currentStage = (Stage)((Node) e.getSource()).getScene().getWindow();
            Stage logout = new Stage();
+           logout.initStyle(StageStyle.UNDECORATED);
             Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Logout.fxml"));
             Scene logoutScene = new Scene(root);
-            
        logout.setScene(logoutScene);
        logout.show();
        /*   Timeline t = new Timeline();
@@ -132,13 +158,15 @@ public class OwnerController {
     void Cancel(ActionEvent e) throws IOException {
         Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
         stage.close();
+         Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
+       Scene temp = new Scene(root);
+         App.setMainScene(temp);
     }
         @FXML
     void Confirm(ActionEvent event) throws IOException {
          //Closing Logout Stage
        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.close();
-        
        Parent root = FXMLLoader.load(getClass().getResource("/UI/login/login-form.fxml"));
        Scene temp = new Scene(root);
        App.setMainScene(temp);

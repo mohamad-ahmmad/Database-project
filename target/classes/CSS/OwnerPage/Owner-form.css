@@ -1,17 +1,19 @@
 .Slide{
-    -fx-background-color: #333333;
+    -fx-background-color: -fx-primaryColor;
+}
+.labels{
+    -fx-text-fill: -fx-labelColor;
 }
 .labels:hover{
-    -fx-background-color: #2d2c2c;
+    -fx-background-color: -fx-hoverColor;
     -fx-border-width: 0 0 0 5;
-    -fx-border-color: Black;
-    -fx-border-color: #F8A918;
+    -fx-border-color: -fx-subColor;
 }
 .labels:pressed{
-    -fx-background-color: #202020;
+    -fx-background-color: -fx-pressedColor;
 }
 .Table{
-      -fx-background-color: #2A398C;
+      -fx-background-color: -fx-primaryColor;
 }
 .Search{
     -fx-background-radius:5;
@@ -19,8 +21,9 @@
 }
 .devs{
      -fx-background-color: transparent;
+     -fx-text-fill: -fx-labelColor;
 }
 .devs:hover{
-    -fx-text-fill: #F8A918;
+    -fx-text-fill: -fx-subColor;
     -fx-underline: true;
 }

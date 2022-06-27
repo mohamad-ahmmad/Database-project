@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
@@ -14,8 +16,17 @@
 
 <AnchorPane id="AnchorPane" fx:id="mainPanel" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.OwnerController">
    <children>
-      <AnchorPane fx:id="menuPanel" prefHeight="700.0" prefWidth="190.0" styleClass="Slide" stylesheets="@../../CSS/OwnerPage/Owner-form.css">
+      <AnchorPane fx:id="menuPanel" prefHeight="700.0" prefWidth="190.0">
          <children>
+            <AnchorPane prefHeight="700.0" prefWidth="190.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <effect>
+                  <DropShadow height="0.0" radius="18.785" spread="0.39" width="77.14">
+                     <color>
+                        <Color red="0.410526305437088" green="0.410526305437088" blue="0.410526305437088" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </AnchorPane>
             <ImageView fitHeight="80.0" fitWidth="58.0" layoutX="57.0" layoutY="13.0" pickOnBounds="true">
                <image>
                   <Image url="@../../ICONS/AppIcon/Main-noBackground.png" />
@@ -30,10 +41,10 @@
             </ImageView>
 
             <Separator layoutY="143.0" prefWidth="190.0" />
-            <Label alignment="CENTER" layoutY="196.0" onMouseClicked="#openHomePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="   Home" textFill="#f8a918">
+            <Label fx:id="labelHome" alignment="CENTER" layoutY="196.0" onMouseClicked="#openHomePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Home" textFill="#f8a918">
 
                <font>
-                  <Font name="Arial" size="14.0" />
+                  <Font name="Berlin Sans FB" size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
@@ -48,10 +59,14 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <stylesheets>
+                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
+                  <URL value="@../../CSS/ColorThemes.css" />
+               </stylesheets>
             </Label>
-            <Label fx:id="labelProfits" alignment="CENTER" layoutY="251.0" onMouseClicked="#openProfitsPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="   Profits" textFill="#f8a918">
+            <Label fx:id="labelProfits" alignment="CENTER" layoutY="251.0" onMouseClicked="#openProfitsPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Profits" textFill="#f8a918">
                <font>
-                  <Font name="Arial" size="14.0" />
+                  <Font name="Berlin Sans FB" size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -66,10 +81,14 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <stylesheets>
+                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
+                  <URL value="@../../CSS/ColorThemes.css" />
+               </stylesheets>
             </Label>
-            <Label fx:id="labelDepartments" alignment="CENTER" layoutY="308.0" onMouseClicked="#openDepartmentPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="  Departements" textFill="#f8a918">
+            <Label fx:id="labelDepartments" alignment="CENTER" layoutY="308.0" onMouseClicked="#openDepartmentPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Departements" textFill="#f8a918">
                <font>
-                  <Font name="Arial" size="14.0" />
+                  <Font name="Berlin Sans FB" size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
@@ -84,10 +103,14 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <stylesheets>
+                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
+                  <URL value="@../../CSS/ColorThemes.css" />
+               </stylesheets>
             </Label>
-            <Label fx:id="labelEmployees" alignment="CENTER" layoutY="365.0" onMouseClicked="#openEmployeePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="  Employees" textFill="#f8a918">
+            <Label fx:id="labelEmployees" alignment="CENTER" layoutY="365.0" onMouseClicked="#openEmployeePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Employees" textFill="#f8a918">
                <font>
-                  <Font name="Arial" size="14.0" />
+                  <Font name="Berlin Sans FB" size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0">
@@ -102,8 +125,12 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <stylesheets>
+                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
+                  <URL value="@../../CSS/ColorThemes.css" />
+               </stylesheets>
             </Label>
-            <Label alignment="CENTER" layoutY="598.0" prefHeight="40.0" prefWidth="190.0" styleClass="devs" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Mohammad Ahmad" textFill="WHITE">
+            <Label alignment="CENTER" layoutY="598.0" prefHeight="40.0" prefWidth="190.0" styleClass="devs" text="Mohammad Ahmad" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -116,7 +143,11 @@
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Label>
+               </cursor>
+               <stylesheets>
+                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
+                  <URL value="@../../CSS/ColorThemes.css" />
+               </stylesheets></Label>
             <Label alignment="CENTER" layoutX="-1.0" layoutY="562.0" prefHeight="40.0" prefWidth="190.0" text="Contact Developers" textFill="#f8a918">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0">
@@ -128,7 +159,7 @@
                <font>
                   <Font name="System Bold Italic" size="10.0" />
                </font></Label>
-            <Label alignment="CENTER" layoutY="628.0" prefHeight="40.0" prefWidth="190.0" styleClass="devs" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Mohammad Bdair" textFill="WHITE">
+            <Label alignment="CENTER" layoutY="628.0" prefHeight="40.0" prefWidth="190.0" styleClass="devs" text="Mohammad Bdair" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -145,16 +176,23 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <stylesheets>
+                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
+                  <URL value="@../../CSS/ColorThemes.css" />
+               </stylesheets>
             </Label>
-            <Label fx:id="labelLogout" alignment="CENTER" layoutY="419.0" onMouseClicked="#Logout" prefHeight="40.0" prefWidth="190.0" styleClass="labels" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="  Log out" textFill="#f8a918">
+            <Label fx:id="labelLogout" alignment="CENTER" layoutY="419.0" onMouseClicked="#Logout" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Log out" textFill="#f8a918">
                <font>
-                  <Font name="Arial" size="14.0" />
+                  <Font name="Berlin Sans FB" size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0">
                      <image>
                         <Image url="@../../ICONS/OwnerPage/logout.png" />
                      </image>
+                     <effect>
+                        <ColorAdjust brightness="-1.0" contrast="1.0" />
+                     </effect>
                   </ImageView>
                </graphic>
                <padding>
@@ -163,9 +201,13 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <stylesheets>
+                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
+                  <URL value="@../../CSS/ColorThemes.css" />
+               </stylesheets>
             </Label>
 
-            <Label layoutX="33.0" layoutY="102.0" text="Welcome, Ahmad" textFill="WHITE">
+            <Label layoutX="33.0" layoutY="102.0" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Welcome, Yazan" textFill="#333333">
 
                <font>
                   <Font size="14.0" />

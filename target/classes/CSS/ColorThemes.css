@@ -1,0 +1,7 @@
+*{
+    -fx-primaryColor: white;
+    -fx-labelColor: #333;
+    -fx-subColor:#F8A918;
+    -fx-hoverColor: #EAEBED;
+    -fx-pressedColor: #6666;
+}
