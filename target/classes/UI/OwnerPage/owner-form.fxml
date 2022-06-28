@@ -15,8 +15,22 @@
 
 <AnchorPane id="AnchorPane" fx:id="mainPanel" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.OwnerController">
    <children>
+      <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="-10.0" pickOnBounds="true" preserveRatio="true" translateX="980.0">
+         <image>
+            <Image url="@../../ICONS/OwnerPage/Notification.png" />
+         </image>
+      </ImageView>
       <AnchorPane fx:id="menuPanel" prefHeight="700.0" prefWidth="190.0">
          <children>
+            <AnchorPane prefHeight="700.0" prefWidth="190.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <effect>
+                  <DropShadow height="0.0" radius="18.785" spread="0.39" width="77.14">
+                     <color>
+                        <Color red="0.410526305437088" green="0.410526305437088" blue="0.410526305437088" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </AnchorPane>
             <ImageView fitHeight="80.0" fitWidth="58.0" layoutX="57.0" layoutY="13.0" pickOnBounds="true">
                <image>
                   <Image url="@../../ICONS/AppIcon/Main-noBackground.png" />
@@ -34,7 +48,7 @@
             <Label fx:id="labelHome" alignment="CENTER" layoutY="196.0" onMouseClicked="#openHomePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Home" textFill="#f8a918">
 
                <font>
-                  <Font name="Berlin Sans FB" size="14.0" />
+                  <Font name="Berlin Sans FB" size="15.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
@@ -205,13 +219,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="viewPanel" layoutX="190.0" prefHeight="700.0" prefWidth="810.0">
-         <children>
-            <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="776.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../ICONS/OwnerPage/Notification.png" />
-               </image>
-            </ImageView>
-         </children></AnchorPane>
+      <AnchorPane fx:id="viewPanel" layoutX="190.0" prefHeight="700.0" prefWidth="810.0" />
    </children>
 </AnchorPane>
