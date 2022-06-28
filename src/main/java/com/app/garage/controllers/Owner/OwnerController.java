@@ -72,7 +72,6 @@ public class OwnerController {
     void openHomePanel() throws IOException {
                clearStyles();
         labelHome.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
-       
      Timeline t = new Timeline();
         Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/HomePage.fxml"));
         root.scaleXProperty().set(0.8);
@@ -85,6 +84,8 @@ public class OwnerController {
          t.play();
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
+        
+      
     }
     private void clearStyles(){
         labelHome.setStyle("");

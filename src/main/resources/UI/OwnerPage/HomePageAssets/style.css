@@ -1,0 +1,13 @@
+.btn{
+-fx-opacity:0.5;
+-fx-background-color:rgb(204,204,204);
+-fx-background-radius: 50;
+-fx-padding: 5;
+}
+.btn:hover{
+-fx-opacity:1;
+}
+.btn:pressed{
+-fx-background-color: gray;
+
+}
