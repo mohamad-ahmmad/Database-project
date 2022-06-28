@@ -13,9 +13,17 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane id="AnchorPane" fx:id="mainPanel" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.OwnerController">
    <children>
+      <AnchorPane fx:id="viewPanel" layoutX="190.0" prefHeight="700.0" prefWidth="810.0">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="776.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../ICONS/OwnerPage/Notification.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="menuPanel" prefHeight="700.0" prefWidth="190.0">
          <children>
             <AnchorPane prefHeight="700.0" prefWidth="190.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -215,15 +223,6 @@
                   <Reflection />
                </effect>
             </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="viewPanel" layoutX="190.0" prefHeight="700.0" prefWidth="810.0">
-         <children>
-            <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="776.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../ICONS/OwnerPage/Notification.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
    </children>

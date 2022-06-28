@@ -86,10 +86,7 @@ public class OwnerController {
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
         
-        //reloading th menupane to fix the overload issue.
-       // System.out.println("Reloading menuUI");
-      //  Parent menuUI = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
-      //  menuPanel.getChildren().add(root);
+      
     }
     private void clearStyles(){
         labelHome.setStyle("");
