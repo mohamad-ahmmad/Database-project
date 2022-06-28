@@ -50,20 +50,23 @@ public class LoginController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        firstLabel.opacityProperty().set(0);
+        secLabel.opacityProperty().set(0);
+        
         Timeline t = new Timeline();
       firstLabel.yProperty().set(-10);
       secLabel.yProperty().set(10);
       
       
       t.getKeyFrames().add(new KeyFrame(
-                 Duration.seconds(1) ,
+                 Duration.seconds(2) ,
       new KeyValue(secLabel.yProperty() , -5)
        ,new KeyValue(firstLabel.yProperty() , 5)
       ));
               
       
         t.getKeyFrames().add(new KeyFrame(
-                Duration.seconds(2) ,
+                Duration.seconds(3) ,
         new KeyValue(secLabel.opacityProperty() , 1.0)
         ,new KeyValue(firstLabel.opacityProperty() , 1.0)
                
@@ -77,11 +80,7 @@ public class LoginController implements Initializable {
     
    @FXML
    public void loginPressed(ActionEvent e) throws IOException{
-       /*
-       Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
-       Scene temp = new Scene(root);
-       App.stage.setScene(temp);
-       */
+      
        
        
        

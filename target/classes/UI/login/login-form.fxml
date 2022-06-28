@@ -28,17 +28,17 @@
    <children>
       <Pane prefWidth="700.0" styleClass="img" stylesheets="@../../CSS/login/login-form.css">
          <children>
-            <ImageView blendMode="SRC_ATOP" fitHeight="724.0" fitWidth="399.0" layoutX="-3.0" layoutY="-27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView blendMode="SRC_ATOP" fitHeight="619.0" fitWidth="411.0" layoutX="-14.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../IMG/login/login-image.jpg" />
+                  <Image url="@../../IMG/login/Background.png" />
                </image>
                <effect>
                   <BoxBlur iterations="3" />
                </effect>
             </ImageView>
-            <Pane layoutX="104.0" layoutY="149.0" prefHeight="99.0" prefWidth="205.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.5 0;">
+            <Pane layoutX="98.0" layoutY="215.0" prefHeight="99.0" prefWidth="205.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.5 0;">
                <children>
-                  <Text fx:id="firstLabel" fill="WHITE" layoutX="-15.0" layoutY="35.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-width: 0 0 1.5 0;" text="Daragmeh">
+                  <Text fx:id="firstLabel" fill="WHITE" layoutX="-8.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-width: 0 0 1.5 0;" text="Daragmeh">
                      <font>
                         <Font name="Corbel" size="47.0" />
                      </font>
@@ -46,7 +46,7 @@
                         <DropShadow height="4.62" radius="4.15" width="13.98" />
                      </effect>
                   </Text>
-                  <Text fx:id="secLabel" fill="WHITE" layoutX="-15.0" layoutY="84.0" opacity="0.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-width: 0 0 1.5 0;" text="C E N T E R">
+                  <Text fx:id="secLabel" fill="WHITE" layoutX="-11.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-width: 0 0 1.5 0;" text="C o m p a n y">
                      <font>
                         <Font name="Corbel" size="47.0" />
                      </font>
