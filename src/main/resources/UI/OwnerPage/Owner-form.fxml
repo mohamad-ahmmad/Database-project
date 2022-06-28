@@ -13,6 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane id="AnchorPane" fx:id="mainPanel" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.OwnerController">
    <children>
       <AnchorPane fx:id="menuPanel" prefHeight="700.0" prefWidth="190.0">
@@ -38,11 +39,11 @@
                   </DropShadow>
                </effect>
             </ImageView>
-
-            <Separator layoutY="143.0" prefWidth="190.0" />
+      
+                                          <Separator layoutY="143.0" prefWidth="190.0" />
             <Label fx:id="labelHome" alignment="CENTER" layoutY="196.0" onMouseClicked="#openHomePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Home" textFill="#f8a918">
-
-               <font>
+      
+                                             <font>
                   <Font name="Berlin Sans FB" size="15.0" />
                </font>
                <graphic>
@@ -146,7 +147,8 @@
                <stylesheets>
                   <URL value="@../../CSS/OwnerPage/Owner-form.css" />
                   <URL value="@../../CSS/ColorThemes.css" />
-               </stylesheets></Label>
+               </stylesheets>
+            </Label>
             <Label alignment="CENTER" layoutX="-1.0" layoutY="562.0" prefHeight="40.0" prefWidth="190.0" text="Contact Developers" textFill="#f8a918">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0">
@@ -157,7 +159,8 @@
                </graphic>
                <font>
                   <Font name="System Bold Italic" size="10.0" />
-               </font></Label>
+               </font>
+            </Label>
             <Label alignment="CENTER" layoutY="628.0" prefHeight="40.0" prefWidth="190.0" styleClass="devs" text="Mohammad Bdair" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
@@ -202,10 +205,10 @@
                   <URL value="@../../CSS/ColorThemes.css" />
                </stylesheets>
             </Label>
-
-            <Label layoutX="33.0" layoutY="102.0" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Welcome, Yazan" textFill="#333333">
-
-               <font>
+      
+                                          <Label layoutX="33.0" layoutY="102.0" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Welcome, Yazan" textFill="#333333">
+      
+                                             <font>
                   <Font size="14.0" />
                </font>
                <effect>
@@ -221,6 +224,7 @@
                   <Image url="@../../ICONS/OwnerPage/Notification.png" />
                </image>
             </ImageView>
-         </children></AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
