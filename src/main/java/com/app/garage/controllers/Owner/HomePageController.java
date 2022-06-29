@@ -32,11 +32,108 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 public class HomePageController implements Initializable {
+    
+    @FXML
+    AnchorPane nextPane;
+    @FXML
+    AnchorPane currentPane;
+    
+    @FXML
+    Pane leftArrow;
+    @FXML  
+    Pane rightArrow;
+    
+    
+    private boolean animationFlag = true;
+            
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+       // rightArrow.setLayoutX(currentPane.getLayoutX()+30);
+       // rightArrow.setLayoutY(10);
+        
+       // leftArrow.setLayoutX(currentPane.getLayoutX()+40);
+        //leftArrow.setLayoutY(9);
+    
+    }
+    
+    
+    private void swap(){
+        AnchorPane temp;
+        temp = nextPane;
+        nextPane = currentPane;
+        currentPane = temp;
+    }
+        @FXML
+    void leftArrowPressed(MouseEvent event) {
+        if(animationFlag){
+            animationFlag = !animationFlag;
+        nextPane.setLayoutX(currentPane.getLayoutX()-810);
+              TranslateTransition transitionCurr = new TranslateTransition();
+                transitionCurr.setDuration(Duration.seconds(1));
+                transitionCurr.setNode(currentPane);
+                transitionCurr.setInterpolator(Interpolator.EASE_BOTH);
+                transitionCurr.setByX(+810);
+                
+                    TranslateTransition transitionNext = new TranslateTransition();
+                transitionNext.setDuration(Duration.seconds(1));
+                transitionNext.setNode(nextPane);
+                transitionNext.setInterpolator(Interpolator.EASE_BOTH);
+                transitionNext.setByX(+810);
+                
+                transitionCurr.play();
+                transitionNext.play();
+                
+                transitionNext.setOnFinished(e->{
+                animationFlag=!animationFlag;
+                swap();
+                });
+                
+        }
+        
+
+    }
 
     @FXML
-    ImageView img;
+    void rightArrowPressed(MouseEvent event) {
+        
+         if(animationFlag){
+            animationFlag = !animationFlag;
+      nextPane.setLayoutX(currentPane.getLayoutX()+810);
+              TranslateTransition transitionCurr = new TranslateTransition();
+                transitionCurr.setDuration(Duration.seconds(1));
+                transitionCurr.setNode(currentPane);
+                transitionCurr.setInterpolator(Interpolator.EASE_BOTH);
+                transitionCurr.setByX(-810);
+                
+                    TranslateTransition transitionNext = new TranslateTransition();
+                transitionNext.setDuration(Duration.seconds(1));
+                transitionNext.setNode(nextPane);
+                transitionNext.setInterpolator(Interpolator.EASE_BOTH);
+                transitionNext.setByX(-810);
+                
+                transitionCurr.play();
+                transitionNext.play();
+                
+                transitionNext.setOnFinished(e->{
+                animationFlag=!animationFlag;
+                swap();
+                });
+                
+        }
+        
+        
+    }
+    
+    }
+
+    
+   /*
+    @FXML
+    AnchorPane img;
     @FXML
     ImageView prevImg;
     @FXML
@@ -122,7 +219,7 @@ public class HomePageController implements Initializable {
                 translateTemp.setOnFinished(es ->{
                     flag=!flag;
                 });
-                switching();
+                //switching();
 
 
             }
@@ -224,9 +321,8 @@ public class HomePageController implements Initializable {
         translateTemp.setByX(550);
         translateTemp.play();
 
-        switchToRight();
+       // switchToRight();
     }
-   
+   */
 
-}
 

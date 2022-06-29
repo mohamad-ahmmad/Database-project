@@ -33,7 +33,7 @@ public class App extends Application {
         ss.setTitle("Daragmeh Center");
         Scene s = new Scene(root);
         ss.setScene(s);
-        ss.setResizable(false);
+        ss.setResizable(true);
         ss.show();
     }
   

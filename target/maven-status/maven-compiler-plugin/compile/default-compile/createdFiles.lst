@@ -1,3 +1,4 @@
+com\app\garage\controllers\Owner\HomePageController.class
 module-info.class
 com\app\garage\controllers\Owner\OwnerController.class
 com\app\garage\controllers\login\LoginController.class
