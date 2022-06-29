@@ -46,11 +46,16 @@ public class OwnerController {
     private AnchorPane viewPanel;
     
     
-    
+    boolean homeSelected = false;
+    boolean profitsSelected = false;
+    boolean departmentsSelected = false;
+    boolean employeesSelected = false;
     private Stage currentStage;
 
     @FXML
     void openProfitsPanel(MouseEvent event) throws IOException {
+        if(!profitsSelected)
+        {
                 clearStyles();
         labelProfits.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
          Timeline t = new Timeline();
@@ -63,13 +68,18 @@ public class OwnerController {
        ,new KeyValue(root.scaleYProperty() , 1)
       ));
          t.play();
-        
-        
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
+        profitsSelected = true;
+        homeSelected = false;
+        departmentsSelected = false;
+        employeesSelected = false;
+        }
     }
     @FXML
     void openHomePanel() throws IOException {
+        if(!homeSelected)
+        {
                clearStyles();
         labelHome.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
      Timeline t = new Timeline();
@@ -84,6 +94,11 @@ public class OwnerController {
          t.play();
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
+        profitsSelected = false;
+        homeSelected = true;
+        departmentsSelected = false;
+        employeesSelected = false;
+        }
         
       
     }
@@ -96,6 +111,8 @@ public class OwnerController {
     }
     @FXML
     void openDepartmentPanel() throws IOException {
+        if(!departmentsSelected)
+        {
         clearStyles();
         labelDepartments.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
          Timeline t = new Timeline();
@@ -110,6 +127,11 @@ public class OwnerController {
          t.play();
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
+        profitsSelected = false;
+        homeSelected = false;
+        departmentsSelected = true;
+        employeesSelected = false;
+        }
     }
     @FXML
      void openEmployeePanel() throws IOException {
