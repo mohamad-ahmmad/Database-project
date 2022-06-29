@@ -190,7 +190,7 @@ public class OwnerController {
         @FXML
     void Confirm(ActionEvent event) throws IOException {
          //Closing Logout Stage
-         
+    
          //this method will return the App stage.
        Stage appStage = App.getAppStage();//Method added to the App class 
        
@@ -199,11 +199,11 @@ public class OwnerController {
        stage.close();
        
        
-       
-       Parent root = FXMLLoader.load(getClass().getResource("/UI/login/login-form.fxml"));
+             Parent root = FXMLLoader.load(getClass().getResource("/UI/login/login-form.fxml"));
        Scene temp = new Scene(root);
+      
        App.setMainScene(temp);//Method in App class to change the current displaying scene
-       appStage.show();
+       appStage.show(); 
       
     }
 
