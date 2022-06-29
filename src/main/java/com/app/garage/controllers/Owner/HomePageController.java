@@ -59,8 +59,6 @@ public class HomePageController implements Initializable {
         //leftArrow.setLayoutY(9);
     
     }
-    
-    
     private void swap(){
         AnchorPane temp;
         temp = nextPane;
@@ -124,8 +122,6 @@ public class HomePageController implements Initializable {
                 });
                 
         }
-        
-        
     }
     
     }

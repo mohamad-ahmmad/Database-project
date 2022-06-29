@@ -3,16 +3,22 @@ package com.app.garage.controllers.Owner;
 import com.app.garage.App;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -20,12 +26,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-public class OwnerController {
+public class OwnerController implements Initializable {
       @FXML
     private JFXButton btnCancel;
 
     @FXML
     private JFXButton btnConfirm;
+    @FXML
+    private AnchorPane smallSlide;
     @FXML
     private Label labelEmployees;
     @FXML
@@ -151,6 +159,7 @@ public class OwnerController {
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
     }
+     
      @FXML
       void Logout(MouseEvent e) throws IOException {
                   clearStyles();
@@ -205,6 +214,26 @@ public class OwnerController {
        App.setMainScene(temp);//Method in App class to change the current displaying scene
        appStage.show(); 
       
+    }
+    
+     @FXML
+    void slideLeft(MouseEvent event) {
+        //menuPanel.setLayoutX(menuPanel.getLayoutX()-menuPanel.getWidth()+smallSlide.getWidth());
+        menuPanel.setVisible(true);
+        Timeline t = new Timeline();
+         t.getKeyFrames().add(new KeyFrame(
+                 Duration.seconds(0.5) ,
+      new KeyValue(menuPanel.translateXProperty(),190)
+      ));
+         t.play();
+        
+
+        
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        menuPanel.setVisible(false);
     }
 
     
