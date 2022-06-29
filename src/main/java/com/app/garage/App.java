@@ -16,6 +16,9 @@ public class App extends Application {
     
     private static Stage ss;
     
+    public static  Stage getAppStage(){
+        return ss;
+    }
     public static void setMainScene(Scene temp){
         ss.setScene(temp);
     }

@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -156,6 +157,7 @@ public class OwnerController {
         labelLogout.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
           currentStage = (Stage)((Node) e.getSource()).getScene().getWindow();
            Stage logout = new Stage();
+           logout.initModality(Modality.APPLICATION_MODAL);
            logout.initStyle(StageStyle.UNDECORATED);
             Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Logout.fxml"));
             Scene logoutScene = new Scene(root);
@@ -179,21 +181,29 @@ public class OwnerController {
 
      @FXML
     void Cancel(ActionEvent e) throws IOException {
-        Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-        stage.close();
+         Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+         stage.close();
          Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
-       Scene temp = new Scene(root);
+         Scene temp = new Scene(root);
          App.setMainScene(temp);
     }
         @FXML
     void Confirm(ActionEvent event) throws IOException {
          //Closing Logout Stage
+         
+         //this method will return the App stage.
+       Stage appStage = App.getAppStage();//Method added to the App class 
+       
        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        stage.close();
+       appStage.hide();
+       stage.close();
+       
+       
+       
        Parent root = FXMLLoader.load(getClass().getResource("/UI/login/login-form.fxml"));
        Scene temp = new Scene(root);
-       App.setMainScene(temp);
-       
+       App.setMainScene(temp);//Method in App class to change the current displaying scene
+       appStage.show();
       
     }
 
