@@ -32,10 +32,14 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class HomePageController implements Initializable {
+    
+    
+    
     
     @FXML
     AnchorPane nextPane;
@@ -49,14 +53,27 @@ public class HomePageController implements Initializable {
     
     
     private boolean animationFlag = true;
+    private int index = 0;
+    private boolean clrFlag = true;
+    
+    private void clear(){
+        currentPane.getChildren().remove(0);
+        clrFlag=!clrFlag;
+    }
             
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       // rightArrow.setLayoutX(currentPane.getLayoutX()+30);
-       // rightArrow.setLayoutY(10);
-        
-       // leftArrow.setLayoutX(currentPane.getLayoutX()+40);
-        //leftArrow.setLayoutY(9);
+        try {
+            SliderInitialize();
+            currentPane.getChildren().add(CardsSlider.cards.get(0).getParent());
+            
+     
+           
+            
+            
+        } catch (IOException ex) {
+            System.out.println("Problems with loading the home-page-template.fxml");
+        }
     
     }
     private void swap(){
@@ -64,10 +81,26 @@ public class HomePageController implements Initializable {
         temp = nextPane;
         nextPane = currentPane;
         currentPane = temp;
+        
     }
         @FXML
     void leftArrowPressed(MouseEvent event) {
+      
         if(animationFlag){
+            if(index == 0){
+                nextPane.getChildren().removeAll(nextPane.getChildren());
+                int size=CardsSlider.cards.size()-1;
+               nextPane.getChildren().add(CardsSlider.cards.get(size).getParent());
+               index = size;
+            }else{
+                nextPane.getChildren().removeAll(nextPane.getChildren());
+                index--;
+                nextPane.getChildren().add(CardsSlider.cards.get(index).getParent());
+                
+            }
+            
+            
+            
             animationFlag = !animationFlag;
         nextPane.setLayoutX(currentPane.getLayoutX()-810);
               TranslateTransition transitionCurr = new TranslateTransition();
@@ -88,6 +121,10 @@ public class HomePageController implements Initializable {
                 transitionNext.setOnFinished(e->{
                 animationFlag=!animationFlag;
                 swap();
+                
+                
+                
+                
                 });
                 
         }
@@ -97,8 +134,22 @@ public class HomePageController implements Initializable {
 
     @FXML
     void rightArrowPressed(MouseEvent event) {
-        
+      
          if(animationFlag){
+              int size=CardsSlider.cards.size()-1;
+               
+                if(index ==size ){
+                  index = 0;
+                  nextPane.getChildren().removeAll(nextPane.getChildren());
+                  nextPane.getChildren().add(CardsSlider.cards.get(index).getParent());
+             
+            }else{
+                index++;
+                nextPane.getChildren().removeAll(nextPane.getChildren());
+                nextPane.getChildren().add(CardsSlider.cards.get(index).getParent());
+                
+            }
+                
             animationFlag = !animationFlag;
       nextPane.setLayoutX(currentPane.getLayoutX()+810);
               TranslateTransition transitionCurr = new TranslateTransition();
@@ -122,6 +173,15 @@ public class HomePageController implements Initializable {
                 });
                 
         }
+    }
+
+    private void SliderInitialize() throws IOException {
+        //DATABASE PROCCESSING AND GETTING THE SLIDES IN THE SLIDER READY
+        for(int i = 0 ; i < 3 ; i++){
+        CardsSlider temp = new CardsSlider((i+1)+". Department Name");
+        
+    }
+        
     }
     
     }

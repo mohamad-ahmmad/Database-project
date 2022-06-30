@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.SliderController">
+   <children>
+      <Pane layoutX="23.0" layoutY="39.328125" styleClass="underline">
+         <children>
+            <Text fx:id="header" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="underline" text="No. of top selling department">
+               <font>
+                  <Font name="Berlin Sans FB" size="32.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <StackedBarChart fx:id="stackChar" layoutX="5.0" layoutY="209.0" prefHeight="375.0" prefWidth="797.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </StackedBarChart>
+      <PieChart fx:id="pieChart" layoutX="485.0" layoutY="12.0" prefHeight="205.0" prefWidth="286.0" styleClass="piechart">
+         <stylesheets>
+            <URL value="@../../../CSS/ColorThemes.css" />
+            <URL value="@../../../CSS/OwnerPage/home.css" />
+         </stylesheets>
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color opacity="0.5509118437767029" />
+               </color>
+            </DropShadow>
+         </effect></PieChart>
+      <Text layoutX="73.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager Name:">
+         <font>
+            <Font name="Wingdings 2" size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="73.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location:">
+         <font>
+            <Font name="Wingdings" size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="managerName" layoutX="189.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Example">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="locationSite" layoutX="145.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Example">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="31.0" fitWidth="26.0" layoutX="41.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../ICONS/OwnerPage/Manager.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="41.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../ICONS/OwnerPage/location.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="72.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone:">
+         <font>
+            <Font name="Wingdings 2" size="16.0" />
+         </font>
+      </Text>
+      <Text fx:id="teleNum" layoutX="155.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Example">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="42.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../ICONS/OwnerPage/phone.png" />
+         </image>
+      </ImageView>
+   </children>
+   <stylesheets>
+      <URL value="@../../../CSS/OwnerPage/home.css" />
+      <URL value="@../../../CSS/ColorThemes.css" />
+   </stylesheets>
+</AnchorPane>
