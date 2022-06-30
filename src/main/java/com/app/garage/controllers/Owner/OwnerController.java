@@ -149,6 +149,8 @@ public class OwnerController implements Initializable {
     }
     @FXML
      void openEmployeePanel() throws IOException {
+         if(!employeesSelected)
+         {
                  clearStyles();
         labelEmployees.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
           Timeline t = new Timeline();
@@ -163,6 +165,11 @@ public class OwnerController implements Initializable {
          t.play();
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
+        profitsSelected = false;
+        homeSelected = false;
+        departmentsSelected = false;
+        employeesSelected = true;
+        }
     }
      
      @FXML

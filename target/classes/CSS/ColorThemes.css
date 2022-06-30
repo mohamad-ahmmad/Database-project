@@ -3,7 +3,10 @@
     -fx-labelColor: #333;
     -fx-subColor:#F8A918;
     -fx-hoverColor: #EAEBED;
+    -fx-btnHover: #141415;
     -fx-pressedColor: #6666;
+    -fx-BoxesColor: #E6E6E6;
+    -fx-buttonColor: #333;
 }
 
 .underline{

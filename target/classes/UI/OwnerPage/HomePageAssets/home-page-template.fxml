@@ -18,7 +18,7 @@
    <children>
       <Pane layoutX="23.0" layoutY="39.328125" styleClass="underline">
          <children>
-            <Text fx:id="header" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="underline" text="No. of top selling department">
+            <Text fx:id="header" fill="#333333" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="underline" text="No. of top selling department">
                <font>
                   <Font name="Berlin Sans FB" size="32.0" />
                </font>
@@ -45,22 +45,22 @@
                </color>
             </DropShadow>
          </effect></PieChart>
-      <Text layoutX="73.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager Name:">
+      <Text fill="#333333" layoutX="73.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manager Name:">
          <font>
             <Font name="Wingdings 2" size="16.0" />
          </font>
       </Text>
-      <Text layoutX="73.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location:">
+      <Text fill="#333333" layoutX="73.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location:">
          <font>
             <Font name="Wingdings" size="16.0" />
          </font>
       </Text>
-      <Text fx:id="managerName" layoutX="189.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Example">
+      <Text fx:id="managerName" fill="#333333" layoutX="189.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Example">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Text fx:id="locationSite" layoutX="145.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Example">
+      <Text fx:id="locationSite" fill="#333333" layoutX="145.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Example">
          <font>
             <Font size="16.0" />
          </font>
@@ -75,12 +75,12 @@
             <Image url="@../../../ICONS/OwnerPage/location.png" />
          </image>
       </ImageView>
-      <Text layoutX="72.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone:">
+      <Text fill="#333333" layoutX="72.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Telephone:">
          <font>
             <Font name="Wingdings 2" size="16.0" />
          </font>
       </Text>
-      <Text fx:id="teleNum" layoutX="155.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Example">
+      <Text fx:id="teleNum" fill="#333333" layoutX="155.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Example">
          <font>
             <Font size="16.0" />
          </font>

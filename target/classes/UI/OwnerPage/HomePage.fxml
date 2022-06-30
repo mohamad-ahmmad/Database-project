@@ -41,6 +41,6 @@
             <Font name="Berlin Sans FB" size="33.0" />
          </font>
       </Text>
-      <Text layoutX="265.0" layoutY="647.0" opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="D e p a r t m e n t s  w i t h  h e i g h e s t  e a r n i n g s" />
+      <Text fill="#f8a918" layoutX="265.0" layoutY="647.0" opacity="0.7" strokeType="OUTSIDE" strokeWidth="0.0" text="D e p a r t m e n t s  w i t h  h e i g h e s t  e a r n i n g s" />
    </children>
 </AnchorPane>
