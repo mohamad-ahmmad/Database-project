@@ -5,3 +5,8 @@
     -fx-hoverColor: #EAEBED;
     -fx-pressedColor: #6666;
 }
+
+.underline{
+    -fx-border-color:-fx-labelColor;
+    -fx-border-width: 0 0 1 0;
+}
