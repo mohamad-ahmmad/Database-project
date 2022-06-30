@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * JavaFX App
  */
 public class App extends Application {
-
+    
     
     private static Stage ss;
     
@@ -20,6 +20,8 @@ public class App extends Application {
         return ss;
     }
     public static void setMainScene(Scene temp){
+        //hello bdair
+        
         ss.setScene(temp);
     }
     
