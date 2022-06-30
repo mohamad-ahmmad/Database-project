@@ -27,3 +27,14 @@
     -fx-text-fill: -fx-subColor;
     -fx-underline: true;
 }
+.icons{
+    -fx-text-fill: -fx-labelColor;
+}
+.icons:hover {
+    -fx-background-color: -fx-hoverColor;
+    -fx-border-width: 0 0 0 5;
+    -fx-border-color: -fx-subColor;
+}
+.icons:pressed{
+    
+}

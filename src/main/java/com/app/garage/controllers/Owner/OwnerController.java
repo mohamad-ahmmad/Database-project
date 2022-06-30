@@ -5,9 +5,11 @@ import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.ParallelTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -18,6 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Effect;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -29,7 +32,8 @@ import javafx.util.Duration;
 public class OwnerController implements Initializable {
       @FXML
     private JFXButton btnCancel;
-
+    @FXML
+    AnchorPane shadowPanel;
     @FXML
     private JFXButton btnConfirm;
     @FXML
@@ -54,6 +58,7 @@ public class OwnerController implements Initializable {
     @FXML
     private AnchorPane viewPanel;
     
+    private Effect shadowEffect;
     
     boolean homeSelected = false;
     boolean profitsSelected = false;
@@ -216,24 +221,9 @@ public class OwnerController implements Initializable {
       
     }
     
-     @FXML
-    void slideLeft(MouseEvent event) {
-        //menuPanel.setLayoutX(menuPanel.getLayoutX()-menuPanel.getWidth()+smallSlide.getWidth());
-        menuPanel.setVisible(true);
-        Timeline t = new Timeline();
-         t.getKeyFrames().add(new KeyFrame(
-                 Duration.seconds(0.5) ,
-      new KeyValue(menuPanel.translateXProperty(),190)
-      ));
-         t.play();
-        
-
-        
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        menuPanel.setVisible(false);
+        
     }
 
     
