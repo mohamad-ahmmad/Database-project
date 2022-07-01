@@ -28,7 +28,6 @@ public class ProfitsController implements Initializable  {
      
     @Override
     public void initialize(URL url, ResourceBundle rb) {
- 
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
                     new PieChart.Data("Sample 1" ,25 ),
                     new PieChart.Data("Sample 2" , 25),

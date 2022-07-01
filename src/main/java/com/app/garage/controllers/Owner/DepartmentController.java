@@ -66,7 +66,7 @@ public class DepartmentController implements Initializable{
         Department D4=  new Department(121,"Test ","Test","12/12/5122",5681332);
         data.addAll(D1,D2,D3,D4);
         FilteredList<Department> filteredlist = new FilteredList<>(data,b->true);
-        searchField.textProperty().addListener((observable, oldValue,newValue)-> {
+        searchField.textProperty().addListener((observable, oldValue,newValue)-> { 
         String st = myCombo.getSelectedItem(); //SSN
         filteredlist.setPredicate(department -> {
         if(newValue==null || newValue.isBlank() || newValue.isEmpty())
@@ -98,4 +98,7 @@ public class DepartmentController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         search();
     }
+    
+    
+    
 }

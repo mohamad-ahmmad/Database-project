@@ -12,7 +12,7 @@
     -fx-border-color: -fx-BoxesColor;
     -fx-border-radius: 8;
     -fx-border-width:2;  
-    -fx-background-radius: 8;
+    -fx-background-radius:8;
    
 }
 .Search:focused{
@@ -22,8 +22,5 @@
     -fx-background-width:5;
     -fx-border-radius: 8;
     -fx-background-radius:8;
-    -fx-border-color: -fx-BoxesColor;
-}
-.mfx-filter-pane .mfx-button{
-    -fx-background-color: Red;
+    -fx-border-color: BoxesColor;
 }
