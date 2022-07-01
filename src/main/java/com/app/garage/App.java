@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  * JavaFX App
  */
 public class App extends Application {
-
+    
     
     private static Stage ss;
     
@@ -20,13 +20,15 @@ public class App extends Application {
         return ss;
     }
     public static void setMainScene(Scene temp){
+        //hello bdair
+        
         ss.setScene(temp);
     }
     
     @Override
     public void start(Stage stage) throws Exception {
         stage.close();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/EmployeePage/employee-page.fxml"));
         Parent root = loader.load();
         ss = new Stage();
         ss.getIcons().add(new Image(String.valueOf(getClass().getResource("/ICONS/AppIcon/main.png"))));

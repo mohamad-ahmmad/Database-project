@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\DataBase Project\src\main\java\com\app\garage\App.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\HomePageController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\OwnerController.java
@@ -8,3 +9,14 @@ D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\SliderControl
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Department.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\login\LoginController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\ProfitsController.java
+=======
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\EmployeeController.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\ProfitsController.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\SliderController.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\module-info.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\OwnerController.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\CardsSlider.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\HomePageController.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\App.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\login\LoginController.java
+>>>>>>> 0f492e2969e648cc86a3e1ffbc48ba06aea211a4

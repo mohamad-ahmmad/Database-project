@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPanel" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.employee.EmployeeController">
    <children>
       <AnchorPane fx:id="menuPanel" prefHeight="700.0" prefWidth="190.0">
          <children>
@@ -40,7 +40,7 @@
             </ImageView>
 
             <Separator layoutY="143.0" prefWidth="190.0" />
-            <Label fx:id="labelHome" alignment="CENTER" layoutY="196.0" onMouseClicked="#openHomePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Cashier" textFill="#f8a918">
+            <Label fx:id="labelCashier" alignment="CENTER" layoutY="196.0" onMouseClicked="#openCashierPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Cashier" textFill="#f8a918">
 
                <font>
                   <Font name="Berlin Sans FB" size="15.0" />
@@ -63,7 +63,7 @@
                   <URL value="@../../CSS/ColorThemes.css" />
                </stylesheets>
             </Label>
-            <Label fx:id="labelProfits" alignment="CENTER" layoutY="251.0" onMouseClicked="#openProfitsPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Clothes" textFill="#f8a918">
+            <Label fx:id="labelClothes" alignment="CENTER" layoutY="251.0" onMouseClicked="#openClothesPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Clothes" textFill="#f8a918">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
@@ -85,7 +85,7 @@
                   <URL value="@../../CSS/ColorThemes.css" />
                </stylesheets>
             </Label>
-            <Label fx:id="labelDepartments" alignment="CENTER" layoutY="308.0" onMouseClicked="#openDepartmentPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Receipt History" textFill="#f8a918">
+            <Label fx:id="labelReceipt" alignment="CENTER" layoutY="308.0" onMouseClicked="#openReceiptPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Receipt History" textFill="#f8a918">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
@@ -107,7 +107,7 @@
                   <URL value="@../../CSS/ColorThemes.css" />
                </stylesheets>
             </Label>
-            <Label fx:id="labelEmployees" alignment="CENTER" layoutY="365.0" onMouseClicked="#openEmployeePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Employees" textFill="#f8a918">
+            <Label alignment="CENTER" layoutY="365.0" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Employees" textFill="#f8a918">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>

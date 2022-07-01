@@ -98,11 +98,7 @@
             <URL value="@../../CSS/ColorThemes.css" />
          </stylesheets>
       </VBox>
-      <TableView layoutX="20.0" layoutY="373.0" prefHeight="323.0" prefWidth="419.0" styleClass="Table">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
+      <MFXTableView fx:id="profitTable" layoutX="9.0" layoutY="376.0" prefHeight="314.0" prefWidth="454.0" styleClass="Table">
          <stylesheets>
             <URL value="@../../CSS/ColorThemes.css" />
             <URL value="@../../CSS/OwnerPage/Profits.css" />
