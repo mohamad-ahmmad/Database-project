@@ -47,7 +47,7 @@ public class EmployeeController {
     @FXML
     private Label labelReceipt;
 
-    private Boolean[] locker = {true, false, false};
+    private boolean[] locker = {true, false, false};
 
     @FXML
     private AnchorPane viewPanel;
@@ -70,8 +70,8 @@ public class EmployeeController {
     }
     
     private void lockerTruer(){
-        for(Boolean temp : locker)
-            temp = true;
+      for(int i = 0 ; i < locker.length ; i++)
+          locker[i]=true;
     }
     private void clearStyles(){
         labelCashier.setStyle("");
@@ -90,6 +90,7 @@ public class EmployeeController {
           loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");
           lockerTruer();
           locker[0]=false;
+          System.out.println(locker[0]+" "+locker[1]+" "+locker[2]);
         }
   
        
