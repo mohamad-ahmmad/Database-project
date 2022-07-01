@@ -71,7 +71,3 @@ Main-colours:
     -fx-text-fill:#cccccc;
     
 }
-.textfields:focus-within .floating-text  {
-    -fx-text-fill:#333333;
-    
-}
