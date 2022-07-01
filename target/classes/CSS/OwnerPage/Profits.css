@@ -23,6 +23,6 @@
     -fx-background-radius:8;
     -fx-border-color: BoxesColor;
 }
-Table.mfx-filter-pane.mfx-button{
+.mfx-filter-pane .mfx-button{
     -fx-background-color: Red;
 }
