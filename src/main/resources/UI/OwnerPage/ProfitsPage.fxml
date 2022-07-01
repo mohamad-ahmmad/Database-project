@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import java.net.URL?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -97,11 +96,5 @@
             <URL value="@../../CSS/ColorThemes.css" />
          </stylesheets>
       </VBox>
-      <MFXTableView fx:id="profitTable" layoutX="9.0" layoutY="376.0" prefHeight="314.0" prefWidth="454.0" styleClass="Table">
-         <stylesheets>
-            <URL value="@../../CSS/ColorThemes.css" />
-            <URL value="@../../CSS/OwnerPage/Profits.css" />
-         </stylesheets>
-      </MFXTableView>
    </children>
 </AnchorPane>
