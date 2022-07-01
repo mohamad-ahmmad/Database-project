@@ -70,10 +70,11 @@ public class OwnerController implements Initializable {
     void openProfitsPanel(MouseEvent event) throws IOException {
         if(!profitsSelected)
         {
+            Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/ProfitsPage.fxml"));
                 clearStyles();
         labelProfits.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
          Timeline t = new Timeline();
-        Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/ProfitsPage.fxml"));
+        
         root.scaleXProperty().set(0.8);
         root.scaleYProperty().set(0.8);
          t.getKeyFrames().add(new KeyFrame(

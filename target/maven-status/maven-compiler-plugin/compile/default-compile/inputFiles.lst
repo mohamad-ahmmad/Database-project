@@ -1,8 +1,10 @@
 D:\DataBase Project\src\main\java\com\app\garage\App.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\HomePageController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\OwnerController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\DepartmentController.java
 D:\DataBase Project\src\main\java\module-info.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\CardsSlider.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\SliderController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Department.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\login\LoginController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\ProfitsController.java

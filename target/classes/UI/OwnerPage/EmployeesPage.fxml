@@ -1,11 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyTableView?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.DepartmentController">
    <children>
-      <MFXLegacyTableView layoutX="14.0" layoutY="238.0" prefHeight="448.0" prefWidth="770.0" />
+      <JFXButton layoutX="318.0" layoutY="423.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Add Department">
+         <stylesheets>
+            <URL value="@../../CSS/ColorThemes.css" />
+            <URL value="@../../CSS/OwnerPage/Departments.css" />
+         </stylesheets>
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="332.0" layoutY="14.0" prefHeight="36.0" prefWidth="145.0" text="Employees" textFill="#333333">
+         <font>
+            <Font name="Berlin Sans FB" size="25.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableView" layoutX="13.0" layoutY="115.0" prefHeight="298.0" prefWidth="783.0" style="-fx-border-color: #333; -fx-border-radius: 6;">
+        <columns>
+          <TableColumn fx:id="SSNCol" prefWidth="154.40002727508545" text="SSN" />
+          <TableColumn fx:id="nameCol" prefWidth="155.19993591308594" text="Name" />
+            <TableColumn fx:id="addressCol" prefWidth="142.4000244140625" text="Address" />
+            <TableColumn fx:id="bDateCol" minWidth="0.0" prefWidth="159.2000732421875" text="Birthdate" />
+            <TableColumn fx:id="phoneCol" prefWidth="174.39996337890625" text="PhoneNumber" />
+        </columns>
+      </TableView>
+      <Label layoutX="372.0" layoutY="71.0" text="Search Coloumn" textFill="#333333">
+         <font>
+            <Font name="Berlin Sans FB" size="19.0" />
+         </font>
+      </Label>
+      <MFXComboBox fx:id="myCombo" floatMode="ABOVE" layoutX="510.0" layoutY="65.0" prefHeight="22.0" prefWidth="234.0" style="-fx-border-radius: 15; -fx-background-radius: 15;" stylesheets="@../../CSS/OwnerPage/Departments.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></MFXComboBox>
+      <MFXTextField fx:id="searchField" floatMode="ABOVE" floatingTextGap="4.0" layoutX="53.0" layoutY="68.0" prefHeight="32.0" prefWidth="286.0" promptText="Search" style="-fx-background-radius: 15; -fx-border-radius: 15;">
+         <padding>
+            <Insets left="30.0" />
+         </padding></MFXTextField>
+      <Label layoutX="193.0" layoutY="487.0" text="SSN" />
+      <TextField disable="true" editable="false" layoutX="223.0" layoutY="480.0" prefHeight="32.0" prefWidth="154.0" />
+      <Label layoutX="185.0" layoutY="534.0" prefHeight="18.0" prefWidth="40.0" text="Name" />
+      <TextField disable="true" editable="false" layoutX="223.0" layoutY="527.0" prefHeight="32.0" prefWidth="154.0" />
+      <Label layoutX="434.0" layoutY="486.0" prefHeight="18.0" prefWidth="51.0" text="Address" />
+      <TextField disable="true" editable="false" layoutX="495.0" layoutY="480.0" prefHeight="32.0" prefWidth="154.0" />
+      <Label layoutX="405.0" layoutY="533.0" prefHeight="18.0" prefWidth="104.0" text="Phone Number" />
+      <TextField disable="true" editable="false" layoutX="495.0" layoutY="526.0" prefHeight="32.0" prefWidth="154.0" />
+      <JFXRadioButton layoutX="219.0" layoutY="578.0" prefHeight="3.0" prefWidth="64.0" styleClass="radioButton" stylesheets="@../../CSS/OwnerPage/Departments.css" text="SSN">
+         <selectedColor>
+            <Color red="0.9725490212440491" green="0.6627451181411743" blue="0.0941176488995552" />
+         </selectedColor></JFXRadioButton>
+      <JFXRadioButton layoutX="219.0" layoutY="607.0" text="Address">
+         <selectedColor>
+            <Color red="0.9725490212440491" green="0.6627451181411743" blue="0.0941176488995552" />
+         </selectedColor></JFXRadioButton>
+      <JFXRadioButton layoutX="219.0" layoutY="637.0" prefHeight="18.0" prefWidth="71.0" text="Name">
+         <selectedColor>
+            <Color red="0.9725490212440491" green="0.6627451181411743" blue="0.0941176488995552" />
+         </selectedColor></JFXRadioButton>
+      <JFXRadioButton layoutX="219.0" layoutY="667.0" prefHeight="18.0" prefWidth="122.0" text="Phone Number">
+         <selectedColor>
+            <Color red="0.9725490212440491" green="0.6627451181411743" blue="0.0941176488995552" />
+         </selectedColor></JFXRadioButton>
+      <TextField layoutX="324.0" layoutY="580.0" prefHeight="36.0" prefWidth="234.0" promptText="New Value" />
+      <ImageView fitHeight="18.0" fitWidth="14.0" layoutX="62.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../ICONS/OwnerPage/Search.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="373.0" layoutY="625.0" prefHeight="30.0" prefWidth="122.0" styleClass="AddDepartment" text="Update">
+         <stylesheets>
+            <URL value="@../../CSS/ColorThemes.css" />
+            <URL value="@../../CSS/OwnerPage/Departments.css" />
+         </stylesheets>
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Separator layoutX="-2.0" layoutY="572.0" prefHeight="0.0" prefWidth="810.0" />
+      <Separator layoutX="4.0" layoutY="466.0" prefHeight="0.0" prefWidth="810.0" />
    </children>
 </AnchorPane>
