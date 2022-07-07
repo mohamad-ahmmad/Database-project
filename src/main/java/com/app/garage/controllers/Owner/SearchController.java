@@ -13,15 +13,13 @@ public class SearchController {
     private AnchorPane Pane;
     Stage stage;
     Scene scene;
-
+ @FXML private DepartmentController dc;
     @FXML
     void Done(ActionEvent event) throws IOException {
-        FXMLLoader loader;
-        loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/DepartmentsPage.fxml"));
-        Parent root = loader.load();
-        DepartmentController dc;
-        Pane=loader.getRoot();
-        Pane.getChildren().remove(3);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/DepartmentsPage.fxml"));
+        AnchorPane root = (AnchorPane)fxmlLoader.load();
+        DepartmentController controller = (DepartmentController)fxmlLoader.getController();
+        controller.clearSearch();
     }
 
 }
