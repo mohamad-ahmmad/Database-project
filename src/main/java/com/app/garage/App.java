@@ -27,7 +27,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         stage.close();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/EmployeePage/Employee-page.fxml"));
         Parent root = loader.load();
         ss = new Stage();
         ss.getIcons().add(new Image(String.valueOf(getClass().getResource("/ICONS/AppIcon/main.png"))));

@@ -22,7 +22,10 @@ import javafx.scene.layout.AnchorPane;
 public class CardController implements Initializable {
     
     private boolean selected =false;
-   
+    
+    @FXML
+    private AnchorPane cardFrame;
+     
     @FXML
     private AnchorPane cardPane;
     
@@ -31,17 +34,49 @@ public class CardController implements Initializable {
     
     @FXML
     private ImageView image;
+    
+    @FXML
+    private Label dressName;
+    
+    @FXML
+    private Label dressColor;
+    
+    @FXML
+    private Label dressSize;
+    
+    @FXML
+    private Label dressPrice;
+    
+    @FXML
+    private Label dressSale;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+       cardFrame.opacityProperty().set(0.95);
        image.setImage(new Image(String.valueOf(getClass().getResource("/UI/OwnerPage/HomePageAssets/MSI.jpg"))));
     }
+    
+    public void setImage(String url){
+        image.setImage(new Image(String.valueOf(getClass().getResource(url))));
+    }
+    
+    public void setAmount(String num){
+        amountNum.setText(num);
+    }
+    
     @FXML
     void paneClicked(MouseEvent event) {
-        if(!selected)
-        cardPane.setStyle("-fx-border-color:#59bfff");
-        else
+        if(!selected){
+                    cardFrame.opacityProperty().set(1);
+                    cardPane.setStyle("-fx-border-color:#F8A918");
+        }
+
+        else{
+            cardFrame.opacityProperty().set(0.95);
             cardPane.setStyle("");
+           
+        }
+
         
        selected=!selected;
     }
@@ -49,5 +84,22 @@ public class CardController implements Initializable {
         
         return selected;
     }
-    
+    public AnchorPane getCardSkeleton(){
+        return cardFrame;  
+    }
+    public void setName(String str){
+        this.dressName.setText(str);//The dress name sometimes will act and discribe several things
+    }
+    public void setColor (String str){
+        this.dressColor.setText(str);//No COmment
+    }
+    public void setSize (String str){
+        this.dressSize.setText(str);//NO COMMENTS
+    }
+    public void setPrice(String str){
+        this.dressPrice.setText(str);//the price will be driven from the sale and the real price
+    }
+      public void setSale(String str){
+          this.dressSale.setText(str);//don't forget the % symbol
+      }
 }

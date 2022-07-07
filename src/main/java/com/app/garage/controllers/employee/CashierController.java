@@ -34,7 +34,7 @@ import javafx.util.Duration;
 public class CashierController implements Initializable {
      
      ArrayList<CardController> conts = new ArrayList<CardController>();
-     ArrayList<Parent> cardArray = new ArrayList<Parent>();
+     //ArrayList<Parent> cardArray = new ArrayList<Parent>();
     @FXML
     private Label count;
      
@@ -53,7 +53,21 @@ public class CashierController implements Initializable {
     
     //UPDATE THE GRID
     private void update(){
-        
+        int i =0,j =0;
+         gridLayout.getChildren().clear();
+        for(CardController temp : conts)
+        {
+         gridLayout.add(temp.getCardSkeleton(), j, i);
+           
+            
+            j++;
+        if(j == 3){
+            i++;
+            j=0;
+        }
+        }
+         this.i=i;
+         this.j=j;
     }
     
     @FXML
@@ -67,7 +81,7 @@ public class CashierController implements Initializable {
         count.setText(String.valueOf(counter));
         FXMLLoader toload = new FXMLLoader(getClass().getResource("/UI/EmployeePage/dress-card.fxml"));
         Parent temp = toload.load();
-        cardArray.add(temp);
+        //cardArray.add(temp);
         conts.add(toload.getController());
         
         gridLayout.add((Node)temp , j , i);
@@ -78,27 +92,28 @@ public class CashierController implements Initializable {
             j=0;
         }
     }
-
+    
+    @FXML
+    void deleteSelectedCards(){
+        
+       for(int i =conts.size()-1 ; i>=0 ; i--){
+           if(conts.get(i).isSelected()){
+            conts.remove(i);
+            counter--;
+            count.setText(String.valueOf(counter));
+           }
+              
+       }
+        update();
+        
+    }
+ 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-            ColumnConstraints columnConstraints = new ColumnConstraints();
-columnConstraints.setHgrow(Priority.NEVER);
-
-// create new constraints for row and set their percentage
-RowConstraints rowConstraints = new RowConstraints();
-rowConstraints.setVgrow(Priority.NEVER);
-
-
 // don't set preferred size or anything on gridpane
-gridLayout = new GridPane();  
-gridLayout.getRowConstraints().add(rowConstraints);
-gridLayout.getColumnConstraints().add(columnConstraints);
-
+gridLayout = new GridPane();
 // suppose your scroll pane id is scrollPane
 scrollPane.setContent(gridLayout);
-
-    
-   
 
     }
     

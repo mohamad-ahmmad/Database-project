@@ -7,6 +7,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,7 +16,7 @@
 
 <AnchorPane fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="810.0" styleClass="white-color" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.employee.CashierController">
    <children>
-      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="700.0" prefWidth="530.0" style="-fx-background-color: white;" styleClass="grid" vbarPolicy="ALWAYS" vvalue="1.0">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="700.0" prefWidth="530.0" styleClass="grid" vbarPolicy="ALWAYS" vvalue="1.0">
          <stylesheets>
             <URL value="@../../CSS/ColorThemes.css" />
             <URL value="@../../CSS/EmployeePage/cashier.css" />
@@ -46,7 +47,7 @@
       </MFXButton>
       <MFXTextField floatMode="ABOVE" layoutX="540.0" layoutY="172.0" prefHeight="30.0" prefWidth="191.0" styleClass="textfields" />
       <Label layoutX="541.0" layoutY="153.0" text="Product #:" />
-      <MFXButton layoutX="543.0" layoutY="342.0" prefHeight="30.0" prefWidth="130.0" styleClass="btns" text="Delete selected card" />
+      <MFXButton layoutX="543.0" layoutY="342.0" onAction="#deleteSelectedCards" prefHeight="30.0" prefWidth="130.0" styleClass="btns" text="Delete selected card" />
       <MFXTextField floatMode="ABOVE" layoutX="539.0" layoutY="257.0" prefHeight="30.0" prefWidth="191.0" styleClass="cashier-textfields" />
       <Label layoutX="540.0" layoutY="239.0" text="Amount :" />
       <MFXButton layoutX="737.0" layoutY="257.0" prefHeight="30.0" prefWidth="70.0" styleClass="btns" text="Update">
@@ -63,12 +64,12 @@
          </padding>
       </Label>
       <Label layoutX="693.0" layoutY="321.0" text="Receipt #:" />
-      <MFXButton layoutX="678.0" layoutY="559.0" prefHeight="30.0" prefWidth="98.0" styleClass="btns" text="Done">
+      <MFXButton layoutX="678.0" layoutY="628.0" prefHeight="30.0" prefWidth="98.0" styleClass="btns" text="Done">
          <font>
             <Font name="Berlin Sans FB" size="13.0" />
          </font>
       </MFXButton>
-      <MFXButton layoutX="572.0" layoutY="559.0" prefHeight="30.0" prefWidth="98.0" styleClass="btns" text="Cancel">
+      <MFXButton layoutX="572.0" layoutY="628.0" prefHeight="30.0" prefWidth="98.0" styleClass="btns" text="Cancel">
          <font>
             <Font name="Berlin Sans FB" size="13.0" />
          </font>
@@ -90,6 +91,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Pane>
+      <Separator layoutX="528.0" layoutY="572.0" prefHeight="5.0" prefWidth="287.0" />
    </children>
    <stylesheets>
       <URL value="@../../CSS/EmployeePage/cashier.css" />
