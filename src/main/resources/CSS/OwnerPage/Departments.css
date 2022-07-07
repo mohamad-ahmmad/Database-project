@@ -9,3 +9,6 @@
      -fx-background-color: -fx-pressedColor;
      -fx-text-fill: primaryColor;
 }
+.mfx-text-field:focus-within {
+	-fx-border-color: #333;
+}

@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXTableView?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.DepartmentController">
    <children>
-      <JFXButton layoutX="599.0" layoutY="501.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Add Department">
+      <JFXButton layoutX="18.0" layoutY="637.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add Department">
          <stylesheets>
             <URL value="@../../CSS/ColorThemes.css" />
             <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -22,11 +27,145 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label layoutX="332.0" layoutY="82.0" prefHeight="36.0" prefWidth="145.0" text="Departments" textFill="#333333">
+      <Label layoutX="356.0" layoutY="14.0" prefHeight="36.0" prefWidth="145.0" text="Departments" textFill="#333333">
          <font>
             <Font name="Berlin Sans FB" size="25.0" />
          </font>
       </Label>
-      <MFXTableView layoutX="32.0" layoutY="152.0" prefHeight="344.0" prefWidth="750.0" />
+      <TableView fx:id="tableView" layoutX="7.0" layoutY="207.0" prefHeight="422.0" prefWidth="794.0" style="-fx-border-color: #333; -fx-border-radius: 6;">
+        <columns>
+          <TableColumn fx:id="SSNCol" prefWidth="92.7999849319458" text="ID" />
+          <TableColumn fx:id="nameCol" prefWidth="112.00006103515625" text="Name" />
+            <TableColumn fx:id="addressCol" prefWidth="115.20002746582031" text="Country" />
+            <TableColumn fx:id="bDateCol" minWidth="0.0" prefWidth="113.5999755859375" text="City" />
+            <TableColumn fx:id="phoneCol" prefWidth="110.4000244140625" text="Street" />
+            <TableColumn prefWidth="140.00006103515625" text="Opening Date" />
+            <TableColumn prefWidth="105.60001220703123" text="Manager ID" />
+        </columns>
+      </TableView>
+      <JFXButton layoutX="618.0" layoutY="637.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Department">
+         <stylesheets>
+            <URL value="@../../CSS/ColorThemes.css" />
+            <URL value="@../../CSS/OwnerPage/Departments.css" />
+         </stylesheets>
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <FlowPane fx:id="flowPane" alignment="CENTER" layoutX="146.0" layoutY="43.0" prefHeight="166.0" prefWidth="545.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Pane fx:id="IDPane" prefHeight="51.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="68.0" text="ID">
+                     <font>
+                        <Font name="Berlin Sans FB" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+               </children>
+            </Pane>
+         </children>
+      </FlowPane>
+      <Pane fx:id="namePane" layoutX="-224.0" layoutY="80.0" prefHeight="51.0" prefWidth="170.0">
+         <children>
+            <Label layoutX="55.0" layoutY="-2.0" text="Name">
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+            </Label>
+            <TextField layoutY="17.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+         </children>
+      </Pane>
+      <Pane fx:id="countryPane" layoutX="-215.0" layoutY="256.0" prefHeight="51.0" prefWidth="170.0">
+         <children>
+            <Label layoutX="49.0" text="Country">
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+            </Label>
+            <TextField layoutY="17.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+         </children>
+      </Pane>
+      <Pane fx:id="cityPane" layoutX="-207.0" layoutY="340.0" prefHeight="51.0" prefWidth="170.0">
+         <children>
+            <Label layoutX="62.0" text="City">
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+            </Label>
+            <TextField layoutY="17.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+            <Pane layoutX="19.0" layoutY="-19.0" prefHeight="51.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="33.0" layoutY="-2.0" text="Opening Date">
+                     <font>
+                        <Font name="Berlin Sans FB" size="15.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane fx:id="streetPane" layoutX="-215.0" layoutY="157.0" prefHeight="51.0" prefWidth="170.0">
+         <children>
+            <Label layoutX="58.0" text="Street">
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+            </Label>
+            <TextField layoutY="17.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+         </children>
+      </Pane>
+      <Pane fx:id="managerPane" layoutX="-215.0" layoutY="499.0" prefHeight="51.0" prefWidth="170.0">
+         <children>
+            <Label layoutX="40.0" layoutY="-2.0" text="Manager ID">
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+            </Label>
+            <TextField layoutY="17.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+         </children>
+      </Pane>
+      <Pane fx:id="openingPane" layoutX="-245.0" layoutY="2.0" prefHeight="51.0" prefWidth="170.0">
+         <children>
+            <Label layoutX="33.0" text="Opening Date">
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+            </Label>
+            <TextField layoutY="17.0" style="-fx-background-radius: 15; -fx-border-radius: 15;" />
+         </children>
+      </Pane>
+      <JFXButton layoutX="8.0" layoutY="161.0" onAction="#showSearchFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search Filter">
+         <stylesheets>
+            <URL value="@../../CSS/ColorThemes.css" />
+            <URL value="@../../CSS/OwnerPage/Departments.css" />
+         </stylesheets>
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="697.0" layoutY="165.0" onAction="#clearFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
+         <stylesheets>
+            <URL value="@../../CSS/ColorThemes.css" />
+            <URL value="@../../CSS/OwnerPage/Departments.css" />
+         </stylesheets>
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <AnchorPane fx:id="searchFilter" layoutX="-22.0" layoutY="-44.0" prefHeight="230.0" prefWidth="420.0" translateX="210.0" translateY="240.0" />
    </children>
 </AnchorPane>

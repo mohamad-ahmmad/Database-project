@@ -8,6 +8,8 @@
 <?import javafx.scene.chart.StackedBarChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.ProfitsController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="810.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.ProfitsController">
    <children>
       <VBox layoutX="469.0" layoutY="63.0" prefHeight="297.0" prefWidth="326.0" styleClass="Boxes">
          <children>
@@ -96,5 +98,18 @@
             <URL value="@../../CSS/ColorThemes.css" />
          </stylesheets>
       </VBox>
+
+      <TableView layoutX="20.0" layoutY="372.0" prefHeight="325.0" prefWidth="419.0" styleClass="Table">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+         <stylesheets>
+            <URL value="@../../CSS/ColorThemes.css" />
+            <URL value="@../../CSS/OwnerPage/Profits.css" />
+         </stylesheets>
+      </TableView>
+
+
    </children>
 </AnchorPane>
