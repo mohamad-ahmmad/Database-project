@@ -46,6 +46,8 @@ public class EmployeeController implements Initializable{
     private Pane IDCardPane;
     @FXML
     private Label lblContact;
+    @FXML
+    private AnchorPane slidePane;
 
     @FXML
     private Label lblInfo;
@@ -200,11 +202,10 @@ public class EmployeeController implements Initializable{
     }
     
  @FXML
-    void addDepartment(ActionEvent event) throws IOException {
+    void addEmployee(ActionEvent event) throws IOException {
         FXMLLoader loader;
-        loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddDepartment.fxml"));
+        loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddEmployee.fxml"));
         Parent root = loader.load();
-        
         Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root);
@@ -224,7 +225,7 @@ public class EmployeeController implements Initializable{
     }
      @FXML
     void Next(ActionEvent event) throws IOException {
-       /*
+       
          if(i==2)
         {
             btnNext.setVisible(false);
@@ -243,18 +244,19 @@ public class EmployeeController implements Initializable{
         t.play();
         t.setOnFinished(e->{
         slidePane.getChildren().remove(0);});
-                  i++;*/
+                  i++;
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        String name = "/UI/OwnerPage/EnterName.fxml";
-        String Location = "/UI/OwnerPage/Location.fxml";
-        String ManagerID = "/UI/OwnerPage/ManagerID.fxml";
+        String name = "/UI/OwnerPage/EnterEmployeeName.fxml";
+        String salary = "/UI/OwnerPage/EnterSalary.fxml";
+        String hireDate = "/UI/OwnerPage/EnterHireDate.fxml";
+        String Idcard = "/UI/OwnerPage/EnterIDCard.fxml";
         next.add(name);
-        next.add(Location);
-        next.add(ManagerID);
+        next.add(salary);
+        next.add(Idcard);
     }
     boolean InfoSelected = true;
         @FXML

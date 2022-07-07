@@ -28,7 +28,7 @@
             <Font name="Berlin Sans FB" size="25.0" />
          </font>
       </Label>
-      <Pane fx:id="InformationPane" layoutX="-536.0" layoutY="-38.0">
+      <Pane fx:id="InformationPane" layoutX="-536.0" layoutY="-38.0" visible="false">
          <children>
             <TableView fx:id="tableView" layoutX="543.0" layoutY="293.0" prefHeight="347.0" prefWidth="810.0" style="-fx-border-color: #333; -fx-border-radius: 6;">
               <columns>
@@ -40,7 +40,7 @@
                   <TableColumn prefWidth="99.20001220703125" text="Birthdate" />
                   <TableColumn prefWidth="84.80010986328125" text="Gender" />
                   <TableColumn prefWidth="84.80010986328125" text="Salary" />
-                  <TableColumn prefWidth="78.39999999999998" text="ID Card" />
+                  <TableColumn prefWidth="94.0" text="ID Card" />
               </columns>
             </TableView>
             <JFXButton layoutX="757.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Employee">
@@ -212,7 +212,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <AnchorPane fx:id="searchFilter" layoutX="737.0" layoutY="234.0" prefHeight="166.0" prefWidth="420.0" translateX="210.0" translateY="240.0" visible="false">
+            <AnchorPane fx:id="searchFilter" layoutX="737.0" layoutY="234.0" prefHeight="166.0" prefWidth="420.0" translateY="20.0" visible="false">
                <children>
                   <AnchorPane layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="166.0" prefWidth="420.0" style="-fx-background-color: white; -fx-border-color: black;">
                      <children>
@@ -323,7 +323,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="554.0" layoutY="675.0" onAction="#addDepartment" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add Employee">
+            <JFXButton layoutX="554.0" layoutY="675.0" onAction="#addEmployee" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add Employee">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -349,13 +349,14 @@
             </JFXButton>
          </children>
       </Pane>
-      <AnchorPane fx:id="ContactPane" layoutY="101.0" prefHeight="598.0" prefWidth="818.0" visible="false">
+      <AnchorPane fx:id="ContactPane" layoutY="101.0" prefHeight="598.0" prefWidth="818.0">
          <children>
-            <TableView layoutX="12.0" layoutY="161.0" prefHeight="406.0" prefWidth="794.0">
+            <TableView layoutX="12.0" layoutY="161.0" prefHeight="328.0" prefWidth="794.0">
               <columns>
-                <TableColumn prefWidth="272.8000122308731" text="Employee ID" />
-                <TableColumn prefWidth="291.2001037597656" text="Area Code" />
-                  <TableColumn minWidth="0.0" prefWidth="258.39990234375" text="Number" />
+                <TableColumn prefWidth="232.0000057220459" text="Employee ID" />
+                <TableColumn prefWidth="162.39996337890625" text="Area Code" />
+                  <TableColumn minWidth="0.0" prefWidth="213.5999755859375" text="Number" />
+                  <TableColumn minWidth="0.0" prefWidth="183.20001220703125" text="Email Address" />
               </columns>
             </TableView>
             <Label layoutX="72.0" layoutY="30.0" prefHeight="36.0" prefWidth="185.0" text="Phone Numbers" textFill="#333333">

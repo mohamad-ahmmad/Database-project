@@ -10,8 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" fx:id="bigPane" prefHeight="239.0" prefWidth="506.0" stylesheets="@../../CSS/OwnerPage/Logout.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.DepartmentController">
+<AnchorPane id="AnchorPane" fx:id="bigPane" prefHeight="239.0" prefWidth="506.0" stylesheets="@../../CSS/OwnerPage/Logout.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.EmployeeController">
    <children>
       <Button layoutX="14.0" layoutY="183.0" mnemonicParsing="false" onAction="#DoneAdding" prefHeight="23.0" prefWidth="65.0" styleClass="AddDepartment" text="Cancel">
          <stylesheets>
@@ -49,7 +48,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="127.0" layoutY="12.0" text="Add a new department" textFill="#333333">
+      <Label layoutX="127.0" layoutY="12.0" text="Add a new Employee" textFill="#333333">
          <font>
             <Font name="Berlin Sans FB" size="25.0" />
          </font>
@@ -58,7 +57,7 @@
          <children>
             <Pane layoutX="117.0">
                <children>
-                  <Label alignment="CENTER" layoutX="3.0" prefHeight="56.0" prefWidth="258.0" text="Enter Department ID:">
+                  <Label alignment="CENTER" layoutX="3.0" prefHeight="56.0" prefWidth="258.0" text="Enter Employee SSN:">
                      <font>
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
@@ -68,9 +67,9 @@
             </Pane>
          </children>
       </AnchorPane>
-      <Line endX="-15.999960899353027" endY="-13.999991416931152" layoutX="19.0" layoutY="15.0" startX="-16.999969482421875" startY="219.0786590576172" strokeWidth="3.0" />
-      <Line endX="-15.999960899353027" endY="-13.999991416931152" layoutX="525.0" layoutY="18.0" startX="-16.999969482421875" startY="219.0786590576172" strokeWidth="3.0" />
-      <Line endX="393.5000305175781" endY="-5.121307373046875" layoutX="115.0" layoutY="9.0" startX="-114.99999237060547" startY="-6.999991416931152" strokeWidth="3.0" />
-      <Line endX="393.5000305175781" endY="-5.121307373046875" layoutX="114.0" layoutY="244.0" startX="-114.99999237060547" startY="-6.999991416931152" strokeWidth="3.0" />
+      <Line endX="-15.999960899353027" endY="-13.999991416931152" layoutX="19.0" layoutY="15.0" startX="-16.999969482421875" startY="219.0786590576172" strokeWidth="2.0" />
+      <Line endX="-15.999960899353027" endY="-13.999991416931152" layoutX="525.0" layoutY="18.0" startX="-16.999969482421875" startY="219.0786590576172" strokeWidth="2.0" />
+      <Line endX="393.5000305175781" endY="-5.121307373046875" layoutX="115.0" layoutY="9.0" startX="-114.99999237060547" startY="-6.999991416931152" strokeWidth="2.0" />
+      <Line endX="393.5000305175781" endY="-5.121307373046875" layoutX="114.0" layoutY="244.0" startX="-114.99999237060547" startY="-6.999991416931152" strokeWidth="2.0" />
    </children>
 </AnchorPane>
