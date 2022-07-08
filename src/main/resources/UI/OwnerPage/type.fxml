@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="496.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.TypeController">
+   <children>
+      <Label alignment="CENTER" layoutX="118.0" prefHeight="40.0" prefWidth="258.0" text="Enter Manager Information">
+         <font>
+            <Font name="Berlin Sans FB" size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="66.0" layoutY="46.0" prefHeight="18.0" prefWidth="90.0" text="Manager Type">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <TextField layoutX="264.0" layoutY="62.0" prefHeight="26.0" prefWidth="170.0" />
+      <Label alignment="CENTER" layoutX="272.0" layoutY="45.0" prefHeight="18.0" prefWidth="154.0" text="Office Telephone Number">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <JFXRadioButton fx:id="radioDepM" layoutX="64.0" layoutY="68.0" text="Department Manager">
+         <selectedColor>
+            <Color red="0.9725490212440491" green="0.6627451181411743" blue="0.0941176488995552" />
+         </selectedColor>
+         <font>
+            <Font name="Berlin Sans FB" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="radioWareM" layoutX="64.0" layoutY="90.0" text="Warehouse Manager">
+         <selectedColor>
+            <Color red="0.9725490212440491" green="0.6627451181411743" blue="0.0941176488995552" />
+         </selectedColor>
+         <font>
+            <Font name="Berlin Sans FB" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXRadioButton>
+   </children>
+</AnchorPane>

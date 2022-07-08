@@ -131,7 +131,10 @@ public class OwnerController implements Initializable {
         clearStyles();
         labelDepartments.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
          Timeline t = new Timeline();
-        Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/DepartmentsPage.fxml"));
+         FXMLLoader temp = new FXMLLoader(getClass().getResource("/UI/OwnerPage/DepartmentsPage.fxml"));
+        Parent root = temp.load();
+       
+
         root.scaleXProperty().set(0.8);
         root.scaleYProperty().set(0.8);
          t.getKeyFrames().add(new KeyFrame(
@@ -142,6 +145,7 @@ public class OwnerController implements Initializable {
          t.play();
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
+        
         profitsSelected = false;
         homeSelected = false;
         departmentsSelected = true;
@@ -185,20 +189,7 @@ public class OwnerController implements Initializable {
             Scene logoutScene = new Scene(root);
        logout.setScene(logoutScene);
        logout.show();
-       /*   Timeline t = new Timeline();
-        Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Logout.fxml"));
-        root.scaleXProperty().set(0.8);
-        root.scaleYProperty().set(0.8);
-         t.getKeyFrames().add(new KeyFrame(
-                 Duration.seconds(0.3) ,
-      new KeyValue(root.scaleXProperty() , 1)
-       ,new KeyValue(root.scaleYProperty() , 1)
-      ));
-         t.play();
-        mainPanel.getChildren().add(root);
-        Node node = mainPanel.getChildren().get(2);
-        node.setTranslateX(400);
-        node.setTranslateY(250);*/
+  
     }
 
      @FXML

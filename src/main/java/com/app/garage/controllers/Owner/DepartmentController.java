@@ -3,11 +3,13 @@ package com.app.garage.controllers.Owner;
 import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
 import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,16 +17,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+
 
 public class DepartmentController implements Initializable{
 
@@ -72,9 +78,11 @@ public class DepartmentController implements Initializable{
 
     @FXML
     private TableView<?> tableView;
+    
+    
+    
     @FXML
-    private AnchorPane mainPane;
-
+    private AnchorPane searchPane;
     @FXML
     void clearFilter(ActionEvent event) {
         nameField.setSelected(false);
@@ -88,13 +96,15 @@ public class DepartmentController implements Initializable{
     public void clearSearch() throws IOException{
         searchFilter.getChildren().clear();
    }
+
     Stage stage;
     private Parent root;
    @FXML
     void Done(ActionEvent event) throws IOException {
          searchFilter.setVisible(false);
-    }
 
+    }
+    
     @FXML
     void showSearchFilter(ActionEvent event) throws IOException {
         searchFilter.setVisible(true);
@@ -158,10 +168,12 @@ public class DepartmentController implements Initializable{
     private JFXCheckBox managerField;
     @FXML
     private AnchorPane slidePane;
-
+    
+    FXMLLoader loader;
+    
  @FXML
     void addDepartment(ActionEvent event) throws IOException {
-        FXMLLoader loader;
+
         loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddDepartment.fxml"));
         Parent root = loader.load();
         
@@ -204,16 +216,19 @@ public class DepartmentController implements Initializable{
         slidePane.getChildren().remove(0);});
                   i++;
 
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         String name = "/UI/OwnerPage/EnterName.fxml";
         String Location = "/UI/OwnerPage/Location.fxml";
         String ManagerID = "/UI/OwnerPage/ManagerID.fxml";
         next.add(name);
         next.add(Location);
         next.add(ManagerID);
+
     }
 
 }

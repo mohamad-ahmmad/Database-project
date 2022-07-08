@@ -14,10 +14,14 @@
 .card{
     -fx-background-color:#FEFEFE;
     -fx-background-radius:4;
+    -fx-border-color : #444;
 }
 
     .cashier-textfields:focus-within{
 
     -fx-border-color:-fx-borderColor;
     
+}
+.grid .thumb {
+    -fx-background-color : #666;
 }

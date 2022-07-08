@@ -18,7 +18,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.DepartmentController">
+
    <children>
       <JFXButton layoutX="18.0" layoutY="637.0" onAction="#addDepartment" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add Department">
          <stylesheets>
