@@ -33,6 +33,30 @@
                      </color>
                   </DropShadow>
                </effect>
+               <children>
+                  <Label fx:id="lblWarehouses" alignment="CENTER" layoutY="256.0" onMouseClicked="#openWarehousesPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="    Warehouses" textFill="#f8a918">
+                     <font>
+                        <Font name="Berlin Sans FB" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../ICONS/warehouseManager/Warehouse.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <stylesheets>
+                        <URL value="@../../CSS/OwnerPage/Owner-form.css" />
+                        <URL value="@../../CSS/ColorThemes.css" />
+                     </stylesheets>
+                  </Label>
+               </children>
             </AnchorPane>
             <ImageView fitHeight="80.0" fitWidth="58.0" layoutX="57.0" layoutY="13.0" pickOnBounds="true">
                <image>
@@ -48,20 +72,20 @@
             </ImageView>
 
             <Separator layoutY="143.0" prefWidth="190.0" />
-            <Label fx:id="labelHome" alignment="CENTER" layoutY="196.0" onMouseClicked="#openHomePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Home" textFill="#f8a918">
+            <Label fx:id="lblSuppliers" alignment="CENTER" layoutY="202.0" onMouseClicked="#openSuppliersPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Suppliers" textFill="#f8a918">
 
-               <font>
+                     <font>
                   <Font name="Berlin Sans FB" size="15.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../ICONS/OwnerPage/HomeIcon.png" />
+                        <Image url="@../../ICONS/warehouseManager/Supplier.png" />
                      </image>
                   </ImageView>
                </graphic>
                <padding>
-                  <Insets right="70.0" />
+                  <Insets right="35.0" />
                </padding>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -71,63 +95,19 @@
                   <URL value="@../../CSS/ColorThemes.css" />
                </stylesheets>
             </Label>
-            <Label fx:id="labelProfits" alignment="CENTER" layoutY="251.0" onMouseClicked="#openProfitsPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Profits" textFill="#f8a918">
-               <font>
-                  <Font name="Berlin Sans FB" size="14.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../ICONS/OwnerPage/ProfitsIcon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets right="70.0" />
-               </padding>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <stylesheets>
-                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
-                  <URL value="@../../CSS/ColorThemes.css" />
-               </stylesheets>
-            </Label>
-            <Label fx:id="labelDepartments" alignment="CENTER" layoutY="308.0" onMouseClicked="#openDepartmentPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Departements" textFill="#f8a918">
+            <Label fx:id="lblShipments" alignment="CENTER" layoutY="308.0" onMouseClicked="#openShipmentsPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Shipments" textFill="#f8a918">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../ICONS/OwnerPage/Departments.png" />
+                        <Image url="@../../ICONS/warehouseManager/Shipment.png" />
                      </image>
                   </ImageView>
                </graphic>
                <padding>
-                  <Insets left="20.0" right="40.0" />
-               </padding>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <stylesheets>
-                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
-                  <URL value="@../../CSS/ColorThemes.css" />
-               </stylesheets>
-            </Label>
-            <Label fx:id="labelEmployees" alignment="CENTER" layoutY="365.0" onMouseClicked="#openEmployeePanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Employees" textFill="#f8a918">
-               <font>
-                  <Font name="Berlin Sans FB" size="14.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0">
-                     <image>
-                        <Image url="@../../ICONS/OwnerPage/Employees.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="10.0" right="40.0" />
+                  <Insets left="20.0" right="50.0" />
                </padding>
                <cursor>
                   <Cursor fx:constant="HAND" />
