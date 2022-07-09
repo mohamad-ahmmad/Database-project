@@ -1,16 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="mainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="810.0" style="-fx-background-color: -fx-primaryColor;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.employee.ClothesController">
    <children>
-      <Text layoutX="364.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEST">
+      <TextField layoutX="297.0" layoutY="57.0" prefHeight="28.0" prefWidth="190.0" styleClass="textfields" stylesheets="@../../CSS/ColorThemes.css">
+         <padding>
+            <Insets left="32.0" />
+         </padding>
+      </TextField>
+      <ImageView fx:id="lens" fitHeight="28.0" fitWidth="28.0" layoutX="297.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../ICONS/employee/search.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="1.0" layoutY="12.0" prefHeight="34.0" prefWidth="255.0" styleClass="underline" text="     Available Clothes:">
          <font>
-            <Font size="39.0" />
+            <Font name="Berlin Sans FB" size="29.0" />
          </font>
-      </Text>
+      </Label>
+      <ImageView fitHeight="34.0" fitWidth="32.0" layoutX="4.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../ICONS/employee/clothes.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="4.0" layoutY="141.0" mnemonicParsing="false" onAction="#filterClicked" prefHeight="32.0" prefWidth="132.0" styleClass="btns" text="Filter">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="28.0" fitWidth="32.0" layoutX="7.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../ICONS/employee/filter.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="1.0" contrast="0.04" hue="0.69" saturation="0.73" />
+         </effect>
+      </ImageView>
+      <Label layoutX="261.0" layoutY="57.0" prefHeight="28.0" prefWidth="32.0" text="ID:">
+         <font>
+            <Font name="Berlin Sans FB" size="25.0" />
+         </font>
+      </Label>
+      <FlowPane fx:id="textPane" hgap="5.0" layoutX="144.0" layoutY="94.0" prefHeight="85.0" prefWidth="651.0" styleClass="textfields" vgap="8.0" />
+      <Button layoutX="4.0" layoutY="99.0" mnemonicParsing="false" onAction="#searchClicked" prefHeight="32.0" prefWidth="132.0" styleClass="btns" text="Search">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <ImageView fx:id="lens1" fitHeight="28.0" fitWidth="28.0" layoutX="9.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../ICONS/employee/search.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="1.0" />
+         </effect>
+      </ImageView>
+      <MFXTextField fx:id="dressName" floatMode="BORDER" floatingText="Name" layoutX="-239.0" layoutY="64.0" prefHeight="34.0" prefWidth="156.0" styleClass="textfields" />
+      <MFXTextField fx:id="dressSize" floatMode="BORDER" floatingText="Size" layoutX="-266.0" layoutY="9.0" prefHeight="34.0" prefWidth="156.0" styleClass="textfields" />
+      <MFXTextField fx:id="dressColor" floatMode="BORDER" floatingText="Color" layoutX="-169.0" layoutY="215.0" prefHeight="34.0" prefWidth="156.0" styleClass="textfields" />
+      <MFXTextField fx:id="dressBrand" floatMode="BORDER" floatingText="Brand" layoutX="-194.0" layoutY="329.0" prefHeight="34.0" prefWidth="156.0" styleClass="textfields" />
+      <MFXTextField fx:id="dressPrice" floatMode="BORDER" floatingText="Price" layoutX="-185.0" layoutY="425.0" prefHeight="34.0" prefWidth="156.0" styleClass="textfields" />
+      <MFXTextField fx:id="dressOPrice" floatMode="BORDER" floatingText="Price(Offer)" layoutX="-203.0" layoutY="663.0" prefHeight="34.0" prefWidth="156.0" styleClass="textfields" />
+      <MFXTextField fx:id="dressStock" floatMode="BORDER" floatingText="Stock" layoutX="-185.0" layoutY="576.0" prefHeight="34.0" prefWidth="156.0" styleClass="textfields" />
+      <MFXTextField fx:id="dressSale" floatMode="BORDER" floatingText="Sale" layoutX="-34.0" layoutY="752.0" prefHeight="34.0" prefWidth="156.0" styleClass="textfields" />
+      <TableView layoutX="5.0" layoutY="188.0" prefHeight="507.0" prefWidth="800.0" styleClass="table">
+        <columns>
+          <TableColumn prefWidth="75.0" text="ID" />
+          <TableColumn prefWidth="75.0" text="Name" />
+            <TableColumn prefWidth="75.0" text="Color" />
+            <TableColumn prefWidth="75.0" text="Size" />
+            <TableColumn prefWidth="75.0" text="Price" />
+            <TableColumn prefWidth="75.0" text="Price(Offer)" />
+            <TableColumn prefWidth="75.0" text="Brand" />
+            <TableColumn prefWidth="75.0" text="Sale" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
    </children>
+   <stylesheets>
+      <URL value="@../../CSS/EmployeePage/clothes.css" />
+      <URL value="@../../CSS/ColorThemes.css" />
+   </stylesheets>
 </AnchorPane>

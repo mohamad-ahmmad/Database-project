@@ -14,7 +14,8 @@
 .card{
     -fx-background-color:#FEFEFE;
     -fx-background-radius:4;
-    -fx-border-color : #444;
+    -fx-border-color : #666;
+    -fx-border-radius:3;
 }
 
     .cashier-textfields:focus-within{
@@ -25,3 +26,4 @@
 .grid .thumb {
     -fx-background-color : #666;
 }
+
