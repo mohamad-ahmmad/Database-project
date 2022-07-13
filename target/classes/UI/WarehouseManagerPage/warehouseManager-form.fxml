@@ -34,7 +34,7 @@
                   </DropShadow>
                </effect>
                <children>
-                  <Label fx:id="lblWarehouses" alignment="CENTER" layoutY="256.0" onMouseClicked="#openWarehousesPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="    Warehouses" textFill="#f8a918">
+                  <Label fx:id="lblWarehouses" alignment="CENTER" layoutY="260.0" onMouseClicked="#openWarehousesPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="    Warehouses" textFill="#f8a918">
                      <font>
                         <Font name="Berlin Sans FB" size="14.0" />
                      </font>
@@ -72,20 +72,20 @@
             </ImageView>
 
             <Separator layoutY="143.0" prefWidth="190.0" />
-            <Label fx:id="lblSuppliers" alignment="CENTER" layoutY="202.0" onMouseClicked="#openSuppliersPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Suppliers" textFill="#f8a918">
+            <Label fx:id="lblSuppliers" alignment="CENTER" layoutY="202.0" onMouseClicked="#openSuppliersPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Suppliers" textFill="#f8a918">
 
                      <font>
                   <Font name="Berlin Sans FB" size="15.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="29.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../ICONS/warehouseManager/Supplier.png" />
                      </image>
                   </ImageView>
                </graphic>
                <padding>
-                  <Insets right="35.0" />
+                  <Insets right="30.0" />
                </padding>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -95,7 +95,7 @@
                   <URL value="@../../CSS/ColorThemes.css" />
                </stylesheets>
             </Label>
-            <Label fx:id="lblShipments" alignment="CENTER" layoutY="308.0" onMouseClicked="#openShipmentsPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Shipments" textFill="#f8a918">
+            <Label fx:id="lblShipments" alignment="CENTER" layoutY="316.0" onMouseClicked="#openShipmentsPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Shipments" textFill="#f8a918">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>

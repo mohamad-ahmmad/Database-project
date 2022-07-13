@@ -8,28 +8,41 @@
     -fx-BoxesColor: #E6E6E6;
     -fx-buttonColor: #333;
     -fx-borderColor:#333;
-
+    -fx-textColor:#333;
+    
+    -fx-border-radius:0;/*THIS CODE MEANS THAT EVERYTHING BY DEFUALT HAVE RADIUS "0" */
+}
+.root{
+    
 }
 
 .underline{
     -fx-border-color:-fx-labelColor;
     -fx-border-width: 0 0 1 0;
 }
+.textfields:focused{
+    -fx-border-color:-fx-borderColor;
+    -fx-accent:-fx-subColor;
+  
+}
 .textfields:focus-within  {
-    -fx-text-fill:-fx-labelColor;
-    
+    -fx-text-fill:-fx-borderColor;
+    -fx-border-color:-fx-borderColor;
+}
+.textfields .floating-text{
+    -fx-text-fill:-fx-textColor;
 }
 .btns{
-    -fx-background-color:-fx-buttonColor;
+    
+    -fx-background-color: -fx-buttonColor;
     -fx-text-fill:-fx-primaryColor;
+    -fx-font-family:"Berlin Sans FB";
 }
 .btns:hover{
-    -fx-background-color:-fx-hoverColor;
-    -fx-text-fill:-fx-buttonColor;
-    -fx-border-color:-fx-buttonColor;
-    -fx-border-width:1.5;
-    -fx-border-radius:2;
+    -fx-background-color:#444;
+    -fx-font-family:"Berlin Sans FB";
 }
+
 /* Useless cuz MFXButton has already pressed effect
 .btns:pressed{
     -fx-background-color:-fx-pressedColor;

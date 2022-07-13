@@ -45,6 +45,8 @@ public class OwnerController implements Initializable {
     @FXML
     private Label labelLogout;
     @FXML
+    private Label labelWarehouses;
+    @FXML
     private Label labelProfits;
     @FXML
     private Label labelHome;
@@ -64,6 +66,7 @@ public class OwnerController implements Initializable {
     boolean profitsSelected = false;
     boolean departmentsSelected = false;
     boolean employeesSelected = false;
+    boolean warehousesSelected=false;
     private Stage currentStage;
 
     @FXML
@@ -89,6 +92,7 @@ public class OwnerController implements Initializable {
         homeSelected = false;
         departmentsSelected = false;
         employeesSelected = false;
+        warehousesSelected=false;
         }
     }
     @FXML
@@ -113,6 +117,7 @@ public class OwnerController implements Initializable {
         homeSelected = true;
         departmentsSelected = false;
         employeesSelected = false;
+        warehousesSelected=false;
         }
         
       
@@ -123,6 +128,7 @@ public class OwnerController implements Initializable {
         labelDepartments.setStyle("");
         labelLogout.setStyle("");
         labelEmployees.setStyle("");
+        labelWarehouses.setStyle("");
     }
     @FXML
     void openDepartmentPanel() throws IOException {
@@ -150,6 +156,7 @@ public class OwnerController implements Initializable {
         homeSelected = false;
         departmentsSelected = true;
         employeesSelected = false;
+        warehousesSelected=false;
         }
     }
     @FXML
@@ -174,6 +181,34 @@ public class OwnerController implements Initializable {
         homeSelected = false;
         departmentsSelected = false;
         employeesSelected = true;
+        warehousesSelected=false;
+        }
+    }
+         @FXML
+    void openWarehousesPanel() throws IOException {
+        if(!warehousesSelected)
+        {
+        clearStyles();
+        labelWarehouses.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
+         Timeline t = new Timeline();
+         FXMLLoader temp = new FXMLLoader(getClass().getResource("/UI/OwnerPage/WarehousesPage.fxml"));
+        Parent root = temp.load(); 
+        root.scaleXProperty().set(0.8);
+        root.scaleYProperty().set(0.8);
+         t.getKeyFrames().add(new KeyFrame(
+                 Duration.seconds(0.3) ,
+      new KeyValue(root.scaleXProperty() , 1)
+       ,new KeyValue(root.scaleYProperty() , 1)
+      ));
+         t.play();
+        viewPanel.getChildren().clear();
+        viewPanel.getChildren().add(root);
+        
+        profitsSelected = false;
+        homeSelected = false;
+        departmentsSelected = false;
+        employeesSelected = false;
+        warehousesSelected=true;
         }
     }
      

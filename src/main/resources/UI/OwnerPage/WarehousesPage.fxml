@@ -18,10 +18,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.warehouseManager.WarehouseManagerController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.WarehousesController">
 
    <children>
-      <JFXButton layoutX="18.0" layoutY="637.0" onAction="#addDepartment" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add Department">
+      <JFXButton layoutX="18.0" layoutY="637.0" onAction="#addWarehouse" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add Warehouse">
          <stylesheets>
             <URL value="@../../CSS/ColorThemes.css" />
             <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -33,7 +33,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label alignment="CENTER" layoutX="338.0" layoutY="14.0" prefHeight="36.0" prefWidth="145.0" text="Suppliers" textFill="#333333">
+      <Label layoutX="353.0" layoutY="14.0" prefHeight="36.0" prefWidth="145.0" text="Warehouses" textFill="#333333">
          <font>
             <Font name="Berlin Sans FB" size="25.0" />
          </font>
@@ -45,11 +45,11 @@
             <TableColumn fx:id="addressCol" prefWidth="115.20002746582031" text="Country" />
             <TableColumn fx:id="bDateCol" minWidth="0.0" prefWidth="113.5999755859375" text="City" />
             <TableColumn fx:id="phoneCol" prefWidth="110.4000244140625" text="Street" />
-            <TableColumn prefWidth="140.00006103515625" text="Opening Date" />
-            <TableColumn prefWidth="105.60001220703123" text="Manager ID" />
+            <TableColumn prefWidth="120.79998779296875" text="Capacity" />
+            <TableColumn prefWidth="126.4000244140625" text="Manager ID" />
         </columns>
       </TableView>
-      <JFXButton layoutX="618.0" layoutY="637.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Department">
+      <JFXButton layoutX="618.0" layoutY="637.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Warehouse">
          <stylesheets>
             <URL value="@../../CSS/ColorThemes.css" />
             <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -146,9 +146,9 @@
                </font></TextField>
          </children>
       </Pane>
-      <Pane fx:id="openingPane" layoutX="-300.0" layoutY="454.0" prefHeight="51.0" prefWidth="170.0">
+      <Pane fx:id="CapacityPane" layoutX="-383.0" layoutY="157.0" prefHeight="51.0" prefWidth="170.0">
          <children>
-            <Label layoutX="22.0" layoutY="3.0" text="Opening Date">
+            <Label layoutX="40.0" text="Capacity">
                <font>
                   <Font name="Berlin Sans FB" size="12.0" />
                </font>
@@ -192,7 +192,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                   </Label>
-                  <JFXCheckBox fx:id="odField" checkedColor="#f8a918" layoutX="292.0" layoutY="91.0" onAction="#opendateCheck" text="Opening Date" unCheckedColor="#333333">
+                  <JFXCheckBox fx:id="CapacityField" checkedColor="#f8a918" layoutX="292.0" layoutY="91.0" onAction="#opencapacityCheck" text="Capacity" unCheckedColor="#333333">
                      <font>
                         <Font name="Berlin Sans FB" size="13.0" />
                      </font>

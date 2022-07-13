@@ -1,6 +1,7 @@
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\OwnerController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\DepartmentController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\warehouseManager\WarehouseManagerController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\ClothesController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\CardsSlider.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\TypeController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\login\LoginController.java
@@ -12,6 +13,8 @@ D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\EmployeeContr
 D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\CardController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\SliderController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\departmentManager\DepManagerController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\WarehousesController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Department.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\ReceiptController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\EmployeeController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\ProfitsController.java
