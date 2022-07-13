@@ -1,6 +1,390 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" />
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.derpartmentmanager.EmployeesController">
+   <children>
+      <Separator layoutX="-2.0" layoutY="64.0" prefHeight="0.0" prefWidth="810.0" />
+      <Separator layoutY="102.0" prefHeight="3.0" prefWidth="810.0" />
+      <Separator layoutX="384.0" layoutY="66.0" orientation="VERTICAL" prefHeight="36.0" prefWidth="11.0" />
+      <Label alignment="CENTER" layoutX="332.0" layoutY="14.0" prefHeight="36.0" prefWidth="145.0" text="Employees" textFill="#333333">
+         <font>
+            <Font name="Berlin Sans FB" size="25.0" />
+         </font>
+      </Label>
+      <Pane fx:id="InformationPane" layoutX="-536.0" layoutY="-38.0">
+         <children>
+            <TableView fx:id="tableView" layoutX="543.0" layoutY="293.0" prefHeight="347.0" prefWidth="810.0" style="-fx-border-color: #333; -fx-border-radius: 6;">
+               <columns>
+                  <TableColumn fx:id="SSNCol" prefWidth="65.60000610351562" text="SSN" />
+                  <TableColumn fx:id="nameCol" prefWidth="79.20001220703125" text="First Name" />
+                  <TableColumn fx:id="addressCol" prefWidth="108.79998779296875" text="Middle Name" />
+                  <TableColumn fx:id="bDateCol" minWidth="0.0" prefWidth="94.4000244140625" text="Last Name" />
+                  <TableColumn fx:id="phoneCol" prefWidth="92.0" text="Hire Date" />
+                  <TableColumn prefWidth="99.20001220703125" text="Birthdate" />
+                  <TableColumn prefWidth="84.80010986328125" text="Gender" />
+                  <TableColumn prefWidth="84.80010986328125" text="Salary" />
+                  <TableColumn prefWidth="78.39999999999998" text="ID Card" />
+               </columns>
+            </TableView>
+            <JFXButton layoutX="757.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Employee">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <FlowPane fx:id="flowPane" alignment="CENTER" layoutX="696.0" layoutY="146.0" prefHeight="143.0" prefWidth="539.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <Pane fx:id="SSNPane" prefHeight="51.0" prefWidth="170.0">
+                     <children>
+                        <Label layoutX="52.0" layoutY="1.0" text="SSN">
+                           <font>
+                              <Font name="Berlin Sans FB" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </Pane>
+               </children>
+            </FlowPane>
+            <Pane fx:id="FirstNamePane" layoutX="171.0" layoutY="97.0" prefHeight="51.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="46.0" layoutY="3.0" text="First Name">
+                     <font>
+                        <Font name="Berlin Sans FB" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0" prefHeight="0.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
+            <Pane fx:id="LastNamePane" layoutX="55.0" prefHeight="51.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="32.0" text="Last Name">
+                     <font>
+                        <Font name="Berlin Sans FB" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
+            <Pane fx:id="MiddleNamePane" layoutX="200.0" prefHeight="51.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="28.0" layoutY="2.0" text="Middle Name">
+                     <font>
+                        <Font name="Berlin Sans FB" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0" prefWidth="125.0" style="-fx-border-radius: 0; -fx-background-radius: 0;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
+            <Pane fx:id="HireDatePane" layoutX="171.0" layoutY="44.0" prefHeight="51.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="34.0" layoutY="3.0" text="Hire Date">
+                     <font>
+                        <Font name="Berlin Sans FB" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
+            <Pane fx:id="BirthDatePane" layoutY="69.0" prefHeight="51.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="32.0" layoutY="2.0" text="BirthDate">
+                     <font>
+                        <Font name="Berlin Sans FB" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
+            <Pane fx:id="GenderPane" layoutX="213.0" layoutY="76.0" prefHeight="51.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="41.0" layoutY="1.0" text="Gender">
+                     <font>
+                        <Font name="Berlin Sans FB" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
+            <Pane fx:id="SalaryPane" layoutX="281.0" layoutY="81.0" prefHeight="51.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="41.0" layoutY="1.0" text="Salary">
+                     <font>
+                        <Font name="Berlin Sans FB" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
+            <Pane fx:id="IDCardPane" layoutX="200.0" layoutY="224.0" prefHeight="51.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="38.0" layoutY="1.0" text="ID Card">
+                     <font>
+                        <Font name="Berlin Sans FB" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
+            <JFXButton layoutX="548.0" layoutY="249.0" onAction="#showSearchFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search Filter">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="1237.0" layoutY="250.0" onAction="#clearFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <AnchorPane fx:id="searchFilter" layoutX="737.0" layoutY="234.0" prefHeight="166.0" prefWidth="420.0" translateX="210.0" translateY="240.0" visible="false">
+               <children>
+                  <AnchorPane layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="166.0" prefWidth="420.0" style="-fx-background-color: white; -fx-border-color: black;">
+                     <children>
+                        <Label layoutX="100.0" layoutY="14.0" text="Choose a Search Coloumn">
+                           <font>
+                              <Font name="Berlin Sans FB" size="20.0" />
+                           </font>
+                        </Label>
+                        <JFXCheckBox fx:id="genderField" checkedColor="#f8a918" layoutX="292.0" layoutY="89.0" onAction="#GenderCheck" text="Gender" unCheckedColor="#333333">
+                           <font>
+                              <Font name="Berlin Sans FB" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXCheckBox>
+                        <Button layoutX="325.0" layoutY="121.0" mnemonicParsing="false" onAction="#Done" prefHeight="33.0" prefWidth="78.0" styleClass="AddDepartment" text="Done">
+                           <stylesheets>
+                              <URL value="@../../CSS/ColorThemes.css" />
+                              <URL value="@../../CSS/OwnerPage/Departments.css" />
+                           </stylesheets>
+                           <font>
+                              <Font name="Berlin Sans FB" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <JFXCheckBox fx:id="fnameField" checkedColor="#f8a918" layoutX="67.0" layoutY="53.0" onAction="#FirstNameCheck" text="First Name" unCheckedColor="#333333">
+                           <font>
+                              <Font name="Berlin Sans FB" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXCheckBox>
+                        <JFXCheckBox fx:id="mnameField" checkedColor="#f8a918" layoutX="166.0" layoutY="53.0" onAction="#MiddleNameCheck" text="Middle Name" unCheckedColor="#333333">
+                           <font>
+                              <Font name="Berlin Sans FB" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXCheckBox>
+                        <JFXCheckBox fx:id="hdField" checkedColor="#f8a918" layoutX="67.0" layoutY="89.0" onAction="#HireDateCheck" text="Hire Date" unCheckedColor="#333333">
+                           <font>
+                              <Font name="Berlin Sans FB" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXCheckBox>
+                        <JFXCheckBox fx:id="lnameField" checkedColor="#f8a918" layoutX="292.0" layoutY="53.0" onAction="#LastNameCheck" text="Last Name" unCheckedColor="#333333">
+                           <font>
+                              <Font name="Berlin Sans FB" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXCheckBox>
+                        <JFXCheckBox fx:id="bdField" checkedColor="#f8a918" layoutX="166.0" layoutY="90.0" onAction="#BirthDateCheck" text="BirthDate" unCheckedColor="#333333">
+                           <font>
+                              <Font name="Berlin Sans FB" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXCheckBox>
+                        <JFXCheckBox fx:id="salaryField" checkedColor="#f8a918" layoutX="67.0" layoutY="125.0" onAction="#SalaryCheck" text="Salary" unCheckedColor="#333333">
+                           <font>
+                              <Font name="Berlin Sans FB" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXCheckBox>
+                        <JFXCheckBox fx:id="idField" checkedColor="#f8a918" layoutX="166.0" layoutY="125.0" onAction="#IDCardCheck" text="ID Card" unCheckedColor="#333333">
+                           <font>
+                              <Font name="Berlin Sans FB" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXCheckBox>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+            <Label layoutX="583.0" layoutY="172.0" prefHeight="36.0" prefWidth="78.0" text="Search:" textFill="#333333">
+               <font>
+                  <Font name="Berlin Sans FB" size="25.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="22.0" fitWidth="29.0" layoutX="554.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../ICONS/OwnerPage/Search.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="957.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Show CV">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="554.0" layoutY="675.0" onAction="#addDepartment" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add Employee">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="1157.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Edit CV">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </Pane>
+      <AnchorPane fx:id="ContactPane" layoutY="101.0" prefHeight="598.0" prefWidth="818.0" visible="false">
+         <children>
+            <TableView layoutX="12.0" layoutY="161.0" prefHeight="406.0" prefWidth="794.0">
+               <columns>
+                  <TableColumn prefWidth="272.8000122308731" text="Employee ID" />
+                  <TableColumn prefWidth="291.2001037597656" text="Area Code" />
+                  <TableColumn minWidth="0.0" prefWidth="258.39990234375" text="Number" />
+               </columns>
+            </TableView>
+            <Label layoutX="72.0" layoutY="30.0" prefHeight="36.0" prefWidth="185.0" text="Phone Numbers" textFill="#333333">
+               <font>
+                  <Font name="Berlin Sans FB" size="25.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="27.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../ICONS/OwnerPage/PhoneNumbers.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <Label fx:id="lblInfo" alignment="CENTER" layoutY="65.0" onMouseClicked="#openInformationPane" prefHeight="36.0" prefWidth="387.0" text="Employees Information" textFill="#f8a918">
+         <font>
+            <Font name="Berlin Sans FB" size="25.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+      <Label fx:id="lblContact" alignment="CENTER" layoutX="389.0" layoutY="65.0" onMouseClicked="#openContactPane" prefHeight="36.0" prefWidth="426.0" text="Contact Information" textFill="#aeaeae">
+         <font>
+            <Font name="Berlin Sans FB" size="25.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
+   </children>
+</AnchorPane>
