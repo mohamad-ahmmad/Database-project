@@ -99,7 +99,7 @@
                   <Image url="@../../ICONS/login/low.jpg" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="136.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="102.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../ICONS/login/output-onlinegiftools.gif" />
                </image>

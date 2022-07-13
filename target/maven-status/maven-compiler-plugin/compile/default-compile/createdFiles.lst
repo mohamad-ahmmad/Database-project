@@ -1,7 +1,6 @@
 com\app\garage\controllers\Owner\OwnerController.class
 com\app\garage\controllers\Department.class
 com\app\garage\controllers\Owner\CardsSlider.class
-com\app\garage\controllers\Owner\SearchController.class
 com\app\garage\controllers\Owner\HomePageController.class
 com\app\garage\controllers\employee\EmployeeController.class
 com\app\garage\App.class

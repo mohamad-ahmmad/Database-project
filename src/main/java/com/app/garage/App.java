@@ -29,7 +29,9 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         
         stage.close();
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/DepartmentManagerPage/manager-page.fxml"));
+
         Parent root = loader.load();
         ss = new Stage();
         ss.getIcons().add(new Image(String.valueOf(getClass().getResource("/ICONS/AppIcon/main.png"))));

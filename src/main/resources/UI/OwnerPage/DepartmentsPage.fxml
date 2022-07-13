@@ -197,6 +197,9 @@
                      <font>
                         <Font name="Berlin Sans FB" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXCheckBox>
                   <Button layoutX="321.0" layoutY="118.0" mnemonicParsing="false" onAction="#Done" prefHeight="33.0" prefWidth="78.0" styleClass="AddDepartment" text="Done">
                      <stylesheets>
@@ -214,26 +217,41 @@
                      <font>
                         <Font name="Berlin Sans FB" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXCheckBox>
                   <JFXCheckBox fx:id="countryField" checkedColor="#f8a918" layoutX="166.0" layoutY="53.0" onAction="#countryCheck" text="Country" unCheckedColor="#333333">
                      <font>
                         <Font name="Berlin Sans FB" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXCheckBox>
                   <JFXCheckBox fx:id="cityField" checkedColor="#f8a918" layoutX="67.0" layoutY="91.0" onAction="#cityCheck" text="City" unCheckedColor="#333333">
                      <font>
                         <Font name="Berlin Sans FB" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXCheckBox>
                   <JFXCheckBox fx:id="streetField" checkedColor="#f8a918" layoutX="292.0" layoutY="53.0" onAction="#streetCheck" text="Street" unCheckedColor="#333333">
                      <font>
                         <Font name="Berlin Sans FB" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXCheckBox>
                   <JFXCheckBox fx:id="managerField" checkedColor="#f8a918" layoutX="165.0" layoutY="91.0" onAction="#managerIDCheck" text="Manager ID" unCheckedColor="#333333">
                      <font>
                         <Font name="Berlin Sans FB" size="13.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXCheckBox>
                </children>
             </AnchorPane>
