@@ -18,15 +18,6 @@ public class WarehouseManagerController {
     private Label labelLogout;
 
     @FXML
-    private AnchorPane mainPanel;
-
-    @FXML
-    private AnchorPane menuPanel;
-
-    @FXML
-    private AnchorPane viewPanel;
-
-    @FXML
     private Label lblShipments;
 
     @FXML
@@ -36,92 +27,100 @@ public class WarehouseManagerController {
     private Label lblWarehouses;
 
     @FXML
+    private AnchorPane mainPanel;
+
+    @FXML
+    private AnchorPane menuPanel;
+
+    @FXML
+    private AnchorPane viewPanel;
+
+    @FXML
     void Logout(MouseEvent event) {
 
-    }   
+    }
+    boolean shipmentSelected = false;
+    boolean suppliersSelected = false;
+    boolean warehousesSelected = false;
     private void clearStyles(){
         lblShipments.setStyle("");
-        lblWarehouses.setStyle("");
         lblSuppliers.setStyle("");
-        labelLogout.setStyle("");
+        lblWarehouses.setStyle("");
     }
-    
-boolean shipmentsSelected = false;
-boolean suppliersSelected = false;
-boolean warehousesSelected = false;
     @FXML
     void openShipmentsPanel(MouseEvent event) throws IOException {
-        if(!shipmentsSelected)
+        
+         if(!shipmentSelected)
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/UI/WarehouseManagerPage/ShipmentsPage.fxml"));
-                clearStyles();
+               clearStyles();
         lblShipments.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
-         Timeline t = new Timeline();
+        Timeline t = new Timeline();
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/WarehouseManagerPage/ShipmentsPage.fxml"));
         root.scaleXProperty().set(0.8);
         root.scaleYProperty().set(0.8);
          t.getKeyFrames().add(new KeyFrame(
-         Duration.seconds(0.3) ,
-         new KeyValue(root.scaleXProperty() , 1)
-         ,new KeyValue(root.scaleYProperty() , 1)
-         ));
+                 Duration.seconds(0.3) ,
+      new KeyValue(root.scaleXProperty() , 1)
+       ,new KeyValue(root.scaleYProperty() , 1)
+      ));
          t.play();
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
+        shipmentSelected = true;
         suppliersSelected = false;
         warehousesSelected = false;
-        shipmentsSelected = true;
         }
-
     }
 
     @FXML
     void openSuppliersPanel(MouseEvent event) throws IOException {
+                
          if(!suppliersSelected)
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/UI/WarehouseManagerPage/SuppliersPage.fxml"));
-            clearStyles();
+        clearStyles();
         lblSuppliers.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
-         Timeline t = new Timeline();
+        Timeline t = new Timeline();
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/WarehouseManagerPage/SuppliersPage.fxml"));
         root.scaleXProperty().set(0.8);
         root.scaleYProperty().set(0.8);
          t.getKeyFrames().add(new KeyFrame(
-         Duration.seconds(0.3) ,
-         new KeyValue(root.scaleXProperty() , 1)
-         ,new KeyValue(root.scaleYProperty() , 1)
-         ));
+                 Duration.seconds(0.3) ,
+      new KeyValue(root.scaleXProperty() , 1)
+       ,new KeyValue(root.scaleYProperty() , 1)
+      ));
          t.play();
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
+        shipmentSelected = false;
         suppliersSelected = true;
         warehousesSelected = false;
-        shipmentsSelected = false;
         }
 
     }
 
     @FXML
     void openWarehousesPanel(MouseEvent event) throws IOException {
-        if(!warehousesSelected)
+                        
+         if(!warehousesSelected)
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/UI/WarehouseManagerPage/WarehousesPage.fxml"));
-            clearStyles();
+        clearStyles();
         lblWarehouses.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
-         Timeline t = new Timeline();
+        Timeline t = new Timeline();
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/WarehouseManagerPage/WarehousesPage.fxml"));
         root.scaleXProperty().set(0.8);
         root.scaleYProperty().set(0.8);
          t.getKeyFrames().add(new KeyFrame(
          Duration.seconds(0.3) ,
-         new KeyValue(root.scaleXProperty() , 1)
-         ,new KeyValue(root.scaleYProperty() , 1)
-         ));
+        new KeyValue(root.scaleXProperty() , 1)
+       ,new KeyValue(root.scaleYProperty() , 1)
+      ));
          t.play();
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
+        shipmentSelected = false;
         suppliersSelected = false;
         warehousesSelected = true;
-        shipmentsSelected = false;
         }
-
 
     }
 

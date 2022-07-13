@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -40,7 +39,7 @@
             </ImageView>
             <Pane layoutX="98.0" layoutY="215.0" prefHeight="99.0" prefWidth="205.0" style="-fx-border-color: black; -fx-border-width: 0 0 1.5 0;">
                <children>
-                  <Text fx:id="firstLabel" fill="WHITE" layoutX="-8.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-width: 0 0 1.5 0;" text="Daragmeh">
+                  <Text fx:id="firstLabel" fill="WHITE" layoutX="-8.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-width: 0 0 1.5 0;" text="Daraghmeh">
                      <font>
                         <Font name="Corbel" size="47.0" />
                      </font>
@@ -76,9 +75,6 @@
                      <padding>
                         <Insets left="40.0" />
                      </padding>
-                     <textFill>
-                        <Color red="0.5392228960990906" green="0.6105263233184814" blue="0.22159844636917114" opacity="0.8700000047683716" />
-                     </textFill>
                   </MFXTextField>
                   <ImageView fitHeight="21.0" fitWidth="21.0" layoutX="5.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.app.garage.controllers.employee;
 
 import com.app.garage.App;
+import com.app.garage.controllers.EmailSender;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -147,10 +144,10 @@ public class EmployeeController implements Initializable {
      @FXML
     void Cancel(ActionEvent e) throws IOException {
          Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-         stage.close();
-         Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
-         Scene temp = new Scene(root);
-         App.setMainScene(temp);
+         stage.hide();
+        // Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
+        // Scene temp = new Scene(root);
+        // App.setMainScene(temp);
     }
         @FXML
     void Confirm(ActionEvent event) throws IOException {
@@ -174,7 +171,8 @@ public class EmployeeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-          
+      
+        
           labelCashier.setStyle(cssPressed);
         try {
             loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");

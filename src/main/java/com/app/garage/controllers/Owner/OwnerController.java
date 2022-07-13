@@ -229,11 +229,9 @@ public class OwnerController implements Initializable {
 
      @FXML
     void Cancel(ActionEvent e) throws IOException {
-         Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-         stage.close();
-         Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
-         Scene temp = new Scene(root);
-         App.setMainScene(temp);
+     Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
+         stage.hide();
+        
     }
         @FXML
     void Confirm(ActionEvent event) throws IOException {

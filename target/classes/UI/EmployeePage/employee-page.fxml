@@ -48,7 +48,7 @@
             </ImageView>
 
             <Separator layoutY="143.0" prefWidth="190.0" />
-            <Label fx:id="labelCashier" alignment="CENTER" layoutY="196.0" onMouseClicked="#openCashierPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Cashier" textFill="#f8a918">
+            <Label fx:id="labelCashier" alignment="CENTER" layoutY="218.0" onMouseClicked="#openCashierPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Cashier" textFill="#f8a918">
 
                <font>
                   <Font name="Berlin Sans FB" size="15.0" />
@@ -71,7 +71,7 @@
                   <URL value="@../../CSS/ColorThemes.css" />
                </stylesheets>
             </Label>
-            <Label fx:id="labelClothes" alignment="CENTER" layoutY="251.0" onMouseClicked="#openClothesPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Clothes" textFill="#f8a918">
+            <Label fx:id="labelClothes" alignment="CENTER" layoutY="273.0" onMouseClicked="#openClothesPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Clothes" textFill="#f8a918">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
@@ -93,7 +93,7 @@
                   <URL value="@../../CSS/ColorThemes.css" />
                </stylesheets>
             </Label>
-            <Label fx:id="labelReceipt" alignment="CENTER" layoutY="308.0" onMouseClicked="#openReceiptPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Receipt History" textFill="#f8a918">
+            <Label fx:id="labelReceipt" alignment="CENTER" layoutY="330.0" onMouseClicked="#openReceiptPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Receipt History" textFill="#f8a918">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
@@ -106,28 +106,6 @@
                </graphic>
                <padding>
                   <Insets left="15.0" right="30.0" />
-               </padding>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <stylesheets>
-                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
-                  <URL value="@../../CSS/ColorThemes.css" />
-               </stylesheets>
-            </Label>
-            <Label alignment="CENTER" layoutY="365.0" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Employees" textFill="#f8a918">
-               <font>
-                  <Font name="Berlin Sans FB" size="14.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0">
-                     <image>
-                        <Image url="@../../ICONS/OwnerPage/Employees.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="10.0" right="40.0" />
                </padding>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -188,7 +166,7 @@
                   <URL value="@../../CSS/ColorThemes.css" />
                </stylesheets>
             </Label>
-            <Label fx:id="labelLogout" alignment="CENTER" layoutY="419.0" onMouseClicked="#Logout" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Log out" textFill="#f8a918">
+            <Label fx:id="labelLogout" alignment="CENTER" layoutY="391.0" onMouseClicked="#Logout" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Log out" textFill="#f8a918">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
