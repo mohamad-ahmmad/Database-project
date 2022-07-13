@@ -5,6 +5,7 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -90,6 +91,21 @@
             <Image url="@../../../ICONS/OwnerPage/phone.png" />
          </image>
       </ImageView>
+      <Text layoutX="74.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:">
+         <font>
+            <Font name="Wingdings 2" size="15.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="23.0" fitWidth="23.0" layoutX="43.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../ICONS/OwnerPage/icons8_mail_100px.png" />
+         </image>
+      </ImageView>
+      <Hyperlink fx:id="empEmail" layoutX="116.0" layoutY="160.0" onAction="#emailClicked" text="example@gmail.com">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Hyperlink>
    </children>
    <stylesheets>
       <URL value="@../../../CSS/OwnerPage/home.css" />

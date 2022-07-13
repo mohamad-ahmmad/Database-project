@@ -61,13 +61,16 @@ Main-colours:
 }
 .textfields:focus-within{
 
-    -fx-border-color:#333333;
+    -fx-border-color:#333;
     
 }
 
+.textfields:focus-within .floating-text {
+    -fx-text-fill:#333;
+    
+}
 
-
-.mfx-text-field .floating-text {
+.textfields .floating-text {
     -fx-text-fill:#cccccc;
     
 }

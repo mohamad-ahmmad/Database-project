@@ -6,18 +6,27 @@ package com.app.garage.controllers.Owner;
 
 
 
+import com.app.garage.controllers.EmailSender;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.StackedBarChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.text.Text;
 
 public class SliderController implements Initializable {
 
+    
+     @FXML
+    private Hyperlink empEmail;
     @FXML
     private Text header;
     @FXML
@@ -47,6 +56,20 @@ public class SliderController implements Initializable {
          );
         pieChart.setTitle("Example Title");
         pieChart.setData(pieChartData);
+    }
+    
+      @FXML 
+    void emailClicked(ActionEvent event) throws IOException, URISyntaxException {
+          Alert temporary = new Alert(Alert.AlertType.INFORMATION);
+       temporary.setContentText("Email Succsesfully Copied.");
+       temporary.show();
+      
+       
+        
+       EmailSender.openBrowser(empEmail.getText().split("@")[1]);
+       EmailSender.clipBoardText(empEmail.getText());
+       
+     
     }
     
     public Text getTextLocationSite(){
