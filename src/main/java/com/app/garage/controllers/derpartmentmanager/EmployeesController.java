@@ -35,11 +35,19 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import com.jfoenix.controls.JFXCheckBox;
 
 public class EmployeesController implements Initializable{
 
-    @FXML
+ 
+     @FXML
     private Pane BirthDatePane;
+
+    @FXML
+    private FlowPane ContactFlow;
+
+    @FXML
+    private AnchorPane ContactPane;
 
     @FXML
     private Pane FirstNamePane;
@@ -52,18 +60,21 @@ public class EmployeesController implements Initializable{
 
     @FXML
     private Pane IDCardPane;
-    @FXML
-    private Label lblContact;
 
     @FXML
-    private Label lblInfo;
-
+    private Pane InformationPane;
 
     @FXML
     private Pane LastNamePane;
 
     @FXML
+    private JFXCheckBox LocationField;
+
+    @FXML
     private Pane MiddleNamePane;
+
+    @FXML
+    private JFXCheckBox PhoneField;
 
     @FXML
     private TableColumn<?, ?> SSNCol;
@@ -72,198 +83,231 @@ public class EmployeesController implements Initializable{
     private Pane SSNPane;
 
     @FXML
+    private Pane SSNPane1;
+
+    @FXML
+    private TableColumn<?, ?> SalCol;
+
+    @FXML
     private Pane SalaryPane;
 
     @FXML
-    private TableColumn<?, ?> addressCol;
-
-    @FXML
-    private TableColumn<?, ?> bDateCol;
-
-    @FXML
-    private JFXCheckBox bdField;
+    private TableColumn<?, ?> birthDateCol;
 
     @FXML
     private FlowPane flowPane;
 
     @FXML
-    private JFXCheckBox fnameField;
+    private TableColumn<?, ?> genderCol;
 
     @FXML
-    private JFXCheckBox genderField;
+    private TableColumn<?, ?> hireDateCol;
 
     @FXML
-    private JFXCheckBox hdField;
+    private TableColumn<?, ?> idCol;
 
     @FXML
-    private JFXCheckBox idField;
+    private TableColumn<?, ?> lNameCol;
 
     @FXML
-    private JFXCheckBox lnameField;
+    private Label lblContact;
+
     @FXML
-    private AnchorPane ContactPane;
+    private Label lblInfo;
+
     @FXML
-    private Pane InformationPane;
+    private TableColumn<?, ?> mNameCol;
 
     @FXML
     private AnchorPane mainPane;
 
     @FXML
-    private JFXCheckBox mnameField;
-
-    @FXML
     private TableColumn<?, ?> nameCol;
-
-    @FXML
-    private TableColumn<?, ?> phoneCol;
-
-    @FXML
-    private JFXCheckBox salaryField;
 
     @FXML
     private AnchorPane searchFilter;
 
     @FXML
+    private AnchorPane searchFilterContact;
+
+    @FXML
     private TableView<?> tableView;
+
+    private boolean isSelected (ActionEvent event){
+        JFXCheckBox s = (JFXCheckBox)(event.getSource());
+        return  s.isSelected();
+    }
     
     @FXML
-    void clearFilter(ActionEvent event) {
-        fnameField.setSelected(false);
-        mnameField.setSelected(false);
-        lnameField.setSelected(false);
-        genderField.setSelected(false);
-        salaryField.setSelected(false);
-        bdField.setSelected(false);
-        hdField.setSelected(false);
-        idField.setSelected(false);
-        flowPane.getChildren().removeAll(FirstNamePane,MiddleNamePane,LastNamePane,SalaryPane,GenderPane,IDCardPane,HireDatePane,BirthDatePane);
-    }
-    public void clearSearch() throws IOException{
-        searchFilter.getChildren().clear();
-   }
-    Stage stage;
-    private Parent root;
-   @FXML
-    void Done(ActionEvent event) throws IOException {
-         searchFilter.setVisible(false);
+    void BirthDateCheck(ActionEvent event) {
+          
+        if( isSelected(event) )
+            flowPane.getChildren().add(BirthDatePane);
+        else
+           flowPane.getChildren().remove(BirthDatePane);
+        
     }
 
     @FXML
-    void showSearchFilter(ActionEvent event) throws IOException {
-        searchFilter.setVisible(true);
+    void Done(ActionEvent event) {
+        searchFilter.setVisible(false);
+        searchFilterOpened=!searchFilterOpened;
     }
+
     
 
     @FXML
     void FirstNameCheck(ActionEvent event) {
-     if(fnameField.isSelected())
-    flowPane.getChildren().add(FirstNamePane);
-    else flowPane.getChildren().remove(FirstNamePane);
+       if( isSelected(event) )
+            flowPane.getChildren().add(FirstNamePane);
+        else
+           flowPane.getChildren().remove(FirstNamePane);
+        
     }
 
     @FXML
-    void MiddleNameCheck(ActionEvent event) {
-    if(mnameField.isSelected())
-    flowPane.getChildren().add(MiddleNamePane);
-    else flowPane.getChildren().remove(MiddleNamePane);
-    }
-
-    @FXML
-    void LastNameCheck(ActionEvent event) {
-    if(lnameField.isSelected())
-    flowPane.getChildren().add(LastNamePane);
-    else flowPane.getChildren().remove(LastNamePane);
-    }
-       @FXML
-    void SalaryCheck(ActionEvent event) {
-    if(salaryField.isSelected())
-    flowPane.getChildren().add(SalaryPane);
-    else flowPane.getChildren().remove(SalaryPane);
-    }
-
-    @FXML
-    void BirthDateCheck(ActionEvent event) {
-    if(bdField.isSelected())
-    flowPane.getChildren().add(BirthDatePane);
-    else flowPane.getChildren().remove(BirthDatePane);
+    void GenderCheck(ActionEvent event) {
+       if( isSelected(event) )
+            flowPane.getChildren().add(GenderPane);
+        else
+           flowPane.getChildren().remove(GenderPane);
+        
     }
 
     @FXML
     void HireDateCheck(ActionEvent event) {
-    if(hdField.isSelected())
-    flowPane.getChildren().add(HireDatePane);
-    else flowPane.getChildren().remove(HireDatePane);
+       if( isSelected(event) )
+            flowPane.getChildren().add(HireDatePane);
+        else
+           flowPane.getChildren().remove(HireDatePane);
+        
+       
     }
+
     @FXML
     void IDCardCheck(ActionEvent event) {
-    if(idField.isSelected())
-    flowPane.getChildren().add(IDCardPane);
-    else flowPane.getChildren().remove(IDCardPane);
-    }
-      @FXML
-    void GenderCheck(ActionEvent event) {
-    if(genderField.isSelected())
-    flowPane.getChildren().add(GenderPane);
-    else flowPane.getChildren().remove(GenderPane);
-    }
-    
- @FXML
-    void addDepartment(ActionEvent event) throws IOException {
-        FXMLLoader loader;
-        loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddDepartment.fxml"));
-        Parent root = loader.load();
+       if( isSelected(event) )
+            flowPane.getChildren().add(IDCardPane);
+        else
+           flowPane.getChildren().remove(IDCardPane);
         
-        Stage stage = new Stage(StageStyle.UNDECORATED);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        Scene scene = new Scene(root);
-             stage.setScene(scene);
-             stage.show();
     }
-    int i=0;
-    ArrayList<String> next = new ArrayList<>();
+
     @FXML
-    private Button btnNext;
-    @FXML
-    private Button btnDone;
-    @FXML
-    void DoneAdding(ActionEvent event) throws IOException {
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.close();
-    }
-     @FXML
-    void Next(ActionEvent event) throws IOException {
-       /*
-         if(i==2)
-        {
-            btnNext.setVisible(false);
-            btnDone.setVisible(true);
-        }
-        FXMLLoader loader;
-        loader = new FXMLLoader(getClass().getResource(next.get(i)));
-        Parent root = loader.load();
-        slidePane.getChildren().add(root);
+    void LastNameCheck(ActionEvent event) {
+       if( isSelected(event) )
+            flowPane.getChildren().add(LastNamePane);
+        else
+           flowPane.getChildren().remove(LastNamePane);
         
-        root.translateXProperty().set(500);
-        Timeline t = new Timeline();
-        t.getKeyFrames().add(new KeyFrame(Duration.seconds(0.2),
-                 new KeyValue(root.translateXProperty(),0),
-                new KeyValue(slidePane.getChildren().get(0).translateYProperty(),200)));
-        t.play();
-        t.setOnFinished(e->{
-        slidePane.getChildren().remove(0);});
-                  i++;*/
+    }
+
+  
+
+    @FXML
+    void MiddleNameCheck(ActionEvent event) {
+       if( isSelected(event) )
+            flowPane.getChildren().add(MiddleNamePane);
+        else
+           flowPane.getChildren().remove(MiddleNamePane);
+        
+    }
+  
+
+    @FXML
+    void SalaryCheck(ActionEvent event) {
+       if( isSelected(event) )
+            flowPane.getChildren().add(SalaryPane);
+        else
+           flowPane.getChildren().remove(SalaryPane);
+        
+    }
+
+    @FXML
+    void LocationCheck(ActionEvent event) {
 
     }
+    @FXML
+    void PhoneCheck(ActionEvent event) {
+
+    }
+@FXML
+    void DoneContact(ActionEvent event) {
+
+    }
+    @FXML
+    void addEmployee(ActionEvent event) throws IOException {
+
+       Stage logout = new Stage();
+       logout.initModality(Modality.APPLICATION_MODAL);
+       logout.initStyle(StageStyle.UNDECORATED);
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/DepartmentManagerPage/add_employee/main_frame.fxml"));
+       Parent root = loader.load();
+       
+       Scene logoutScene = new Scene(root);
+       logout.setScene(logoutScene);
+       logout.show();
+       
+
+    }
+    @FXML
+    void deleteEmployee(ActionEvent event) {
+
+    }
+
+    @FXML
+    void addInfo(ActionEvent event) {
+
+    }
+
+    @FXML
+    void clearContactFilter(ActionEvent event) {
+
+    }
+
+    @FXML
+    void clearFilter(ActionEvent event) {
+      flowPane.getChildren().clear();
+      flowPane.getChildren().add(SSNPane);
+    }
+
+    
+    @FXML
+    void showContactFilter(ActionEvent event) {
+
+    }
+     
+    private boolean searchFilterOpened =false;
+    @FXML
+    void showSearchFilter(ActionEvent event) {
+        if(!searchFilterOpened)
+            searchFilter.setVisible(true);
+        else
+            searchFilter.setVisible(false);
+        
+        searchFilterOpened=!searchFilterOpened;
+    }
+
+ 
+ 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        String name = "/UI/OwnerPage/EnterName.fxml";
-        String Location = "/UI/OwnerPage/Location.fxml";
-        String ManagerID = "/UI/OwnerPage/ManagerID.fxml";
+       /* String Phone = "/UI/OwnerPage/EnterPhoneNum.fxml";
+        String Location = "/UI/OwnerPage/EnterLocation.fxml";
+        String name = "/UI/OwnerPage/EnterEmployeeName.fxml";
+        String salary = "/UI/OwnerPage/EnterSalary.fxml";
+        String hireDate = "/UI/OwnerPage/EnterHireDate.fxml";
+        String Idcard = "/UI/OwnerPage/EnterIDCard.fxml";
+        String type = "/UI/OwnerPage/type.fxml";
         next.add(name);
-        next.add(Location);
-        next.add(ManagerID);
+        next.add(salary);
+        next.add(Idcard);
+        next.add(type);
+        nextInfo.add(Phone);
+        nextInfo.add(Location);*/
     }
+    
     boolean InfoSelected = true;
         @FXML
     void openContactPane(MouseEvent event) {

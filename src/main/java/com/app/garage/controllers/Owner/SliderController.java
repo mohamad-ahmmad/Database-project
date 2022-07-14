@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.text.Text;
 
@@ -63,8 +64,9 @@ public class SliderController implements Initializable {
           Alert temporary = new Alert(Alert.AlertType.INFORMATION);
        temporary.setContentText("Email Succsesfully Copied.");
        temporary.show();
-      
        
+          Button s = new Button();
+          
         
        EmailSender.openBrowser(empEmail.getText().split("@")[1]);
        EmailSender.clipBoardText(empEmail.getText());

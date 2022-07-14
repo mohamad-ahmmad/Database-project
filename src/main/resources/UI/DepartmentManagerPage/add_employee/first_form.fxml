@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="389.0" style="-fx-background-color: white;" stylesheets="@../../../CSS/ColorThemes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.derpartmentmanager.AddEmployeeController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="321.0" prefWidth="389.0" spacing="20.0">
+         <children>
+            <MFXTextField fx:id="ssn" floatMode="ABOVE" floatingText="SSN" floatingTextGap="2.0" maxHeight="26.0" minHeight="25.0" prefHeight="0.0" prefWidth="135.0" styleClass="textfields" />
+            <MFXTextField fx:id="firstName" floatMode="ABOVE" floatingText="First Name" floatingTextGap="2.0" maxHeight="25.0" minHeight="25.0" prefWidth="135.0" styleClass="textfields" />
+            <MFXTextField fx:id="middleName" floatMode="ABOVE" floatingText="Middle Name" floatingTextGap="2.0" maxHeight="25.0" minHeight="25.0" prefWidth="135.0" styleClass="textfields" />
+            <MFXTextField fx:id="lastName" floatMode="ABOVE" floatingText="Last Name" floatingTextGap="2.0" maxHeight="25.0" minHeight="25.0" prefWidth="135.0" styleClass="textfields" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>
