@@ -22,6 +22,8 @@ public class WarehouseManagerController {
 
     @FXML
     private Label lblSuppliers;
+    @FXML
+    private Label lblClothes;
 
     @FXML
     private Label lblWarehouses;
@@ -39,6 +41,7 @@ public class WarehouseManagerController {
     void Logout(MouseEvent event) {
 
     }
+    boolean clothesSelected = false;
     boolean shipmentSelected = false;
     boolean suppliersSelected = false;
     boolean warehousesSelected = false;
@@ -46,6 +49,7 @@ public class WarehouseManagerController {
         lblShipments.setStyle("");
         lblSuppliers.setStyle("");
         lblWarehouses.setStyle("");
+        lblClothes.setStyle("");
     }
     @FXML
     void openShipmentsPanel(MouseEvent event) throws IOException {
@@ -69,6 +73,7 @@ public class WarehouseManagerController {
         shipmentSelected = true;
         suppliersSelected = false;
         warehousesSelected = false;
+        clothesSelected = false;
         }
     }
 
@@ -94,6 +99,7 @@ public class WarehouseManagerController {
         shipmentSelected = false;
         suppliersSelected = true;
         warehousesSelected = false;
+        clothesSelected = false;
         }
 
     }
@@ -120,6 +126,33 @@ public class WarehouseManagerController {
         shipmentSelected = false;
         suppliersSelected = false;
         warehousesSelected = true;
+        clothesSelected = false;
+        }
+    }
+  
+    @FXML
+    void openClothesPanel(MouseEvent event) throws IOException {
+                        
+         if(!clothesSelected)
+        {
+        clearStyles();
+        lblClothes.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
+        Timeline t = new Timeline();
+        Parent root = FXMLLoader.load(getClass().getResource("/UI/WarehouseManagerPage/ClothesPage.fxml"));
+        root.scaleXProperty().set(0.8);
+        root.scaleYProperty().set(0.8);
+         t.getKeyFrames().add(new KeyFrame(
+         Duration.seconds(0.3) ,
+        new KeyValue(root.scaleXProperty() , 1)
+       ,new KeyValue(root.scaleYProperty() , 1)
+      ));
+         t.play();
+        viewPanel.getChildren().clear();
+        viewPanel.getChildren().add(root);
+        shipmentSelected = false;
+        suppliersSelected = false;
+        warehousesSelected = false;
+        clothesSelected = true;
         }
 
     }

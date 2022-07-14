@@ -24,4 +24,5 @@ module com.app.garage {
     exports com.app.garage.controllers.Owner;
     exports com.app.garage.controllers.departmentManager;
     exports com.app.garage.controllers.warehouseManager;
+    
 }

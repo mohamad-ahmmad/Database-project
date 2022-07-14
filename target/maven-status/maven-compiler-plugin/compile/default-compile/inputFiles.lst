@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\WarehousesController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\module-info.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\CardsSlider.java
@@ -23,3 +24,31 @@ C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\EmployeeController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\ClothesController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Department.java
+=======
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\OwnerController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\DepartmentController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\warehouseManager\ClothesController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\ClothesController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\CardsSlider.java
+D:\DataBase Project\src\main\java\com\app\garage\App.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\warehouseManager\WarehousesController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\CashierController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\SliderController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\departmentManager\DepManagerController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Department.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\ReceiptController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\EmployeeController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\ProfitsController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\warehouseManager\WarehouseManagerController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\warehouseManager\ShipmentsController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\TypeController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\derpartmentmanager\ManagerController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\login\LoginController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\HomePageController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\warehouseManager\SuppliersController.java
+D:\DataBase Project\src\main\java\module-info.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\EmployeeController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\CardController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\WarehousesController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\EmailSender.java
+>>>>>>> c9900884c741fe10cdc07d40be297b534e8906aa

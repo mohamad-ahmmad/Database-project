@@ -279,8 +279,9 @@ public class SuppliersController implements Initializable{
         @FXML
     void openContactPane(MouseEvent event) {
        
-        if(!SupplierSelected)
-        { lblContact.setStyle("-fx-text-fill: #F8A918");
+        if(!SupplierSelected){
+        SupplierSelected=true;
+        lblContact.setStyle("-fx-text-fill: #F8A918");
         lblInfo.setStyle("-fx-text-fill: #aeaeae");
         ContactPane.translateXProperty().set(850);
         ContactPane.setVisible(true);
@@ -298,6 +299,7 @@ public class SuppliersController implements Initializable{
     void openInformationPane(MouseEvent event) {
         if(!InfoSelected)
         {
+        InfoSelected=true;
         lblInfo.setStyle("-fx-text-fill: #F8A918");
         lblContact.setStyle("-fx-text-fill: #aeaeae");
         Timeline t = new Timeline();
