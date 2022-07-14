@@ -110,13 +110,13 @@ public class HomePageController implements Initializable {
             animationFlag = !animationFlag;
         nextPane.setLayoutX(currentPane.getLayoutX()-810);
               TranslateTransition transitionCurr = new TranslateTransition();
-                transitionCurr.setDuration(Duration.seconds(1));
+                transitionCurr.setDuration(Duration.seconds(0.5));
                 transitionCurr.setNode(currentPane);
                 transitionCurr.setInterpolator(Interpolator.EASE_BOTH);
                 transitionCurr.setByX(+810);
                 
                     TranslateTransition transitionNext = new TranslateTransition();
-                transitionNext.setDuration(Duration.seconds(1));
+                transitionNext.setDuration(Duration.seconds(0.5));
                 transitionNext.setNode(nextPane);
                 transitionNext.setInterpolator(Interpolator.EASE_BOTH);
                 transitionNext.setByX(+810);
@@ -159,13 +159,13 @@ public class HomePageController implements Initializable {
             animationFlag = !animationFlag;
       nextPane.setLayoutX(currentPane.getLayoutX()+810);
               TranslateTransition transitionCurr = new TranslateTransition();
-                transitionCurr.setDuration(Duration.seconds(1));
+                transitionCurr.setDuration(Duration.seconds(0.5));
                 transitionCurr.setNode(currentPane);
                 transitionCurr.setInterpolator(Interpolator.EASE_BOTH);
                 transitionCurr.setByX(-810);
                 
                     TranslateTransition transitionNext = new TranslateTransition();
-                transitionNext.setDuration(Duration.seconds(1));
+                transitionNext.setDuration(Duration.seconds(0.5));
                 transitionNext.setNode(nextPane);
                 transitionNext.setInterpolator(Interpolator.EASE_BOTH);
                 transitionNext.setByX(-810);

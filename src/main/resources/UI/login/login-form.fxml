@@ -107,6 +107,11 @@
                   <ColorAdjust brightness="-0.45" contrast="-0.92" hue="0.45" saturation="1.0" />
                </effect>
             </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="98.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../ICONS/login/pablita-449.gif" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

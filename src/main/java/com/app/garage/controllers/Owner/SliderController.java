@@ -14,14 +14,19 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
+import org.controlsfx.control.HiddenSidesPane;
+import org.controlsfx.control.Notifications;
 
 public class SliderController implements Initializable {
 
@@ -58,9 +63,10 @@ public class SliderController implements Initializable {
         pieChart.setTitle("Example Title");
         pieChart.setData(pieChartData);
     }
-    
+
       @FXML 
     void emailClicked(ActionEvent event) throws IOException, URISyntaxException {
+<<<<<<< HEAD
           Alert temporary = new Alert(Alert.AlertType.INFORMATION);
        temporary.setContentText("Email Succsesfully Copied.");
        temporary.show();
@@ -68,12 +74,25 @@ public class SliderController implements Initializable {
           Button s = new Button();
           
         
+=======
+         
+       Notifications notifications = Notifications.create()
+               .title("Email copied").text("Link Copied Succefully")
+               .graphic(null)
+               .hideAfter(Duration.seconds(3))
+               .position(Pos.BOTTOM_RIGHT)
+               .onAction(new EventHandler<ActionEvent>(){
+               @Override
+               public void handle(ActionEvent event){
+                   System.out.println("test");
+               }
+        });
+       notifications.darkStyle();
+       notifications.showInformation();
+>>>>>>> bb44defe1c4cd93635b0be6678cc48bc4b7170a5
        EmailSender.openBrowser(empEmail.getText().split("@")[1]);
        EmailSender.clipBoardText(empEmail.getText());
-       
-     
     }
-    
     public Text getTextLocationSite(){
         return locationSite;
     }
