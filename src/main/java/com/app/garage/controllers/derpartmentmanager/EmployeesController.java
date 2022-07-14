@@ -36,66 +36,38 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import com.jfoenix.controls.JFXCheckBox;
+import javafx.scene.control.TextField;
 
 public class EmployeesController implements Initializable{
-
- 
-     @FXML
-    private Pane BirthDatePane;
+    
+    @FXML
+    private Pane cityPane, countryPane, phonePane, BirthDatePane, FirstNamePane, GenderPane,
+            HireDatePane, IDCardPane,InformationPane, LastNamePane, MiddleNamePane, SSNPane,
+            SSNPane1, SalaryPane, streetPane;
 
     @FXML
-    private FlowPane ContactFlow;
+    private TextField countryField, cityField, streetField, phoneNumberField;
+    
+    @FXML
+    private FlowPane ContactFlow, flowPane;
 
     @FXML
     private AnchorPane ContactPane;
 
-    @FXML
-    private Pane FirstNamePane;
-
-    @FXML
-    private Pane GenderPane;
-
-    @FXML
-    private Pane HireDatePane;
-
-    @FXML
-    private Pane IDCardPane;
-
-    @FXML
-    private Pane InformationPane;
-
-    @FXML
-    private Pane LastNamePane;
-
-    @FXML
-    private JFXCheckBox LocationField;
-
-    @FXML
-    private Pane MiddleNamePane;
-
-    @FXML
-    private JFXCheckBox PhoneField;
+    
 
     @FXML
     private TableColumn<?, ?> SSNCol;
 
-    @FXML
-    private Pane SSNPane;
-
-    @FXML
-    private Pane SSNPane1;
-
+  
     @FXML
     private TableColumn<?, ?> SalCol;
 
-    @FXML
-    private Pane SalaryPane;
-
+   
     @FXML
     private TableColumn<?, ?> birthDateCol;
 
-    @FXML
-    private FlowPane flowPane;
+
 
     @FXML
     private TableColumn<?, ?> genderCol;
@@ -225,14 +197,33 @@ public class EmployeesController implements Initializable{
 
     @FXML
     void LocationCheck(ActionEvent event) {
-
+        if(isSelected(event)){
+        ContactFlow.getChildren().add(streetPane);
+        ContactFlow.getChildren().add(cityPane);
+        ContactFlow.getChildren().add(countryPane);
+            visibleContact(true);
+        }else {
+            visibleContact(false);
+            ContactFlow.getChildren().remove(streetPane);
+        ContactFlow.getChildren().remove(cityPane);
+        ContactFlow.getChildren().remove(countryPane);
+        }
     }
     @FXML
     void PhoneCheck(ActionEvent event) {
-
+         if(isSelected(event)){
+             ContactFlow.getChildren().add(phonePane);
+            phonePane.setVisible(true);
+         }
+       
+        else {
+         ContactFlow.getChildren().remove(phonePane);
+         phonePane.setVisible(false);
+         }
     }
 @FXML
     void DoneContact(ActionEvent event) {
+        searchFilterContact.setVisible(false);
 
     }
     @FXML
@@ -262,7 +253,8 @@ public class EmployeesController implements Initializable{
 
     @FXML
     void clearContactFilter(ActionEvent event) {
-
+     ContactFlow.getChildren().clear();
+     ContactFlow.getChildren().add(SSNPane1);
     }
 
     @FXML
@@ -271,10 +263,12 @@ public class EmployeesController implements Initializable{
       flowPane.getChildren().add(SSNPane);
     }
 
-    
+      private boolean searchFilterContactOpened =false;
     @FXML
     void showContactFilter(ActionEvent event) {
-
+        if(!searchFilterContactOpened)
+          searchFilterContact.setVisible(true);
+        else searchFilterContact.setVisible(false);
     }
      
     private boolean searchFilterOpened =false;
@@ -308,9 +302,17 @@ public class EmployeesController implements Initializable{
         nextInfo.add(Location);*/
     }
     
+    void visibleContact(boolean state){
+        streetPane.setVisible(state);
+        cityPane.setVisible(state);
+        countryPane.setVisible(state); 
+    }
+    
     boolean InfoSelected = true;
         @FXML
     void openContactPane(MouseEvent event) {
+        phonePane.setVisible(false);
+        visibleContact(false);
         lblContact.setStyle("-fx-text-fill: #F8A918");
         lblInfo.setStyle("-fx-text-fill: #aeaeae");
         if(InfoSelected)
@@ -329,10 +331,12 @@ public class EmployeesController implements Initializable{
         @FXML
     void openInformationPane(MouseEvent event) {
         
+        
         lblInfo.setStyle("-fx-text-fill: #F8A918");
         lblContact.setStyle("-fx-text-fill: #aeaeae");
         if(!InfoSelected)
         {
+ 
         Timeline t = new Timeline();
         t.getKeyFrames().add(new KeyFrame(Duration.seconds(0.3),
         new KeyValue(InformationPane.translateXProperty(),0),
