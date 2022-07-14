@@ -181,7 +181,7 @@
             </Label>
             <ImageView fitHeight="22.0" fitWidth="29.0" layoutX="554.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../ICONS/OwnerPage/Search.png" />
+                  <Image url="@../../ICONS/warehouseManager/Search.gif" />
                </image>
             </ImageView>
             <JFXButton layoutX="554.0" layoutY="675.0" onAction="#addSupplier" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add Supplier">
@@ -208,7 +208,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <Pane fx:id="LocationPane" layoutX="623.0" layoutY="-21.0" prefHeight="51.0" prefWidth="170.0">
+            <Pane fx:id="LocationPane" layoutX="206.0" layoutY="208.0" prefHeight="51.0" prefWidth="170.0">
                <children>
                   <Label layoutX="34.0" layoutY="3.0" text="Location">
                      <font>
@@ -222,18 +222,32 @@
                   </TextField>
                </children>
             </Pane>
+            <Pane fx:id="ShipmentPane" layoutX="222.0" layoutY="81.0" prefHeight="44.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="27.0" text="Shipment Cost">
+                     <font>
+                        <Font name="Berlin Sans FB" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </Pane>
          </children>
       </Pane>
       <AnchorPane fx:id="ContactPane" layoutX="3.0" layoutY="105.0" prefHeight="591.0" prefWidth="810.0" visible="false">
          <children>
-            <Label layoutX="59.0" layoutY="12.0" prefHeight="36.0" prefWidth="185.0" text="Contact Info." textFill="#333333">
+            <Label layoutX="59.0" layoutY="12.0" prefHeight="36.0" prefWidth="185.0" text="Locations" textFill="#333333">
                <font>
                   <Font name="Berlin Sans FB" size="25.0" />
                </font>
             </Label>
             <ImageView fitHeight="36.0" fitWidth="37.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../ICONS/OwnerPage/PhoneNumbers.png" />
+                  <Image url="@../../ICONS/warehouseManager/Location.gif" />
                </image>
             </ImageView>
             <JFXButton layoutX="10.0" layoutY="530.0" onAction="#addInfo" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add a new Info">
@@ -373,19 +387,5 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Pane fx:id="ShipmentPane" layoutX="-102.0" layoutY="-86.0" prefHeight="44.0" prefWidth="170.0">
-         <children>
-            <Label layoutX="27.0" text="Shipment Cost">
-               <font>
-                  <Font name="Berlin Sans FB" size="12.0" />
-               </font>
-            </Label>
-            <TextField layoutY="17.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </TextField>
-         </children>
-      </Pane>
    </children>
 </AnchorPane>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import java.net.URL?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.chart.StackedAreaChart?>
-<?import javafx.scene.chart.StackedBarChart?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -14,102 +14,168 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="810.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.ProfitsController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.warehouseManager.ShipmentsController">
+
    <children>
-      <VBox layoutX="469.0" layoutY="63.0" prefHeight="297.0" prefWidth="326.0" styleClass="Boxes">
+      <Label alignment="CENTER" layoutX="330.0" layoutY="14.0" prefHeight="36.0" prefWidth="145.0" text="Shipments" textFill="#333333">
+         <font>
+            <Font name="Berlin Sans FB" size="25.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableView" layoutX="7.0" layoutY="207.0" prefHeight="422.0" prefWidth="794.0" style="-fx-border-color: #333; -fx-border-radius: 6;">
+        <columns>
+          <TableColumn fx:id="SSNCol" prefWidth="152.79999351501465" text="Serial Number" />
+          <TableColumn fx:id="nameCol" prefWidth="241.60003662109375" text="Supplier ID" />
+            <TableColumn fx:id="addressCol" prefWidth="203.99996948242188" text="Shipment Date" />
+            <TableColumn fx:id="addressCol1" prefWidth="195.199951171875" text="Shipment Cost" />
+        </columns>
+      </TableView>
+      <FlowPane fx:id="flowPane" alignment="CENTER" layoutX="156.0" layoutY="63.0" prefHeight="141.0" prefWidth="539.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="43.0" prefWidth="326.0" text="Profits PieChart" textFill="#333333">
-               <font>
-                  <Font name="Berlin Sans FB" size="18.0" />
-               </font>
-               <stylesheets>
-                  <URL value="@../../CSS/ColorThemes.css" />
-                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
-               </stylesheets>
-            </Label>
-            <Separator prefWidth="200.0" />
-            <PieChart fx:id="pieChart" prefHeight="261.0" prefWidth="325.0" />
+            <Pane fx:id="IDPane" prefHeight="51.0" prefWidth="170.0">
+               <children>
+                  <Label layoutX="27.0" text="Serial number">
+                     <font>
+                        <Font name="Berlin Sans FB" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                     <font>
+                        <Font size="10.0" />
+                     </font></TextField>
+               </children>
+            </Pane>
          </children>
-         <stylesheets>
-            <URL value="@../../CSS/OwnerPage/Profits.css" />
-            <URL value="@../../CSS/ColorThemes.css" />
-         </stylesheets>
-      </VBox>
-      <VBox layoutX="20.0" layoutY="64.0" prefHeight="300.0" prefWidth="419.0" styleClass="Boxes">
+      </FlowPane>
+      <Pane fx:id="SupplierPane" layoutX="-280.0" layoutY="350.0" prefHeight="51.0" prefWidth="170.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="420.0" text="Profits AreaChart" textFill="#333333">
+            <Label layoutX="35.0" text="Supplier ID">
                <font>
-                  <Font name="Berlin Sans FB" size="18.0" />
+                  <Font name="Berlin Sans FB" size="12.0" />
                </font>
-               <stylesheets>
-                  <URL value="@../../CSS/ColorThemes.css" />
-                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
-                  <URL value="@../../CSS/OwnerPage/Profits.css" />
-               </stylesheets>
             </Label>
-            <Separator prefWidth="200.0" />
-            <StackedAreaChart prefHeight="260.0" prefWidth="418.0">
-              <xAxis>
-                <NumberAxis prefWidth="359.0" side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </StackedAreaChart>
+            <TextField layoutY="17.0" prefHeight="0.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+               <font>
+                  <Font size="10.0" />
+               </font></TextField>
          </children>
+      </Pane>
+      <Pane fx:id="DatePane" layoutX="-247.0" layoutY="49.0" prefHeight="51.0" prefWidth="170.0">
+         <children>
+            <Label layoutX="25.0" text="Shipment Date">
+               <font>
+                  <Font name="Berlin Sans FB" size="12.0" />
+               </font>
+            </Label>
+            <TextField layoutY="17.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </TextField>
+         </children>
+      </Pane>
+      <Pane fx:id="CostPane" layoutX="-280.0" layoutY="179.0" prefHeight="51.0" prefWidth="170.0">
+         <children>
+            <Label layoutX="27.0" text="Shipment Cost">
+               <font>
+                  <Font name="Berlin Sans FB" size="12.0" />
+               </font>
+            </Label>
+            <TextField layoutY="17.0" prefWidth="125.0" style="-fx-border-radius: 0; -fx-background-radius: 0;">
+               <font>
+                  <Font size="10.0" />
+               </font></TextField>
+         </children>
+      </Pane>
+      <JFXButton layoutX="8.0" layoutY="161.0" onAction="#showSearchFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search Filter">
          <stylesheets>
-            <URL value="@../../CSS/OwnerPage/Profits.css" />
             <URL value="@../../CSS/ColorThemes.css" />
+            <URL value="@../../CSS/OwnerPage/Departments.css" />
          </stylesheets>
-      </VBox>
-      <TextField layoutX="259.0" layoutY="14.0" prefHeight="27.0" prefWidth="259.0" promptText="Search" styleClass="Search">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton layoutX="697.0" layoutY="165.0" onAction="#clearFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
          <stylesheets>
-            <URL value="@../../CSS/OwnerPage/Profits.css" />
             <URL value="@../../CSS/ColorThemes.css" />
+            <URL value="@../../CSS/OwnerPage/Departments.css" />
          </stylesheets>
-      </TextField>
-      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="238.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <AnchorPane fx:id="searchFilter" layoutX="-9.0" layoutY="-44.0" prefHeight="122.0" prefWidth="420.0" translateX="210.0" translateY="240.0" visible="false">
+         <children>
+            <AnchorPane layoutY="-3.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="420.0" style="-fx-background-color: white; -fx-border-color: black;">
+               <children>
+                  <Label layoutX="100.0" layoutY="14.0" text="Choose a Search Coloumn">
+                     <font>
+                        <Font name="Berlin Sans FB" size="20.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="327.0" layoutY="83.0" mnemonicParsing="false" onAction="#Done" prefHeight="33.0" prefWidth="78.0" styleClass="AddDepartment" text="Done">
+                     <stylesheets>
+                        <URL value="@../../CSS/ColorThemes.css" />
+                        <URL value="@../../CSS/OwnerPage/Departments.css" />
+                     </stylesheets>
+                     <font>
+                        <Font name="Berlin Sans FB" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <JFXCheckBox fx:id="SupplierField" checkedColor="#f8a918" layoutX="67.0" layoutY="53.0" onAction="#SupplierCheck" text="Supplier ID" unCheckedColor="#333333">
+                     <font>
+                        <Font name="Berlin Sans FB" size="13.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXCheckBox>
+                  <JFXCheckBox fx:id="DateField" checkedColor="#f8a918" layoutX="166.0" layoutY="53.0" onAction="#DateCheck" text="Shipment Date" unCheckedColor="#333333">
+                     <font>
+                        <Font name="Berlin Sans FB" size="13.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXCheckBox>
+                  <JFXCheckBox fx:id="CostField" checkedColor="#f8a918" layoutX="292.0" layoutY="53.0" onAction="#CostCheck" text="Shipment Cost" unCheckedColor="#333333">
+                     <font>
+                        <Font name="Berlin Sans FB" size="13.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXCheckBox>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+      <Separator layoutX="-2.0" layoutY="64.0" prefHeight="0.0" prefWidth="810.0" />
+      <Label layoutX="47.0" layoutY="68.0" prefHeight="36.0" prefWidth="78.0" text="Search:" textFill="#333333">
+         <font>
+            <Font name="Berlin Sans FB" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="22.0" fitWidth="29.0" layoutX="18.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../ICONS/OwnerPage/Search.png" />
          </image>
       </ImageView>
-      <VBox layoutX="469.0" layoutY="371.0" prefHeight="325.0" prefWidth="326.0" styleClass="Boxes">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="325.0" text="Profits BarChart" textFill="#333333">
-               <font>
-                  <Font name="Berlin Sans FB" size="18.0" />
-               </font>
-            </Label>
-            <Separator prefWidth="200.0" />
-            <StackedBarChart prefHeight="282.0" prefWidth="325.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </StackedBarChart>
-         </children>
-         <stylesheets>
-            <URL value="@../../CSS/OwnerPage/Profits.css" />
-            <URL value="@../../CSS/ColorThemes.css" />
-         </stylesheets>
-      </VBox>
-
-      <TableView layoutX="20.0" layoutY="372.0" prefHeight="325.0" prefWidth="419.0" styleClass="Table">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-         <stylesheets>
-            <URL value="@../../CSS/ColorThemes.css" />
-            <URL value="@../../CSS/OwnerPage/Profits.css" />
-         </stylesheets>
-      </TableView>
-
-
    </children>
 </AnchorPane>

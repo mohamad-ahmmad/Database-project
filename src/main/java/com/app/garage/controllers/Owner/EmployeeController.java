@@ -359,10 +359,12 @@ public class EmployeeController implements Initializable{
     boolean InfoSelected = true;
         @FXML
     void openContactPane(MouseEvent event) {
-        lblContact.setStyle("-fx-text-fill: #F8A918");
-        lblInfo.setStyle("-fx-text-fill: #aeaeae");
-        if(InfoSelected)
+        
+        if(InfoSelected && start)
         {
+            start = false;
+            lblContact.setStyle("-fx-text-fill: #F8A918");
+        lblInfo.setStyle("-fx-text-fill: #aeaeae");
         ContactPane.translateXProperty().set(850);
         ContactPane.setVisible(true);
         Timeline t = new Timeline();
@@ -371,23 +373,28 @@ public class EmployeeController implements Initializable{
         new KeyValue(InformationPane.translateXProperty(),-850)));
         t.play();
          t.setOnFinished(e->{
-        InfoSelected=false;});
+        InfoSelected=false;
+         start=true;});
         }
     }
+    boolean start = true;
         @FXML
     void openInformationPane(MouseEvent event) {
         
-        lblInfo.setStyle("-fx-text-fill: #F8A918");
-        lblContact.setStyle("-fx-text-fill: #aeaeae");
-        if(!InfoSelected)
+     
+        if(!InfoSelected && start)
         {
+            start = false;
+               lblInfo.setStyle("-fx-text-fill: #F8A918");
+        lblContact.setStyle("-fx-text-fill: #aeaeae");
         Timeline t = new Timeline();
         t.getKeyFrames().add(new KeyFrame(Duration.seconds(0.3),
         new KeyValue(InformationPane.translateXProperty(),0),
         new KeyValue(ContactPane.translateXProperty(),850)));
         t.play();
         t.setOnFinished(e->{
-        InfoSelected=true;});
+        InfoSelected=true;
+        start = true;});
         }
     }
 
