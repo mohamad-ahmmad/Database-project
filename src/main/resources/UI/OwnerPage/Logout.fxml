@@ -3,47 +3,54 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="120.0" prefWidth="300.0" styleClass="panel" stylesheets="@../../CSS/OwnerPage/Logout.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.OwnerController">
+<AnchorPane id="AnchorPane" prefHeight="283.0" prefWidth="330.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.OwnerController">
    <children>
-      <AnchorPane prefHeight="123.0" prefWidth="342.0" style="-fx-border-color: #F8A918; -fx-border-width: 5;">
-         <children>
-            <Label layoutX="144.0" layoutY="17.0" styleClass="loggingOut" stylesheets="@../../CSS/OwnerPage/Logout.css" text="Logging out">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="111.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../ICONS/OwnerPage/confirm.png" />
-               </image>
-            </ImageView>
-            <Label layoutX="29.0" layoutY="46.0" prefHeight="30.0" prefWidth="295.0" text="Are you sure you want to logout?" textFill="#f8a918">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="btnConfirm" layoutX="35.0" layoutY="76.0" onAction="#Confirm" prefHeight="27.0" prefWidth="85.0" styleClass="confirmBtn" stylesheets="@../../CSS/OwnerPage/Logout.css" text="Confirm">
-               <font>
-                  <Font name="Arial" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton fx:id="btnCancel" layoutX="223.0" layoutY="76.0" onAction="#Cancel" prefHeight="27.0" prefWidth="85.0" styleClass="cancelBtn" stylesheets="@../../CSS/OwnerPage/Logout.css" text="Cancel">
-               <font>
-                  <Font name="Arial" size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-         </children>
+      <AnchorPane layoutX="8.0" layoutY="7.0" prefHeight="264.0" prefWidth="314.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="7.0">
+         <effect>
+            <DropShadow />
+         </effect>
       </AnchorPane>
+      <Label layoutX="41.0" layoutY="118.0" prefHeight="43.0" prefWidth="246.0" text="You want to logout?" textFill="#f8a918">
+         <font>
+            <Font name="Berlin Sans FB" size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="76.0" layoutY="104.0" prefHeight="30.0" prefWidth="166.0" text="Are you sure you sure," textFill="#f8a918">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnCancel" layoutX="27.0" layoutY="196.0" onAction="#Cancel" prefHeight="43.0" prefWidth="107.0" style="-fx-background-radius: 25;" styleClass="cancelBtn" stylesheets="@../../CSS/OwnerPage/Logout.css" text="Cancel">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnConfirm" layoutX="193.0" layoutY="196.0" onAction="#Confirm" prefHeight="43.0" prefWidth="107.0" style="-fx-border-radius: 15; -fx-background-radius: 25;" styleClass="confirmBtn" stylesheets="@../../CSS/OwnerPage/Logout.css" text="Confirm">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Label alignment="CENTER" layoutX="80.0" layoutY="29.0" prefHeight="43.0" prefWidth="166.0" stylesheets="@../../CSS/OwnerPage/Logout.css" text="Logging out" textFill="#4e4d4d">
+         <font>
+            <Font name="Berlin Sans FB" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="43.0" fitWidth="45.0" layoutX="52.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../ICONS/login/Untitled-removebg-preview.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

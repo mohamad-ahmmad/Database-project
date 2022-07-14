@@ -29,7 +29,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         
         stage.close();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/WarehouseManagerPage/warehouseManager-form.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
         Parent root = loader.load();
         ss = new Stage();
         ss.getIcons().add(new Image(String.valueOf(getClass().getResource("/ICONS/AppIcon/main.png"))));

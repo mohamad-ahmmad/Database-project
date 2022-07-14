@@ -2,7 +2,10 @@ package com.app.garage.controllers.Owner;
 
 import com.app.garage.App;
 import com.jfoenix.controls.JFXButton;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.FadeTransition;
@@ -24,6 +27,7 @@ import javafx.scene.effect.Effect;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -60,8 +64,6 @@ public class OwnerController implements Initializable {
     @FXML
     private AnchorPane viewPanel;
     
-    private Effect shadowEffect;
-    
     boolean homeSelected = false;
     boolean profitsSelected = false;
     boolean departmentsSelected = false;
@@ -93,6 +95,19 @@ public class OwnerController implements Initializable {
         departmentsSelected = false;
         employeesSelected = false;
         warehousesSelected=false;
+        }
+    }
+    
+    @FXML
+    void openMhammadAhamd(MouseEvent event) throws URISyntaxException, IOException {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+         Desktop.getDesktop().browse(new URI("https://www.canva.com/design/DAFGaYUbsgY/CEWQ1FeE1sq1wR12wojVrA/view?utm_content=DAFGaYUbsgY&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink"));
+        }
+    }
+     @FXML
+    void openBdair(MouseEvent event) throws URISyntaxException, IOException {
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+         Desktop.getDesktop().browse(new URI("https://www.canva.com/design/DAFGaV6MXEs/UjzuIP4D90_a2he3wDRRcQ/view?utm_content=DAFGaV6MXEs&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink"));
         }
     }
     @FXML
@@ -219,14 +234,16 @@ public class OwnerController implements Initializable {
           currentStage = (Stage)((Node) e.getSource()).getScene().getWindow();
            Stage logout = new Stage();
            logout.initModality(Modality.APPLICATION_MODAL);
-           logout.initStyle(StageStyle.UNDECORATED);
+           logout.initStyle(StageStyle.TRANSPARENT);
             Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Logout.fxml"));
             Scene logoutScene = new Scene(root);
+            logoutScene.setFill(Color.TRANSPARENT);
+            logout.setOpacity(0.85);
        logout.setScene(logoutScene);
+       logout.setX(650);
+       logout.setY(220);
        logout.show();
-  
     }
-
      @FXML
     void Cancel(ActionEvent e) throws IOException {
      Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();

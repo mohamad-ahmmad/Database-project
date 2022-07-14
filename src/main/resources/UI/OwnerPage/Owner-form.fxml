@@ -161,7 +161,7 @@
                   <URL value="@../../CSS/ColorThemes.css" />
                </stylesheets>
             </Label>
-            <Label alignment="CENTER" layoutY="598.0" prefHeight="40.0" prefWidth="190.0" styleClass="devs" text="Mohammad Ahmad" textFill="WHITE">
+            <Label alignment="CENTER" layoutY="598.0" onMouseClicked="#openMhammadAhamd" prefHeight="40.0" prefWidth="190.0" styleClass="devs" text="Mohammad Ahmad" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -190,7 +190,7 @@
                <font>
                   <Font name="System Bold Italic" size="10.0" />
                </font></Label>
-            <Label alignment="CENTER" layoutY="628.0" prefHeight="40.0" prefWidth="190.0" styleClass="devs" text="Mohammad Bdair" textFill="WHITE">
+            <Label alignment="CENTER" layoutY="628.0" onMouseClicked="#openBdair" prefHeight="40.0" prefWidth="190.0" styleClass="devs" text="Mohammad Bdair" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -6,10 +6,16 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class WarehouseManagerController {
@@ -37,9 +43,21 @@ public class WarehouseManagerController {
     @FXML
     private AnchorPane viewPanel;
 
-    @FXML
-    void Logout(MouseEvent event) {
-
+      @FXML
+      void Logout(MouseEvent e) throws IOException {
+                  clearStyles();
+        labelLogout.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
+           Stage logout = new Stage();
+           logout.initModality(Modality.APPLICATION_MODAL);
+           logout.initStyle(StageStyle.TRANSPARENT);
+            Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/Logout.fxml"));
+            Scene logoutScene = new Scene(root);
+            logoutScene.setFill(Color.TRANSPARENT);
+            logout.setOpacity(0.85);
+       logout.setScene(logoutScene);
+       logout.setX(650);
+       logout.setY(220);
+       logout.show();
     }
     boolean clothesSelected = false;
     boolean shipmentSelected = false;
