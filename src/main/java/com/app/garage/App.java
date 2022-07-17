@@ -8,15 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-
 /**
  * JavaFX App
  */
 public class App extends Application {
-    //Mhammad:192.168.18.128
+    //Mhammad:192.168.18.133
     //Bdair:192.168.86.128
     
-    public static final String ip = "jdbc:oracle:thin:@192.168.18.128:1521:xe",
+    public static final String ip = "jdbc:oracle:thin:@192.168.18.133:1521:xe",
     user= "c##daraghmeh",
     password= "123456" ;
     
@@ -37,7 +36,7 @@ public class App extends Application {
         
         stage.close();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/DepartmentManagerPage/manager-page.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/login/login-form.fxml"));
 
         Parent root = loader.load();
         ss = new Stage();

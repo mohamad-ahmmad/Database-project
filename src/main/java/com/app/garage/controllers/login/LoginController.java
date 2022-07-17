@@ -9,8 +9,15 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -25,6 +32,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
@@ -37,7 +45,9 @@ import javafx.util.Duration;
 
 
 public class LoginController implements Initializable {
+    private final String ownerUser = "Owner",ownerPassword="123456";
     
+    private Connection con;
     @FXML
     MFXTextField userName;
     @FXML
@@ -50,6 +60,12 @@ public class LoginController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.out.println("Connection Failed.");
+        }
         firstLabel.opacityProperty().set(0);
         secLabel.opacityProperty().set(0);
         
@@ -78,8 +94,69 @@ public class LoginController implements Initializable {
         
     }
     
+    private void load(String URL) throws IOException{
+       
+           FXMLLoader loader = new FXMLLoader(getClass().getResource(URL));
+           Parent root = loader.load();
+           Stage appStage =  App.getAppStage();
+           appStage.hide();
+           appStage.setScene(new Scene(root));
+           appStage.show();
+           return;
+    }
+    
    @FXML
    public void loginPressed(ActionEvent e) throws IOException{
+         String user = userName.getText();
+         String password = passField.getText();
+       if(user.equals(ownerUser) && password.equals(ownerPassword)){
+           System.out.println("Loging to Owner");
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
+           Parent root = loader.load();
+           Stage appStage =  App.getAppStage();
+           appStage.hide();
+           appStage.setScene(new Scene(root));
+           appStage.show();
+           return;
+       }
+       
+       
+        try {
+          
+            String qry=
+            "select epassword,etype from employee where IDCARD ="+user;
+            
+            Statement st = con.createStatement();
+            ResultSet loginQry = st.executeQuery(qry);
+            loginQry.next();
+            String qryPass = loginQry.getString(1);
+            System.out.println("qry");
+            
+            if(qryPass.equals(password)){
+                String eType = loginQry.getString(2);
+                if(eType.equals("warehouse")){
+                    load("/UI/WarehouseManagerPage/warehousemanager-form.fxml");
+                    return;
+                }
+                else if (eType.equals("manager")){
+                    load("/UI/DepartmentManagerPage/manager-page.fxml");
+                    return;
+                }
+                else if(eType.equals("cashier")){
+                    load("/UI/EmployeePage/employee-page.fxml");
+                    return;
+                }
+            }else{
+                     userName.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+                     passField.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+                }
+            
+            
+             
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+         
+        }
       
        
        

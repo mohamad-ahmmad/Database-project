@@ -203,6 +203,7 @@ public class AddEmployeeController implements Initializable {
     private MFXButton nextBtn;
      
      String [] arrFXML;
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -210,6 +211,7 @@ public class AddEmployeeController implements Initializable {
         arrFXML[0]="/UI/DepartmentManagerPage/add_employee/sec_form.fxml";
         arrFXML[1]="/UI/DepartmentManagerPage/add_employee/third_form.fxml";
            
+        
      
         
     }
