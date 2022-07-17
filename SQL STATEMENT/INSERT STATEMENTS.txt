@@ -1,0 +1,165 @@
+
+
+/*   SQL INSERT STATEMENTS   */
+
+
+/*   Employee   -------------------------------------     */
+
+
+alter table employee 
+modify epassword varchar2(15) null;
+
+insert into Employee values (3901820192, 'Mhammad', 'Azmi','Ahmad',to_date('23-05-2021','dd-mm-yyyy'),to_date('14-02-2002','dd-mm-yyyy'),'m',5500,311403,'warehouse','admin123',null,null);
+insert into Employee values (4203220352, 'Mhammad', 'Ahmad','Bdair',to_date('15-03-2022','dd-mm-yyyy'),to_date('14-07-2002','dd-mm-yyyy'),'m',5500,211401,'manager','admin123',null,null);
+insert into Employee values (4201920232, 'Osama', 'Emran','Massoud',to_date('19-04-2015','dd-mm-yyyy'),to_date('15-03-1995','dd-mm-yyyy'),'m',2700,111411,'cashier','cash123',null,null);
+insert into Employee values (4101421228, 'Zuhair', 'Rasim','Sami',to_date('14-02-2016','dd-mm-yyyy'),to_date('15-03-1992','dd-mm-yyyy'),'m',2400,111412,'cashier','cash123',null,null);
+insert into Employee values (4201820292, 'Said', 'Abdulla','Soliman',to_date('18-02-2021','dd-mm-yyyy'),to_date('15-03-2000','dd-mm-yyyy'),'m',2200,411413,'assistant',null,null,null);
+
+
+/* ASSISTANT -------------------------------*/
+insert into assistant values(4201820292 , 'men');
+
+
+/* Department ---------------------------------*/
+alter table department
+modify did number(3,0);
+
+alter table department_dress
+modify did number(3,0);
+
+alter table department_dress
+modify did number(3,0);
+
+alter table sell_record
+modify DEPID number(3,0);
+
+alter table warehouse_department 
+modify did number(3,0);
+
+insert into department values (114,'Palestine','Nablus','Jerwan','D114',4203220352);
+insert into department values (104,'Jordan','Amman','Waleed','D104',null);
+insert into department values (11,'Jordan','Amman','Zatar','D11',null);
+insert into department values (1,'Palestine','Jenin','Khaleed','D1',null);
+
+/*Suplier ---------------------------*/
+
+insert into supplier values (133678, 2598660, 'Adidas','adidas@gmail.com');
+insert into supplier values (122678, 2598680, 'Dr.Zone','dr_zone@gmail.com');
+insert into supplier values (111678, 2900660, 'Nick','nick@gmail.com');
+insert into supplier values (111111, 0987790, 'Gucci','gucci@gmail.com');
+
+
+/*DRESS -----------------------------------*/
+alter table Dress
+modify dressname varchar (20);
+
+
+insert into dress values(1243530251,'Sweater Women', 'M', 'Pink', 'Gucci', 50 , 110, 200, 111111, null,to_date('30-04-2021','dd-mm-yyyy'));
+insert into dress values(1224353025,'Trauser men', '39', 'Black', 'Dr.Men', 50 , 110, 200, 122678, null,to_date('30-04-2021','dd-mm-yyyy'));
+insert into dress values(1224353024,'Trauser men', '29', 'Black', 'Dr.Men', 50 , 110, 200, 122678, null,to_date('30-04-2021','dd-mm-yyyy'));
+insert into dress values(1224353023,'Trauser men', '32', 'Black', 'Dr.Men', 50 , 110, 200, 122678, null,to_date('20-04-2021','dd-mm-yyyy'));
+insert into dress values(1224350823,'T-Shirt men', 'L', 'Black', 'Adidas', 32.5 , 70, 120, 133678, null,to_date('20-04-2021','dd-mm-yyyy'));
+insert into dress values(1224350923,'T-Shirt men', 'L', 'White', 'Adidas', 29.5 , 60, 300, 133678, null,to_date('20-04-2021','dd-mm-yyyy'));
+insert into dress values(1224350123,'T-Shirt men', 'L', 'Orange', 'Gucci', 125 , 250, 80, 111111, null,to_date('29-04-2021','dd-mm-yyyy'));
+
+
+/*DRESS_DEPARTMENT ------------------------*/
+
+insert into department_dress values ( 1243530251  , 104 , 0 , 80  );
+insert into department_dress values ( 1224353025  , 104 , 0 , 50  );
+insert into department_dress values ( 1224353024  , 104 , 0 , 50  );
+
+
+insert into department_dress values ( 1243530251  , 114 , 0 , 80  );
+insert into department_dress values ( 1224353025  , 114 , 30 , 50  );
+insert into department_dress values ( 1224353024  , 114 , 0 , 50  );
+
+insert into department_dress values ( 1224353023  , 1 , 10 , 80  );
+insert into department_dress values ( 1224350823  , 1 , 0 , 40  );
+insert into department_dress values ( 1224350923  , 1 , 0 , 50  );
+
+insert into department_dress values ( 1224353023  , 11 , 10 , 80  );
+insert into department_dress values ( 1224350823  , 11 , 0 , 40  );
+insert into department_dress values ( 1224350123  , 11 , 0 , 20  );
+
+
+
+
+
+/*EMPLOYEE_LOCATION ---------------------*/
+insert into employee_location values (3901820192 , 'Palestine' , 'Nablus' , 'example');
+
+insert into employee_location values (4203220352 , 'Palestine' , 'Tulkurm' , 'example1');
+insert into employee_location values (4203220352 , 'Palestine' , 'Nablus' , 'example2');
+
+insert into employee_location values (4201920232 , 'Palestine' , 'Nablus' , 'example3');
+
+
+insert into employee_location values (4101421228 , 'Jordan' , 'Ammman' , 'example4');
+insert into employee_location values (4101421228 , 'Palestine' , 'Nablus' , 'example');
+
+insert into employee_location values (4201820292 , 'Palestine' , 'Jenin' , 'example5');
+
+
+/*EMPLOYEE _ PHONENUMBER --------------------------------*/
+
+insert into EMPLOYEE_PHONENUMBER values(3901820192 , 0598565645);
+insert into EMPLOYEE_PHONENUMBER values(3901820192 , 0596768889);
+
+insert into EMPLOYEE_PHONENUMBER values(4203220352 , 0598123645);
+
+insert into EMPLOYEE_PHONENUMBER values(4201920232 , 0598978613);
+
+insert into EMPLOYEE_PHONENUMBER values(4101421228 , 0598445245);
+
+insert into EMPLOYEE_PHONENUMBER values(4201820292 , 0568666645);
+
+
+/*Supplier_location ---------------------------------*/
+insert into SUPPLIER_LOCATION values(133678, 'German', 'Berlin', 'Fokend' , 1200);
+insert into SUPPLIER_LOCATION values(133678, 'Spain', 'Madrid', 'Assina' , 2200);
+
+insert into SUPPLIER_LOCATION values(122678, 'Jordan', 'Amman', 'example' , 200);
+
+insert into SUPPLIER_LOCATION values(111678, 'Canada', 'example', 'example1' , 3200);
+
+
+insert into SUPPLIER_LOCATION values(111111, 'Japan', 'Tokyo', 'Center' , 4200);
+
+
+
+/*WAREHOUSE --------------------------------------*/
+insert into warehouse values(12028676 , 'Jordan' , 'Amman' , null , 'B20' ,  4203220352);
+insert into warehouse values(11928676 , 'Palestine' , 'Jericho' , 'Nablus' , 'B11' ,  4203220352);
+
+
+/*WAREHOUSES_DEPARTMENT ------------------------------*/
+insert into Warehouse_department values (11928676 , 114);
+insert into Warehouse_department values (11928676 , 104);
+insert into Warehouse_department values (11928676 , 11);
+insert into Warehouse_department values (11928676 , 1);
+
+insert into Warehouse_department values (12028676 , 114);
+insert into Warehouse_department values (12028676 , 104);
+insert into Warehouse_department values (12028676 , 11);
+insert into Warehouse_department values (12028676 , 1);
+
+
+/*WAREHOUSE DRESS -------------------------*/
+insert into warehouse_dress values(12028676 ,1243530251 );
+insert into warehouse_dress values(12028676 ,1224353025 );
+insert into warehouse_dress values(12028676 ,1224353024 );
+
+insert into warehouse_dress values(11928676 ,1224353023 );
+insert into warehouse_dress values(11928676 ,1224350823 );
+insert into warehouse_dress values(11928676 ,1224350923 );
+insert into warehouse_dress values(11928676 ,1224350123 );
+
+
+
+
+/*WDMANAGER --------------------*/
+INSERT into wdmanager values(3901820192 , 'mohammad_ahmad@gmail.com' , 09256687);
+
+INSERT into wdmanager values(4203220352 , 'mohammad_bdair@gmail.com' , 09286668);
+

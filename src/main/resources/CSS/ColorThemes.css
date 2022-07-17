@@ -36,8 +36,11 @@
     -fx-font-family:"Berlin Sans FB";
     -fx-text-fill:-fx-textColor;
 }
-
-
+.delete-btns .mfx-ripple-generator{-mfx-ripple-color: rgba(248,0,0,0.6);}
+.delete-btns{
+    -fx-border-color : #333;
+    
+}
 .date-box:focus-within {
     
     -fx-border-color : -fx-borderColor;
@@ -93,7 +96,7 @@
 
 
 .btns{
-    
+   
     -fx-font-size : 15;
     -fx-background-color: -fx-buttonColor;
     -fx-text-fill:-fx-primaryColor;

@@ -3,6 +3,7 @@ C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\CardsSlider.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\warehouseManager\SuppliersController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\App.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\ProfitsController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\warehouseManager\ClothesController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\login\LoginController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\CardController.java
@@ -12,6 +13,7 @@ C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\SliderController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\AddEmployeeController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\OwnerController.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\ClothesController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\CashierController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\HomePageController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\warehouseManager\WarehousesController.java
@@ -25,4 +27,5 @@ C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\EmployeeController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\ClothesController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Department.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\WarehousesController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\warehouseManager\ShipmentsController.java

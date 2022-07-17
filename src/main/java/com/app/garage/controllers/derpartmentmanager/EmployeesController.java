@@ -253,6 +253,7 @@ public class EmployeesController implements Initializable{
 
     @FXML
     void clearContactFilter(ActionEvent event) {
+        
      ContactFlow.getChildren().clear();
      ContactFlow.getChildren().add(SSNPane1);
     }
@@ -287,19 +288,7 @@ public class EmployeesController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       /* String Phone = "/UI/OwnerPage/EnterPhoneNum.fxml";
-        String Location = "/UI/OwnerPage/EnterLocation.fxml";
-        String name = "/UI/OwnerPage/EnterEmployeeName.fxml";
-        String salary = "/UI/OwnerPage/EnterSalary.fxml";
-        String hireDate = "/UI/OwnerPage/EnterHireDate.fxml";
-        String Idcard = "/UI/OwnerPage/EnterIDCard.fxml";
-        String type = "/UI/OwnerPage/type.fxml";
-        next.add(name);
-        next.add(salary);
-        next.add(Idcard);
-        next.add(type);
-        nextInfo.add(Phone);
-        nextInfo.add(Location);*/
+ 
     }
     
     void visibleContact(boolean state){
@@ -332,11 +321,12 @@ public class EmployeesController implements Initializable{
     void openInformationPane(MouseEvent event) {
         
         
-        lblInfo.setStyle("-fx-text-fill: #F8A918");
-        lblContact.setStyle("-fx-text-fill: #aeaeae");
+      
         if(!InfoSelected)
         {
- 
+            InfoSelected=false;
+        lblInfo.setStyle("-fx-text-fill: #F8A918");
+        lblContact.setStyle("-fx-text-fill: #aeaeae");
         Timeline t = new Timeline();
         t.getKeyFrames().add(new KeyFrame(Duration.seconds(0.3),
         new KeyValue(InformationPane.translateXProperty(),0),

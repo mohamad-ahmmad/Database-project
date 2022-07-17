@@ -143,6 +143,8 @@ public class ManagerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+      
        
          try {
              labelEmployees.setStyle(cssPressed);

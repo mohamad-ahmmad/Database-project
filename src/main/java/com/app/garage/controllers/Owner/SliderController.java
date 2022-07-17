@@ -66,15 +66,7 @@ public class SliderController implements Initializable {
 
       @FXML 
     void emailClicked(ActionEvent event) throws IOException, URISyntaxException {
-<<<<<<< HEAD
-          Alert temporary = new Alert(Alert.AlertType.INFORMATION);
-       temporary.setContentText("Email Succsesfully Copied.");
-       temporary.show();
-       
-          Button s = new Button();
-          
-        
-=======
+
          
        Notifications notifications = Notifications.create()
                .title("Email copied").text("Link Copied Succefully")
@@ -89,7 +81,7 @@ public class SliderController implements Initializable {
         });
        notifications.darkStyle();
        notifications.showInformation();
->>>>>>> bb44defe1c4cd93635b0be6678cc48bc4b7170a5
+
        EmailSender.openBrowser(empEmail.getText().split("@")[1]);
        EmailSender.clipBoardText(empEmail.getText());
     }

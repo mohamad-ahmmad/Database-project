@@ -13,6 +13,13 @@ import javafx.stage.Stage;
  * JavaFX App
  */
 public class App extends Application {
+    //Mhammad:192.168.18.128
+    //Bdair:192.168.86.128
+    
+    public static final String ip = "jdbc:oracle:thin:@192.168.18.128:1521:xe",
+    user= "c##daraghmeh",
+    password= "123456" ;
+    
     
     
     private static Stage ss;
@@ -29,20 +36,16 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         
         stage.close();
-<<<<<<< HEAD
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/DepartmentManagerPage/manager-page.fxml"));
 
-=======
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
->>>>>>> bb44defe1c4cd93635b0be6678cc48bc4b7170a5
         Parent root = loader.load();
         ss = new Stage();
         ss.getIcons().add(new Image(String.valueOf(getClass().getResource("/ICONS/AppIcon/main.png"))));
         ss.setTitle("Daragmeh Center");
-        Scene s = new Scene(root);
+        Scene s = new Scene(root );
         ss.setScene(s);
-        ss.setResizable(true);
+        ss.setResizable(false);
         ss.show();
     }
   
