@@ -71,11 +71,16 @@ public class OwnerController implements Initializable {
     boolean warehousesSelected=false;
     private Stage currentStage;
 
+    private Parent root;
+    private boolean isOpened= false;
     @FXML
     void openProfitsPanel(MouseEvent event) throws IOException {
-        if(!profitsSelected)
+        if(!isOpened){
+            
+            if(!profitsSelected)
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/ProfitsPage.fxml"));
+            isOpened=true;
+          root  = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/ProfitsPage.fxml"));
                 clearStyles();
         labelProfits.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
          Timeline t = new Timeline();
@@ -95,7 +100,11 @@ public class OwnerController implements Initializable {
         departmentsSelected = false;
         employeesSelected = false;
         warehousesSelected=false;
+        }}else{
+            viewPanel.getChildren().clear();
+            viewPanel.getChildren().add(root);
         }
+        
     }
     
     @FXML
