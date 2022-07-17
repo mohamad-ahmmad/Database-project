@@ -1,0 +1,167 @@
+create table Employee(
+SSN Number(10,0) PRIMARY KEY,
+FirstName varChar2(15) NOT NULL,
+MiddleName varChar2(15),
+LastName varChar2(15) NOT NULL,
+HireDate DATE NOT NULL,
+BirthDate DATE NOT NULL,
+Gender CHARACTER NOT NULL,
+Salary NUMBER(7,2) NOT NULL,
+IDCard NUMBER(6,0) UNIQUE,
+EType varChar2(10),
+EPassword varChar2(15) NOT NULL,
+CV varChar2(255),
+DepID NUMBER(3,0),
+Check (Gender in ('m' , 'f')),
+Check (Salary > 0)
+);
+
+
+create table Employee_Location(
+SSN Number(10),
+Country varChar2(12) NOT NULL,
+City varChar2(12) NOT NULL,
+Street varChar2(12)
+);
+Alter table Employee_Location add CONSTRAINT el_numstreet_PK PRIMARY KEY(SSN,Street);
+Alter table Employee_Location add CONSTRAINT el_ssn_FK Foreign Key(SSN) References Employee(SSN);
+
+
+create table Employee_PhoneNumber(
+SSN Number(10,0),
+PhoneNumber Number(10,0)
+);
+Alter table Employee_PhoneNumber add CONSTRAINT EP_ssn_PK Primary Key(SSN,PhoneNumber);
+Alter table Employee_PhoneNumber add CONSTRAINT EP_ssn_FK Foreign Key(SSN) References Employee(SSN);
+
+create table WDManager(
+SSN Number(10,0),
+Email varChar2(25) NOT NULL,
+TelephoneNumber NUMBER(8,0)
+);
+Alter Table WDManager add CONSTRAINT manager_ssn_PK PRIMARY KEY(SSN,Email);
+Alter table WDManager add CONSTRAINT manager_ssn_FK Foreign Key(SSN) References Employee(SSN);
+
+create table Assistant(
+SSN Number(10,0),
+Section varChar2(25)
+);
+Alter Table Assistant add CONSTRAINT assistant_ssn_PK PRIMARY KEY(SSN,Section);
+Alter table Assistant add CONSTRAINT assistant_ssn_FK Foreign Key(SSN) References Employee(SSN);
+
+
+create table Warehouse(
+WID Number(10,0) PRIMARY KEY,
+Country varChar2(12) NOT NULL,
+City varChar2(12) NOT NULL,
+Street varChar2(12),
+WName varChar2(12) NOT NULL,
+ManagerID  Number(10,0)
+);
+Alter table Warehouse add CONSTRAINT Warehouse_ssn_FK Foreign Key(ManagerID) References Employee(SSN);
+
+create table Department(
+DID Number(10,0) PRIMARY KEY,
+Country varChar2(12) NOT NULL,
+City varChar2(12) NOT NULL,
+Street varChar2(12),
+DName varChar2(12) NOT NULL,
+ManagerID  Number(10,0)
+);
+Alter table Department add CONSTRAINT Department_ssn_FK Foreign Key(ManagerID) References Employee(SSN);
+
+create table Sell_Record(
+RID Number(10,0) PRIMARY KEY,
+Recepit_Num NUMBER NOT NULL,
+DepID Number(10,0) NOT NULL,
+DressID Number(10,0) NOT  NULL
+);
+Alter table Sell_Record add CONSTRAINT Record_depid_FK Foreign Key(DepID) References Department(DID);
+Alter table Employee add CONSTRAINT Employee_depid_FK Foreign Key(DepID) References Department(DID);
+create table Dress(
+DressID Number(10,0) Primary Key,
+DressName NUMBER(10,0) NOT NULL,
+DressSize varChar2(4) NOT NULL,
+DressColor varChar2(10) NOT NULL,
+BrandName varChar2(15) NOT NULL,
+WSPrice Number(6,2) NOT NULL,
+Price Number(6,2) NOT NULL, 
+Stock Number(10,0) NOT NULL,
+SupplierID Number(10,0) NOT NULL,
+Preview varChar2(255),
+BuyHistory Date NOT NULL,
+Check (Price >=0),
+Check (Stock >=0),
+Check (WSPrice >= 0)
+);
+Alter table Sell_Record add CONSTRAINT Record_dressid_FK Foreign Key(DressID) References Dress(DressID);
+
+
+create table Supplier(
+SupplierID Number(10,0) Primary key,
+Telephone_Number NUMBER(10,0) NOT NULL,
+SupplierName varChar2(15) NOT NULL,
+Email varChar2(25)
+);
+Alter table Dress add CONSTRAINT Dress_ssn_FK Foreign Key(SupplierID) References Supplier(SupplierID);
+
+create table Supplier_Location(
+SupplierID Number(10,0),
+Country varChar2(12) NOT NULL,
+City varChar2(12) NOT NULL,
+Street varChar2(12),
+Shipment_Cost Number(7,2) NOT NULL,
+Check (Shipment_Cost > = 0)
+);
+Alter table Supplier_Location add CONSTRAINT SL_ssn_PK Primary Key(SupplierID,Street);
+Alter table Supplier_Location add CONSTRAINT SL_sid_FK Foreign Key(SupplierID) References Supplier(SupplierID);
+
+
+create table Warehouse_Dress(
+WID Number(10,0),
+DressID Number(10,0)
+);
+Alter table Warehouse_Dress add CONSTRAINT WD_wid_PK Primary Key(WID,DressID);
+Alter table Warehouse_Dress add CONSTRAINT WD_sid_FK Foreign Key(WID) References Warehouse(WID);
+Alter table Warehouse_Dress add CONSTRAINT WD_did_FK Foreign Key(DressID) References Dress(DressID);
+
+create table Warehouse_Department(
+WID Number(10,0),
+DID Number(10,0)
+);
+Alter table Warehouse_Department add CONSTRAINT WDep_wid_PK Primary Key(WID,DID);
+Alter table Warehouse_Department add CONSTRAINT WDep_sid_FK Foreign Key(WID) References Warehouse(WID);
+Alter table Warehouse_Department add CONSTRAINT WDep_did_FK Foreign Key(DID) References Department(DID);
+
+
+
+create table Department_Dress(
+DressID Number(10),
+DID Number(10),
+SalePercentage Number(3,1) NOT NULL,
+DepartmentStock Number(3) NOT NULL,
+Check (SalePercentage >= 0),
+Check (DepartmentStock > =0)
+);
+
+Alter table Department_Dress add CONSTRAINT DD_Did_PK Primary Key(DressID,DID);
+Alter table Department_Dress add CONSTRAINT DD_Dressid_FK Foreign Key(DressID) References Dress(DressID);
+Alter table Department_Dress add CONSTRAINT DD_did_FK Foreign Key(DID) References Department(DID);
+
+insert into Employee values (1234555112, 'Ahmad', 'mohammad','Sami','14-feb-2002','15-mar-2003','m',1200,123451,'manager','test1234','test.com',null);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -56,7 +56,7 @@ public class EmployeeController implements Initializable {
     
     
     private void loadAnimatedPane(String path) throws IOException{
-                    Timeline t = new Timeline();
+        Timeline t = new Timeline();
         Parent root = FXMLLoader.load(getClass().getResource(path));
         root.scaleXProperty().set(0.8);
         root.scaleYProperty().set(0.8);

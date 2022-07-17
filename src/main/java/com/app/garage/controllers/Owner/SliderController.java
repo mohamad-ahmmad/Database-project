@@ -21,6 +21,7 @@ import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -65,6 +66,7 @@ public class SliderController implements Initializable {
 
       @FXML 
     void emailClicked(ActionEvent event) throws IOException, URISyntaxException {
+
          
        Notifications notifications = Notifications.create()
                .title("Email copied").text("Link Copied Succefully")
@@ -79,6 +81,7 @@ public class SliderController implements Initializable {
         });
        notifications.darkStyle();
        notifications.showInformation();
+
        EmailSender.openBrowser(empEmail.getText().split("@")[1]);
        EmailSender.clipBoardText(empEmail.getText());
     }

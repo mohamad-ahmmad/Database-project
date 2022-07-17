@@ -16,21 +16,14 @@
 
 <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.derpartmentmanager.ManagerController">
    <children>
-      <AnchorPane fx:id="viewPanel" layoutX="190.0" prefHeight="700.0" prefWidth="810.0">
-         <children>
-            <ImageView fitHeight="20.0" fitWidth="22.0" layoutX="776.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../ICONS/OwnerPage/Notification.png" />
-               </image>
-            </ImageView>
-         </children></AnchorPane>
+      <AnchorPane fx:id="viewPanel" layoutX="195.0" prefHeight="700.0" prefWidth="810.0" />
       <AnchorPane fx:id="menuPanel" prefHeight="700.0" prefWidth="190.0">
          <children>
             <AnchorPane prefHeight="700.0" prefWidth="190.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <effect>
-                  <DropShadow height="0.0" radius="18.785" spread="0.39" width="77.14">
+                  <DropShadow height="38.57" radius="28.427500000000002" spread="0.39" width="77.14">
                      <color>
-                        <Color red="0.410526305437088" green="0.410526305437088" blue="0.410526305437088" />
+                        <Color red="0.4099999964237213" green="0.4099999964237213" blue="0.4099999964237213" opacity="0.4285714626312256" />
                      </color>
                   </DropShadow>
                </effect>
