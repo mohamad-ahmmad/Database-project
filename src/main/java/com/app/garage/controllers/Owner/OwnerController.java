@@ -1,5 +1,5 @@
 package com.app.garage.controllers.Owner;
-
+import java.sql.Connection;
 import com.app.garage.App;
 import com.jfoenix.controls.JFXButton;
 import java.awt.Desktop;
@@ -7,7 +7,12 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -278,9 +283,10 @@ public class OwnerController implements Initializable {
        appStage.show(); 
       
     }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+
         
     }
 

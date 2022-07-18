@@ -16,12 +16,9 @@ public class App extends Application {
     //Mhammad:192.168.18.128
     //Bdair:192.168.86.128
     
-    public static final String ip = "jdbc:oracle:thin:@192.168.18.128:1521:xe",
-    user= "c##daraghmeh",
-    password= "123456" ;
-    
-    
-    
+    public static final String ip = "jdbc:oracle:thin:@192.168.86.128:1521:xe",
+    user= "c##DaraghmehCompany",
+    password= "12345" ;
     private static Stage ss;
     
     public static  Stage getAppStage(){
@@ -37,7 +34,7 @@ public class App extends Application {
         
         stage.close();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/DepartmentManagerPage/manager-page.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
 
         Parent root = loader.load();
         ss = new Stage();

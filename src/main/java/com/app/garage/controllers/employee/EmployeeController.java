@@ -52,7 +52,7 @@ public class EmployeeController implements Initializable {
 
     @FXML
     private AnchorPane viewPanel;
-    
+   
     
     
     private void loadAnimatedPane(String path) throws IOException{
