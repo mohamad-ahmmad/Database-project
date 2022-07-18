@@ -4,7 +4,6 @@ module com.app.garage {
     requires com.jfoenix;
     requires org.controlsfx.controls;
     requires MaterialFX;
-    
     requires java.sql;
     
     opens com.app.garage.controllers.derpartmentmanager to javafx.fxml;

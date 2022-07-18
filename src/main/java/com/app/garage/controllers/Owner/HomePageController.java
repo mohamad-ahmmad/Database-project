@@ -5,6 +5,7 @@
 package com.app.garage.controllers.Owner;
 
 
+import com.app.garage.App;
 import com.app.garage.controllers.EmailSender;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
@@ -22,6 +23,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -34,6 +39,8 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 
@@ -41,12 +48,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class HomePageController implements Initializable {
-    
-    
-    
-    
-   
-    
     @FXML
     AnchorPane nextPane;
     @FXML
@@ -186,6 +187,9 @@ public class HomePageController implements Initializable {
         //DATABASE PROCCESSING AND GETTING THE SLIDES IN THE SLIDER READY
         for(int i = 0 ; i < 3 ; i++){
         CardsSlider temp = new CardsSlider((i+1)+". Department Name");
+        
+        
+                
         
     }
         

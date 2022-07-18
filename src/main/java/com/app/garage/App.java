@@ -8,17 +8,19 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-
 /**
  * JavaFX App
  */
 public class App extends Application {
-    //Mhammad:192.168.18.128
+    //Mhammad:192.168.18.133
     //Bdair:192.168.86.128
     
     public static final String ip = "jdbc:oracle:thin:@192.168.86.128:1521:xe",
     user= "c##DaraghmehCompany",
     password= "12345" ;
+
+    
+    
     private static Stage ss;
     
     public static  Stage getAppStage(){
@@ -33,9 +35,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         
         stage.close();
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/Owner-form.fxml"));
-
         Parent root = loader.load();
         ss = new Stage();
         ss.getIcons().add(new Image(String.valueOf(getClass().getResource("/ICONS/AppIcon/main.png"))));

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -112,6 +113,7 @@
                   <Image url="@../../ICONS/login/pablita-449.gif" />
                </image>
             </ImageView>
+            <MFXPasswordField floatMode="BORDER" floatingText="Password" layoutX="58.0" layoutY="535.0" prefHeight="50.0" prefWidth="291.0" styleClass="textfields" />
          </children>
       </AnchorPane>
    </children>

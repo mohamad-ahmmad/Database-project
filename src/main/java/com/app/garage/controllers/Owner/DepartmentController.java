@@ -1,14 +1,26 @@
 package com.app.garage.controllers.Owner;
 
+import com.app.garage.App;
 import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,11 +29,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -36,15 +51,27 @@ public class DepartmentController implements Initializable{
 
     @FXML
     private Pane IDPane;
+    
+    @FXML
+    private TextField txtfieldID;
+        @FXML
+    private TextField txtfieldName;
 
     @FXML
-    private TableColumn<?, ?> SSNCol;
-
+    private TableColumn<Departments, Integer> IDCol;
     @FXML
-    private TableColumn<?, ?> addressCol;
-
+    private TableColumn<Departments, String> nameCol;
     @FXML
-    private TableColumn<?, ?> bDateCol;
+    private TableColumn<Departments, String> streetCol;
+    @FXML
+    private TableColumn<Departments, String> countryCol;
+    @FXML
+    private TableColumn<Departments, String> cityCol;
+    @FXML
+    private TableColumn<Departments, Integer> managerIDCol;
+                    
+    @FXML
+    private TableColumn<?, Date> openingDateCol;
 
     @FXML
     private Pane cityPane;
@@ -58,8 +85,7 @@ public class DepartmentController implements Initializable{
     @FXML
     private Pane managerPane;
 
-    @FXML
-    private TableColumn<?, ?> nameCol;
+
 
     @FXML
     private Pane namePane;
@@ -67,8 +93,6 @@ public class DepartmentController implements Initializable{
     @FXML
     private Pane openingPane;
 
-    @FXML
-    private TableColumn<?, ?> phoneCol;
 
     @FXML
     private  AnchorPane searchFilter;
@@ -77,7 +101,7 @@ public class DepartmentController implements Initializable{
     private Pane streetPane;
 
     @FXML
-    private TableView<?> tableView;
+    private TableView<Departments> tableView;
     
     
     
@@ -218,7 +242,7 @@ public class DepartmentController implements Initializable{
 
 
     }
-
+    ObservableList<Departments> deps = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -228,6 +252,42 @@ public class DepartmentController implements Initializable{
         next.add(name);
         next.add(Location);
         next.add(ManagerID);
+        
+         try {      
+              Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+              Statement stmt = con.createStatement();
+              
+         ResultSet rs = stmt.executeQuery("SELECT DID, Dname, Country, City, Street, OpeningDate, ManagerID"
+                 + " FROM Department");
+        while(rs.next()) {  
+            Integer id = rs.getInt("DID");
+            String country = rs.getString("Country");
+            String city= rs.getString("city");
+            String street = rs.getString("street");
+            String dname = rs.getString("Dname");        
+            Double mid = rs.getDouble("ManagerID");
+            String date = rs.getString("OpeningDate");
+            date=date.replaceAll("-", "/");
+            String[] d = date.split(" ");
+            System.out.println(d[0]);
+            deps.add(new Departments(id, dname, country, city, street, d[0], mid));
+        } 
+        
+        tableView.setItems(deps);
+             IDCol.setCellValueFactory(new PropertyValueFactory<>("DID"));
+             nameCol.setCellValueFactory(new PropertyValueFactory<>("DName"));
+             countryCol.setCellValueFactory(new PropertyValueFactory<>("Country"));
+             cityCol.setCellValueFactory(new PropertyValueFactory<>("City"));
+             streetCol.setCellValueFactory(new PropertyValueFactory<>("Street"));
+             openingDateCol.setCellValueFactory(new PropertyValueFactory<>("OpeningDate"));
+             managerIDCol.setCellValueFactory(new PropertyValueFactory<>("ManagerID"));
+             
+             
+          }
+         
+        catch (SQLException ex) {
+              ex.printStackTrace();
+          } 
 
     }
 

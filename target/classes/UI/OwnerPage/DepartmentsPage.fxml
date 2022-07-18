@@ -18,7 +18,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.DepartmentController">
 
    <children>
@@ -41,13 +40,13 @@
       </Label>
       <TableView fx:id="tableView" layoutX="7.0" layoutY="207.0" prefHeight="422.0" prefWidth="794.0" style="-fx-border-color: #333; -fx-border-radius: 6;">
         <columns>
-          <TableColumn fx:id="SSNCol" prefWidth="92.7999849319458" text="ID" />
+          <TableColumn fx:id="IDCol" prefWidth="92.7999849319458" text="ID" />
           <TableColumn fx:id="nameCol" prefWidth="112.00006103515625" text="Name" />
-            <TableColumn fx:id="addressCol" prefWidth="115.20002746582031" text="Country" />
-            <TableColumn fx:id="bDateCol" minWidth="0.0" prefWidth="113.5999755859375" text="City" />
-            <TableColumn fx:id="phoneCol" prefWidth="110.4000244140625" text="Street" />
-            <TableColumn prefWidth="140.00006103515625" text="Opening Date" />
-            <TableColumn prefWidth="105.60001220703123" text="Manager ID" />
+            <TableColumn fx:id="countryCol" prefWidth="115.20002746582031" text="Country" />
+            <TableColumn fx:id="cityCol" minWidth="0.0" prefWidth="113.5999755859375" text="City" />
+            <TableColumn fx:id="streetCol" prefWidth="110.4000244140625" text="Street" />
+            <TableColumn fx:id="openingDateCol" prefWidth="140.00006103515625" text="Opening Date" />
+            <TableColumn fx:id="managerIDCol" prefWidth="105.60001220703123" text="Manager ID" />
         </columns>
       </TableView>
       <JFXButton layoutX="618.0" layoutY="637.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Department">
@@ -74,7 +73,7 @@
                         <Font name="Berlin Sans FB" size="12.0" />
                      </font>
                   </Label>
-                  <TextField layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                  <TextField fx:id="txtfieldID" layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
                      <font>
                         <Font size="10.0" />
                      </font></TextField>
@@ -89,7 +88,7 @@
                   <Font name="Berlin Sans FB" size="12.0" />
                </font>
             </Label>
-            <TextField layoutY="17.0" prefHeight="0.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+            <TextField fx:id="txtfieldName" layoutY="17.0" prefHeight="0.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
                <font>
                   <Font size="10.0" />
                </font></TextField>

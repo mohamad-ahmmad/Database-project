@@ -163,3 +163,15 @@ INSERT into wdmanager values(3901820192 , 'mohammad_ahmad@gmail.com' , 09256687)
 
 INSERT into wdmanager values(4203220352 , 'mohammad_bdair@gmail.com' , 09286668);
 
+update Department
+set openingDate='14-mar-2006'
+where Did=114;
+update Department
+set openingDate='15-mar-2020'
+where Did=104;
+update Department
+set openingDate='18-mar-2010'
+where Did=11;
+update Department
+set openingDate='19-mar-2016'
+where Did=1;
