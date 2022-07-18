@@ -46,12 +46,12 @@
             <Pane layoutX="3.0" layoutY="165.0" prefHeight="7.0" prefWidth="7.0" style="-fx-background-color: #333; -fx-background-radius: 30;" />
             <Pane layoutX="3.0" layoutY="179.0" prefHeight="7.0" prefWidth="7.0" style="-fx-background-color: #333; -fx-background-radius: 30;" />
             <Pane layoutX="3.0" layoutY="192.0" prefHeight="7.0" prefWidth="7.0" style="-fx-background-color: #333; -fx-background-radius: 30;" />
-            <ImageView fitHeight="19.0" fitWidth="34.0" layoutX="148.0" layoutY="155.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="19.0" fitWidth="34.0" layoutX="125.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../ICONS/employee/money_sign.png" />
                </image>
             </ImageView>
-            <Label fx:id="dressPrice" layoutX="136.0" layoutY="155.0" text="00">
+            <Label fx:id="dressPrice" layoutX="106.0" layoutY="160.0" text="00">
                <font>
                   <Font name="Yu Gothic Regular" size="15.0" />
                </font>
@@ -66,7 +66,7 @@
                   <Font name="Berlin Sans FB" size="12.0" />
                </font>
             </Label>
-            <Line endX="18.400009155273438" endY="-25.0" layoutX="148.0" layoutY="199.0" startX="-34.107078552246094" startY="11.399993896484375" stroke="#f7a6193b" />
+            <Line endX="16.600006103515625" endY="-23.600006103515625" layoutX="148.0" layoutY="199.0" startX="-33.0" startY="9.600006103515625" stroke="#f7a6193b" strokeWidth="3.0" />
             <Label fx:id="dressSale" layoutX="137.0" layoutY="191.0" prefHeight="19.0" prefWidth="29.0" text="00%">
                <font>
                   <Font size="14.0" />

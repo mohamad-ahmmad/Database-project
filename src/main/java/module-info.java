@@ -18,7 +18,6 @@ module com.app.garage {
     
     exports com.app.garage.controllers.employee;
     exports com.app.garage;
-    
     exports com.app.garage.controllers.derpartmentmanager;
     exports com.app.garage.controllers.login;
     exports com.app.garage.controllers.Owner;

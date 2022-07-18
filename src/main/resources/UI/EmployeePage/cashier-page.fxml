@@ -45,10 +45,10 @@
             <Font name="Berlin Sans FB" size="12.0" />
          </font>
       </MFXButton>
-      <MFXTextField floatMode="ABOVE" layoutX="540.0" layoutY="172.0" prefHeight="30.0" prefWidth="191.0" styleClass="textfields" />
+      <MFXTextField fx:id="productID" floatMode="ABOVE" layoutX="540.0" layoutY="172.0" prefHeight="30.0" prefWidth="191.0" styleClass="textfields" />
       <Label layoutX="541.0" layoutY="153.0" text="Product #:" />
       <MFXButton layoutX="543.0" layoutY="342.0" onAction="#deleteSelectedCards" prefHeight="30.0" prefWidth="130.0" styleClass="btns" text="Delete selected card" />
-      <MFXTextField floatMode="ABOVE" layoutX="539.0" layoutY="257.0" prefHeight="30.0" prefWidth="191.0" styleClass="cashier-textfields" />
+      <MFXTextField fx:id="productAmount" floatMode="ABOVE" layoutX="539.0" layoutY="257.0" prefHeight="30.0" prefWidth="191.0" styleClass="cashier-textfields" />
       <Label layoutX="540.0" layoutY="239.0" text="Amount :" />
       <MFXButton layoutX="737.0" layoutY="257.0" prefHeight="30.0" prefWidth="70.0" styleClass="btns" text="Update">
          <font>
@@ -64,12 +64,12 @@
          </padding>
       </Label>
       <Label layoutX="693.0" layoutY="321.0" text="Receipt #:" />
-      <MFXButton layoutX="678.0" layoutY="628.0" prefHeight="30.0" prefWidth="98.0" styleClass="btns" text="Done">
+      <MFXButton fx:id="doneButtton" disable="true" layoutX="678.0" layoutY="628.0" prefHeight="30.0" prefWidth="98.0" styleClass="btns" text="Done">
          <font>
             <Font name="Berlin Sans FB" size="13.0" />
          </font>
       </MFXButton>
-      <MFXButton layoutX="572.0" layoutY="628.0" prefHeight="30.0" prefWidth="98.0" styleClass="btns" text="Cancel">
+      <MFXButton disable="true" layoutX="572.0" layoutY="628.0" prefHeight="30.0" prefWidth="98.0" styleClass="btns" text="Cancel">
          <font>
             <Font name="Berlin Sans FB" size="13.0" />
          </font>

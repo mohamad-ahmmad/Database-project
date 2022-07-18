@@ -29,6 +29,8 @@ public class CardController implements Initializable {
     @FXML
     private AnchorPane cardPane;
     
+    private double dressID;
+    
     @FXML
     private Label amountNum;
     
@@ -101,5 +103,12 @@ public class CardController implements Initializable {
     }
       public void setSale(String str){
           this.dressSale.setText(str);//don't forget the % symbol
+      }
+      
+      public void setID (double id){
+         dressID = id;
+      }
+      public double getID(){
+          return dressID;
       }
 }
