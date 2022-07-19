@@ -243,6 +243,7 @@ public class DepartmentController implements Initializable{
 
     }
     ObservableList<Departments> deps = FXCollections.observableArrayList();
+    ObservableList<Departments> searchDeps = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -271,9 +272,10 @@ public class DepartmentController implements Initializable{
             String[] d = date.split(" ");
             System.out.println(d[0]);
             deps.add(new Departments(id, dname, country, city, street, d[0], mid));
-        } 
+        }
         
-        tableView.setItems(deps);
+        
+            tableView.setItems(deps);
              IDCol.setCellValueFactory(new PropertyValueFactory<>("DID"));
              nameCol.setCellValueFactory(new PropertyValueFactory<>("DName"));
              countryCol.setCellValueFactory(new PropertyValueFactory<>("Country"));
@@ -281,14 +283,48 @@ public class DepartmentController implements Initializable{
              streetCol.setCellValueFactory(new PropertyValueFactory<>("Street"));
              openingDateCol.setCellValueFactory(new PropertyValueFactory<>("OpeningDate"));
              managerIDCol.setCellValueFactory(new PropertyValueFactory<>("ManagerID"));
-             
-             
           }
          
         catch (SQLException ex) {
               ex.printStackTrace();
           } 
 
+    }
+    
+        @FXML
+    void startSearch(ActionEvent event) throws SQLException {
+        searchDeps.clear();
+        boolean found = false;
+        boolean searchFields[]={true,true,true,true,true,true,true};
+        boolean searchFields2[]={true,true,true,true,true,true,true};
+        
+        Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+        Statement stmt = con.createStatement();
+        try{
+        ResultSet rs = stmt.executeQuery("SELECT DID, Dname, Country, City, Street, OpeningDate, ManagerID"
+        + " FROM Department "
+        +"Where Did = " + txtfieldID.getText() + " And " + "Dname = " + "\'"+txtfieldName.getText()+"\'");
+        
+                while(rs.next()) {  
+            Integer id = rs.getInt("DID");
+            String country = rs.getString("Country");
+            String city= rs.getString("city");
+            String street = rs.getString("street");
+            String dname = rs.getString("Dname");        
+            Double mid = rs.getDouble("ManagerID");
+            String date = rs.getString("OpeningDate");
+            date=date.replaceAll("-", "/");
+            String[] d = date.split(" ");
+            System.out.println(d[0]);
+            searchDeps.add(new Departments(id, dname, country, city, street, d[0], mid));
+            
+        }
+         tableView.setItems(searchDeps);
+        }
+        catch(java.sql.SQLSyntaxErrorException exc){
+            tableView.setItems(deps);
+        }
+        
     }
 
 }

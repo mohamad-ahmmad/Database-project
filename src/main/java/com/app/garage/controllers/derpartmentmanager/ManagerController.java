@@ -58,6 +58,8 @@ public class ManagerController implements Initializable {
     @FXML
     private AnchorPane viewPanel;
     
+   
+    
     private void loadAnimatedPane(String path) throws IOException{
                     Timeline t = new Timeline();
         Parent root = FXMLLoader.load(getClass().getResource(path));
@@ -89,7 +91,7 @@ public class ManagerController implements Initializable {
         truer[i]=true;
     }
     
-   
+    
 
     @FXML
     void openDepartment(MouseEvent event) throws IOException {
@@ -196,6 +198,7 @@ public class ManagerController implements Initializable {
          stage.hide();
         
     }
+    
     
     
     

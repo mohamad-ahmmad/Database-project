@@ -48,16 +48,18 @@ public class EmployeeController implements Initializable {
     @FXML
     private Label labelReceipt;
 
-    private boolean[] locker = {true, false, false};
+    private boolean[] locker = {true, true, true};
 
     @FXML
     private AnchorPane viewPanel;
-   
+
     
+     private String idCard;
     
-    private void loadAnimatedPane(String path) throws IOException{
-        Timeline t = new Timeline();
-        Parent root = FXMLLoader.load(getClass().getResource(path));
+    private Object loadAnimatedPane(String path) throws IOException{
+                    Timeline t = new Timeline();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        Parent root = loader.load();
         root.scaleXProperty().set(0.8);
         root.scaleYProperty().set(0.8);
          t.getKeyFrames().add(new KeyFrame(
@@ -68,6 +70,8 @@ public class EmployeeController implements Initializable {
          t.play();
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
+        
+        return loader.getController();
     }
     
     private void lockerTruer(){
@@ -86,9 +90,13 @@ public class EmployeeController implements Initializable {
         @FXML
     void openCashierPanel(MouseEvent event) throws IOException {
         if(locker[0]){
+         
+         
           clearStyles();
           labelCashier.setStyle(cssPressed);
-          loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");
+          CashierController cont = (CashierController)  loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");
+          cont.setIdCard(idCard);
+          
           lockerTruer();
           locker[0]=false;
           System.out.println(locker[0]+" "+locker[1]+" "+locker[2]);
@@ -104,6 +112,7 @@ public class EmployeeController implements Initializable {
          clearStyles();
          labelClothes.setStyle(cssPressed);
          loadAnimatedPane("/UI/EmployeePage/clothes-page.fxml");
+         
          lockerTruer();
          locker[1]=false;
         }
@@ -173,19 +182,25 @@ public class EmployeeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
       
         
-          labelCashier.setStyle(cssPressed);
-        try {
-            loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");
-        } catch (IOException ex) {
-         ex.printStackTrace();
-        }
-        lockerTruer();
-          locker[0]=false;
+          //labelCashier.setStyle(cssPressed);
+     
+         // CashierController cont = (CashierController)  loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");
+          //System.out.println(idCard+"!!!!!!!");
+          //cont.setIdCard(idCard);
+       
+       // lockerTruer();
+         // locker[0]=false;
 
       
           
     }
     
-
+    public void setIdCard (String id){
+        idCard=id;
+    }
+    
+    public String getIdCard(){
+        return this.idCard;
+    }
     
 }

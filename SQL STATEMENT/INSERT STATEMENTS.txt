@@ -163,6 +163,7 @@ INSERT into wdmanager values(3901820192 , 'mohammad_ahmad@gmail.com' , 09256687)
 
 INSERT into wdmanager values(4203220352 , 'mohammad_bdair@gmail.com' , 09286668);
 
+<<<<<<< HEAD
 update Department
 set openingDate='14-mar-2006'
 where Did=114;
@@ -175,3 +176,8 @@ where Did=11;
 update Department
 set openingDate='19-mar-2016'
 where Did=1;
+=======
+/* ALERT : EXCUTE IT BEFORE EXCUTE YOU */
+alter table WAREHOUSE_DRESS
+add WAREHOUSE_STOCK number(5,0);
+>>>>>>> 05be263144a99abf849ed3cefbac6224939ddb47
