@@ -56,6 +56,16 @@ public class DepartmentController implements Initializable{
     private TextField txtfieldID;
         @FXML
     private TextField txtfieldName;
+                @FXML
+    private TextField txtFieldCountry;
+    @FXML
+    private TextField txtFieldCity;
+    @FXML
+    private TextField txtFieldStreet;
+    @FXML
+    private TextField txtFieldManagerId;
+    @FXML
+    private TextField txtFieldOpeningDate;
 
     @FXML
     private TableColumn<Departments, Integer> IDCol;
@@ -254,6 +264,7 @@ public class DepartmentController implements Initializable{
         next.add(Location);
         next.add(ManagerID);
         
+        
          try {      
               Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
               Statement stmt = con.createStatement();
@@ -293,17 +304,21 @@ public class DepartmentController implements Initializable{
     
         @FXML
     void startSearch(ActionEvent event) throws SQLException {
+        String ID="";
+        String Name="";
+        String cond1="";
+      
         searchDeps.clear();
         boolean found = false;
         boolean searchFields[]={true,true,true,true,true,true,true};
         boolean searchFields2[]={true,true,true,true,true,true,true};
         
+
         Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
         Statement stmt = con.createStatement();
-        try{
-        ResultSet rs = stmt.executeQuery("SELECT DID, Dname, Country, City, Street, OpeningDate, ManagerID"
+        ResultSet rs = stmt.executeQuery("SELECT *"
         + " FROM Department "
-        +"Where Did = " + txtfieldID.getText() + " And " + "Dname = " + "\'"+txtfieldName.getText()+"\'");
+        +"Where DID like '%"+txtfieldID.getText()+ "%' and dname like '%"+txtfieldName.getText()+"%' and country like '%"+txtFieldCountry.getText()+"%' and city like '%"+txtFieldCity.getText()+"%' and street like '%"+txtFieldStreet.getText()+"%' and ManagerID like '%"+txtFieldManagerId.getText() + "%' and OpeningDate like '%"+txtFieldOpeningDate.getText()+"%'");
         
                 while(rs.next()) {  
             Integer id = rs.getInt("DID");
@@ -319,12 +334,7 @@ public class DepartmentController implements Initializable{
             searchDeps.add(new Departments(id, dname, country, city, street, d[0], mid));
             
         }
-         tableView.setItems(searchDeps);
-        }
-        catch(java.sql.SQLSyntaxErrorException exc){
-            tableView.setItems(deps);
-        }
-        
+         tableView.setItems(searchDeps);     
     }
 
 }
