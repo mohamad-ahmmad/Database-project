@@ -301,7 +301,7 @@ public class WarehousesController implements Initializable{
               ex.printStackTrace();
           } 
         
-
+        
     }
     ObservableList<Warehouses> warehouses = FXCollections.observableArrayList();
     ObservableList<Warehouses> searchWh = FXCollections.observableArrayList();

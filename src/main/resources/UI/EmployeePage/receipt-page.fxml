@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXCheckbox?>
 <?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import java.net.URL?>
@@ -9,19 +9,22 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="810.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.employee.ReceiptController">
    <children>
-      <TableView layoutX="458.0" layoutY="143.0" prefHeight="554.0" prefWidth="350.0" styleClass="bd-table">
+      <TableView layoutX="6.0" layoutY="54.0" prefHeight="640.0" prefWidth="396.0" styleClass="table">
         <columns>
-          <TableColumn prefWidth="75.0" text="Serial Number" />
           <TableColumn prefWidth="75.0" text="Receipt ID" />
             <TableColumn prefWidth="75.0" text="Dress ID" />
             <TableColumn prefWidth="75.0" text="Date" />
+            <TableColumn prefWidth="75.0" text="Amount" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -31,7 +34,7 @@
             <URL value="@../../CSS/ColorThemes.css" />
          </stylesheets>
       </TableView>
-      <Label layoutX="-2.0" layoutY="9.0" prefHeight="32.0" prefWidth="242.0" styleClass="underline" text="     Receipt History">
+      <Label layoutX="-2.0" layoutY="9.0" prefHeight="32.0" prefWidth="222.0" styleClass="underline" text="     Receipt History:">
          <font>
             <Font name="Berlin Sans FB" size="28.0" />
          </font>
@@ -41,8 +44,29 @@
             <Image url="@../../ICONS/employee/receipt.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="card" layoutX="125.0" layoutY="398.0" prefHeight="262.0" prefWidth="212.0" style="-fx-border-color: #777;" />
-      <MFXButton fx:id="deleteBtn" layoutX="32.0" layoutY="208.0" onAction="#deleteReceipt" prefHeight="32.0" prefWidth="175.0" styleClass="btns" text="- Delete Selected Row">
+      <Pane fx:id="addPane" layoutX="411.0" layoutY="335.0" prefHeight="360.0" prefWidth="386.0" style="-fx-border-color: #aaa; -fx-border-radius: 5;">
+         <children>
+            <MFXButton layoutX="12.0" layoutY="306.0" onAction="#addReceipt" prefHeight="32.0" prefWidth="362.0" styleClass="btns" text="+ Add Receipt Row">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </MFXButton>
+            <MFXDatePicker fx:id="dressDate" floatMode="ABOVE" floatingText="Date:" layoutX="12.0" layoutY="212.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="361.0" styleClass="date-box" />
+            <MFXTextField fx:id="dressID" floatMode="ABOVE" floatingText="Dress ID:" layoutX="11.0" layoutY="98.0" minWidth="-Infinity" prefHeight="35.0" prefWidth="361.0" styleClass="textfields" />
+            <MFXTextField fx:id="dressReceipt" floatMode="ABOVE" floatingText="Receipt ID:" layoutX="11.0" layoutY="43.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="361.0" styleClass="textfields" />
+            <MFXTextField fx:id="amount" floatMode="ABOVE" floatingText="Amount:" layoutX="11.0" layoutY="154.0" minWidth="-Infinity" prefHeight="35.0" prefWidth="361.0" styleClass="textfields" />
+         </children>
+      </Pane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="418.0" layoutY="319.0" stroke="WHITE" strokeType="INSIDE" width="28.0" />
+      <JFXCheckBox checkedColor="#f8a918" layoutX="421.0" layoutY="321.0" onAction="#enableCheck" text="Add Receipt Row" unCheckedColor="WHITE">
+         <font>
+            <Font name="Berlin Sans FB" size="12.0" />
+         </font>
+      </JFXCheckBox>
+      <MFXButton layoutX="411.0" layoutY="253.0" onAction="#deleteReceipt" prefHeight="35.0" prefWidth="182.0" style="-fx-border-radius: 5;" styleClass="btns" text="- Delete Selected">
          <font>
             <Font size="15.0" />
          </font>
@@ -50,22 +74,23 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </MFXButton>
-      <MFXButton fx:id="addBtn" layoutX="250.0" layoutY="208.0" onAction="#addReceipt" prefHeight="32.0" prefWidth="175.0" styleClass="btns" text="+ Add Receipt Row">
-         <font>
-            <Font size="15.0" />
-         </font>
+      <MFXButton layoutX="615.0" layoutY="253.0" onAction="#search" prefHeight="35.0" prefWidth="182.0" styleClass="btns" text="Search">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </MFXButton>
-      <MFXDatePicker fx:id="dressDate" floatMode="ABOVE" floatingText="Date:" layoutX="248.0" layoutY="329.0" prefHeight="39.0" prefWidth="175.0" />
-      <MFXCheckbox fx:id="enableChecked" layoutX="225.0" layoutY="213.0" onAction="#enableCheck">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></MFXCheckbox>
-      <MFXTextField fx:id="dressID" floatMode="ABOVE" floatingText="Dress ID:" layoutX="39.0" layoutY="328.0" prefHeight="39.0" prefWidth="175.0" />
-      <MFXTextField fx:id="dressSerial" floatMode="ABOVE" floatingText="Serial Number:" layoutX="39.0" layoutY="266.0" prefHeight="39.0" prefWidth="175.0" />
-      <MFXTextField fx:id="dressReceipt" floatMode="ABOVE" floatingText="Receipt ID:" layoutX="250.0" layoutY="266.0" prefHeight="39.0" prefWidth="175.0" />
+      <ImageView fitHeight="24.0" fitWidth="24.0" layoutX="624.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../ICONS/employee/search_FILL0_wght700_GRAD0_opsz48.png" />
+         </image>
+         <effect>
+            <ColorAdjust brightness="1.0" />
+         </effect>
+      </ImageView>
+      <MFXTextField fx:id="idSearch" floatMode="ABOVE" floatingText="Receipt ID:" layoutX="411.0" layoutY="117.0" prefHeight="35.0" prefWidth="182.0" styleClass="textfields" />
+      <MFXTextField fx:id="dressSearch" floatMode="ABOVE" floatingText="Dress ID:" layoutX="618.0" layoutY="117.0" prefHeight="35.0" prefWidth="182.0" styleClass="textfields" />
+      <MFXTextField fx:id="dateSearch" floatMode="ABOVE" floatingText="Date:" layoutX="411.0" layoutY="183.0" prefHeight="35.0" prefWidth="182.0" styleClass="textfields" />
+      <MFXTextField fx:id="amountSearch" floatMode="ABOVE" floatingText="Amount:" layoutX="618.0" layoutY="183.0" prefHeight="35.0" prefWidth="182.0" styleClass="textfields" />
    </children>
    <stylesheets>
       <URL value="@../../CSS/EmployeePage/clothes.css" />

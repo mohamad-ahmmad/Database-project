@@ -21,6 +21,9 @@ import javafx.scene.layout.AnchorPane;
  */
 public class CardController implements Initializable {
     
+    public CardController(){
+        
+    }
     private boolean selected =false;
     
     @FXML
@@ -29,7 +32,7 @@ public class CardController implements Initializable {
     @FXML
     private AnchorPane cardPane;
     
-    private double dressID;
+    private long dressID;
     
     @FXML
     private Label amountNum;
@@ -64,6 +67,10 @@ public class CardController implements Initializable {
     
     public void setAmount(String num){
         amountNum.setText(num);
+    }
+    
+    public void setSelect (boolean temp){
+        selected=temp;
     }
     
     @FXML
@@ -105,10 +112,13 @@ public class CardController implements Initializable {
           this.dressSale.setText(str);//don't forget the % symbol
       }
       
-      public void setID (double id){
+      public void setID (long id){
          dressID = id;
       }
-      public double getID(){
+      public long getID(){
           return dressID;
+      }
+      public String getAmount(){
+          return amountNum.getText();
       }
 }

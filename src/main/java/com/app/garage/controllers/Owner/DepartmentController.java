@@ -328,6 +328,7 @@ public class DepartmentController implements Initializable{
         + " FROM Department "
         +"Where DID like '%"+txtfieldID.getText()+ "%' and dname like '%"+txtfieldName.getText()+"%' and country like '%"+txtFieldCountry.getText()+"%' and city like '%"+txtFieldCity.getText()+"%' and street like '%"+txtFieldStreet.getText()+"%' and ManagerID like '%"+txtFieldManagerId.getText() + "%' and OpeningDate like '%"+txtFieldOpeningDate.getText()+"%'");
         
+        
                 while(rs.next()) {  
             Integer id = rs.getInt("DID");
             String country = rs.getString("Country");
