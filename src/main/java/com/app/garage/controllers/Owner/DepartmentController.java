@@ -125,6 +125,14 @@ public class DepartmentController implements Initializable{
         streetField.setSelected(false);
         managerField.setSelected(false);
         odField.setSelected(false);
+        txtfieldID.setText("");
+        txtfieldName.setText("");
+        txtFieldCountry.setText("");
+        txtFieldCity.setText("");
+        txtFieldStreet.setText("");
+        txtFieldManagerId.setText("");
+        txtFieldOpeningDate.setText("");
+        tableView.setItems(deps);
         flowPane.getChildren().removeAll(namePane,cityPane,streetPane,countryPane,managerPane,openingPane);
     }
     public void clearSearch() throws IOException{

@@ -1,14 +1,23 @@
 package com.app.garage.controllers.Owner;
 
+import com.app.garage.App;
 import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +31,8 @@ import javafx.scene.control.Button;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -37,15 +48,20 @@ public class WarehousesController implements Initializable{
     @FXML
     private Pane IDPane;
 
+@FXML
+    private TableColumn<Warehouses, Integer> IDCol;
     @FXML
-    private TableColumn<?, ?> SSNCol;
-
+    private TableColumn<Warehouses, String> nameCol;
     @FXML
-    private TableColumn<?, ?> addressCol;
-
+    private TableColumn<Warehouses, String> streetCol;
     @FXML
-    private TableColumn<?, ?> bDateCol;
-
+    private TableColumn<Warehouses, String> countryCol;
+    @FXML
+    private TableColumn<Warehouses, String> cityCol;
+    @FXML
+    private TableColumn<Warehouses, Integer> managerIDCol;           
+    @FXML
+    private TableColumn<Warehouses, Integer> capacityCol;
     @FXML
     private Pane cityPane;
 
@@ -57,18 +73,12 @@ public class WarehousesController implements Initializable{
 
     @FXML
     private Pane managerPane;
-
-    @FXML
-    private TableColumn<?, ?> nameCol;
-
     @FXML
     private Pane namePane;
 
     @FXML
     private Pane CapacityPane;
 
-    @FXML
-    private TableColumn<?, ?> phoneCol;
 
     @FXML
     private  AnchorPane searchFilter;
@@ -77,9 +87,28 @@ public class WarehousesController implements Initializable{
     private Pane streetPane;
 
     @FXML
-    private TableView<?> tableView;
+    private TableView<Warehouses> tableView;
     
-    
+    @FXML
+    private TextField txtFieldCapacity;
+
+    @FXML
+    private TextField txtFieldCity;
+
+    @FXML
+    private TextField txtFieldCountry;
+
+    @FXML
+    private TextField txtFieldManagerId;
+
+    @FXML
+    private TextField txtFieldStreet;
+
+    @FXML
+    private TextField txtFieldName;
+    @FXML
+    private TextField txtFieldId;
+
     
     @FXML
     private AnchorPane searchPane;
@@ -240,7 +269,61 @@ public class WarehousesController implements Initializable{
         next.add(name);
         next.add(Location);
         next.add(ManagerID);
+        
+        try {      
+              Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+              Statement stmt = con.createStatement();
+              
+         ResultSet rs = stmt.executeQuery("SELECT WID, wname, Country, City, Street, Wcapacity, ManagerID"
+                 + " FROM "
+                 + "warehouse");
+        while(rs.next()) {  
+            Integer id = rs.getInt("WID");
+            String country = rs.getString("Country");
+            String city= rs.getString("city");
+            String street = rs.getString("street");
+            String wname = rs.getString("wname");        
+            Double mid = rs.getDouble("ManagerID");
+            Integer capacity = rs.getInt("Wcapacity");
+            warehouses.add(new Warehouses(id, wname, country, city, street, capacity, mid));
+        }
+            tableView.setItems(warehouses);
+             IDCol.setCellValueFactory(new PropertyValueFactory<>("WID"));
+             nameCol.setCellValueFactory(new PropertyValueFactory<>("WName"));
+             countryCol.setCellValueFactory(new PropertyValueFactory<>("Country"));
+             cityCol.setCellValueFactory(new PropertyValueFactory<>("City"));
+             streetCol.setCellValueFactory(new PropertyValueFactory<>("Street"));
+             capacityCol.setCellValueFactory(new PropertyValueFactory<>("WCapacity"));
+             managerIDCol.setCellValueFactory(new PropertyValueFactory<>("ManagerID"));
+          }
+         
+        catch (SQLException ex) {
+              ex.printStackTrace();
+          } 
+        
 
     }
-
-}
+    ObservableList<Warehouses> warehouses = FXCollections.observableArrayList();
+    ObservableList<Warehouses> searchWh = FXCollections.observableArrayList();
+    @FXML
+    void startSearch(ActionEvent event) throws SQLException {
+        searchWh.clear();
+        Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT *"
+        + " FROM Warehouse "
+        +"Where WID like '%"+txtFieldId.getText()+ "%' and WName like '%"+txtFieldName.getText()+"%' and country like '%"+txtFieldCountry.getText()+"%' and city like '%"+txtFieldCity.getText()+"%' and (street like '%"+txtFieldStreet.getText()+"%' or street is null) and ManagerID like '%"+txtFieldManagerId.getText() + "%' and WCapacity like '%"+txtFieldCapacity.getText()+"%'");
+            while(rs.next()) {  
+            Integer id = rs.getInt("WID");
+            String country = rs.getString("Country");
+            String city= rs.getString("city");
+            String street = rs.getString("street");
+            String wname = rs.getString("wname");        
+            Double mid = rs.getDouble("ManagerID");
+            Integer capacity = rs.getInt("Wcapacity");
+            searchWh.add(new Warehouses(id, wname, country, city, street, capacity, mid));
+        }
+            tableView.setItems(searchWh);
+          }
+    
+    }
