@@ -152,16 +152,35 @@ insert into Employee values (1234555112, 'Ahmad', 'mohammad','Sami','14-feb-2002
 
 
 
+/*SEQUENCE FOR GENERATE THE RECEIPT NUMBER*/
+create SEQUENCE receipt_num
+  start with 1;
 
 
+/*TO GENERATE THE PRIMARY KEY FOR EACH SINGLE ROW IN THE DEP_SALE TABLE*/
+create SEQUENCE receipt_id
+  start with 1;
 
 
+/*STORE THE DATE IN THE DATABASE FOR FUTURE PRINTING RECEIPTS BY USING JASPER REPORT AND FOR PROFIT SECTION*/
+alter table sell_record
+add purchased_date date not null;
+
+/*THIS EASIER THAN DATE TYPE CUZ THIS ATRIBUTE IS FIXED AND TAKE THE LAPTOP CURRENT TIME*/
+alter table sell_record
+modify purchased_date varchar2(20);
 
 
+/*AMOUNT COLUMN ADDED TO DETECT HOW MANY SOLD*/
 
+alter table sell_record
+add amount number(3,0);
 
+/*the number start from 1*/
+alter table sell_record 
+modify rid number;
 
-
-
-
+/* ALERT : EXCUTE IT BEFORE EXCUTE YOU */
+alter table WAREHOUSE_DRESS
+add WAREHOUSE_STOCK number(5,0);
 

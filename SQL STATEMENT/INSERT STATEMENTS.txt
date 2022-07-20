@@ -163,6 +163,4 @@ INSERT into wdmanager values(3901820192 , 'mohammad_ahmad@gmail.com' , 09256687)
 
 INSERT into wdmanager values(4203220352 , 'mohammad_bdair@gmail.com' , 09286668);
 
-/* ALERT : EXCUTE IT BEFORE EXCUTE YOU */
-alter table WAREHOUSE_DRESS
-add WAREHOUSE_STOCK number(5,0);
+

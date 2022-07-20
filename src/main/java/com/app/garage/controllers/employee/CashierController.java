@@ -14,13 +14,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,24 +32,33 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
 
-import javafx.scene.text.Text;
-import javafx.util.Duration;
+import javafx.scene.layout.GridPane;
+
 
 public class CashierController implements Initializable {
      private Connection con;
      ArrayList<CardController> conts = new ArrayList<CardController>();
-     //ArrayList<Parent> cardArray = new ArrayList<Parent>();
+   
     @FXML
-    private Label count;
+    private Label receiptID;
+     
+    @FXML
+    private MFXButton cancelButton;
     
     @FXML
     private MFXButton doneButton;
+    
+     @FXML
+    private MFXButton btnDone;
+    
+    @FXML
+    private MFXButton btnCancel;
+     
+    @FXML
+    private Label count;
+    
+
     
     @FXML
     private AnchorPane view;
@@ -72,6 +82,7 @@ public class CashierController implements Initializable {
     
     //UPDATE THE GRID
     private void update(){
+        count.setText(String.valueOf(counter));
         int i =0,j =0;
          gridLayout.getChildren().clear();
         for(CardController temp : conts)
@@ -92,90 +103,252 @@ public class CashierController implements Initializable {
     @FXML
     private void toReceipt() throws IOException{
         //goto receipt
+        
     }
     
+    
+    private boolean exist(CardController e){
+        if(conts.isEmpty())
+          return false;
+         for(int i =0;i<conts.size();i++)
+             if(conts.get(i).getID()==e.getID()){
+                 conts.get(i).setAmount(String.valueOf(Integer.parseInt(conts.get(i).getAmount())+1));
+                 return true;
+             }
+         return false;
+     }
+    
+    
     @FXML
-    void btnPressed(ActionEvent event) throws IOException, SQLException {
-        counter++;
-        count.setText(String.valueOf(counter));
-        FXMLLoader toload = new FXMLLoader(getClass().getResource("/UI/EmployeePage/dress-card.fxml"));
-        Parent temp = toload.load();
-        //cardArray.add(temp);
-        CardController crd = toload.getController();
+    void btnPressed(ActionEvent event) throws IOException,SQLException  {
+       
+         try {
+             con=DriverManager.getConnection(App.ip, App.user, App.password );
+         } catch (SQLException ex) {
+            ex.printStackTrace();
+         }
+        
+        int toCount = 1;
         
         Statement st = con.createStatement();
-        
+         ResultSet dressQry = null ;
        // double ID =Double.parseDouble(productID.getText());
-        System.out.println(idCard.substring(1, 4));
-        ResultSet dressQry = st.executeQuery(
+        try{
+         dressQry = st.executeQuery(
                 "Select d.DRESSID, d.DRESSNAME,d.DRESSSIZE, d.DRESSCOLOR, d.BRANDNAME, d.PRICE, d.PREVIEW, dd.SALEPERCENTAGE,"
                 + " dd.DEPARTMENTSTOCK "
                 + " from DRESS  d, DEPARTMENT_DRESS  dd "
                 + " where d.DRESSID = dd.DRESSID AND dd.DID = "+idCard.substring(1, 4) +" AND dd.DRESSID = "+productID.getText() );//AND
-        boolean avaliable = dressQry.next(); 
+        }catch(SQLException e){
+              productID.setStyle("-fx-border-color: rgba(248,0,0,0.6)");  return;
+        }
+        boolean avaliable = dressQry.next();
         
+        if(!productAmount.getText().replace(" ", "").equals("")) 
+        try{
+           System.out.println(productAmount.getText());
+           toCount= Integer.parseInt(productAmount.getText());
+            
+        }catch(Exception e)
+        {productAmount.setStyle("-fx-border-color: rgba(248,0,0,0.6);"); return ; }
+        
+       
+        
+       
         if(avaliable){
+        counter=counter+toCount;
+        count.setText(String.valueOf(counter));
+            
+         FXMLLoader toload = new FXMLLoader(getClass().getResource("/UI/EmployeePage/dress-card.fxml"));
+         Parent temp = toload.load();
+
+         CardController crd = toload.getController(); 
+            
+            
+           
            String amount =productAmount.getText().replace(" ", ""); 
            if(amount.equals(""))
               crd.setAmount("1");
            else
-               crd.setAmount(amount);
+           crd.setAmount(productAmount.getText());
+           
            
            crd.setColor(dressQry.getString(4));
-           crd.setID(dressQry.getDouble(1));
+           crd.setID(dressQry.getLong(1));
            //crd.setImage(null);
            crd.setName(dressQry.getString(2));
            crd.setPrice(dressQry.getString(6));
            crd.setSale(dressQry.getString(8)+"%");
            crd.setSize(dressQry.getString(3));
            
+           
+           if(!exist(crd)){
+           conts.add(crd);
+           gridLayout.add((Node)temp , j , i);
+           j++;
+           if(j == 3){
+           i++;
+           j=0;
+           }
+           }
+           
+          btnDone.setDisable(false);
+          btnCancel.setDisable(false);
+          productAmount.setText("");
+          productAmount.setStyle("");
+          productID.setStyle("");
         }else{
-            System.out.println("DOESN'T EXIST.");
+           productID.setStyle("-fx-border-color: rgba(248,0,0,0.6)");  return;
         }
         
         
-        conts.add(crd);
+     
         
-        gridLayout.add((Node)temp , j , i);
-        
-        j++;
-        if(j == 3){
-            i++;
-            j=0;
-        }
+      
     }
+    
     
     @FXML
     void deleteSelectedCards(){
         
        for(int i =conts.size()-1 ; i>=0 ; i--){
            if(conts.get(i).isSelected()){
+            counter= counter -  Integer.parseInt(conts.get(i).getAmount());
+            
             conts.remove(i);
-            counter--;
-            count.setText(String.valueOf(counter));
+            
+            
            }
               
        }
         update();
         
     }
+    
+    private void setReceiptNumLABEL(){
+         try {
+             con = DriverManager.getConnection(App.ip, App.user, App.password);
+             Statement rLatest = con.createStatement();
+             ResultSet latestReceipt = rLatest.executeQuery("select MAX(RECEPIT_NUM) from SELL_RECORD");
+             boolean found = latestReceipt.next();
+             
+             if(found){
+                  long num = latestReceipt.getLong(1)+1;
+                  receiptID.setText(Long.toString(num));
+             }
+                
+             
+             
+         } catch (SQLException ex) {
+            ex.printStackTrace();
+         }
+         
+    }
  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         try {
-             con=DriverManager.getConnection(App.ip, App.user, App.password );
-         } catch (SQLException ex) {
-             Logger.getLogger(CashierController.class.getName()).log(Level.SEVERE, null, ex);
-         }
-      
-      
-// don't set preferred size or anything on gridpane
-gridLayout = new GridPane();
-// suppose your scroll pane id is scrollPane
-scrollPane.setContent(gridLayout);
+        
+        
+        
+        
+       
+        
+        btnDone.setDisable(true);
+        btnCancel.setDisable(true);
+       // don't set preferred size or anything on gridpane
+       gridLayout = new GridPane();
+       // suppose your scroll pane id is scrollPane
+       scrollPane.setContent(gridLayout);
 
     }
     
     public void setIdCard(String ID){idCard=ID;}
  
+    @FXML
+    private void purchase(ActionEvent e){
+            try {
+             con=DriverManager.getConnection(App.ip, App.user, App.password );
+         } catch (SQLException ex) {
+            ex.printStackTrace();
+         }
+        
+          btnDone.setDisable(true);
+          btnCancel.setDisable(true);
+         try {
+           
+             //UPDATE STATEMENT WITH INSERT VALUES
+             Statement stDone = con.createStatement();
+             stDone.executeQuery("select receipt_num.nextval from dual");
+             for(CardController temp : conts){
+                 Date current = new Date();
+                 SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy");
+                 
+                 String currentDate = formatter.format(current);
+                 String dressID = Long.toString(temp.getID());
+                 String depid = this.idCard.substring(1, 4);
+                 String amount = temp.getAmount();
+                 
+              
+                 stDone.executeUpdate("insert into sell_record values("
+                         + " receipt_id.nextval, "
+                         + " receipt_num.currval, "
+                         + depid+", "
+                         + dressID+", "
+                         + "substr( current_timestamp , 1 ,18), "
+                         + amount
+                         + " )");
+                 
+                 stDone.executeUpdate("update DEPARTMENT_DRESS "
+                                      + " set DEPARTMENTSTOCK=DEPARTMENTSTOCK-"+temp.getAmount()
+                                      + " where DRESSID="+Long.toString(temp.getID())
+                                      + " and did = "+idCard.substring(1,4));
+                 
+             }
+             
+             con.close();
+         } catch (SQLException ex) {
+            productID.setStyle("-fx-border-color: rgba(248,0,0,0.6);"); ex.printStackTrace();
+         }
+        setReceiptNumLABEL();
+        selectAllCards();
+        deleteSelectedCards();
+        update();
+         
+    }
+    
+    private void selectAllCards(){
+        conts.trimToSize();
+        for(int i =0; i<conts.size() ; i++)
+          conts.get(i).setSelect(true);
+    }
+    
+    @FXML
+    private void cancelPurchase(ActionEvent e){
+        //NOTHING RELATED TO SQL OR DB
+        
+        btnDone.setDisable(true);
+        btnCancel.setDisable(true);
+        productAmount.setText("");
+        productID.setText("");
+        selectAllCards(); 
+        deleteSelectedCards();
+        update();
+    }
+    
+    @FXML
+    public void updateAmountToSelected(ActionEvent e){
+        
+        
+        try {
+         Integer.parseInt( productAmount.getText());  
+        }catch(Exception ex)
+        {
+            productAmount.setStyle("-fx-border-color: rgba(248,0,0,0.6);");return;
+        }
+        for(CardController temp : conts){
+            temp.setAmount(productAmount.getText());
+        }
+    }
+    
+    
 }

@@ -4,16 +4,22 @@
  */
 package com.app.garage.controllers.employee;
 
+import com.app.garage.App;
+import com.jfoenix.controls.JFXCheckBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXCheckbox;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -21,14 +27,32 @@ import javafx.scene.layout.AnchorPane;
  */
 public class ReceiptController implements Initializable  {
     
+    private Connection con;
+    
+    @FXML
+    private MFXTextField dressSearch;
+    
+    @FXML
+    private MFXTextField amountSearch;
+
+    @FXML
+    private MFXTextField dateSearch;
+
+    @FXML
+    private MFXTextField idSearch;
+    
+    
+
+     @FXML
+    private Pane addPane;
+    
       @FXML
     private MFXButton addBtn;
 
     @FXML
     private AnchorPane card;
 
-    @FXML
-    private MFXButton deleteBtn;
+    
 
     @FXML
     private MFXDatePicker dressDate;
@@ -43,17 +67,11 @@ public class ReceiptController implements Initializable  {
     private MFXTextField dressSerial;
 
     @FXML
+    private MFXTextField amount;
+    @FXML
     private MFXCheckbox enableChecked;
 
-    @FXML
-    void addReceipt(ActionEvent event) {
-
-    }
-
-    @FXML
-    void deleteReceipt(ActionEvent event) {
-
-    }
+  
     
     private void setEditability(boolean temp){
         temp =!temp;
@@ -62,7 +80,7 @@ public class ReceiptController implements Initializable  {
        dressReceipt.disableProperty().set(temp);
        dressSerial.disableProperty().set(temp);
        addBtn.disableProperty().set(temp);
-      
+       amount.disableProperty().set(temp);
       
       
         
@@ -71,9 +89,15 @@ public class ReceiptController implements Initializable  {
     
     @FXML
     void enableCheck(ActionEvent event) {
-     if( ((MFXCheckbox)event.getSource()).isSelected() )
+     if( ((JFXCheckBox)event.getSource()).isSelected() ){
          setEditability(true);
-     else setEditability(false);
+         addPane.setStyle("-fx-border-color:#666; -fx-border-radius:5");
+     }
+         
+     else{
+         setEditability(false);
+         addPane.setStyle("-fx-border-color:#aaa; -fx-border-radius:5");
+     }
         
     }
 
@@ -82,6 +106,27 @@ public class ReceiptController implements Initializable  {
         setEditability(false);
         
         
+    }
+    
+    @FXML 
+    private void search(ActionEvent e) {
+        
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+    
+    @FXML
+    void addReceipt(ActionEvent event) {
+
+    }
+
+    @FXML
+    void deleteReceipt(ActionEvent event) {
+
     }
     
 }
