@@ -1,5 +1,5 @@
 package com.app.garage.controllers.Owner;
-
+import java.sql.Connection;
 import com.app.garage.App;
 import com.jfoenix.controls.JFXButton;
 import java.awt.Desktop;
@@ -7,7 +7,12 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -71,11 +76,16 @@ public class OwnerController implements Initializable {
     boolean warehousesSelected=false;
     private Stage currentStage;
 
+    private Parent root;
+    private boolean isOpened= false;
     @FXML
     void openProfitsPanel(MouseEvent event) throws IOException {
-        if(!profitsSelected)
+        if(!isOpened){
+            
+            if(!profitsSelected)
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/ProfitsPage.fxml"));
+            isOpened=true;
+          root  = FXMLLoader.load(getClass().getResource("/UI/OwnerPage/ProfitsPage.fxml"));
                 clearStyles();
         labelProfits.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
          Timeline t = new Timeline();
@@ -95,7 +105,11 @@ public class OwnerController implements Initializable {
         departmentsSelected = false;
         employeesSelected = false;
         warehousesSelected=false;
+        }}else{
+            viewPanel.getChildren().clear();
+            viewPanel.getChildren().add(root);
         }
+        
     }
     
     @FXML
@@ -269,9 +283,9 @@ public class OwnerController implements Initializable {
        appStage.show(); 
       
     }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         
     }
 

@@ -6,11 +6,19 @@ package com.app.garage.controllers.Owner;
 
 
 
+import com.app.garage.App;
 import com.app.garage.controllers.EmailSender;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -53,14 +61,30 @@ public class SliderController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-        new PieChart.Data("Sample 1" ,25 ),
-         new PieChart.Data("Sample 2" , 25),
-          new PieChart.Data("Sample 3", 25),
-           new PieChart.Data("Sample 4", 25)
-            
+                ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+        new PieChart.Data("Sample 1" ,25 )      
          );
-        pieChart.setTitle("Example Title");
+          try {      
+              Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+              Statement stmt = con.createStatement();
+              String depName;   
+              
+              
+              
+         ResultSet rs = stmt.executeQuery("SELECT DName FROM Department");
+        
+        while(rs.next()) {
+        depName = rs.getString("DName");
+            pieChartData.add(new PieChart.Data(depName ,25 ) );
+        } 
+        
+        
+          }
+        catch (SQLException ex) {
+              ex.printStackTrace();
+          }
+       
+        pieChart.setTitle("Departments Profits");
         pieChart.setData(pieChartData);
     }
 

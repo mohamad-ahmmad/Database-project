@@ -52,6 +52,7 @@ public class EmployeeController implements Initializable {
 
     @FXML
     private AnchorPane viewPanel;
+
     
      private String idCard;
     
