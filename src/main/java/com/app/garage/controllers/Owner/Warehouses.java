@@ -12,9 +12,9 @@ public class Warehouses {
     Integer WID;
     String WName,Country,City,Street;
     Integer WCapacity;
-    Double ManagerID;
+    Long ManagerID;
 
-    public Warehouses(Integer WID, String WName, String Country, String City, String Street, Integer WCapacity, Double ManagerID) {
+    public Warehouses(Integer WID, String WName, String Country, String City, String Street, Integer WCapacity, Long ManagerID) {
         this.WID = WID;
         this.WName = WName;
         this.Country = Country;
@@ -48,7 +48,7 @@ public class Warehouses {
         return WCapacity;
     }
 
-    public Double getManagerID() {
+    public Long getManagerID() {
         return ManagerID;
     }
 
@@ -76,7 +76,7 @@ public class Warehouses {
         this.WCapacity = WCapacity;
     }
 
-    public void setManagerID(Double ManagerID) {
+    public void setManagerID(Long ManagerID) {
         this.ManagerID = ManagerID;
     }
     

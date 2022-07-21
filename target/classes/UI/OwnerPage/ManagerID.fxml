@@ -12,6 +12,6 @@
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="117.0" layoutY="67.0" prefHeight="47.0" prefWidth="265.0" />
+      <TextField fx:id="EnterManagerID" layoutX="117.0" layoutY="67.0" prefHeight="47.0" prefWidth="265.0" />
    </children>
 </AnchorPane>

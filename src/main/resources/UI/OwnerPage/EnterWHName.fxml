@@ -12,12 +12,12 @@
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="54.0" layoutY="56.0" prefHeight="47.0" prefWidth="265.0" />
+      <TextField fx:id="enterWHName" layoutX="54.0" layoutY="56.0" prefHeight="47.0" prefWidth="265.0" />
       <Label alignment="CENTER" layoutX="347.0" layoutY="33.0" prefHeight="20.0" prefWidth="107.0" text="Capacity">
          <font>
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="331.0" layoutY="64.0" prefHeight="31.0" prefWidth="139.0" />
+      <TextField fx:id="enterCapacity" layoutX="331.0" layoutY="64.0" prefHeight="31.0" prefWidth="139.0" />
    </children>
 </AnchorPane>

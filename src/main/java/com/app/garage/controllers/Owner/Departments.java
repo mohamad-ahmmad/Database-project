@@ -10,9 +10,9 @@ public class Departments {
     Integer DID;
     String DName,Country,City,Street;
     String openingDate;
-    Double ManagerID;
+    Long ManagerID;
 
-    public Departments(Integer DID, String DName, String Country, String City, String Street, String openingDate, Double ManagerID) {
+    public Departments(Integer DID, String DName, String Country, String City, String Street, String openingDate, Long ManagerID) {
         this.DID = DID;
         this.DName = DName;
         this.Country = Country;
@@ -46,7 +46,7 @@ public class Departments {
         this.openingDate = openingDate;
     }
 
-    public void setManagerID(Double ManagerID) {
+    public void setManagerID(Long ManagerID) {
         this.ManagerID = ManagerID;
     }
 
@@ -74,7 +74,7 @@ public class Departments {
         return openingDate;
     }
 
-    public Double getManagerID() {
+    public Long getManagerID() {
         return ManagerID;
     }
   

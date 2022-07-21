@@ -201,10 +201,10 @@ public class WarehousesController implements Initializable{
     FXMLLoader loader;
      @FXML
     void addWarehouse(ActionEvent event) throws IOException {
-
+        add = false;
         loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddWarehouse.fxml"));
+        loader.setController(this);
         Parent root = loader.load();
-        
         Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root);
@@ -212,18 +212,6 @@ public class WarehousesController implements Initializable{
              stage.show();
     }
     
- @FXML
-    void addDepartment(ActionEvent event) throws IOException {
-
-        loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddDepartment.fxml"));
-        Parent root = loader.load();
-        
-        Stage stage = new Stage(StageStyle.UNDECORATED);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        Scene scene = new Scene(root);
-             stage.setScene(scene);
-             stage.show();
-    }
     int i=0;
     ArrayList<String> next = new ArrayList<>();
     @FXML
@@ -235,15 +223,51 @@ public class WarehousesController implements Initializable{
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
+    @FXML
+    private TextField enterID;
+    @FXML
+    private TextField enterWHName;
+    @FXML
+    private TextField enterCapacity;
+    boolean flag = false;
      @FXML
     void Next(ActionEvent event) throws IOException {
+        
+        if(enterID.getText().isEmpty() && i==0)
+        {
+             enterID.setStyle("-fx-border-color:RED");
+        }
+        else if((enterWHName==null||enterWHName.getText().isEmpty()) && i==1)
+        {
+            enterWHName.setStyle("-fx-border-color:RED"); flag = false;
+        }
+        else if((enterCapacity==null||enterCapacity.getText().isEmpty()) && i==2)
+        {
+            enterCapacity.setStyle("-fx-border-color:RED"); flag = false;
+        }
+        else
+        {
+        try{
+        int test = Integer.parseInt(enterID.getText());
+        enterID.setStyle("");
+        flag=true;
+        }
+        catch(Exception e){
+        enterID.setStyle("-fx-border-color:RED");
+        flag = false;    
+        }
+        
+        }
         if(i==2)
         {
             btnNext.setVisible(false);
             btnDone.setVisible(true);
         }
+        if(flag)
+        {
         FXMLLoader loader;
         loader = new FXMLLoader(getClass().getResource(next.get(i)));
+        loader.setController(this);
         Parent root = loader.load();
         slidePane.getChildren().add(root);
         
@@ -257,19 +281,19 @@ public class WarehousesController implements Initializable{
         slidePane.getChildren().remove(0);});
                   i++;
 
-
+        }
     }
-
+    boolean add = true;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         String name = "/UI/OwnerPage/EnterWHName.fxml";
         String Location = "/UI/OwnerPage/WHLocation.fxml";
         String ManagerID = "/UI/OwnerPage/ManagerID.fxml";
         next.add(name);
         next.add(Location);
         next.add(ManagerID);
-        
+        if(add){
         try {      
               Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
               Statement stmt = con.createStatement();
@@ -283,7 +307,7 @@ public class WarehousesController implements Initializable{
             String city= rs.getString("city");
             String street = rs.getString("street");
             String wname = rs.getString("wname");        
-            Double mid = rs.getDouble("ManagerID");
+            Long mid = rs.getLong("ManagerID");
             Integer capacity = rs.getInt("Wcapacity");
             warehouses.add(new Warehouses(id, wname, country, city, street, capacity, mid));
         }
@@ -300,6 +324,7 @@ public class WarehousesController implements Initializable{
         catch (SQLException ex) {
               ex.printStackTrace();
           } 
+        }
         
         
     }
@@ -319,7 +344,7 @@ public class WarehousesController implements Initializable{
             String city= rs.getString("city");
             String street = rs.getString("street");
             String wname = rs.getString("wname");        
-            Double mid = rs.getDouble("ManagerID");
+            Long mid = rs.getLong("ManagerID");
             Integer capacity = rs.getInt("Wcapacity");
             searchWh.add(new Warehouses(id, wname, country, city, street, capacity, mid));
         }
