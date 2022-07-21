@@ -135,7 +135,7 @@ public class LoginController implements Initializable {
         try {
           
             String qry=
-            "select epassword,etype from employee where IDCARD ="+user;
+            "select epassword,etype from employee where IDCARD = "+user;
             
             Statement st = con.createStatement();
             ResultSet loginQry = st.executeQuery(qry);

@@ -1,14 +1,22 @@
 package com.app.garage.controllers.Owner;
 
+import com.app.garage.App;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +28,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -31,7 +41,81 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class EmployeeController implements Initializable{
+    
+    @FXML
+    private TextField txtFieldSSN;
+    @FXML
+    private TextField txtFieldName;
+    @FXML
+    private TextField txtFieldHDate;
+    @FXML
+    private TextField txtFieldBDate;
+    @FXML
+    private TextField txtFieldSalary;
+    @FXML
+    private TextField txtFieldGender;
+    @FXML
+    private TextField txtFieldIDCard;
+    @FXML
+    private TextField txtFieldType;
+    @FXML
+    private TextField txtFieldOfficeTele;
+        
+    @FXML
+    private TextField txtFieldNumber;
+    
+    @FXML
+    private TextField txtFieldID;
+    @FXML
+    private TextField txtFieldLocation;
+    @FXML
+    private TableColumn<Employees, Long> IDCardCol;
+    
+    @FXML
+    private TableColumn<Employees, Long> SSNCol;
 
+    @FXML
+    private TableColumn<Employees, String> bDateCol;
+    @FXML
+    private TableColumn<Employees, String> hDateCol;
+    @FXML
+    private TableColumn<Employees, String> salaryCol;
+    @FXML
+    private TableColumn<Employees, String> officeTelephoneCol;
+     @FXML
+    private TableColumn<Employees, String> typeCol;
+  
+    @FXML
+    private TableColumn<Employees, String> genderCol;
+    
+    @FXML
+    private TableColumn<Employees, Long> employeeID2Col;
+
+    @FXML
+    private TableColumn<Employees, Long> areaCol;
+    @FXML
+    private TableColumn<Employees, Long> employeeIDCol;
+    @FXML
+    private TableColumn<Employees, Long> numberCol;
+    @FXML
+    private TableColumn<Employees, Long> countryCol;
+    @FXML
+    private TableColumn<Employees, String> cityCol;
+    @FXML
+    private TableColumn<Employees, String> streetCol;
+    @FXML
+    private TableView<Employees> locationTable;
+    @FXML
+    private TableView<Employees> numbersTable;
+    
+    
+    @FXML
+    private TableColumn<Employees, String> fNameCol;
+    @FXML
+    private TableColumn<Employees, String> mNameCol;
+    @FXML
+    private TableColumn<Employees, String> lNameCol;
+    
     @FXML
     private Pane BirthDatePane;
 
@@ -63,17 +147,10 @@ public class EmployeeController implements Initializable{
     @FXML
     private Pane TypePane;
 
-    @FXML
-    private TableColumn<?, ?> SSNCol;
 
     @FXML
     private Pane SalaryPane;
 
-    @FXML
-    private TableColumn<?, ?> addressCol;
-
-    @FXML
-    private TableColumn<?, ?> bDateCol;
 
     @FXML
     private JFXCheckBox bdField;
@@ -108,11 +185,6 @@ public class EmployeeController implements Initializable{
     @FXML
     private JFXCheckBox TypeField;
 
-    @FXML
-    private TableColumn<?, ?> nameCol;
-
-    @FXML
-    private TableColumn<?, ?> phoneCol;
 
     @FXML
     private JFXCheckBox salaryField;
@@ -122,7 +194,7 @@ public class EmployeeController implements Initializable{
     @FXML
     private AnchorPane searchFilterContact;
     @FXML
-    private TableView<?> tableView;
+    private TableView<Employees> tableView;
      @FXML
     private JFXCheckBox LocationField;
      @FXML
@@ -255,6 +327,7 @@ public class EmployeeController implements Initializable{
      void addInfo(ActionEvent event) throws IOException {
         FXMLLoader loader;
         loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddInfo.fxml"));
+        loader.setController(this);
         Parent root = loader.load();
         Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -265,15 +338,17 @@ public class EmployeeController implements Initializable{
      }
     
  @FXML
-    void addEmployee(ActionEvent event) throws IOException {
+    void addManager(ActionEvent event) throws IOException {
         FXMLLoader loader;
         loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddEmployee.fxml"));
+        loader.setController(this);
+        loader.setController(this);
         Parent root = loader.load();
         Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root);
-             stage.setScene(scene);
-             stage.show();
+        stage.setScene(scene);
+        stage.show();
     }
     int i=0;
     ArrayList<String> next = new ArrayList<>();
@@ -339,6 +414,13 @@ public class EmployeeController implements Initializable{
                   i++;
 
     }
+    ObservableList<Employees> emps = FXCollections.observableArrayList();
+    ObservableList<Employees> empsSearch = FXCollections.observableArrayList();    
+    ObservableList<Employees> locations = FXCollections.observableArrayList();
+    ObservableList<Employees> locationsSearch = FXCollections.observableArrayList();
+    ObservableList<Employees> numbers = FXCollections.observableArrayList();
+     ObservableList<Employees> numbersSearch = FXCollections.observableArrayList();
+    ObservableList<Employees> searchEmps = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -355,6 +437,77 @@ public class EmployeeController implements Initializable{
         next.add(type);
         nextInfo.add(Phone);
         nextInfo.add(Location);
+        
+        try {      
+              Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+              Statement stmt = con.createStatement();
+              
+         ResultSet rs = stmt.executeQuery("select SSN, firstname, middlename, lastname, hiredate, birthdate, gender, salary, idcard, TELEPHONENUMBER, etype from employee, WDManager"
+                 + " Where (employee.ssn = WDManager.WDssn)");
+        while(rs.next()) {  
+            Long SSN = rs.getLong("SSN");
+            System.out.println(SSN);
+            String firstName = rs.getString("firstname");
+            String middleName= rs.getString("middlename");
+            String lastName = rs.getString("lastname");
+            String hDate = rs.getString("HireDate");        
+            String bDate = rs.getString("BirthDate");
+            String Gender = rs.getString("gender");
+            Integer Salary = rs.getInt("Salary");
+            Long IDCard = rs.getLong("IDCard");
+            Long telephoneNumber = rs.getLong("telephoneNumber");
+            String Type = rs.getString("EType");
+            hDate=hDate.substring(0,10);
+            bDate=bDate.substring(0,10);
+            emps.add (new Employees(SSN,IDCard,telephoneNumber,firstName,middleName,lastName,Type,hDate,bDate,Gender,Salary));
+        }
+            tableView.setItems(emps);
+             SSNCol.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+             fNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+             mNameCol.setCellValueFactory(new PropertyValueFactory<>("middleName"));
+             lNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+             hDateCol.setCellValueFactory(new PropertyValueFactory<>("hireDate"));
+             bDateCol.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+             genderCol.setCellValueFactory(new PropertyValueFactory<>("gender"));
+             salaryCol.setCellValueFactory(new PropertyValueFactory<>("salary"));
+             IDCardCol.setCellValueFactory(new PropertyValueFactory<>("IDCard"));
+             officeTelephoneCol.setCellValueFactory(new PropertyValueFactory<>("officeTelephone"));
+             typeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
+             
+             rs = stmt.executeQuery("select SSN, phonenumber from Employee_Phonenumber");
+             while (rs.next())
+             {
+                 Long SSN = rs.getLong("SSN");
+                 Long phonenumber = rs.getLong("phonenumber");
+                 numbers.add(new Employees(SSN,phonenumber));
+             }
+            employeeIDCol.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+            numberCol.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
+            numbersTable.setItems(numbers);
+            
+            rs = stmt.executeQuery("select SSN, Country, city, street from Employee_Location");
+             while (rs.next())
+             {
+                 Long SSN = rs.getLong("SSN");
+                 String country = rs.getString("country");
+                 String city = rs.getString("city");
+                 String street = rs.getString("street");
+                 numbersSearch.add(new Employees(SSN,country,city,street));
+             }
+            employeeID2Col.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+            countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+            cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
+            streetCol.setCellValueFactory(new PropertyValueFactory<>("street"));
+            locationTable.setItems(numbersSearch);
+          }
+        catch (SQLException ex) {
+              ex.printStackTrace();
+          } 
+        
+
+        
+        
+        
     }
     boolean InfoSelected = true;
         @FXML
@@ -397,5 +550,75 @@ public class EmployeeController implements Initializable{
         start = true;});
         }
     }
+    @FXML
+    public void searchContact(ActionEvent e){
+        locationsSearch.clear();
+        numbersSearch.clear();
+         try {      
+              Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+              Statement stmt = con.createStatement();
+              
+         ResultSet rs = stmt.executeQuery("select SSN, Country, city, street from Employee_Location Where SSN like '%" + txtFieldID.getText()+"%' and (country like '%"+txtFieldLocation.getText()+ "%' or city like '%" + txtFieldLocation.getText() +"%' or street like '%" + txtFieldLocation.getText()+"%')");
+         while(rs.next())
+         {
+            Long SSN = rs.getLong("SSN");
+            String country = rs.getString("country");
+            String city = rs.getString("city");
+            String street = rs.getString("street");
+            locationsSearch.add(new Employees(SSN,country,city,street));  
+         }
+         locationTable.setItems(locationsSearch);
+         rs = stmt.executeQuery("select SSN, phonenumber from employee_phonenumber Where SSN like '%" + txtFieldID.getText()+"%' and phonenumber like '%" + txtFieldNumber.getText() + "%'");
+       while(rs.next())
+         {
+            Long SSN = rs.getLong("SSN");
+            Long phonenumber = rs.getLong("phonenumber");
+            numbersSearch.add(new Employees(SSN,phonenumber));
+            numbersTable.setItems(numbersSearch);
+        
+         }
+         }
+         catch(SQLException exc)
+         {
+             exc.printStackTrace();
+         }
+    }
+    
+    @FXML
+    public void startSearch(ActionEvent e){    
+        empsSearch.clear();
+        try {      
+              Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+              Statement stmt = con.createStatement();
+              
+         ResultSet rs = stmt.executeQuery("select employee.SSN, firstname, middlename, lastname, hiredate, birthdate, gender, salary, idcard, telephoneNumber, etype from employee, WDManager"
+                 + " Where (employee.SSN = WDManager.WDSSN) and employee.SSN like '%"+txtFieldSSN.getText()+"%' and (firstname like '%"+txtFieldName.getText() +"%' or middlename like '%" + txtFieldName.getText()+"%' or lastname like '%" + txtFieldName.getText()+"%')"
+                 + " and hiredate like '%" + txtFieldHDate.getText() +"%' and birthdate like '%" + txtFieldBDate.getText()+"%' and gender like '%" + txtFieldGender.getText()+"%' and salary like '%"+txtFieldSalary.getText()+"%' and telephoneNumber like '%" + txtFieldOfficeTele.getText()
+                 + "%' and idcard like '%" + txtFieldIDCard.getText() + "%' and etype like '%" + txtFieldType.getText() + "%'");
+        while(rs.next()) { 
+            Long SSN = rs.getLong("SSN");
+            String firstName = rs.getString("firstname");
+            String middleName= rs.getString("middlename");
+            String lastName = rs.getString("lastname");
+            String hDate = rs.getString("HireDate");        
+            String bDate = rs.getString("BirthDate");
+            String Gender = rs.getString("gender");
+            Integer Salary = rs.getInt("Salary");
+            Long IDCard = rs.getLong("IDCard");
+            Long telephoneNumber = rs.getLong("telephoneNumber");
+            String Type = rs.getString("EType");
+            hDate=hDate.substring(0,10);
+            bDate=bDate.substring(0,10);
+            empsSearch.add (new Employees(SSN,IDCard,telephoneNumber,firstName,middleName,lastName,Type,hDate,bDate,Gender,Salary));
+        }
+        tableView.setItems(empsSearch);
+         }
+         catch(SQLException exc)
+         {
+             exc.printStackTrace();
+         }        
+        
+    }
+    
 
 }

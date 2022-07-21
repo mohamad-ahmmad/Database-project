@@ -12,19 +12,19 @@
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="14.0" layoutY="78.0" prefHeight="34.0" prefWidth="152.0" />
+      <TextField fx:id="enterCountry" layoutX="14.0" layoutY="78.0" prefHeight="34.0" prefWidth="152.0" />
       <Label alignment="CENTER" layoutX="40.0" layoutY="50.0" prefHeight="34.0" prefWidth="100.0" text="Country:">
          <font>
             <Font name="Berlin Sans FB" size="17.0" />
          </font>
       </Label>
-      <TextField layoutX="172.0" layoutY="78.0" prefHeight="34.0" prefWidth="152.0" />
+      <TextField fx:id="enterCity" layoutX="172.0" layoutY="78.0" prefHeight="34.0" prefWidth="152.0" />
       <Label alignment="CENTER" layoutX="205.0" layoutY="52.0" prefHeight="24.0" prefWidth="82.0" text="City">
          <font>
             <Font name="Berlin Sans FB" size="17.0" />
          </font>
       </Label>
-      <TextField layoutX="331.0" layoutY="78.0" prefHeight="34.0" prefWidth="152.0" />
+      <TextField fx:id="enterStreet" layoutX="331.0" layoutY="78.0" prefHeight="34.0" prefWidth="152.0" />
       <Label alignment="CENTER" layoutX="357.0" layoutY="47.0" prefHeight="34.0" prefWidth="100.0" text="Street">
          <font>
             <Font name="Berlin Sans FB" size="17.0" />

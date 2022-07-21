@@ -1,14 +1,25 @@
 package com.app.garage.controllers.Owner;
 
+import com.app.garage.App;
 import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +33,9 @@ import javafx.scene.control.Button;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -30,6 +44,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javafx.util.converter.LongStringConverter;
+import javax.swing.JOptionPane;
 
 
 public class WarehousesController implements Initializable{
@@ -37,15 +53,20 @@ public class WarehousesController implements Initializable{
     @FXML
     private Pane IDPane;
 
+@FXML
+    private TableColumn<Warehouses, Long> IDCol;
     @FXML
-    private TableColumn<?, ?> SSNCol;
-
+    private TableColumn<Warehouses, String> nameCol;
     @FXML
-    private TableColumn<?, ?> addressCol;
-
+    private TableColumn<Warehouses, String> streetCol;
     @FXML
-    private TableColumn<?, ?> bDateCol;
-
+    private TableColumn<Warehouses, String> countryCol;
+    @FXML
+    private TableColumn<Warehouses, String> cityCol;
+    @FXML
+    private TableColumn<Warehouses, Long> managerIDCol;           
+    @FXML
+    private TableColumn<Warehouses, Long> capacityCol;
     @FXML
     private Pane cityPane;
 
@@ -57,18 +78,12 @@ public class WarehousesController implements Initializable{
 
     @FXML
     private Pane managerPane;
-
-    @FXML
-    private TableColumn<?, ?> nameCol;
-
     @FXML
     private Pane namePane;
 
     @FXML
     private Pane CapacityPane;
 
-    @FXML
-    private TableColumn<?, ?> phoneCol;
 
     @FXML
     private  AnchorPane searchFilter;
@@ -77,9 +92,29 @@ public class WarehousesController implements Initializable{
     private Pane streetPane;
 
     @FXML
-    private TableView<?> tableView;
-    
-    
+    private TableView<Warehouses> tableView;
+    @FXML
+    private TextField enterManagerID;
+    @FXML
+    private TextField txtFieldCapacity;
+
+    @FXML
+    private TextField txtFieldCity;
+
+    @FXML
+    private TextField txtFieldCountry;
+
+    @FXML
+    private TextField txtFieldManagerId;
+
+    @FXML
+    private TextField txtFieldStreet;
+
+    @FXML
+    private TextField txtFieldName;
+    @FXML
+    private TextField txtFieldId;
+
     
     @FXML
     private AnchorPane searchPane;
@@ -172,10 +207,10 @@ public class WarehousesController implements Initializable{
     FXMLLoader loader;
      @FXML
     void addWarehouse(ActionEvent event) throws IOException {
-
+        add = false;
         loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddWarehouse.fxml"));
+        loader.setController(this);
         Parent root = loader.load();
-        
         Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root);
@@ -183,18 +218,6 @@ public class WarehousesController implements Initializable{
              stage.show();
     }
     
- @FXML
-    void addDepartment(ActionEvent event) throws IOException {
-
-        loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddDepartment.fxml"));
-        Parent root = loader.load();
-        
-        Stage stage = new Stage(StageStyle.UNDECORATED);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        Scene scene = new Scene(root);
-             stage.setScene(scene);
-             stage.show();
-    }
     int i=0;
     ArrayList<String> next = new ArrayList<>();
     @FXML
@@ -202,19 +225,160 @@ public class WarehousesController implements Initializable{
     @FXML
     private Button btnDone;
     @FXML
-    void DoneAdding(ActionEvent event) throws IOException {
+    boolean done = true;
+    @FXML
+    void DoneAdding(ActionEvent event) throws IOException, SQLException {
+        Long ID = Long.parseLong(enterID.getText());
+        Long Capacity = Long.parseLong(enterCapacity.getText());
+        String Name = enterWHName.getText();
+        String Country = enterCountry.getText();
+        String City = enterCity.getText();
+        String Street = enterStreet.getText();
+         Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+         Statement stmt = con.createStatement();
+         try{
+         Long ManagerID = Long.parseLong(enterManagerID.getText());
+         ResultSet s1=  stmt.executeQuery("Select SSN, WareID from Employee");
+         while(s1.next()){
+             if((s1.getLong("SSN") == Long.parseLong(enterManagerID.getText())) && s1.getString("WareID")!=null)
+             {  
+                 enterManagerID.setStyle("-fx-border-color:RED");
+                 done = false;
+                 break;
+             }
+         }
+         s1= stmt.executeQuery("insert into Warehouse values ("+ ID + ", '" + Country + "', '" + City + "', '" + Street + "',  '" + Name + "', " + ManagerID +", "+ Capacity +")");
+         s1=stmt.executeQuery("Update Employee set wareID = " + ID + " where SSN = " + ManagerID);
+         }
+         catch(java.sql.SQLIntegrityConstraintViolationException e){
+             System.out.println("idk");
+             enterManagerID.setStyle("-fx-border-color:RED");
+             done = false;
+         }
+         catch(java.lang.NumberFormatException exc){
+             System.out.println("nmber");
+           enterManagerID.setStyle("-fx-border-color:RED");
+           done = false;
+         }
+        if(done)
+        {
+        i=0;
+        ResultSet rs = stmt.executeQuery("SELECT WID, wname, Country, City, Street, Wcapacity, ManagerID"
+                 + " FROM "
+                 + "warehouse");
+        warehouses.clear();
+        while(rs.next()) {  
+            Integer id = rs.getInt("WID");
+            String country = rs.getString("Country");
+            String city= rs.getString("city");
+            String street = rs.getString("street");
+            String wname = rs.getString("wname");        
+            Long mid = rs.getLong("ManagerID");
+            Long capacity = rs.getLong("Wcapacity");
+            warehouses.add(new Warehouses(id, wname, country, city, street, capacity, mid));
+        }
+        tableView.refresh();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
+        
+         }
     }
+    @FXML
+    private TextField enterCountry;
+    @FXML
+    private TextField enterCity;
+    @FXML
+    private TextField enterStreet;
+    @FXML
+    private TextField enterID;
+    @FXML
+    private TextField enterWHName;
+    @FXML
+    private TextField enterCapacity;
+    boolean flag = true;
      @FXML
-    void Next(ActionEvent event) throws IOException {
-        if(i==2)
+    void Next(ActionEvent event) throws IOException, SQLException {
+      
+        if(enterID.getText().isEmpty() && i==0)
+        {
+             enterID.setStyle("-fx-border-color:RED"); flag = false;
+        }
+        else if((enterWHName==null||enterWHName.getText().isEmpty() || enterCapacity==null || enterCapacity.getText().isEmpty()) && i==1)
+        {
+            if(enterWHName==null||enterWHName.getText().isEmpty() || enterCapacity==null)
+            {enterWHName.setStyle("-fx-border-color:RED"); 
+            enterCapacity.setStyle("");
+            flag = false;}
+            else
+            {enterCapacity.setStyle("-fx-border-color:RED"); 
+            enterWHName.setStyle("");
+            flag = false;}
+        }
+        else if((enterCountry==null || enterCity==null || enterCity.getText().isEmpty() || enterCountry.getText().isEmpty())  && i==2)
+        {
+            if((enterCountry==null ||enterCountry.getText().isEmpty()))
+            {enterCountry.setStyle("-fx-border-color:RED"); 
+            enterCity.setStyle("");
+            flag = false;}
+            else
+            {enterCity.setStyle("-fx-border-color:RED");
+            enterCountry.setStyle("");
+            flag = false;}
+        }
+        else if ((enterManagerID==null || enterManagerID.getText().isEmpty()) && i == 3)
+        {
+            enterManagerID.setStyle("-fx-border-color:RED");
+            flag = false;
+        }
+        else
+        {
+        try{
+        int test = Integer.parseInt(enterID.getText());
+        flag = true;
+        if(i==1)
+        {
+        Long t = Long.parseLong(enterCapacity.getText());
+        enterCapacity.setStyle("");
+        }
+        enterID.setStyle("");
+       
+        
+        }
+        catch(Exception e){
+        enterID.setStyle("-fx-border-color:RED");
+        if(i==1){enterCapacity.setStyle("-fx-border-color:RED");}
+        flag = false;    
+        }
+        }
+                 if(i==0 && flag)
+            {
+             Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+             Statement stmt = con.createStatement(); 
+             ResultSet s1 = stmt.executeQuery("Select WID from Warehouse");
+                while(s1.next())
+                {
+                   if(Long.parseLong(enterID.getText())==s1.getLong("WID"))
+                   {
+                       flag=false;
+                       enterID.setStyle("-fx-border-color:red");
+                       break;
+                   }
+                }
+            }
+        
+        if(flag)
+        {
+            
+            if(i==2)
         {
             btnNext.setVisible(false);
             btnDone.setVisible(true);
         }
+        Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+        Statement stmt = con.createStatement(); 
         FXMLLoader loader;
         loader = new FXMLLoader(getClass().getResource(next.get(i)));
+        loader.setController(this);
         Parent root = loader.load();
         slidePane.getChildren().add(root);
         
@@ -228,19 +392,148 @@ public class WarehousesController implements Initializable{
         slidePane.getChildren().remove(0);});
                   i++;
 
-
+        }
     }
-
+    
+        @FXML
+     private void Cancel(ActionEvent e){
+         i=0;
+         if(enterCity!=null)
+         enterCity.setText("");
+         if(enterCountry!=null)
+         enterCountry.setText("");
+         if(enterStreet!=null)
+         enterStreet.setText("");
+         if(enterManagerID!=null)
+         enterManagerID.setText("");
+         if(enterWHName!=null)
+         enterWHName.setText("");
+         if(enterID!=null)
+         enterID.setText("");
+         if(enterCapacity!=null)
+         enterCapacity.setText("");
+         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+         stage.close();
+     }
+    boolean add = true;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        tableView.setEditable(true);
         String name = "/UI/OwnerPage/EnterWHName.fxml";
         String Location = "/UI/OwnerPage/WHLocation.fxml";
-        String ManagerID = "/UI/OwnerPage/ManagerID.fxml";
+        String ManagerID = "/UI/OwnerPage/WHManagerID.fxml";
         next.add(name);
         next.add(Location);
         next.add(ManagerID);
-
+        if(add){
+        try {      
+              Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+              Statement stmt = con.createStatement();
+              
+         ResultSet rs = stmt.executeQuery("SELECT WID, wname, Country, City, Street, Wcapacity, ManagerID"
+                 + " FROM "
+                 + "warehouse");
+        while(rs.next()) {  
+            Integer id = rs.getInt("WID");
+            String country = rs.getString("Country");
+            String city= rs.getString("city");
+            String street = rs.getString("street");
+            String wname = rs.getString("wname");        
+            Long mid = rs.getLong("ManagerID");
+            Long capacity = rs.getLong("Wcapacity");
+            warehouses.add(new Warehouses(id, wname, country, city, street, capacity, mid));
+        }
+            tableView.setItems(warehouses);
+             IDCol.setCellValueFactory(new PropertyValueFactory<>("WID"));
+            
+             nameCol.setCellValueFactory(new PropertyValueFactory<>("WName"));
+             nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             nameCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setWName(e.getNewValue());
+             Update(w);
+             });
+             countryCol.setCellValueFactory(new PropertyValueFactory<>("Country"));
+             countryCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             countryCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setCountry(e.getNewValue());
+             Update(w);
+             });             
+             cityCol.setCellValueFactory(new PropertyValueFactory<>("City"));
+             cityCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             cityCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setCity(e.getNewValue());
+             Update(w);
+             }); 
+             streetCol.setCellValueFactory(new PropertyValueFactory<>("Street"));
+             streetCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             streetCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setStreet(e.getNewValue());
+             Update(w);
+             }); 
+             capacityCol.setCellValueFactory(new PropertyValueFactory<>("WCapacity"));
+             capacityCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+             capacityCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setWCapacity(e.getNewValue());
+             Update(w);
+             }); 
+             managerIDCol.setCellValueFactory(new PropertyValueFactory<>("ManagerID"));
+             managerIDCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+             try{
+             managerIDCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setManagerID(e.getNewValue());
+             Update(w);
+             });
+             }
+             catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Wrong manager ID");
+             }
+          }
+         
+        catch (SQLException ex) {
+              ex.printStackTrace();
+          } 
+        }
+        
+        
     }
+    ObservableList<Warehouses> warehouses = FXCollections.observableArrayList();
+    ObservableList<Warehouses> searchWh = FXCollections.observableArrayList();
+    @FXML
+    void startSearch(ActionEvent event) throws SQLException {
+        searchWh.clear();
+        Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT *"
+        + " FROM Warehouse "
+        +"Where WID like '%"+txtFieldId.getText()+ "%' and WName like '%"+txtFieldName.getText()+"%' and country like '%"+txtFieldCountry.getText()+"%' and city like '%"+txtFieldCity.getText()+"%' and (street like '%"+txtFieldStreet.getText()+"%' or street is null) and ManagerID like '%"+txtFieldManagerId.getText() + "%' and WCapacity like '%"+txtFieldCapacity.getText()+"%'");
+            while(rs.next()) {  
+            Integer id = rs.getInt("WID");
+            String country = rs.getString("Country");
+            String city= rs.getString("city");
+            String street = rs.getString("street");
+            String wname = rs.getString("wname");        
+            Long mid = rs.getLong("ManagerID");
+            Long capacity = rs.getLong("Wcapacity");
+            searchWh.add(new Warehouses(id, wname, country, city, street, capacity, mid));
+        }
+            tableView.setItems(searchWh);
+          }
 
+    private void Update(Warehouses w) {
+     try{
+     Connection con= DriverManager.getConnection(App.ip,App.user,App.password);
+    Statement st = con.createStatement();
+    st.executeUpdate("Update Warehouse set Country = '"+ w.getCountry() +"', City = '"+ w.getCity()+"', Street = '" + w.getStreet()+"', Wname = '"+w.getWName()+"', managerID = "+w.getManagerID() + ", WCapacity = "+ w.getWCapacity()+" Where WID = " + w.getWID());
+    tableView.refresh();
+    } catch (SQLException ex) {
+    JOptionPane.showMessageDialog(null, "Wrong manager ID");
+    tableView.refresh();
+    }
+    }
 }
