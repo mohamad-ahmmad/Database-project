@@ -13,6 +13,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -33,6 +35,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -41,6 +44,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javafx.util.converter.LongStringConverter;
+import javax.swing.JOptionPane;
 
 
 public class WarehousesController implements Initializable{
@@ -49,7 +54,7 @@ public class WarehousesController implements Initializable{
     private Pane IDPane;
 
 @FXML
-    private TableColumn<Warehouses, Integer> IDCol;
+    private TableColumn<Warehouses, Long> IDCol;
     @FXML
     private TableColumn<Warehouses, String> nameCol;
     @FXML
@@ -59,9 +64,9 @@ public class WarehousesController implements Initializable{
     @FXML
     private TableColumn<Warehouses, String> cityCol;
     @FXML
-    private TableColumn<Warehouses, Integer> managerIDCol;           
+    private TableColumn<Warehouses, Long> managerIDCol;           
     @FXML
-    private TableColumn<Warehouses, Integer> capacityCol;
+    private TableColumn<Warehouses, Long> capacityCol;
     @FXML
     private Pane cityPane;
 
@@ -269,7 +274,7 @@ public class WarehousesController implements Initializable{
             String street = rs.getString("street");
             String wname = rs.getString("wname");        
             Long mid = rs.getLong("ManagerID");
-            Integer capacity = rs.getInt("Wcapacity");
+            Long capacity = rs.getLong("Wcapacity");
             warehouses.add(new Warehouses(id, wname, country, city, street, capacity, mid));
         }
         tableView.refresh();
@@ -413,7 +418,7 @@ public class WarehousesController implements Initializable{
     boolean add = true;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        tableView.setEditable(true);
         String name = "/UI/OwnerPage/EnterWHName.fxml";
         String Location = "/UI/OwnerPage/WHLocation.fxml";
         String ManagerID = "/UI/OwnerPage/WHManagerID.fxml";
@@ -435,18 +440,59 @@ public class WarehousesController implements Initializable{
             String street = rs.getString("street");
             String wname = rs.getString("wname");        
             Long mid = rs.getLong("ManagerID");
-            Integer capacity = rs.getInt("Wcapacity");
+            Long capacity = rs.getLong("Wcapacity");
             warehouses.add(new Warehouses(id, wname, country, city, street, capacity, mid));
         }
             tableView.setItems(warehouses);
              IDCol.setCellValueFactory(new PropertyValueFactory<>("WID"));
             
              nameCol.setCellValueFactory(new PropertyValueFactory<>("WName"));
+             nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             nameCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setWName(e.getNewValue());
+             Update(w);
+             });
              countryCol.setCellValueFactory(new PropertyValueFactory<>("Country"));
+             countryCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             countryCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setCountry(e.getNewValue());
+             Update(w);
+             });             
              cityCol.setCellValueFactory(new PropertyValueFactory<>("City"));
+             cityCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             cityCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setCity(e.getNewValue());
+             Update(w);
+             }); 
              streetCol.setCellValueFactory(new PropertyValueFactory<>("Street"));
+             streetCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             streetCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setStreet(e.getNewValue());
+             Update(w);
+             }); 
              capacityCol.setCellValueFactory(new PropertyValueFactory<>("WCapacity"));
+             capacityCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+             capacityCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setWCapacity(e.getNewValue());
+             Update(w);
+             }); 
              managerIDCol.setCellValueFactory(new PropertyValueFactory<>("ManagerID"));
+             managerIDCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+             try{
+             managerIDCol.setOnEditCommit(e->{
+             Warehouses w = e.getRowValue();
+             w.setManagerID(e.getNewValue());
+             Update(w);
+             });
+             }
+             catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Wrong manager ID");
+             }
           }
          
         catch (SQLException ex) {
@@ -473,10 +519,21 @@ public class WarehousesController implements Initializable{
             String street = rs.getString("street");
             String wname = rs.getString("wname");        
             Long mid = rs.getLong("ManagerID");
-            Integer capacity = rs.getInt("Wcapacity");
+            Long capacity = rs.getLong("Wcapacity");
             searchWh.add(new Warehouses(id, wname, country, city, street, capacity, mid));
         }
             tableView.setItems(searchWh);
           }
-    
+
+    private void Update(Warehouses w) {
+     try{
+     Connection con= DriverManager.getConnection(App.ip,App.user,App.password);
+    Statement st = con.createStatement();
+    st.executeUpdate("Update Warehouse set Country = '"+ w.getCountry() +"', City = '"+ w.getCity()+"', Street = '" + w.getStreet()+"', Wname = '"+w.getWName()+"', managerID = "+w.getManagerID() + ", WCapacity = "+ w.getWCapacity()+" Where WID = " + w.getWID());
+    tableView.refresh();
+    } catch (SQLException ex) {
+    JOptionPane.showMessageDialog(null, "Wrong manager ID");
+    tableView.refresh();
     }
+    }
+}

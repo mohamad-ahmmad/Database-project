@@ -565,13 +565,7 @@ public class DepartmentController implements Initializable{
     }
         @FXML
     void startSearch(ActionEvent event) throws SQLException {
-        String ID="";
-        String Name="";
-        String cond1="";    
         searchDeps.clear();
-        boolean found = false;
-        boolean searchFields[]={true,true,true,true,true,true,true};
-        boolean searchFields2[]={true,true,true,true,true,true,true};
         Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT *"

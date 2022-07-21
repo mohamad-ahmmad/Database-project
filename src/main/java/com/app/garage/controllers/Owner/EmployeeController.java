@@ -327,6 +327,7 @@ public class EmployeeController implements Initializable{
      void addInfo(ActionEvent event) throws IOException {
         FXMLLoader loader;
         loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddInfo.fxml"));
+        loader.setController(this);
         Parent root = loader.load();
         Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -337,15 +338,17 @@ public class EmployeeController implements Initializable{
      }
     
  @FXML
-    void addEmployee(ActionEvent event) throws IOException {
+    void addManager(ActionEvent event) throws IOException {
         FXMLLoader loader;
         loader = new FXMLLoader(getClass().getResource("/UI/OwnerPage/AddEmployee.fxml"));
+        loader.setController(this);
+        loader.setController(this);
         Parent root = loader.load();
         Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
         Scene scene = new Scene(root);
-             stage.setScene(scene);
-             stage.show();
+        stage.setScene(scene);
+        stage.show();
     }
     int i=0;
     ArrayList<String> next = new ArrayList<>();

@@ -11,10 +11,10 @@ package com.app.garage.controllers.Owner;
 public class Warehouses {
     Integer WID;
     String WName,Country,City,Street;
-    Integer WCapacity;
+    Long WCapacity;
     Long ManagerID;
 
-    public Warehouses(Integer WID, String WName, String Country, String City, String Street, Integer WCapacity, Long ManagerID) {
+    public Warehouses(Integer WID, String WName, String Country, String City, String Street, Long WCapacity, Long ManagerID) {
         this.WID = WID;
         this.WName = WName;
         this.Country = Country;
@@ -44,7 +44,7 @@ public class Warehouses {
         return Street;
     }
 
-    public Integer getWCapacity() {
+    public Long getWCapacity() {
         return WCapacity;
     }
 
@@ -72,7 +72,7 @@ public class Warehouses {
         this.Street = Street;
     }
 
-    public void setWCapacity(Integer WCapacity) {
+    public void setWCapacity(Long WCapacity) {
         this.WCapacity = WCapacity;
     }
 

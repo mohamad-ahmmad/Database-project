@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.EmployeeController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="700.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.EmployeeController">
    <children>
       <Separator layoutX="-2.0" layoutY="64.0" prefHeight="0.0" prefWidth="810.0" />
       <Separator layoutY="102.0" prefHeight="3.0" prefWidth="810.0" />
@@ -297,7 +297,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="554.0" layoutY="675.0" onAction="#addEmployee" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add Manager">
+            <JFXButton layoutX="554.0" layoutY="675.0" onAction="#addManager" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add Manager">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -365,7 +365,7 @@
       </Pane>
       <AnchorPane fx:id="ContactPane" layoutX="3.0" layoutY="105.0" prefHeight="591.0" prefWidth="810.0" visible="false">
          <children>
-            <TableView fx:id="numbersTable" layoutX="12.0" layoutY="194.0" prefHeight="347.0" prefWidth="387.0">
+            <TableView fx:id="numbersTable" layoutX="15.0" layoutY="194.0" prefHeight="347.0" prefWidth="387.0">
               <columns>
                 <TableColumn fx:id="employeeIDCol" prefWidth="179.19995403289795" text="Employee ID" />
                   <TableColumn fx:id="numberCol" minWidth="0.0" prefWidth="208.80003356933594" text="Number" />
@@ -393,7 +393,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="632.0" layoutY="548.0" onAction="#addEmployee" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Info.">
+            <JFXButton layoutX="622.0" layoutY="548.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Info.">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -438,7 +438,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="702.0" layoutY="148.0" onAction="#clearContactFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
+            <JFXButton layoutX="686.0" layoutY="148.0" onAction="#clearContactFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -450,7 +450,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <TableView fx:id="locationTable" layoutX="408.0" layoutY="194.0" prefHeight="347.0" prefWidth="387.0">
+            <TableView fx:id="locationTable" layoutX="416.0" layoutY="194.0" prefHeight="347.0" prefWidth="387.0">
                <columns>
                   <TableColumn fx:id="employeeID2Col" prefWidth="92.0" text="Employee ID" />
                   <TableColumn fx:id="countryCol" prefWidth="92.00003051757812" text="Country" />
@@ -499,7 +499,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <JFXButton layoutX="702.0" layoutY="103.0" onAction="#searchContact" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
+            <JFXButton layoutX="686.0" layoutY="103.0" onAction="#searchContact" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -521,7 +521,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <Label fx:id="lblContact" alignment="CENTER" layoutX="389.0" layoutY="65.0" onMouseClicked="#openContactPane" prefHeight="36.0" prefWidth="426.0" text="Contact Information" textFill="#aeaeae">
+      <Label fx:id="lblContact" alignment="CENTER" layoutX="389.0" layoutY="65.0" onMouseClicked="#openContactPane" prefHeight="36.0" prefWidth="420.0" text="Contact Information" textFill="#aeaeae">
          <font>
             <Font name="Berlin Sans FB" size="25.0" />
          </font>
