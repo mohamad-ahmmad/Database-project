@@ -5,6 +5,7 @@
 package com.app.garage.controllers.employee;
 
 import com.app.garage.App;
+import com.app.garage.controllers.login.LoginController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.io.IOException;
@@ -144,6 +145,11 @@ public class CashierController implements Initializable {
         }
         boolean avaliable = dressQry.next();
         
+        if(avaliable && dressQry.getInt("DEPARTMENTSTOCK")==0){
+            productID.setStyle("-fx-border-color: rgba(248,0,0,0.6)");
+            return;
+        }
+        
         if(!productAmount.getText().replace(" ", "").equals("")) 
         try{
            System.out.println(productAmount.getText());
@@ -152,7 +158,7 @@ public class CashierController implements Initializable {
         }catch(Exception e)
         {productAmount.setStyle("-fx-border-color: rgba(248,0,0,0.6);"); return ; }
         
-       
+         
         
        
         if(avaliable){
@@ -248,9 +254,9 @@ public class CashierController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        idCard = LoginController.currentUser;
         
-        
-        
+        setReceiptNumLABEL();
        
         
         btnDone.setDisable(true);
@@ -262,7 +268,7 @@ public class CashierController implements Initializable {
 
     }
     
-    public void setIdCard(String ID){idCard=ID;}
+
  
     @FXML
     private void purchase(ActionEvent e){

@@ -65,6 +65,11 @@ public class LoginController implements Initializable {
     @FXML
     Text secLabel;
     
+    
+    public static String currentUser; 
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
    
@@ -103,7 +108,7 @@ public class LoginController implements Initializable {
         
     }
     
-    private Object load(String URL) throws IOException{
+    private void load(String URL) throws IOException{
        
            FXMLLoader loader = new FXMLLoader(getClass().getResource(URL));
            Parent root = loader.load();
@@ -111,13 +116,14 @@ public class LoginController implements Initializable {
            appStage.hide();
            appStage.setScene(new Scene(root));
            appStage.show();
-           return loader.getController();
+      
     }
     
         @FXML
     void loginKey(KeyEvent event) throws IOException {
         if(event.getCode() == KeyCode.ENTER){
          String user = userName.getText();
+         currentUser=user;
          String password = passField.getText();
        if(user.equals(ownerUser) && password.equals(ownerPassword)){
            System.out.println("Loging to Owner");
@@ -150,8 +156,8 @@ public class LoginController implements Initializable {
                     return;
                 }
                 else if(eType.equals("cashier")){
-                   EmployeeController cont = (EmployeeController) load("/UI/EmployeePage/employee-page.fxml");
-                   cont.setIdCard(user);
+                   load("/UI/EmployeePage/employee-page.fxml");
+                  
                    
                     return;
                 }
@@ -177,6 +183,7 @@ public class LoginController implements Initializable {
    public void loginPressed(ActionEvent e) throws IOException{
       
          String user = userName.getText();
+         currentUser=user;
          String password = passField.getText();
        if(user.equals(ownerUser) && password.equals(ownerPassword)){
            System.out.println("Loging to Owner");
@@ -209,8 +216,8 @@ public class LoginController implements Initializable {
                     return;
                 }
                 else if(eType.equals("cashier")){
-                   EmployeeController cont = (EmployeeController) load("/UI/EmployeePage/employee-page.fxml");
-                   cont.setIdCard(user);
+                  load("/UI/EmployeePage/employee-page.fxml");
+            
                    System.out.println(user);
                     return;
                 }
