@@ -88,7 +88,8 @@ public class WarehousesController implements Initializable{
 
     @FXML
     private TableView<Warehouses> tableView;
-    
+    @FXML
+    private TextField enterManagerID;
     @FXML
     private TextField txtFieldCapacity;
 
@@ -219,52 +220,157 @@ public class WarehousesController implements Initializable{
     @FXML
     private Button btnDone;
     @FXML
-    void DoneAdding(ActionEvent event) throws IOException {
+    boolean done = true;
+    @FXML
+    void DoneAdding(ActionEvent event) throws IOException, SQLException {
+        Long ID = Long.parseLong(enterID.getText());
+        Long Capacity = Long.parseLong(enterCapacity.getText());
+        String Name = enterWHName.getText();
+        String Country = enterCountry.getText();
+        String City = enterCity.getText();
+        String Street = enterStreet.getText();
+         Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+         Statement stmt = con.createStatement();
+         try{
+         Long ManagerID = Long.parseLong(enterManagerID.getText());
+         ResultSet s1=  stmt.executeQuery("Select SSN, WareID from Employee");
+         while(s1.next()){
+             if((s1.getLong("SSN") == Long.parseLong(enterManagerID.getText())) && s1.getString("WareID")!=null)
+             {  
+                 enterManagerID.setStyle("-fx-border-color:RED");
+                 done = false;
+                 break;
+             }
+         }
+         s1= stmt.executeQuery("insert into Warehouse values ("+ ID + ", '" + Country + "', '" + City + "', '" + Street + "',  '" + Name + "', " + ManagerID +", "+ Capacity +")");
+         s1=stmt.executeQuery("Update Employee set wareID = " + ID + " where SSN = " + ManagerID);
+         }
+         catch(java.sql.SQLIntegrityConstraintViolationException e){
+             System.out.println("idk");
+             enterManagerID.setStyle("-fx-border-color:RED");
+             done = false;
+         }
+         catch(java.lang.NumberFormatException exc){
+             System.out.println("nmber");
+           enterManagerID.setStyle("-fx-border-color:RED");
+           done = false;
+         }
+        if(done)
+        {
+        i=0;
+        ResultSet rs = stmt.executeQuery("SELECT WID, wname, Country, City, Street, Wcapacity, ManagerID"
+                 + " FROM "
+                 + "warehouse");
+        warehouses.clear();
+        while(rs.next()) {  
+            Integer id = rs.getInt("WID");
+            String country = rs.getString("Country");
+            String city= rs.getString("city");
+            String street = rs.getString("street");
+            String wname = rs.getString("wname");        
+            Long mid = rs.getLong("ManagerID");
+            Integer capacity = rs.getInt("Wcapacity");
+            warehouses.add(new Warehouses(id, wname, country, city, street, capacity, mid));
+        }
+        tableView.refresh();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
+        
+         }
     }
+    @FXML
+    private TextField enterCountry;
+    @FXML
+    private TextField enterCity;
+    @FXML
+    private TextField enterStreet;
     @FXML
     private TextField enterID;
     @FXML
     private TextField enterWHName;
     @FXML
     private TextField enterCapacity;
-    boolean flag = false;
+    boolean flag = true;
      @FXML
-    void Next(ActionEvent event) throws IOException {
-        
+    void Next(ActionEvent event) throws IOException, SQLException {
+      
         if(enterID.getText().isEmpty() && i==0)
         {
-             enterID.setStyle("-fx-border-color:RED");
+             enterID.setStyle("-fx-border-color:RED"); flag = false;
         }
-        else if((enterWHName==null||enterWHName.getText().isEmpty()) && i==1)
+        else if((enterWHName==null||enterWHName.getText().isEmpty() || enterCapacity==null || enterCapacity.getText().isEmpty()) && i==1)
         {
-            enterWHName.setStyle("-fx-border-color:RED"); flag = false;
+            if(enterWHName==null||enterWHName.getText().isEmpty() || enterCapacity==null)
+            {enterWHName.setStyle("-fx-border-color:RED"); 
+            enterCapacity.setStyle("");
+            flag = false;}
+            else
+            {enterCapacity.setStyle("-fx-border-color:RED"); 
+            enterWHName.setStyle("");
+            flag = false;}
         }
-        else if((enterCapacity==null||enterCapacity.getText().isEmpty()) && i==2)
+        else if((enterCountry==null || enterCity==null || enterCity.getText().isEmpty() || enterCountry.getText().isEmpty())  && i==2)
         {
-            enterCapacity.setStyle("-fx-border-color:RED"); flag = false;
+            if((enterCountry==null ||enterCountry.getText().isEmpty()))
+            {enterCountry.setStyle("-fx-border-color:RED"); 
+            enterCity.setStyle("");
+            flag = false;}
+            else
+            {enterCity.setStyle("-fx-border-color:RED");
+            enterCountry.setStyle("");
+            flag = false;}
+        }
+        else if ((enterManagerID==null || enterManagerID.getText().isEmpty()) && i == 3)
+        {
+            enterManagerID.setStyle("-fx-border-color:RED");
+            flag = false;
         }
         else
         {
         try{
         int test = Integer.parseInt(enterID.getText());
+        flag = true;
+        if(i==1)
+        {
+        Long t = Long.parseLong(enterCapacity.getText());
+        enterCapacity.setStyle("");
+        }
         enterID.setStyle("");
-        flag=true;
+       
+        
         }
         catch(Exception e){
         enterID.setStyle("-fx-border-color:RED");
+        if(i==1){enterCapacity.setStyle("-fx-border-color:RED");}
         flag = false;    
         }
-        
         }
-        if(i==2)
+                 if(i==0 && flag)
+            {
+             Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+             Statement stmt = con.createStatement(); 
+             ResultSet s1 = stmt.executeQuery("Select WID from Warehouse");
+                while(s1.next())
+                {
+                   if(Long.parseLong(enterID.getText())==s1.getLong("WID"))
+                   {
+                       flag=false;
+                       enterID.setStyle("-fx-border-color:red");
+                       break;
+                   }
+                }
+            }
+        
+        if(flag)
+        {
+            
+            if(i==2)
         {
             btnNext.setVisible(false);
             btnDone.setVisible(true);
         }
-        if(flag)
-        {
+        Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+        Statement stmt = con.createStatement(); 
         FXMLLoader loader;
         loader = new FXMLLoader(getClass().getResource(next.get(i)));
         loader.setController(this);
@@ -283,13 +389,34 @@ public class WarehousesController implements Initializable{
 
         }
     }
+    
+        @FXML
+     private void Cancel(ActionEvent e){
+         i=0;
+         if(enterCity!=null)
+         enterCity.setText("");
+         if(enterCountry!=null)
+         enterCountry.setText("");
+         if(enterStreet!=null)
+         enterStreet.setText("");
+         if(enterManagerID!=null)
+         enterManagerID.setText("");
+         if(enterWHName!=null)
+         enterWHName.setText("");
+         if(enterID!=null)
+         enterID.setText("");
+         if(enterCapacity!=null)
+         enterCapacity.setText("");
+         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+         stage.close();
+     }
     boolean add = true;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         String name = "/UI/OwnerPage/EnterWHName.fxml";
         String Location = "/UI/OwnerPage/WHLocation.fxml";
-        String ManagerID = "/UI/OwnerPage/ManagerID.fxml";
+        String ManagerID = "/UI/OwnerPage/WHManagerID.fxml";
         next.add(name);
         next.add(Location);
         next.add(ManagerID);
@@ -313,6 +440,7 @@ public class WarehousesController implements Initializable{
         }
             tableView.setItems(warehouses);
              IDCol.setCellValueFactory(new PropertyValueFactory<>("WID"));
+            
              nameCol.setCellValueFactory(new PropertyValueFactory<>("WName"));
              countryCol.setCellValueFactory(new PropertyValueFactory<>("Country"));
              cityCol.setCellValueFactory(new PropertyValueFactory<>("City"));

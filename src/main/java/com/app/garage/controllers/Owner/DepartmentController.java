@@ -1,6 +1,7 @@
 package com.app.garage.controllers.Owner;
 
 import com.app.garage.App;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import io.github.palexdev.materialfx.dialogs.MFXDialogs;
 import java.io.IOException;
@@ -14,6 +15,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -38,6 +41,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -46,6 +51,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javafx.util.StringConverter;
+import javafx.util.converter.LongStringConverter;
 import javax.swing.JOptionPane;
 
 
@@ -70,7 +77,7 @@ public class DepartmentController implements Initializable{
     private TextField txtfieldID;
         @FXML
     private TextField txtfieldName;
-                @FXML
+    @FXML
     private TextField txtFieldCountry;
     @FXML
     private TextField txtFieldCity;
@@ -82,7 +89,7 @@ public class DepartmentController implements Initializable{
     private TextField txtFieldOpeningDate;
 
     @FXML
-    private TableColumn<Departments, Integer> IDCol;
+    private TableColumn<Departments, Long> IDCol;
     @FXML
     private TableColumn<Departments, String> nameCol;
     @FXML
@@ -92,11 +99,13 @@ public class DepartmentController implements Initializable{
     @FXML
     private TableColumn<Departments, String> cityCol;
     @FXML
-    private TableColumn<Departments, Integer> managerIDCol;
+    private TableColumn<Departments, Long> managerIDCol;
                     
     @FXML
-    private TableColumn<?, Date> openingDateCol;
-
+    private TableColumn<Departments, String> openingDateCol;
+    
+    @FXML
+    private JFXButton deleteDep;
     @FXML
     private Pane cityPane;
 
@@ -131,6 +140,18 @@ public class DepartmentController implements Initializable{
     
     @FXML
     private AnchorPane searchPane;
+    
+    
+    @FXML
+    void deleteDep(ActionEvent event) {
+     if(tableView.getSelectionModel().getSelectedItem()==null)
+            System.out.println("Not selected");
+     else
+     {
+         Delete(tableView.getSelectionModel().getSelectedItem());
+     }
+    }
+    
     @FXML
     void clearFilter(ActionEvent event) {
         nameField.setSelected(false);
@@ -318,7 +339,7 @@ public class DepartmentController implements Initializable{
          ResultSet rs = stmt.executeQuery("SELECT DID, Dname, Country, City, Street, OpeningDate, ManagerID"
                  + " FROM Department");
         while(rs.next()) {  
-            Integer id = rs.getInt("DID");
+            Long id = rs.getLong("DID");
             String country = rs.getString("Country");
             String city= rs.getString("city");
             String street = rs.getString("street");
@@ -330,6 +351,8 @@ public class DepartmentController implements Initializable{
             System.out.println(d[0]);
             deps.add(new Departments(id, dname, country, city, street, d[0], mid));
         }
+        
+
             tableView.setItems(deps);
              IDCol.setCellValueFactory(new PropertyValueFactory<>("DID"));
              nameCol.setCellValueFactory(new PropertyValueFactory<>("DName"));
@@ -339,12 +362,14 @@ public class DepartmentController implements Initializable{
              openingDateCol.setCellValueFactory(new PropertyValueFactory<>("OpeningDate"));
              managerIDCol.setCellValueFactory(new PropertyValueFactory<>("ManagerID"));
           }
+         
         catch (SQLException ex) {
               ex.printStackTrace();
           } 
          }
         }
-    }   
+    }
+        
     }
     @FXML
      private void Cancel(ActionEvent e){
@@ -363,6 +388,7 @@ public class DepartmentController implements Initializable{
          EnterID.setText("");
          Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
          stage.close();
+         
      }
     boolean add=true;
     boolean flag = true;
@@ -435,6 +461,18 @@ public class DepartmentController implements Initializable{
         }
         }
     }
+    public void Update(Departments s){
+     try{
+     Connection con= DriverManager.getConnection(App.ip,App.user,App.password);
+    Statement st = con.createStatement();
+    st.executeUpdate("Update Department set Country = '"+ s.getCountry() +"', City = '"+ s.getCity()+"', Street = '" + s.getStreet()+"', dname = '"+s.getDName()+"', managerID = "+s.getManagerID() + ", OpeningDate = to_date('" + s.getOpeningDate()+"' ,'yyyy/mm/dd') Where DID = " + s.getDID());
+    tableView.refresh();
+    } catch (SQLException ex) {
+    Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
+ 
     ObservableList<Departments> deps = FXCollections.observableArrayList();
     ObservableList<Departments> searchDeps = FXCollections.observableArrayList();
     @Override
@@ -446,7 +484,7 @@ public class DepartmentController implements Initializable{
         next.add(name);
         next.add(Location);
         next.add(ManagerID);
-        
+        tableView.setEditable(true);
         if(add)
         {
          try {      
@@ -456,7 +494,7 @@ public class DepartmentController implements Initializable{
          ResultSet rs = stmt.executeQuery("SELECT DID, Dname, Country, City, Street, OpeningDate, ManagerID"
                  + " FROM Department");
         while(rs.next()) {  
-            Integer id = rs.getInt("DID");
+            Long id = rs.getLong("DID");
             String country = rs.getString("Country");
             String city= rs.getString("city");
             String street = rs.getString("street");
@@ -467,47 +505,80 @@ public class DepartmentController implements Initializable{
             String[] d = date.split(" ");
             System.out.println(d[0]);
             deps.add(new Departments(id, dname, country, city, street, d[0], mid));
-        }
-        
-        
+            }
+        nameCol.setOnEditStart(e->{
+        });
             tableView.setItems(deps);
              IDCol.setCellValueFactory(new PropertyValueFactory<>("DID"));
              nameCol.setCellValueFactory(new PropertyValueFactory<>("DName"));
+             nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             nameCol.setOnEditCommit(e->{
+             Departments s = e.getRowValue();
+             s.setDName(e.getNewValue());
+             Update(s);
+             });
              countryCol.setCellValueFactory(new PropertyValueFactory<>("Country"));
+             countryCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             countryCol.setOnEditCommit(e->{
+             Departments s = e.getRowValue();
+             s.setCountry(e.getNewValue());
+             Update(s);
+             });
              cityCol.setCellValueFactory(new PropertyValueFactory<>("City"));
+             cityCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             cityCol.setOnEditCommit(e->{
+             Departments s = e.getRowValue();
+             s.setCity(e.getNewValue());
+             Update(s);
+             });
              streetCol.setCellValueFactory(new PropertyValueFactory<>("Street"));
+             streetCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             streetCol.setOnEditCommit(e->{
+             Departments s = e.getRowValue();
+             s.setStreet(e.getNewValue());
+             Update(s);
+             });
              openingDateCol.setCellValueFactory(new PropertyValueFactory<>("OpeningDate"));
+             openingDateCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             openingDateCol.setOnEditCommit(e->{
+             Departments s = e.getRowValue();
+             s.setOpeningDate(e.getNewValue());
+             Update(s);
+             });
              managerIDCol.setCellValueFactory(new PropertyValueFactory<>("ManagerID"));
+             managerIDCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+             try{
+             managerIDCol.setOnEditCommit(e->{
+             Departments s = e.getRowValue();
+             s.setManagerID(e.getNewValue());
+             Update(s);
+             });
+             }
+             catch(Exception e){
+             JOptionPane.showMessageDialog(null, "Wrong manager ID");
+             }
           }
-         
         catch (SQLException ex) {
               ex.printStackTrace();
           } 
         }
-
     }
-    
         @FXML
     void startSearch(ActionEvent event) throws SQLException {
         String ID="";
         String Name="";
-        String cond1="";
-      
+        String cond1="";    
         searchDeps.clear();
         boolean found = false;
         boolean searchFields[]={true,true,true,true,true,true,true};
         boolean searchFields2[]={true,true,true,true,true,true,true};
-        
-
         Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT *"
         + " FROM Department "
         +"Where DID like '%"+txtfieldID.getText()+ "%' and dname like '%"+txtfieldName.getText()+"%' and country like '%"+txtFieldCountry.getText()+"%' and city like '%"+txtFieldCity.getText()+"%' and street like '%"+txtFieldStreet.getText()+"%' and ManagerID like '%"+txtFieldManagerId.getText() + "%' and OpeningDate like '%"+txtFieldOpeningDate.getText()+"%'");
-        
-        
              while(rs.next()) {  
-            Integer id = rs.getInt("DID");
+            Long id = rs.getLong("DID");
             String country = rs.getString("Country");
             String city= rs.getString("city");
             String street = rs.getString("street");
@@ -517,9 +588,18 @@ public class DepartmentController implements Initializable{
             date=date.replaceAll("-", "/");
             String[] d = date.split(" ");
             System.out.println(d[0]);
-            searchDeps.add(new Departments(id, dname, country, city, street, d[0], mid));
+            searchDeps.add(new Departments(id, dname, country, city, street, d[0], mid));       
         }
          tableView.setItems(searchDeps);     
     }
-
+    private void Delete(Departments selectedItem) {
+     try{
+     Connection con= DriverManager.getConnection(App.ip,App.user,App.password);
+    Statement st = con.createStatement();
+    st.executeUpdate("Delete from Department Where Did = " + selectedItem.getDID());
+    tableView.refresh();
+    } catch (SQLException ex) {
+    Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
 }
