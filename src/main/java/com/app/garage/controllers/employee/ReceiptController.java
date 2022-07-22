@@ -137,11 +137,13 @@ public class ReceiptController implements Initializable  {
      if( ((JFXCheckBox)event.getSource()).isSelected() ){
          setEditability(true);
          addPane.setStyle("-fx-border-color:#666; -fx-border-radius:5");
+          dressDate.setText(new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date()));
      }
          
      else{
          setEditability(false);
          addPane.setStyle("-fx-border-color:#aaa; -fx-border-radius:5");
+          dressDate.setText("");
      }
         
     }
@@ -354,6 +356,10 @@ public class ReceiptController implements Initializable  {
         try {
             con=DriverManager.getConnection(App.ip, App.user, App.password);
             Statement delete = con.createStatement();
+            
+            delete.executeUpdate("update DEPARTMENT_DRESS set DEPARTMENTSTOCK =DEPARTMENTSTOCK+"+selectedItem.getAmount()
+                    + " where DID = "+LoginController.currentUser.substring(1,4)+" AND DRESSID = " +selectedItem.getDressID());
+            
             
             delete.executeUpdate("delete from SELL_RECORD where RID="+selectedItem.getId());
             

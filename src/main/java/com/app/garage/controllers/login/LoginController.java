@@ -229,8 +229,9 @@ public class LoginController implements Initializable {
             
              
         } catch (SQLException ex) {
-            ex.printStackTrace();
-         
+            
+           userName.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+                     passField.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
         }
       
        

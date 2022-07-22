@@ -3,7 +3,6 @@ com\app\garage\controllers\warehouseManager\WarehouseManagerController.class
 com\app\garage\controllers\warehouseManager\ClothesController.class
 com\app\garage\controllers\Owner\Warehouses.class
 com\app\garage\controllers\Department.class
-com\app\garage\controllers\employee\ClothesController.class
 com\app\garage\controllers\employee\ReceiptController.class
 com\app\garage\controllers\Owner\CardsSlider.class
 com\app\garage\controllers\Owner\Departments.class
@@ -12,7 +11,6 @@ com\app\garage\controllers\derpartmentmanager\ManagerController.class
 module-info.class
 com\app\garage\controllers\derpartmentmanager\AddEmployeeController.class
 com\app\garage\controllers\derpartmentmanager\EmployeesController.class
-.netbeans_automatic_build
 com\app\garage\controllers\Owner\TypeController.class
 com\app\garage\controllers\Owner\Employees.class
 com\app\garage\controllers\employee\EmployeeController.class

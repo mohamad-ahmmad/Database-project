@@ -19,7 +19,7 @@ public class CardsSlider {
    // final private static URL templateURL = (CardsSlider.class.getClass().getResource("/UI/OwnerPage/HomePageAssets/home-page-template.fxml")) ;
     private SliderController control;
     private Parent cardUI;
-    
+    private int id;
   
     public CardsSlider(String Title) throws IOException{
         FXMLLoader loader;
@@ -51,5 +51,12 @@ public class CardsSlider {
         return control;
     }
     
+    public void setID(int id){
+        this.id=id;
+    }
+    
+    public int getID(){
+        return this.id;
+    }
     
 }
