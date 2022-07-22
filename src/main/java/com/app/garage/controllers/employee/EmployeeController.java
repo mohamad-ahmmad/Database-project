@@ -56,7 +56,7 @@ public class EmployeeController implements Initializable {
     
      private String idCard;
     
-    private Object loadAnimatedPane(String path) throws IOException{
+    private void loadAnimatedPane(String path) throws IOException{
                     Timeline t = new Timeline();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         Parent root = loader.load();
@@ -71,7 +71,7 @@ public class EmployeeController implements Initializable {
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
         
-        return loader.getController();
+       
     }
     
     private void lockerTruer(){
@@ -94,8 +94,8 @@ public class EmployeeController implements Initializable {
          
           clearStyles();
           labelCashier.setStyle(cssPressed);
-          CashierController cont = (CashierController)  loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");
-          cont.setIdCard(idCard);
+          loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");
+     
           
           lockerTruer();
           locker[0]=false;
@@ -125,6 +125,7 @@ public class EmployeeController implements Initializable {
        clearStyles();
        labelReceipt.setStyle(cssPressed);
        loadAnimatedPane("/UI/EmployeePage/receipt-page.fxml");
+
        lockerTruer();
        locker[2]=false;
        

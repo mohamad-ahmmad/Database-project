@@ -18,11 +18,13 @@ public class App extends Application {
         
     }
 
-    public static final String ip = "jdbc:oracle:thin:@192.168.86.129:1521:xe",
-    user= "c##DaraghmehCompany",
-    password= "12345" ;
-    
+    public static final String ip = "jdbc:oracle:thin:@192.168.18.145:1521:xe",
+    user= "c##daraghmeh",
+    password= "123456" ;
 
+
+    
+    
     private static Stage ss;
     
     public static  Stage getAppStage(){
