@@ -122,14 +122,14 @@
                   </TextField>
                </children>
             </Pane>
-            <Pane fx:id="HireDatePane" layoutX="171.0" layoutY="44.0" prefHeight="51.0" prefWidth="170.0">
+            <Pane fx:id="HireDatePane" layoutX="62.0" layoutY="55.0" prefHeight="51.0" prefWidth="170.0">
                <children>
                   <Label layoutX="34.0" layoutY="3.0" text="HireDate">
                      <font>
                         <Font name="Berlin Sans FB" size="12.0" />
                      </font>
                   </Label>
-                  <DatePicker layoutY="25.0" prefHeight="0.0" prefWidth="125.0" />
+                  <DatePicker layoutY="18.0" prefHeight="0.0" prefWidth="125.0" />
                </children>
             </Pane>
             <Pane fx:id="BirthDatePane" layoutY="69.0" prefHeight="51.0" prefWidth="170.0">
@@ -139,7 +139,7 @@
                         <Font name="Berlin Sans FB" size="12.0" />
                      </font>
                   </Label>
-                  <DatePicker layoutY="26.0" prefHeight="0.0" prefWidth="125.0" />
+                  <DatePicker layoutY="21.0" prefHeight="0.0" prefWidth="125.0" />
                </children>
             </Pane>
             <Pane fx:id="GenderPane" layoutX="213.0" layoutY="76.0" prefHeight="51.0" prefWidth="170.0">
