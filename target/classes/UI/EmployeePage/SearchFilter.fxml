@@ -16,7 +16,7 @@
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
       </Label>
-      <JFXCheckBox checkedColor="#f8a918" layoutX="168.0" layoutY="157.0" onAction="#saleChecked" text="Sale" unCheckedColor="#333333">
+      <JFXCheckBox checkedColor="#f8a918" layoutX="63.0" layoutY="157.0" onAction="#saleChecked" text="Sale" unCheckedColor="#333333">
          <font>
             <Font name="Berlin Sans FB" size="13.0" />
          </font>
@@ -59,6 +59,11 @@
          </font>
       </JFXCheckBox>
       <JFXCheckBox checkedColor="#f8a918" layoutX="290.0" layoutY="120.0" onAction="#priceOChecked" text="Price(Offer)" unCheckedColor="#333333">
+         <font>
+            <Font name="Berlin Sans FB" size="13.0" />
+         </font>
+      </JFXCheckBox>
+      <JFXCheckBox checkedColor="#f8a918" layoutX="170.0" layoutY="157.0" onAction="#stockChecked" text="Stock" unCheckedColor="#333333">
          <font>
             <Font name="Berlin Sans FB" size="13.0" />
          </font>

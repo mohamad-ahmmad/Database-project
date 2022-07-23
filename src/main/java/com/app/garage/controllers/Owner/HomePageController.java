@@ -6,11 +6,8 @@ package com.app.garage.controllers.Owner;
 
 
 import com.app.garage.App;
-import com.app.garage.controllers.EmailSender;
 import javafx.animation.Interpolator;
-import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,27 +24,28 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import java.time.Month;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+
 import javafx.util.Duration;
 
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
+
 public class HomePageController implements Initializable {
+    private Connection con;
+    
     @FXML
     AnchorPane nextPane;
     @FXML
@@ -73,6 +71,8 @@ public class HomePageController implements Initializable {
         try {
             SliderInitialize();
             currentPane.getChildren().add(CardsSlider.cards.get(0).getParent());
+            
+            DataInitilaizer();
             
      
            
@@ -192,6 +192,120 @@ public class HomePageController implements Initializable {
                 
         
     }
+        
+    }
+    
+    private long profitCalc(long depId){
+        
+        //SQL
+        
+        return 0;
+    }
+    
+    private long profitCalcDay(int depId, int day){
+       
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password );
+            Statement st = con.createStatement();
+            /*
+            select s.dressid, (ds.PRICE-(ds.PRICE* ((select salepercentage from department_dress dd where dd.did=114 AND dd.dressid=s.dressid )/100) ) ) * AMOUNT as SOLD 
+            from SELL_RECORD s join Dress ds on s.dressid = ds.dressid 
+            where s.depid=114 and s.purchased_date like '%21-JUL%' ; 
+            
+            */
+            ResultSet result = st.executeQuery("select (ds.PRICE-(ds.PRICE* ((select salepercentage from department_dress dd where dd.did="+depId+" AND dd.dressid=s.dressid )/100) )-ds.WSPRICE ) * AMOUNT as SOLD " 
+                    + " from SELL_RECORD s join Dress ds on s.dressid = ds.dressid "
+                    + " where s.depid="+depId+" and s.purchased_date like '"+day+ "-JUL%' ");
+            
+            long sum=0;
+            
+            
+            
+            while(result.next()){
+                long temp = result.getLong(1);
+                sum=sum+temp;
+            }
+            
+            con.close();
+            return sum;
+        } catch (SQLException ex) {
+            
+            Alert s = new Alert(Alert.AlertType.ERROR);
+            s.setTitle("Something Wrong !");
+            s.setContentText("Contact the developers.");
+            
+            ex.printStackTrace();
+        }
+        
+        return -1;
+    }
+    
+   
+    private int[] arrDays={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31};
+    private int[] topDep; 
+    int i=0;
+    private void DataInitilaizer() {
+        
+        
+        determinesTopDep();
+        
+        for(int i =0 ; i < this.i;i++){
+            CardsSlider.cards.get(i).setID(topDep[i]);
+            calculateSliderData(CardsSlider.cards.get(i));
+            departmentInformationInit(CardsSlider.cards.get(i));
+            
+        }
+        
+        
+    }
+
+    private void calculateSliderData(CardsSlider slide ) {
+     
+        LineChart ref =  slide.getSlideController().getLineChart();
+        XYChart.Series  data = new XYChart.Series();
+        
+        for(int i=0 ; i<arrDays.length ; i++)
+            data.getData().add(new XYChart.Data(Integer.toString(arrDays[i]),profitCalcDay(slide.getID(), arrDays[i])));
+        
+        ref.getData().add(data);
+        
+    }
+
+    private void determinesTopDep() {
+        topDep= new int[3];
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            ResultSet result = st.executeQuery("select DEPID , SUM(AMOUNT) as aa from SELL_RECORD GROUP BY DEPID ORDER BY aa desc");
+            i=0;
+            while(result.next() && i <3 ){
+                topDep[i]=result.getInt(1);
+                i++;
+            }
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+
+    private void departmentInformationInit(CardsSlider temp) {
+        try {
+            //SQL QURIES TO GET THE NAME TELEPHONE NUMBER EMAIL...ETC AND ANY THING NOT NUMERIC RELATED TO THE DEPARTMENT
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement inf = con.createStatement();
+            ResultSet q = inf.executeQuery("select DNAME, Country,City from Department where DID ="+temp.getID());
+            
+            q.next();
+            
+            SliderController s = temp.getSlideController();
+            s.getTextLocationSite().setText(q.getString(2)+", "+q.getString(3));
+            s.getHeader().setText(q.getString(1));
+            
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
         
     }
     

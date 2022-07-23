@@ -3,7 +3,6 @@ com\app\garage\controllers\warehouseManager\WarehouseManagerController.class
 com\app\garage\controllers\warehouseManager\ClothesController.class
 com\app\garage\controllers\Owner\Warehouses.class
 com\app\garage\controllers\Department.class
-com\app\garage\controllers\employee\ClothesController.class
 com\app\garage\controllers\employee\ReceiptController.class
 com\app\garage\controllers\Owner\CardsSlider.class
 com\app\garage\controllers\Owner\Departments.class

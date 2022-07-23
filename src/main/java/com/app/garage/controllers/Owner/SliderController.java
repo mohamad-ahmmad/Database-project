@@ -26,8 +26,10 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -53,13 +55,17 @@ public class SliderController implements Initializable {
     private PieChart pieChart;
 
     @FXML
-    private StackedBarChart<?, ?> stackChar;//
+    private LineChart lineChart;//
 
     @FXML
     private Text teleNum;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+     
+       
+        
         
                 ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
         new PieChart.Data("Sample 1" ,25 )      
@@ -121,12 +127,15 @@ public class SliderController implements Initializable {
     public PieChart getPieChart(){
         return pieChart;
     }
-    public StackedBarChart getStackChart(){//MABYE CAUSES PROBLEMS
+    public LineChart getLineChart(){//MABYE CAUSES PROBLEMS
         
-        return stackChar;
+        return lineChart;
     }
     public Text getHeader(){
         return header;
+    }
+    public Hyperlink getHyperLink(){
+        return empEmail;
     }
     
     

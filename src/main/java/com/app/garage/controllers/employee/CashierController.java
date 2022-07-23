@@ -108,12 +108,12 @@ public class CashierController implements Initializable {
     }
     
     
-    private boolean exist(CardController e){
+    private boolean exist(CardController e, int count){
         if(conts.isEmpty())
           return false;
          for(int i =0;i<conts.size();i++)
              if(conts.get(i).getID()==e.getID()){
-                 conts.get(i).setAmount(String.valueOf(Integer.parseInt(conts.get(i).getAmount())+1));
+                 conts.get(i).setAmount(String.valueOf(Integer.parseInt(conts.get(i).getAmount())+count));
                  return true;
              }
          return false;
@@ -145,38 +145,42 @@ public class CashierController implements Initializable {
         }
         boolean avaliable = dressQry.next();
         
-        if(avaliable && dressQry.getInt("DEPARTMENTSTOCK")==0){
+        if(!avaliable && dressQry.getInt("DEPARTMENTSTOCK")==0){
             productID.setStyle("-fx-border-color: rgba(248,0,0,0.6)");
             return;
         }
         
         if(!productAmount.getText().replace(" ", "").equals("")) 
         try{
-           System.out.println(productAmount.getText());
+           System.out.println("Amount in the textfield"+ productAmount.getText());
+           
            toCount= Integer.parseInt(productAmount.getText());
-            
+
         }catch(Exception e)
         {productAmount.setStyle("-fx-border-color: rgba(248,0,0,0.6);"); return ; }
         
-         
-        
        
+        
+
         if(avaliable){
         counter=counter+toCount;
-        count.setText(String.valueOf(counter));
-            
+        count.setText(String.valueOf(counter));//set the number of products
+
          FXMLLoader toload = new FXMLLoader(getClass().getResource("/UI/EmployeePage/dress-card.fxml"));
+
          Parent temp = toload.load();
 
          CardController crd = toload.getController(); 
+
             
-            
+
+
+//           String amount =productAmount.getText().replace(" ", ""); 
+//           if(amount.equals(""))
+//              crd.setAmount("1");
+//           else
            
-           String amount =productAmount.getText().replace(" ", ""); 
-           if(amount.equals(""))
-              crd.setAmount("1");
-           else
-           crd.setAmount(productAmount.getText());
+           crd.setAmount( String.valueOf(toCount));
            
            
            crd.setColor(dressQry.getString(4));
@@ -188,7 +192,7 @@ public class CashierController implements Initializable {
            crd.setSize(dressQry.getString(3));
            
            
-           if(!exist(crd)){
+           if(!exist(crd,toCount)){
            conts.add(crd);
            gridLayout.add((Node)temp , j , i);
            j++;
@@ -352,6 +356,7 @@ public class CashierController implements Initializable {
             productAmount.setStyle("-fx-border-color: rgba(248,0,0,0.6);");return;
         }
         for(CardController temp : conts){
+            if(temp.isSelected())
             temp.setAmount(productAmount.getText());
         }
     }
