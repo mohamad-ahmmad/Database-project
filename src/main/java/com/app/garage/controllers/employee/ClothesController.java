@@ -201,7 +201,7 @@ public class ClothesController implements Initializable {
         ResultSet rs = search.executeQuery("select d.DRESSID , d.DRESSNAME , d.DRESSSIZE , d.DRESSCOLOR , d.BRANDNAME , d.PRICE, dd.SALEPERCENTAGE, dd.DEPARTMENTSTOCK "
                 + " from DRESS d join DEPARTMENT_DRESS dd on dd.DID = "+LoginController.currentUser.substring(1,4)+" AND dd.DRESSID=d.DRESSID " +" where dd.DRESSID LIKE '%"+dressIDtextField.getText()+"%' AND d.DRESSNAME LIKE '%" +dressName.getText()+"%' "
                 + " AND d.DRESSSIZE LIKE '%"+dressSize.getText()+"%' AND d.DRESSCOLOR LIKE '%"+ dressColor.getText()+ "%' "
-                + " AND d.BRANDNAME LIKE '%" + dressBrand.getText() +"%' AND d.PRICE LIKE '%" + dressPrice.getText() + "%' AND dd.SALEPERCENTAGE LIKE '%"+dressSale.getText()+"%' AND dd.DEPARTMENTSTOCK LIK '%"+dressStock.getText()+"%' ");
+                + " AND d.BRANDNAME LIKE '%" + dressBrand.getText() +"%' AND d.PRICE LIKE '%" + dressPrice.getText() + "%' AND dd.SALEPERCENTAGE LIKE '%"+dressSale.getText()+"%' AND dd.DEPARTMENTSTOCK LIKE '%"+dressStock.getText()+"%' ");
        
           while(rs.next()){
            long idDress = rs.getLong(1);
