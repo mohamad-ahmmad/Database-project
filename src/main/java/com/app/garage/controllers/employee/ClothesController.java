@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -130,6 +132,9 @@ public class ClothesController implements Initializable {
         
     }
     
+  
+    
+    
     @FXML
     private FlowPane textPane;
     
@@ -144,7 +149,7 @@ public class ClothesController implements Initializable {
 
     @FXML
     private MFXTextField dressOPrice;
-
+    
     @FXML
     private MFXTextField dressPrice;
 
@@ -196,12 +201,8 @@ public class ClothesController implements Initializable {
         ResultSet rs = search.executeQuery("select d.DRESSID , d.DRESSNAME , d.DRESSSIZE , d.DRESSCOLOR , d.BRANDNAME , d.PRICE, dd.SALEPERCENTAGE, dd.DEPARTMENTSTOCK "
                 + " from DRESS d join DEPARTMENT_DRESS dd on dd.DID = "+LoginController.currentUser.substring(1,4)+" AND dd.DRESSID=d.DRESSID " +" where dd.DRESSID LIKE '%"+dressIDtextField.getText()+"%' AND d.DRESSNAME LIKE '%" +dressName.getText()+"%' "
                 + " AND d.DRESSSIZE LIKE '%"+dressSize.getText()+"%' AND d.DRESSCOLOR LIKE '%"+ dressColor.getText()+ "%' "
-                + " AND d.BRANDNAME LIKE '%" + dressBrand.getText() +"%' AND d.PRICE LIKE '%" + dressPrice.getText() + "%' ");
-        
-            System.out.println("select d.DRESSID , d.DRESSNAME , d.DRESSSIZE , d.DRESSCOLOR , d.BRANDNAME , d.PRICE, dd.SALEPERCENTAGE, dd.DEPARTMENTSTOCK "
-                + " from DRESS d join DEPARTMENT_DRESS dd on dd.DID = "+LoginController.currentUser.substring(1,4)+" AND dd.DRESSID=d.DRESSID " +" where d.DRESSID LIKE '%"+dressIDtextField.getText()+"%' AND d.DRESSNAME LIKE '%" +dressName.getText()+"%' "
-                + " AND d.DRESSSIZE LIKE '%"+dressSize.getText()+"%' AND d.DRESSCOLOR LIKE '%"+ dressColor.getText()+ "%' "
-                + " AND d.BRANDNAME LIKE '%" + dressBrand.getText() +"%' AND d.PRICE LIKE '%" + dressPrice.getText() + "%' ");
+                + " AND d.BRANDNAME LIKE '%" + dressBrand.getText() +"%' AND d.PRICE LIKE '%" + dressPrice.getText() + "%' AND dd.SALEPERCENTAGE LIKE '%"+dressSale.getText()+"%' AND dd.DEPARTMENTSTOCK LIK '%"+dressStock.getText()+"%' ");
+       
           while(rs.next()){
            long idDress = rs.getLong(1);
            String dressName = rs.getString(2);
@@ -292,5 +293,35 @@ public class ClothesController implements Initializable {
            textPane.getChildren().remove(dressSize);
     }
     
+    @FXML
+    void stockChecked(ActionEvent event){
+        if( ((JFXCheckBox)event.getSource()).isSelected() ){
+            textPane.getChildren().add(dressStock);
+        }else textPane.getChildren().remove(dressStock);
+        
+    }
+    
+    @FXML
+    void clearPressed(ActionEvent event){
+        
+        Object[] s = flowPane.getChildren().toArray();
+        
+        for(Object temp : s){
+            if(temp instanceof JFXCheckBox)
+            ((JFXCheckBox)temp).setSelected(false);
+            
+        }
+        Object [] b = textPane.getChildren().toArray();
+        
+        for(Object temp : b){
+            if(temp instanceof MFXTextField){
+                ((MFXTextField)temp).setText("");
+                textPane.getChildren().remove(temp);
+            }
+                
+        }
+        
+        
+    }
     
 }
