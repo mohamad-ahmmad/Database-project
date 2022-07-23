@@ -78,8 +78,7 @@ public class ClothesController implements Initializable {
         saleCol.setCellValueFactory(new PropertyValueFactory<>("sale"));
         stockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         
-        idCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
-        nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+
         
         
         dressTable.setItems(all);
@@ -127,7 +126,8 @@ public class ClothesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
           searchAll();
-        
+          idCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+          nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         
         
     }

@@ -356,8 +356,17 @@ public class CashierController implements Initializable {
             productAmount.setStyle("-fx-border-color: rgba(248,0,0,0.6);");return;
         }
         for(CardController temp : conts){
-            if(temp.isSelected())
+            if(temp.isSelected()){
+
+            int prev= Integer.parseInt(temp.getAmount());
+
+            int cur = Integer.parseInt(productAmount.getText());
+            counter = counter + (cur-prev);
+            count.setText(String.valueOf(counter) );
             temp.setAmount(productAmount.getText());
+            
+            
+            }
         }
     }
     
