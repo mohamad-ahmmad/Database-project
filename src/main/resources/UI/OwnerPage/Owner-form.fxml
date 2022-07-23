@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -34,6 +35,14 @@
                   </DropShadow>
                </effect>
                <children>
+                  <ImageView fitHeight="700.0" fitWidth="190.0" layoutY="1.0" opacity="0.1" pickOnBounds="true">
+                     <image>
+                        <Image url="@../../IMG/login/WallpaperDog-984723.jpg" />
+                     </image>
+                     <effect>
+                        <GaussianBlur radius="8.24" />
+                     </effect>
+                  </ImageView>
                   <Label fx:id="labelWarehouses" alignment="CENTER" layoutY="362.0" onMouseClicked="#openWarehousesPanel" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="   Warehouses" textFill="#f8a918">
                      <font>
                         <Font name="Berlin Sans FB" size="14.0" />

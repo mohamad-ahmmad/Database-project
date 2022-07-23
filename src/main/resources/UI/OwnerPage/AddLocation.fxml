@@ -24,7 +24,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnDoneInfo" layoutX="376.0" layoutY="177.0" mnemonicParsing="false" onAction="#DoneAddingInfo" prefHeight="39.0" prefWidth="125.0" styleClass="AddDepartment" text="Done">
+      <Button fx:id="btnDoneLocation" layoutX="376.0" layoutY="177.0" mnemonicParsing="false" onAction="#DoneAddingLocation" prefHeight="39.0" prefWidth="125.0" styleClass="AddDepartment" text="Done">
          <stylesheets>
             <URL value="@../../CSS/ColorThemes.css" />
             <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -36,7 +36,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnNextInfo" layoutX="376.0" layoutY="177.0" mnemonicParsing="false" onAction="#NextInfo" prefHeight="39.0" prefWidth="125.0" styleClass="AddDepartment" text="Next">
+      <Button fx:id="btnNextLocation" layoutX="376.0" layoutY="177.0" mnemonicParsing="false" onAction="#NextLocation" prefHeight="39.0" prefWidth="125.0" styleClass="AddDepartment" text="Next">
          <stylesheets>
             <URL value="@../../CSS/ColorThemes.css" />
             <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -53,7 +53,7 @@
             <Font name="Berlin Sans FB" size="25.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="InfoslidePane" layoutX="4.0" layoutY="40.0" prefHeight="134.0" prefWidth="504.0">
+      <AnchorPane fx:id="locationSlidePane" layoutX="4.0" layoutY="40.0" prefHeight="134.0" prefWidth="504.0">
          <children>
             <Pane layoutX="117.0">
                <children>
@@ -62,7 +62,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="numberSSN" layoutY="56.0" prefHeight="47.0" prefWidth="265.0" />
+                  <TextField fx:id="LocationSSN" layoutY="56.0" prefHeight="47.0" prefWidth="265.0" />
                </children>
             </Pane>
          </children>

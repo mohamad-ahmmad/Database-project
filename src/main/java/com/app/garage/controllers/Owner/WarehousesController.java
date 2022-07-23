@@ -1,6 +1,7 @@
 package com.app.garage.controllers.Owner;
 
 import com.app.garage.App;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +19,8 @@ import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -32,7 +35,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -114,10 +119,22 @@ public class WarehousesController implements Initializable{
     private TextField txtFieldName;
     @FXML
     private TextField txtFieldId;
-
-    
     @FXML
     private AnchorPane searchPane;
+    @FXML
+    private void deleteWarehouse(ActionEvent e){
+        Delete(tableView.getSelectionModel().getSelectedItem());
+    }
+    private void Delete(Warehouses w) {
+     try{
+     Connection con= DriverManager.getConnection(App.ip,App.user,App.password);
+    Statement st = con.createStatement();
+    st.executeUpdate("Delete from Warehouse Where Wid = " + w.getWID());
+    tableView.refresh();
+    } catch (SQLException ex) {
+    Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+ }
     @FXML
     void clearFilter(ActionEvent event) {
         nameField.setSelected(false);
@@ -225,9 +242,8 @@ public class WarehousesController implements Initializable{
     @FXML
     private Button btnDone;
     @FXML
-    boolean done = true;
-    @FXML
     void DoneAdding(ActionEvent event) throws IOException, SQLException {
+        boolean done = true;
         Long ID = Long.parseLong(enterID.getText());
         Long Capacity = Long.parseLong(enterCapacity.getText());
         String Name = enterWHName.getText();
@@ -238,25 +254,25 @@ public class WarehousesController implements Initializable{
          Statement stmt = con.createStatement();
          try{
          Long ManagerID = Long.parseLong(enterManagerID.getText());
-         ResultSet s1=  stmt.executeQuery("Select SSN, WareID from Employee");
+         ResultSet s1=  stmt.executeQuery("Select SSN, Etype, WareID from Employee");
          while(s1.next()){
-             if((s1.getLong("SSN") == Long.parseLong(enterManagerID.getText())) && s1.getString("WareID")!=null)
+             if((s1.getLong("SSN") == Long.parseLong(enterManagerID.getText())) && (s1.getString("WareID")!=null || !s1.getString("Etype").equals("warehouse")))
              {  
+                 System.out.println("test");
                  enterManagerID.setStyle("-fx-border-color:RED");
                  done = false;
                  break;
              }
          }
-         s1= stmt.executeQuery("insert into Warehouse values ("+ ID + ", '" + Country + "', '" + City + "', '" + Street + "',  '" + Name + "', " + ManagerID +", "+ Capacity +")");
-         s1=stmt.executeQuery("Update Employee set wareID = " + ID + " where SSN = " + ManagerID);
-         }
+         if(done){
+         stmt.executeUpdate("insert into Warehouse values ("+ ID + ", '" + Country + "', '" + City + "', '" + Street + "',  '" + Name + "', " + ManagerID +", "+ Capacity +")");
+         stmt.executeUpdate("Update Employee set wareID = " + ID + " where SSN = " + ManagerID);
+         }}
          catch(java.sql.SQLIntegrityConstraintViolationException e){
-             System.out.println("idk");
              enterManagerID.setStyle("-fx-border-color:RED");
              done = false;
          }
          catch(java.lang.NumberFormatException exc){
-             System.out.println("nmber");
            enterManagerID.setStyle("-fx-border-color:RED");
            done = false;
          }
@@ -416,8 +432,13 @@ public class WarehousesController implements Initializable{
          stage.close();
      }
     boolean add = true;
+    
+    @FXML
+    private JFXButton btnDeleteWarehouse;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
         tableView.setEditable(true);
         String name = "/UI/OwnerPage/EnterWHName.fxml";
         String Location = "/UI/OwnerPage/WHLocation.fxml";
@@ -425,6 +446,20 @@ public class WarehousesController implements Initializable{
         next.add(name);
         next.add(Location);
         next.add(ManagerID);
+    tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+    @Override
+    public void changed(ObservableValue observableValue, Object oldValue, Object newValue) {
+        //Check whether item is selected and set value of selected item to Label
+        if(tableView.getSelectionModel().getSelectedItem() != null) 
+        {    
+           TableViewSelectionModel selectionModel = tableView.getSelectionModel();
+           ObservableList selectedCells = selectionModel.getSelectedCells();
+           TablePosition tablePosition = (TablePosition) selectedCells.get(0);
+           Object val = tablePosition.getTableColumn().getCellData(newValue);
+           btnDeleteWarehouse.setDisable(false);
+         }
+         }
+    });
         if(add){
         try {      
               Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
@@ -486,28 +521,55 @@ public class WarehousesController implements Initializable{
              try{
              managerIDCol.setOnEditCommit(e->{
              Warehouses w = e.getRowValue();
+             Long old = e.getOldValue();
              w.setManagerID(e.getNewValue());
-             Update(w);
+             try{
+                 Statement st = con.createStatement();
+               if(e.getNewValue()==null)
+               {
+                 st.executeUpdate("Update employee set wareID = '' where SSN = " + old);
+                 st.executeUpdate("Update warehouse set ManagerID = '' where WID = " + w.getWID());
+                 st.executeUpdate("Delete from WDManager where WDSSN = " + old);
+                 System.out.println("deleted");
+               }
+               else
+               {
+               ResultSet r=st.executeQuery("Select SSN,etype,depid,wareid from employee Where SSN = "+e.getNewValue());
+               while(r.next())
+               {
+                   if((r.getString("etype").equals("warehouse") && (r.getString("Depid")==null && r.getString("wareid")==null)))
+                   {
+                       st.executeUpdate("Update employee set wareID = '' where SSN = " + old);
+                       st.executeUpdate("Delete from WDManager where WDSSN = " + old);
+                       st.executeUpdate("insert into WDManager values("+e.getNewValue()+", 'newEmail@Gmail.com', 012457847)");
+                       st.executeUpdate("Update warehouse set ManagerID = "+ e.getNewValue()+ " where WID = " + w.getWID());
+                       st.executeUpdate("Update employee set wareID = "+w.getWID()+" where SSN = " + e.getNewValue());
+                   }
+                   else
+                   {
+                       System.out.println("wrong id");
+                   }
+               }
+               tableView.refresh();
+               }
+             }
+             catch(SQLException ex){
+             }
              });
              }
              catch(Exception e){
              JOptionPane.showMessageDialog(null, "Wrong manager ID");
              }
           }
-         
         catch (SQLException ex) {
               ex.printStackTrace();
           } 
-        }
-        
-        
+        }    
     }
     ObservableList<Warehouses> warehouses = FXCollections.observableArrayList();
     ObservableList<Warehouses> searchWh = FXCollections.observableArrayList();
-    @FXML
-    void startSearch(ActionEvent event) throws SQLException {
-        searchWh.clear();
-        Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+    private void Connect() throws SQLException{
+    Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT *"
         + " FROM Warehouse "
@@ -522,8 +584,13 @@ public class WarehousesController implements Initializable{
             Long capacity = rs.getLong("Wcapacity");
             searchWh.add(new Warehouses(id, wname, country, city, street, capacity, mid));
         }
-            tableView.setItems(searchWh);
-          }
+    }
+    @FXML
+    void startSearch(ActionEvent event) throws SQLException {
+        searchWh.clear();
+        Connect();
+        tableView.setItems(searchWh);
+ }
 
     private void Update(Warehouses w) {
      try{

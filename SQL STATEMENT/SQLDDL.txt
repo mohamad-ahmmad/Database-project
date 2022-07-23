@@ -180,7 +180,7 @@ add amount number(3,0);
 alter table sell_record 
 modify rid number;
 
-/* ALERT : EXCUTE IT BEFORE EXCUTE YOU */
+/* ALERT : EXCUTE IT BEFORE I EXCUTE YOU */
 alter table WAREHOUSE_DRESS
 add WAREHOUSE_STOCK number(5,0);
 

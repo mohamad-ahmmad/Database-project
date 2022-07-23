@@ -45,7 +45,7 @@
                   <TableColumn fx:id="typeCol" prefWidth="63.999755859375" text="Type" />
               </columns>
             </TableView>
-            <JFXButton layoutX="757.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Manager">
+            <JFXButton fx:id="deleteManager" disable="true" layoutX="757.0" layoutY="675.0" onAction="#deleteManager" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Manager">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -285,7 +285,7 @@
                   <Image url="@../../ICONS/OwnerPage/Search.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="957.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Show CV">
+            <JFXButton fx:id="showCV" disable="true" layoutX="957.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Show CV">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -309,7 +309,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="1157.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Edit CV">
+            <JFXButton fx:id="editCV" disable="true" layoutX="1157.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Edit CV">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -365,10 +365,10 @@
       </Pane>
       <AnchorPane fx:id="ContactPane" layoutX="3.0" layoutY="105.0" prefHeight="591.0" prefWidth="810.0" visible="false">
          <children>
-            <TableView fx:id="numbersTable" layoutX="15.0" layoutY="194.0" prefHeight="347.0" prefWidth="387.0">
+            <TableView fx:id="numbersTable" layoutX="15.0" layoutY="175.0" prefHeight="347.0" prefWidth="360.0">
               <columns>
-                <TableColumn fx:id="employeeIDCol" prefWidth="179.19995403289795" text="Employee ID" />
-                  <TableColumn fx:id="numberCol" minWidth="0.0" prefWidth="208.80003356933594" text="Number" />
+                <TableColumn fx:id="employeeIDCol" prefWidth="179.19995403289795" text="Manager ID" />
+                  <TableColumn fx:id="numberCol" minWidth="0.0" prefWidth="180.00001525878906" text="Number" />
               </columns>
             </TableView>
             <Label layoutX="59.0" layoutY="12.0" prefHeight="36.0" prefWidth="185.0" text="Contact Info." textFill="#333333">
@@ -381,7 +381,7 @@
                   <Image url="@../../ICONS/OwnerPage/PhoneNumbers.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="23.0" layoutY="548.0" onAction="#addInfo" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add a new Info">
+            <JFXButton layoutX="15.0" layoutY="529.0" onAction="#addNumber" prefHeight="34.0" prefWidth="152.0" styleClass="AddDepartment" text="+ Add a new number">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -393,7 +393,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="622.0" layoutY="548.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Info.">
+            <JFXButton layoutX="391.0" layoutY="528.0" onAction="#addLocation" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add new location">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -405,7 +405,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <FlowPane fx:id="ContactFlow" alignment="CENTER" layoutX="130.0" layoutY="45.0" prefHeight="115.0" prefWidth="539.0">
+            <FlowPane fx:id="ContactFlow" alignment="CENTER" layoutX="130.0" layoutY="45.0" prefHeight="122.0" prefWidth="539.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -426,7 +426,7 @@
                   </Pane>
                </children>
             </FlowPane>
-            <JFXButton layoutX="23.0" layoutY="148.0" onAction="#showContactFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search Filter">
+            <JFXButton layoutX="15.0" layoutY="129.0" onAction="#showContactFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search Filter">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -438,7 +438,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="686.0" layoutY="148.0" onAction="#clearContactFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
+            <JFXButton layoutX="699.0" layoutY="129.0" onAction="#clearContactFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -450,12 +450,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <TableView fx:id="locationTable" layoutX="416.0" layoutY="194.0" prefHeight="347.0" prefWidth="387.0">
+            <TableView fx:id="locationTable" layoutX="391.0" layoutY="175.0" prefHeight="347.0" prefWidth="412.0">
                <columns>
-                  <TableColumn fx:id="employeeID2Col" prefWidth="92.0" text="Employee ID" />
+                  <TableColumn fx:id="employeeID2Col" prefWidth="92.0" text="Manager" />
                   <TableColumn fx:id="countryCol" prefWidth="92.00003051757812" text="Country" />
                   <TableColumn fx:id="cityCol" minWidth="0.0" prefWidth="102.39996337890625" text="City" />
-                  <TableColumn fx:id="streetCol" minWidth="0.0" prefWidth="100.0" text="Street" />
+                  <TableColumn fx:id="streetCol" minWidth="0.0" prefWidth="123.99993896484375" text="Street" />
                </columns>
             </TableView>
             <AnchorPane fx:id="searchFilterContact" layoutX="171.0" layoutY="166.0" prefHeight="122.0" prefWidth="420.0" visible="false">
@@ -499,7 +499,31 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <JFXButton layoutX="686.0" layoutY="103.0" onAction="#searchContact" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
+            <JFXButton layoutX="699.0" layoutY="84.0" onAction="#searchContact" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="deleteNumber" disable="true" layoutX="249.0" layoutY="529.0" onAction="#deleteNumber" prefHeight="34.0" prefWidth="125.0" styleClass="AddDepartment" text="-Delete Number">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="deleteLocation" disable="true" layoutX="678.0" layoutY="528.0" onAction="#deleteLocation" prefHeight="36.0" prefWidth="125.0" styleClass="AddDepartment" text="-Delete Location">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />

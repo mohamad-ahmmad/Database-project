@@ -1,47 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.DatePicker?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="496.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label alignment="CENTER" layoutX="118.0" prefHeight="40.0" prefWidth="258.0" text="Enter Employee Information">
+      <Label alignment="CENTER" layoutX="118.0" layoutY="-2.0" prefHeight="40.0" prefWidth="258.0" text="Enter Employee Information">
          <font>
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="55.0" layoutY="63.0" prefHeight="24.0" prefWidth="112.0" />
-      <Label alignment="CENTER" layoutX="66.0" layoutY="46.0" prefHeight="18.0" prefWidth="90.0" text="First Name:">
+      <TextField fx:id="enterFName" layoutX="74.0" layoutY="57.0" prefHeight="26.0" prefWidth="112.0" />
+      <Label alignment="CENTER" layoutX="84.0" layoutY="35.0" prefHeight="18.0" prefWidth="90.0" text="First Name:">
          <font>
             <Font name="Berlin Sans FB" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="191.0" layoutY="63.0" prefHeight="24.0" prefWidth="112.0" />
-      <Label alignment="CENTER" layoutX="202.0" layoutY="45.0" prefHeight="18.0" prefWidth="90.0" text="Middle Name">
+      <TextField fx:id="enterMName" layoutX="202.0" layoutY="57.0" prefHeight="18.0" prefWidth="112.0" />
+      <Label alignment="CENTER" layoutX="203.0" layoutY="35.0" prefHeight="18.0" prefWidth="90.0" text="Middle Name">
          <font>
             <Font name="Berlin Sans FB" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="329.0" layoutY="63.0" prefHeight="24.0" prefWidth="112.0" />
-      <Label alignment="CENTER" layoutX="340.0" layoutY="45.0" prefHeight="18.0" prefWidth="90.0" text="Last Name">
+      <TextField fx:id="enterLName" layoutX="329.0" layoutY="57.0" prefHeight="18.0" prefWidth="112.0" />
+      <Label alignment="CENTER" layoutX="340.0" layoutY="35.0" prefHeight="18.0" prefWidth="90.0" text="Last Name">
          <font>
             <Font name="Berlin Sans FB" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="89.0" layoutY="99.0" prefHeight="24.0" prefWidth="112.0" />
-      <Label alignment="CENTER" layoutX="36.0" layoutY="102.0" prefHeight="18.0" prefWidth="48.0" text="Gender">
+      <Label alignment="CENTER" layoutX="277.0" layoutY="99.0" prefHeight="18.0" prefWidth="48.0" text="Gender">
          <font>
             <Font name="Berlin Sans FB" size="14.0" />
          </font>
       </Label>
-      <DatePicker layoutX="303.0" layoutY="99.0" />
-      <Label alignment="CENTER" layoutX="223.0" layoutY="102.0" prefHeight="18.0" prefWidth="70.0" text="Birthdate">
+      <Label alignment="CENTER" layoutX="5.0" layoutY="102.0" prefHeight="18.0" prefWidth="70.0" text="Birthdate">
          <font>
             <Font name="Berlin Sans FB" size="14.0" />
          </font>
       </Label>
+      <MFXDatePicker fx:id="enterDate" borderGap="5.0" layoutX="72.0" layoutY="92.0" prefHeight="0.0" prefWidth="171.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></MFXDatePicker>
+      <JFXRadioButton fx:id="radioBtnMale" layoutX="338.0" layoutY="90.0" prefHeight="18.0" prefWidth="66.0" text="Male">
+         <selectedColor>
+            <Color red="0.9725490212440491" green="0.6627451181411743" blue="0.0941176488995552" />
+         </selectedColor>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="radioBtnFemale" layoutX="338.0" layoutY="113.0" text="Female">
+         <selectedColor>
+            <Color red="0.9725490212440491" green="0.6627451181411743" blue="0.0941176488995552" />
+         </selectedColor>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXRadioButton>
    </children>
 </AnchorPane>

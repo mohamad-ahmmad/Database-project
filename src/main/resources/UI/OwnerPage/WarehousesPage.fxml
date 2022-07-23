@@ -49,7 +49,7 @@
             <TableColumn fx:id="managerIDCol" prefWidth="126.4000244140625" text="Manager ID" />
         </columns>
       </TableView>
-      <JFXButton layoutX="618.0" layoutY="637.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Warehouse">
+      <JFXButton fx:id="btnDeleteWarehouse" disable="true" layoutX="618.0" layoutY="637.0" onAction="#deleteWarehouse" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Warehouse">
          <stylesheets>
             <URL value="@../../CSS/ColorThemes.css" />
             <URL value="@../../CSS/OwnerPage/Departments.css" />

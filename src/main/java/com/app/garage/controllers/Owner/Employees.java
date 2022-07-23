@@ -12,7 +12,7 @@ public class Employees {
     Long SSN,IDCard,officeTelephone, phoneNumber;
     String firstName,middleName,lastName,Type,hireDate,birthDate;
     String gender,country,city,street;
-    Integer Salary;
+    Long Salary;
 
     public Employees(Long SSN,Long phonenumber){
         this.SSN= SSN;
@@ -47,7 +47,7 @@ public class Employees {
         public Long getSSN() {
         return SSN;
     }
-    public Employees(Long SSN, Long IDCard, Long officeTelephone, String firstName, String middleName, String lastName, String Type, String hireDate, String birthDate, String gender, Integer Salary) {
+    public Employees(Long SSN, Long IDCard, Long officeTelephone, String firstName, String middleName, String lastName, String Type, String hireDate, String birthDate, String gender, Long Salary) {
         this.SSN = SSN;
         this.IDCard = IDCard;
         this.officeTelephone = officeTelephone;
@@ -104,7 +104,7 @@ public class Employees {
         return gender;
     }
 
-    public Integer getSalary() {
+    public Long getSalary() {
         return Salary;
     }
 
@@ -148,7 +148,7 @@ public class Employees {
         this.gender = gender;
     }
 
-    public void setSalary(Integer Salary) {
+    public void setSalary(Long Salary) {
         this.Salary = Salary;
     }
     
