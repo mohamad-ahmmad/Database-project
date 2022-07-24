@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.MFXDatePicker?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="389.0" stylesheets="@../../../CSS/ColorThemes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MFXDatePicker fx:id="hireDate" floatMode="ABOVE" floatingText="Hiredate:" layoutX="95.0" layoutY="167.0" styleClass="date-box" />
-      <MFXDatePicker fx:id="birthDate" floatMode="ABOVE" floatingText="Birthdate" layoutX="95.0" layoutY="97.0" styleClass="date-box" />
+      <DatePicker fx:id="birthDate" editable="false" layoutX="95.0" layoutY="109.0" prefHeight="30.0" prefWidth="200.0" promptText="Birthdate:" />
+      <DatePicker fx:id="hireDate" editable="false" layoutX="95.0" layoutY="174.0" prefHeight="30.0" prefWidth="200.0" promptText="Hiredate:" />
    </children>
 </AnchorPane>

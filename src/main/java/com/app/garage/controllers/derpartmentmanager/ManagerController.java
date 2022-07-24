@@ -60,6 +60,7 @@ public class ManagerController implements Initializable {
     
    
     
+    
     private void loadAnimatedPane(String path) throws IOException{
                     Timeline t = new Timeline();
         Parent root = FXMLLoader.load(getClass().getResource(path));

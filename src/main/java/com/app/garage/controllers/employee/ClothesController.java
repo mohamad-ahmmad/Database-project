@@ -126,6 +126,8 @@ public class ClothesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
           searchAll();
+          
+          dressTable.setEditable(true);
           idCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
           nameCol.setCellFactory(TextFieldTableCell.forTableColumn());
         

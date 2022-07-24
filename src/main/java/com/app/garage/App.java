@@ -18,7 +18,7 @@ public class App extends Application {
         
     }
 
-    public static final String ip = "jdbc:oracle:thin:@192.168.18.148:1521:xe",
+    public static final String ip = "jdbc:oracle:thin:@192.168.18.158:1521:xe",
     user= "c##daraghmeh",
     password= "123456" ;
 
@@ -34,6 +34,9 @@ public class App extends Application {
         //hello bdair
         ss.setScene(temp);
     }
+    
+    
+    
     
     @Override
     public void start(Stage stage) throws Exception {

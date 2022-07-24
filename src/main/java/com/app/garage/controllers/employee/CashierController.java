@@ -291,20 +291,20 @@ public class CashierController implements Initializable {
              stDone.executeQuery("select receipt_num.nextval from dual");
              for(CardController temp : conts){
                  Date current = new Date();
-                 SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy");
+                 SimpleDateFormat formatter= new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
                  
                  String currentDate = formatter.format(current);
                  String dressID = Long.toString(temp.getID());
                  String depid = this.idCard.substring(1, 4);
                  String amount = temp.getAmount();
                  
-              
+    
                  stDone.executeUpdate("insert into sell_record values("
                          + " receipt_id.nextval, "
                          + " receipt_num.currval, "
                          + depid+", "
-                         + dressID+", "
-                         + "substr( current_timestamp , 1 ,18), "
+                         + dressID+", '"
+                         + currentDate+"', "
                          + amount
                          + " )");
                  

@@ -18,6 +18,7 @@ C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\Departments.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\OwnerController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\ClothesController.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\Contact.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\CashierController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\HomePageController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\warehouseManager\WarehousesController.java
@@ -33,4 +34,6 @@ C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\ClothesController.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Department.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\WarehousesController.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\Employee.java
 C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\warehouseManager\ShipmentsController.java
+C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\EmpLocation.java

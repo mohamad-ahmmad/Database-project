@@ -211,6 +211,8 @@ public class ReceiptController implements Initializable  {
         dressIDCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
         amountCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         
+    
+        
        
         
         amountCol.setOnEditCommit(e->{
