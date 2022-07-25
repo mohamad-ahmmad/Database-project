@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\OwnerController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\derpartmentmanager\ProfitsController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\DepartmentController.java
@@ -14,7 +13,6 @@ D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\Warehouses.ja
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\Employees.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\SliderController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\departmentManager\DepManagerController.java
-D:\DataBase Project\src\main\java\com\app\garage\controllers\Department.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\ReceiptController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\EmployeeController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\ProfitsController.java
@@ -33,42 +31,5 @@ D:\DataBase Project\src\main\java\module-info.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\EmployeeController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\CardController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\WarehousesController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\Dress.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\EmailSender.java
-=======
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\WarehousesController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\module-info.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\CardsSlider.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\warehouseManager\SuppliersController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\Dress.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\App.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\ProfitsController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\warehouseManager\ClothesController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\login\LoginController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\Warehouses.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\CardController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\TypeController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\EmployeeController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\departmentManager\DepManagerController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\SliderController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\AddEmployeeController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\Receipt.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\Departments.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\OwnerController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\ClothesController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\CashierController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\HomePageController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\warehouseManager\WarehousesController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\ManagerController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\ReceiptController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\EmployeesController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\EmailSender.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\warehouseManager\WarehouseManagerController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\ProfitsController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\DepartmentController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\EmployeeController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Owner\Employees.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\employee\ClothesController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\Department.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\derpartmentmanager\WarehousesController.java
-C:\Users\USER-M\OneDrive\Documents\NetBeansProjects\Ver2\garage\Database-project\src\main\java\com\app\garage\controllers\warehouseManager\ShipmentsController.java
->>>>>>> 435b6a941888d988830c04f7a6e5b311b9a63a6e

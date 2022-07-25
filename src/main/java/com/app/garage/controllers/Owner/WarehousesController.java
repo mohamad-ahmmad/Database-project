@@ -284,7 +284,7 @@ public class WarehousesController implements Initializable{
                  + "warehouse");
         warehouses.clear();
         while(rs.next()) {  
-            Integer id = rs.getInt("WID");
+            Long id = rs.getLong("WID");
             String country = rs.getString("Country");
             String city= rs.getString("city");
             String street = rs.getString("street");
@@ -469,7 +469,7 @@ public class WarehousesController implements Initializable{
                  + " FROM "
                  + "warehouse");
         while(rs.next()) {  
-            Integer id = rs.getInt("WID");
+            Long id = rs.getLong("WID");
             String country = rs.getString("Country");
             String city= rs.getString("city");
             String street = rs.getString("street");
@@ -529,7 +529,6 @@ public class WarehousesController implements Initializable{
                {
                  st.executeUpdate("Update employee set wareID = '' where SSN = " + old);
                  st.executeUpdate("Update warehouse set ManagerID = '' where WID = " + w.getWID());
-                 st.executeUpdate("Delete from WDManager where WDSSN = " + old);
                  System.out.println("deleted");
                }
                else
@@ -539,11 +538,9 @@ public class WarehousesController implements Initializable{
                {
                    if((r.getString("etype").equals("warehouse") && (r.getString("Depid")==null && r.getString("wareid")==null)))
                    {
-                       st.executeUpdate("Update employee set wareID = '' where SSN = " + old);
-                       st.executeUpdate("Delete from WDManager where WDSSN = " + old);
-                       st.executeUpdate("insert into WDManager values("+e.getNewValue()+", 'newEmail@Gmail.com', 012457847)");
+                       st.executeUpdate("Update employee set wareID = '',IDCard =  where SSN = " + old);
                        st.executeUpdate("Update warehouse set ManagerID = "+ e.getNewValue()+ " where WID = " + w.getWID());
-                       st.executeUpdate("Update employee set wareID = "+w.getWID()+" where SSN = " + e.getNewValue());
+                       st.executeUpdate("Update employee set IDcard =  wareID = "+w.getWID()+" where SSN = " + e.getNewValue());
                    }
                    else
                    {
@@ -575,7 +572,7 @@ public class WarehousesController implements Initializable{
         + " FROM Warehouse "
         +"Where WID like '%"+txtFieldId.getText()+ "%' and WName like '%"+txtFieldName.getText()+"%' and country like '%"+txtFieldCountry.getText()+"%' and city like '%"+txtFieldCity.getText()+"%' and (street like '%"+txtFieldStreet.getText()+"%' or street is null) and ManagerID like '%"+txtFieldManagerId.getText() + "%' and WCapacity like '%"+txtFieldCapacity.getText()+"%'");
             while(rs.next()) {  
-            Integer id = rs.getInt("WID");
+            Long id = rs.getLong("WID");
             String country = rs.getString("Country");
             String city= rs.getString("city");
             String street = rs.getString("street");
