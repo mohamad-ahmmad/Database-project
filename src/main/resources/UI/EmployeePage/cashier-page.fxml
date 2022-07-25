@@ -35,11 +35,6 @@
             <Image url="@../../ICONS/employee/cart.png" />
          </image>
       </ImageView>
-      <Label layoutX="-116.0" layoutY="53.0" styleClass="labels" text="Cart :">
-         <font>
-            <Font name="Lucida Sans Demibold Italic" size="33.0" />
-         </font>
-      </Label>
       <MFXButton layoutX="737.0" layoutY="172.0" onAction="#btnPressed" prefHeight="30.0" prefWidth="70.0" styleClass="btns" text="Add">
          <font>
             <Font name="Berlin Sans FB" size="12.0" />

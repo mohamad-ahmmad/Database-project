@@ -1011,6 +1011,11 @@ private void Update() throws SQLException{
         }
              tableView.setItems(emps);
              SSNCol.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+             SSNCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+             SSNCol.setOnEditCommit(e->{
+                 System.out.println("test");
+             });
+             
              typeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
              IDCardCol.setCellValueFactory(new PropertyValueFactory<>("IDCard"));
              fNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));

@@ -27,6 +27,8 @@ import java.sql.Statement;
 import java.time.Month;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javafx.scene.input.MouseEvent;
 
 import javafx.util.Duration;
@@ -44,6 +46,7 @@ import javafx.scene.layout.Pane;
 
 
 public class HomePageController implements Initializable {
+    
     private Connection con;
     
     @FXML
@@ -73,11 +76,7 @@ public class HomePageController implements Initializable {
             currentPane.getChildren().add(CardsSlider.cards.get(0).getParent());
             
             DataInitilaizer();
-            
-     
-           
-            
-            
+   
         } catch (IOException ex) {
             System.out.println("Problems with loading the home-page-template.fxml");
         }
@@ -213,9 +212,14 @@ public class HomePageController implements Initializable {
             where s.depid=114 and s.purchased_date like '%21-JUL%' ; 
             
             */
+            Date s = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
+            String currentDate = formatter.format(s);
+            System.out.println(currentDate);
             ResultSet result = st.executeQuery("select (ds.PRICE-(ds.PRICE* ((select salepercentage from department_dress dd where dd.did="+depId+" AND dd.dressid=s.dressid )/100) )-ds.WSPRICE ) * AMOUNT as SOLD " 
                     + " from SELL_RECORD s join Dress ds on s.dressid = ds.dressid "
-                    + " where s.depid="+depId+" and s.purchased_date like '"+day+ "-JUL%' ");
+                    + " where s.depid="+depId+" and s.purchased_date like '"+String.format("%02d",day)+ "-"+ currentDate.substring(3,5) +"-"+ currentDate.substring(6,10) +"%' ");
+            System.out.println(day+ "-"+ currentDate.substring(3,5) +"-"+ currentDate.substring(6,10) +"%' ");
             
             long sum=0;
             
@@ -245,8 +249,6 @@ public class HomePageController implements Initializable {
     private int[] topDep; 
     int i=0;
     private void DataInitilaizer() {
-        
-        
         determinesTopDep();
         
         for(int i =0 ; i < this.i;i++){
@@ -258,16 +260,22 @@ public class HomePageController implements Initializable {
         
         
     }
-
+    static XYChart.Series  data = new XYChart.Series();
+    static boolean selected=true;
     private void calculateSliderData(CardsSlider slide ) {
-     
+        if(selected)
+        {
+        data.setName("Profits/day");
         LineChart ref =  slide.getSlideController().getLineChart();
-        XYChart.Series  data = new XYChart.Series();
-        
-        for(int i=0 ; i<arrDays.length ; i++)
+        selected=false;
+         for(int i=0 ; i<arrDays.length ; i++)
             data.getData().add(new XYChart.Data(Integer.toString(arrDays[i]),profitCalcDay(slide.getID(), arrDays[i])));
         
         ref.getData().add(data);
+        }
+        
+        
+       
         
     }
 

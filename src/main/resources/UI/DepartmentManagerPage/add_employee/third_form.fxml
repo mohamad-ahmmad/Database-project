@@ -8,14 +8,21 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="389.0" styleClass="comboboxes" stylesheets="@../../../CSS/ColorThemes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="94.0" layoutY="93.0" text="Gender :">
+      <Label layoutX="94.0" layoutY="58.0" text="Gender :">
          <font>
             <Font name="Berlin Sans FB" size="15.0" />
          </font>
       </Label>
-      <JFXCheckBox fx:id="femaleCheckBox" checkedColor="#f8a918" layoutX="158.0" layoutY="93.0" onAction="#checkBoxSelected" text="Female" />
-      <JFXCheckBox fx:id="maleCheckBox" checkedColor="#f8a918" layoutX="242.0" layoutY="93.0" onAction="#checkBoxSelected" text="Male" />
-      <MFXTextField fx:id="salary" floatMode="ABOVE" floatingText="Salary" floatingTextGap="2.0" layoutX="124.0" layoutY="147.0" maxHeight="26.0" minHeight="25.0" prefHeight="0.0" prefWidth="135.0" styleClass="textfields" />
-      <MFXTextField fx:id="idCard" floatMode="ABOVE" floatingText="ID Card" floatingTextGap="2.0" layoutX="124.0" layoutY="196.0" maxHeight="26.0" minHeight="25.0" prefHeight="0.0" prefWidth="135.0" styleClass="textfields" />
+      <JFXCheckBox fx:id="femaleCheckBox" checkedColor="#f8a918" layoutX="244.0" layoutY="57.0" onAction="#checkBoxSelected" text="Female" />
+      <JFXCheckBox fx:id="maleCheckBox" checkedColor="#f8a918" layoutX="160.0" layoutY="57.0" onAction="#checkBoxSelected" selected="true" text="Male" />
+      <MFXTextField fx:id="salary" floatMode="ABOVE" floatingText="Salary" floatingTextGap="2.0" layoutX="124.0" layoutY="146.0" maxHeight="26.0" minHeight="25.0" prefHeight="0.0" prefWidth="135.0" styleClass="textfields" />
+      <MFXTextField fx:id="idCard" floatMode="ABOVE" floatingText="Employee Number" floatingTextGap="2.0" layoutX="124.0" layoutY="195.0" maxHeight="26.0" minHeight="25.0" prefHeight="0.0" prefWidth="135.0" styleClass="textfields" />
+      <Label layoutX="94.0" layoutY="98.0" text="Type     :">
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+      </Label>
+      <JFXCheckBox fx:id="cashierCheckBox" checkedColor="#f8a918" layoutX="160.0" layoutY="97.0" onAction="#typeCheckBox" selected="true" text="Cashier" />
+      <JFXCheckBox fx:id="assistantCheckBox" checkedColor="#f8a918" layoutX="244.0" layoutY="97.0" onAction="#typeCheckBox" text="Assistant" />
    </children>
 </AnchorPane>

@@ -159,14 +159,14 @@ public class ReceiptController implements Initializable  {
             con= DriverManager.getConnection(App.ip, App.user, App.password);
             Statement st = con.createStatement();
             
-            ResultSet all = st.executeQuery("select * from SELL_RECORD where DEPID = "+LoginController.currentUser.substring(1,4));
+            ResultSet all = st.executeQuery("select RID, RECEPIT_NUM, DRESSID, PURCHASED_DATE, AMOUNT from SELL_RECORD where DEPID = "+LoginController.currentUser.substring(1,4));
             
             while(all.next()){
                 long id = all.getLong(1);
                 long receiptNum = all.getLong(2);
-                long dressid = all.getLong(4);
-                String date = all.getString(5).replace(".", ":");
-                int amount = all.getInt(6);
+                long dressid = all.getLong(3);
+                String date = all.getString(4).replace(".", ":");
+                int amount = all.getInt(5);
                 
                 
                 initState.add(new Receipt(id, receiptNum, dressid, date, amount));
@@ -210,6 +210,8 @@ public class ReceiptController implements Initializable  {
         receiptIDCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
         dressIDCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
         amountCol.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        
+    
         
        
         
@@ -318,7 +320,7 @@ public class ReceiptController implements Initializable  {
         try {
             con = DriverManager.getConnection(App.ip, App.user, App.password);
             Statement insert = con.createStatement();
-            insert.executeUpdate("insert into SELL_RECORD values( "
+            insert.executeUpdate("insert into SELL_RECORD (RID, RECEPIT_NUM, DEPID, DRESSID, PURCHASED_DATE, AMOUNT) values ( "
                     + " receipt_id.nextval, "
                     + receiptID +", "
                     + LoginController.currentUser.substring(1, 4) +", "

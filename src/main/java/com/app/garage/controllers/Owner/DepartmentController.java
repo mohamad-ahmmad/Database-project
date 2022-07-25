@@ -3,6 +3,7 @@ package com.app.garage.controllers.Owner;
 import com.app.garage.App;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import io.github.palexdev.materialfx.dialogs.MFXDialogs;
 import java.io.IOException;
@@ -62,8 +63,8 @@ import javax.swing.JOptionPane;
 
 
 public class DepartmentController implements Initializable{
-     
-
+    @FXML
+    private JFXComboBox<String> comboboxManagerID;
     @FXML
     private TextField EnterCountry;
     @FXML
@@ -74,8 +75,7 @@ public class DepartmentController implements Initializable{
     private TextField EnterID;
     @FXML
     private TextField EnterName;
-    @FXML
-    private TextField EnterManagerID;
+    
 
     @FXML
     private Pane IDPane;
@@ -276,20 +276,20 @@ public class DepartmentController implements Initializable{
         boolean f = true;
         boolean canAdd = false;
         boolean Continue = true;
-        if ((EnterManagerID==null||EnterManagerID.getText().isEmpty()) && i==3)
+        if (comboboxManagerID.getSelectionModel().getSelectedItem().isEmpty() && i==3)
         {
-            EnterManagerID.setStyle("-fx-border-color:RED");
+            comboboxManagerID.setStyle("-fx-border-color:RED");
         }
         else
         {
         try{
-        Long test = Long.parseLong(EnterManagerID.getText());
-        EnterManagerID.setStyle("");
+        Long test = Long.parseLong(comboboxManagerID.getSelectionModel().getSelectedItem());
+        comboboxManagerID.setStyle("");
         f= true;
         }
          catch(Exception e){
              System.out.println("test");
-             EnterManagerID.setStyle("-fx-border-color:RED");
+             comboboxManagerID.setStyle("-fx-border-color:RED");
              f=false;
         }
         if(f)
@@ -299,7 +299,7 @@ public class DepartmentController implements Initializable{
         Country=EnterCountry.getText();
         City=EnterCity.getText();
         Street = EnterStreet.getText();
-        ManagerID=Long.parseLong(EnterManagerID.getText());
+        ManagerID=Long.parseLong(comboboxManagerID.getSelectionModel().getSelectedItem());
          Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
          Statement stmt = con.createStatement();
          ResultSet s1= stmt.executeQuery("Select SSN, Etype, Depid from employee");
@@ -323,7 +323,7 @@ public class DepartmentController implements Initializable{
          }
          else
          {
-         EnterManagerID.setStyle("-fx-border-color:RED"); 
+         comboboxManagerID.setStyle("-fx-border-color:RED"); 
          Continue=false;
          }
          if(Continue)
@@ -351,6 +351,7 @@ public class DepartmentController implements Initializable{
 
             tableView.setItems(deps);
              IDCol.setCellValueFactory(new PropertyValueFactory<>("DID"));
+             
              nameCol.setCellValueFactory(new PropertyValueFactory<>("DName"));
              countryCol.setCellValueFactory(new PropertyValueFactory<>("Country"));
              cityCol.setCellValueFactory(new PropertyValueFactory<>("City"));
@@ -376,8 +377,6 @@ public class DepartmentController implements Initializable{
          EnterCountry.setText("");
          if(EnterStreet!=null)
          EnterStreet.setText("");
-         if(EnterManagerID!=null)
-         EnterManagerID.setText("");
          if(EnterName!=null)
          EnterName.setText("");
          if(EnterID!=null)
@@ -392,7 +391,7 @@ public class DepartmentController implements Initializable{
     void Next(ActionEvent event) throws IOException, SQLException {
         boolean exists=false;
         
-        if(EnterID.getText().isEmpty() && i==0)
+        if(EnterID.getText().isEmpty() && i==0 || EnterID.getText().length()!=3)
         {
              EnterID.setStyle("-fx-border-color:RED");
         }
@@ -422,6 +421,14 @@ public class DepartmentController implements Initializable{
         {
             btnNext.setVisible(false);
             btnDone.setVisible(true);
+            Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+            Statement stmt = con.createStatement();
+            ResultSet rs= stmt.executeQuery("Select SSN from employee where Depid is null and Etype='manager'");
+            ObservableList<String> SSNs = FXCollections.observableArrayList();
+            while(rs.next()){
+                SSNs.add(rs.getString("SSN"));
+            }
+            comboboxManagerID.setItems(SSNs);
         }
         if(flag){
             Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
@@ -571,7 +578,7 @@ public class DepartmentController implements Initializable{
                Statement st = con.createStatement();
                ResultSet ss = st.executeQuery("Select IDCard from employee where SSN =" + old);
                while(ss.next()){
-                id = ss.getString("IDCard");
+                id = String.format("%03d",ss.getLong("IDCard"));
                 hello = id.charAt(0)+"000"+id.charAt(4)+id.charAt(5);
                }
                if(e.getNewValue()==null)
@@ -587,12 +594,12 @@ public class DepartmentController implements Initializable{
                Statement q= con.createStatement();
                while(S.next())
                {
-                  card =  String.valueOf(S.getLong("IDCard"));
+                  card =  String.format("%03d",S.getLong("IDCard"));
                    if((S.getString("etype").equals("manager") && (S.getString("Depid")==null && S.getString("wareid")==null)))
                    {
                        q.executeUpdate("Update employee set DepID = '', IDCard = "+hello+" where SSN = " + old);
                        q.executeUpdate("Update Department set ManagerID = "+ e.getNewValue()+ " where DID = " + s.getDID());
-                       q.executeUpdate("Update employee set IDCard = " +card.charAt(0)+s.getDID()+card.charAt(4)+card.charAt(5)+", DepID = "+s.getDID()+" where SSN = " + e.getNewValue());
+                       q.executeUpdate("Update employee set IDCard = " +card.charAt(0)+String.format("%03d",s.getDID())+card.charAt(4)+card.charAt(5)+", DepID = "+s.getDID()+" where SSN = " + e.getNewValue());
                    }
                    else
                    {
