@@ -26,17 +26,17 @@
             <Image url="@../../ICONS/DepartmentManager/warehouse_64px.png" />
          </image>
       </ImageView>
-      <TableView layoutX="7.0" layoutY="238.0" prefHeight="450.0" prefWidth="794.0" style="-fx-border-color: #333;">
+      <TableView fx:id="tableView" layoutX="7.0" layoutY="238.0" prefHeight="450.0" prefWidth="794.0" style="-fx-border-color: #333;">
         <columns>
-          <TableColumn prefWidth="75.0" text="Dress ID" />
-          <TableColumn prefWidth="75.0" text="Name" />
-            <TableColumn prefWidth="75.0" text="Color" />
-            <TableColumn prefWidth="42.39994812011719" text="Size" />
-            <TableColumn prefWidth="112.79998779296875" text="Brand Name" />
-            <TableColumn prefWidth="54.4000244140625" text="Stock" />
-            <TableColumn prefWidth="119.20001220703125" text="Warehouse ID" />
-            <TableColumn prefWidth="102.4000244140625" text="Wholesale Price" />
-            <TableColumn prefWidth="67.199951171875" text="Price" />
+          <TableColumn fx:id="tableId" prefWidth="75.0" text="Dress ID" />
+          <TableColumn fx:id="tableName" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="tableColor" prefWidth="75.0" text="Color" />
+            <TableColumn fx:id="tableSize" prefWidth="42.39994812011719" text="Size" />
+            <TableColumn fx:id="tableBrand" prefWidth="112.79998779296875" text="Brand Name" />
+            <TableColumn fx:id="tableStock" prefWidth="54.4000244140625" text="Stock in Warehouse" />
+            <TableColumn fx:id="tableWareId" prefWidth="119.20001220703125" text="Warehouse ID" />
+            <TableColumn fx:id="tableWPrice" prefWidth="102.4000244140625" text="Wholesale Price" />
+            <TableColumn fx:id="tablePrice" prefWidth="67.199951171875" text="Price" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -197,7 +197,7 @@
          </children>
       </Pane>
       <AnchorPane fx:id="filterPane" layoutX="379.0" layoutY="455.0" prefHeight="230.0" prefWidth="420.0" />
-      <MFXButton layoutX="675.0" layoutY="152.0" onAction="#showLocation" prefHeight="34.0" prefWidth="125.0" styleClass="btns" text="Show location" />
+      <MFXButton layoutX="675.0" layoutY="152.0" onAction="#showInfo" prefHeight="34.0" prefWidth="125.0" styleClass="btns" text="Show Info." />
       <Pane fx:id="pricePane" layoutX="1037.0" layoutY="-557.0" prefHeight="51.0" prefWidth="142.0">
          <children>
             <Label layoutX="48.0" layoutY="1.0" text="Price">
@@ -234,5 +234,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
+      <MFXButton layoutX="9.0" layoutY="153.0" onAction="#searchButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" text="Search!" />
    </children>
 </AnchorPane>

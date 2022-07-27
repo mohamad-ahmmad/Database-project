@@ -28,7 +28,7 @@
                   </DropShadow>
                </effect>
                <children>
-                  <Pane fx:id="labelDepartment" layoutX="-1.0" layoutY="318.0" onMouseClicked="#openDepartment" prefHeight="40.0" prefWidth="194.0" styleClass="labels">
+                  <Pane fx:id="labelDepartment" layoutX="-1.0" layoutY="325.0" onMouseClicked="#openDepartment" prefHeight="40.0" prefWidth="194.0" styleClass="labels">
                      <children>
                         <Label alignment="CENTER" layoutX="41.0" onMouseClicked="#openDepartment" prefHeight="40.0" prefWidth="83.0" text="Clothes" textFill="#333333">
                            <font>
@@ -48,7 +48,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane fx:id="labelWarehouses" layoutX="-1.0" layoutY="358.0" onMouseClicked="#openWarehouses" prefHeight="40.0" prefWidth="194.0" styleClass="labels">
+                  <Pane fx:id="labelWarehouses" layoutX="-1.0" layoutY="383.0" onMouseClicked="#openWarehouses" prefHeight="40.0" prefWidth="194.0" styleClass="labels">
                      <children>
                         <Label alignment="CENTER" layoutX="40.0" onMouseClicked="#openWarehouses" prefHeight="40.0" prefWidth="102.0" text="  Warehouses" textFill="#333333">
                            <font>
@@ -68,7 +68,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane fx:id="labelEmployees" layoutX="-1.0" layoutY="238.0" onMouseClicked="#openEmployees" prefHeight="40.0" prefWidth="194.0" styleClass="labels">
+                  <Pane fx:id="labelEmployees" layoutX="-1.0" layoutY="207.0" onMouseClicked="#openEmployees" prefHeight="40.0" prefWidth="194.0" styleClass="labels">
                      <children>
                         <Label alignment="CENTER" layoutX="44.0" onMouseClicked="#openEmployees" prefHeight="40.0" prefWidth="99.0" text=" Employees" textFill="#333333">
             
@@ -89,7 +89,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Pane>
-                  <Pane fx:id="labelProfits" layoutX="-1.0" layoutY="279.0" onMouseClicked="#openProfits" prefHeight="40.0" prefWidth="194.0" styleClass="labels" stylesheets="@../../CSS/ColorThemes.css">
+                  <Pane fx:id="labelProfits" layoutX="-1.0" layoutY="266.0" onMouseClicked="#openProfits" prefHeight="40.0" prefWidth="194.0" styleClass="labels" stylesheets="@../../CSS/ColorThemes.css">
                      <children>
                         <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="23.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -176,12 +176,12 @@
                   <URL value="@../../CSS/ColorThemes.css" />
                </stylesheets>
             </Label>
-            <Label fx:id="labelLogout" alignment="CENTER" layoutY="422.0" onMouseClicked="#Logout" prefHeight="40.0" prefWidth="190.0" styleClass="labels" text="  Log out" textFill="#f8a918">
+            <Label fx:id="labelLogout" alignment="CENTER" layoutX="-1.0" layoutY="439.0" onMouseClicked="#Logout" prefHeight="40.0" prefWidth="194.0" styleClass="labels" text="  Log out" textFill="#f8a918">
                <font>
                   <Font name="Berlin Sans FB" size="14.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0">
+                  <ImageView fitHeight="23.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0">
                      <image>
                         <Image url="@../../ICONS/OwnerPage/logout.png" />
                      </image>

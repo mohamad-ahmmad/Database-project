@@ -4,23 +4,124 @@
  */
 package com.app.garage.controllers.derpartmentmanager;
 
+import com.app.garage.App;
 import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.util.converter.LongStringConverter;
 
 /**
  *
  * @author USER-M
  */
-public class WarehousesController {
+public class WarehousesController implements Initializable {
+    private Connection con;
+    private void searchAll(){
+        data.clear();
+        try {
+            
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            
+            ResultSet rs=  st.executeQuery(" select d.DRESSID, d.DRESSNAME, d.DRESSCOLOR, d.BRANDNAME, d.DRESSSIZE, wd.WAREHOUSE_STOCK, wd.WID, d.WSPRICE, d.PRICE from DRESS d join WAREHOUSE_DRESS wd on d.DRESSID = wd.DRESSID ");
+            
+            while(rs.next()){
+                long dId = rs.getLong(1);
+                String dressName = rs.getString(2);
+                String dressColor = rs.getString(3);
+                String dressBrand = rs.getString(4);
+                String dressSize = rs.getString(5);
+                int wStock = rs.getInt(6);
+                int wId = rs.getInt(7);
+                int wPrice = rs.getInt(8);
+                int price = rs.getInt(9);
+                
+                data.add(new Warehouse (dId, dressName, dressSize, dressColor, dressBrand, wStock, wId, wPrice, price));
+            }
+          
+            
+            tableView.setItems(data);
+            con.close();
+            
+        } catch (SQLException ex) {
+            
+            ex.printStackTrace();
+        }
+        
+        
+    }
+    private ObservableList<Warehouse> data = FXCollections.observableArrayList();
+        @Override
+    public void initialize(URL url, ResourceBundle rb) {
+          tableId.setCellValueFactory(new PropertyValueFactory<>("dressId"));
+            tableName.setCellValueFactory(new PropertyValueFactory<>("name"));
+            tableColor.setCellValueFactory(new PropertyValueFactory<>("color"));
+            tableSize.setCellValueFactory(new PropertyValueFactory<>("size"));
+            tableBrand.setCellValueFactory(new PropertyValueFactory<>("brandName"));
+            tableStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
+            tableWareId.setCellValueFactory(new PropertyValueFactory<>("warehouseId"));
+            tableWPrice.setCellValueFactory(new PropertyValueFactory<>("wprice"));
+            tablePrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+            
+        searchAll();
+        tableView.setEditable(true);
+        tableId.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+        tableId.setOnEditCommit(e->{tableView.refresh();});
+        
+    }
     
+        @FXML
+    private TableColumn<Warehouse, String> tableBrand;
+
+    @FXML
+    private TableColumn<Warehouse, String> tableColor;
+
+    @FXML
+    private TableColumn<Warehouse, Long> tableId;
+
+    @FXML
+    private TableColumn<Warehouse, String> tableName;
+
+    @FXML
+    private TableColumn<Warehouse, Integer> tablePrice;
+
+    @FXML
+    private TableColumn<Warehouse, String> tableSize;
+
+    @FXML
+    private TableColumn<Warehouse, Integer> tableStock;
+
+    @FXML
+    private TableView <Warehouse> tableView;
+
+    @FXML
+    private TableColumn<Warehouse, Integer> tableWPrice;
+
+    @FXML
+    private TableColumn<Warehouse, Integer> tableWareId;
     
         @FXML
     private TextField brandField;
@@ -116,7 +217,7 @@ public class WarehousesController {
     }
 
     @FXML
-    void showLocation(ActionEvent event) {
+    void showInfo(ActionEvent event) {
 
     }
 
@@ -126,6 +227,14 @@ public class WarehousesController {
     }
     @FXML
     void clearFilter(){
+        Object[] arr = filterPane.getChildren().toArray();
+        
+        for(Object temp : arr){
+            
+            if(temp instanceof JFXCheckBox)
+                ((JFXCheckBox)temp).setSelected(false);
+        }
+        
         flowPane.getChildren().clear();
         flowPane.getChildren().add(idPane);
     }
@@ -211,4 +320,39 @@ public class WarehousesController {
          flowPane.getChildren().add(wIDPane);
      else flowPane.getChildren().remove(wIDPane);
     }
+
+    @FXML
+    private void searchButton(){
+         data.clear();
+         
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            
+            ResultSet rs = st.executeQuery("select d.DRESSID, d.DRESSNAME, d.DRESSCOLOR, d.BRANDNAME, d.DRESSSIZE, wd.WAREHOUSE_STOCK, wd.WID, d.WSPRICE, d.PRICE from DRESS d join WAREHOUSE_DRESS wd on d.DRESSID = wd.DRESSID "
+                    + " where d.DRESSID LIKE '%"+idField.getText()+"%' AND d.DRESSNAME LIKE '%"+nameField.getText()+"%' AND d.DRESSCOLOR LIKE '%"+colorField.getText()+"%' AND d.BRANDNAME LIKE '%"+brandField.getText()+"%' "
+                    + " AND d.DRESSSIZE LIKE '%"+sizeField.getText()+"%' AND wd.WAREHOUSE_STOCK LIKE '%"+stockField.getText()+"%' AND wd.WID LIKE '%"+wIDField.getText()+"%' AND d.WSPRICE LIKE '%"+wPriceField.getText()+"%' AND d.PRICE LIKE '%"+priceField.getText()+"%' ");
+            
+                   while(rs.next()){
+                long dId = rs.getLong(1);
+                String dressName = rs.getString(2);
+                String dressColor = rs.getString(3);
+                String dressBrand = rs.getString(4);
+                String dressSize = rs.getString(5);
+                int wStock = rs.getInt(6);
+                int wId = rs.getInt(7);
+                int wPrice = rs.getInt(8);
+                int price = rs.getInt(9);
+                
+                data.add(new Warehouse (dId, dressName, dressSize, dressColor, dressBrand, wStock, wId, wPrice, price));
+            }
+                   
+                   tableView.setItems(data);
+            con.close();
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+        
+    }
+
 }

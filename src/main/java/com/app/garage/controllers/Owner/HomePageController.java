@@ -27,6 +27,8 @@ import java.sql.Statement;
 import java.time.Month;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javafx.scene.input.MouseEvent;
 
 import javafx.util.Duration;
@@ -211,12 +213,17 @@ public class HomePageController implements Initializable {
             select s.dressid, (ds.PRICE-(ds.PRICE* ((select salepercentage from department_dress dd where dd.did=114 AND dd.dressid=s.dressid )/100) ) ) * AMOUNT as SOLD 
             from SELL_RECORD s join Dress ds on s.dressid = ds.dressid 
             where s.depid=114 and s.purchased_date like '%21-JUL%' ; 
-            
+            111411 (1,4)
             */
+            Date s = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
+            String currentDate = formatter.format(s);
+            
             ResultSet result = st.executeQuery("select (ds.PRICE-(ds.PRICE* ((select salepercentage from department_dress dd where dd.did="+depId+" AND dd.dressid=s.dressid )/100) )-ds.WSPRICE ) * AMOUNT as SOLD " 
                     + " from SELL_RECORD s join Dress ds on s.dressid = ds.dressid "
-                    + " where s.depid="+depId+" and s.purchased_date like '"+day+ "-JUL%' ");
+                    + " where s.depid="+depId+" and s.purchased_date like '"+String.format("%02d", day)+ "-"+currentDate.substring(3,5)+"-"+currentDate.substring(6,10)+"%' ");
             
+     
             long sum=0;
             
             
@@ -277,8 +284,9 @@ public class HomePageController implements Initializable {
             con = DriverManager.getConnection(App.ip, App.user, App.password);
             Statement st = con.createStatement();
             ResultSet result = st.executeQuery("select DEPID , SUM(AMOUNT) as aa from SELL_RECORD GROUP BY DEPID ORDER BY aa desc");
+            
             i=0;
-            while(result.next() && i <3 ){
+            while(result.next() && i < 2 ){
                 topDep[i]=result.getInt(1);
                 i++;
             }
@@ -295,12 +303,15 @@ public class HomePageController implements Initializable {
             con = DriverManager.getConnection(App.ip, App.user, App.password);
             Statement inf = con.createStatement();
             ResultSet q = inf.executeQuery("select DNAME, Country,City from Department where DID ="+temp.getID());
-            
-            q.next();
-            
             SliderController s = temp.getSlideController();
+            if(q.next()){
+            
             s.getTextLocationSite().setText(q.getString(2)+", "+q.getString(3));
             s.getHeader().setText(q.getString(1));
+            }
+            ResultSet Manager = inf.executeQuery("select FIRSTNAME, LASTNAME from Employee where DEPID="+temp.getID()+" AND ETYPE = 'manager'");
+           if(Manager.next()) 
+            s.getTextManagerName().setText(Manager.getString(1)+" "+Manager.getString(2));
             
             con.close();
         } catch (SQLException ex) {
