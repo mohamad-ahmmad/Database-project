@@ -1,6 +1,7 @@
 package com.app.garage.controllers.Owner;
 
 import com.app.garage.App;
+import com.app.garage.controllers.login.LoginController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
@@ -276,7 +277,7 @@ public class DepartmentController implements Initializable{
         boolean f = true;
         boolean canAdd = false;
         boolean Continue = true;
-        if (comboboxManagerID.getSelectionModel().getSelectedItem().isEmpty() && i==3)
+        if (comboboxManagerID.getSelectionModel().getSelectedItem()==null && i==3)
         {
             comboboxManagerID.setStyle("-fx-border-color:RED");
         }
@@ -358,6 +359,7 @@ public class DepartmentController implements Initializable{
              streetCol.setCellValueFactory(new PropertyValueFactory<>("Street"));
              openingDateCol.setCellValueFactory(new PropertyValueFactory<>("OpeningDate"));
              managerIDCol.setCellValueFactory(new PropertyValueFactory<>("ManagerID"));
+             con.close();
           }
          
         catch (SQLException ex) {
@@ -365,22 +367,13 @@ public class DepartmentController implements Initializable{
           } 
          }
         }
-    }
         
+    }
+       
     }
     @FXML
      private void Cancel(ActionEvent e){
          i=0;
-         if(EnterCity!=null)
-         EnterCity.setText("");
-         if(EnterCountry!=null)
-         EnterCountry.setText("");
-         if(EnterStreet!=null)
-         EnterStreet.setText("");
-         if(EnterName!=null)
-         EnterName.setText("");
-         if(EnterID!=null)
-         EnterID.setText("");
          Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
          stage.close();
          
@@ -421,14 +414,6 @@ public class DepartmentController implements Initializable{
         {
             btnNext.setVisible(false);
             btnDone.setVisible(true);
-            Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
-            Statement stmt = con.createStatement();
-            ResultSet rs= stmt.executeQuery("Select SSN from employee where Depid is null and Etype='manager'");
-            ObservableList<String> SSNs = FXCollections.observableArrayList();
-            while(rs.next()){
-                SSNs.add(rs.getString("SSN"));
-            }
-            comboboxManagerID.setItems(SSNs);
         }
         if(flag){
             Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
@@ -448,8 +433,19 @@ public class DepartmentController implements Initializable{
          {
         FXMLLoader loader;
         loader = new FXMLLoader(getClass().getResource(next.get(i)));
+        
         loader.setController(this);
         Parent root = loader.load();
+        if(i==2){
+            rs= stmt.executeQuery("Select SSN from employee where Depid is null and Etype='manager'");
+            ObservableList<String> SSNs = FXCollections.observableArrayList();
+            while(rs.next()){
+                System.out.println("yo");
+                SSNs.add(rs.getString("SSN"));
+            }
+            comboboxManagerID.setItems(SSNs);
+        
+        }
         slidePane.getChildren().add(root);
         root.translateXProperty().set(500);
         Timeline t = new Timeline();
@@ -461,6 +457,7 @@ public class DepartmentController implements Initializable{
         slidePane.getChildren().remove(0);});
                   i++;
          }
+         con.close();
         }
         }
     }
@@ -471,6 +468,7 @@ public class DepartmentController implements Initializable{
     st.executeUpdate("Update Department set Country = '"+ s.getCountry() +"', City = '"+ s.getCity()+"', Street = '" + s.getStreet()+"', dname = '"+s.getDName()+"', managerID = "+s.getManagerID() + ", OpeningDate = to_date('" + s.getOpeningDate()+"' ,'yyyy/mm/dd') Where DID = " + s.getDID());
     
     tableView.refresh();
+    con.close();
     } catch (SQLException ex) {
     Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -481,9 +479,8 @@ public class DepartmentController implements Initializable{
     ObservableList<Departments> searchDeps = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
-            tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+           
+    tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
     @Override
     public void changed(ObservableValue observableValue, Object oldValue, Object newValue) {
         //Check whether item is selected and set value of selected item to Label
@@ -571,7 +568,7 @@ public class DepartmentController implements Initializable{
              Departments s = e.getRowValue();
              Long old = e.getOldValue();
              s.setManagerID(e.getNewValue());
-             String hello = "";
+             String newIDCard = "";
              String id = "";
              try{
                String card;
@@ -579,13 +576,13 @@ public class DepartmentController implements Initializable{
                ResultSet ss = st.executeQuery("Select IDCard from employee where SSN =" + old);
                while(ss.next()){
                 id = String.format("%03d",ss.getLong("IDCard"));
-                hello = id.charAt(0)+"000"+id.charAt(4)+id.charAt(5);
+                newIDCard = id.charAt(0)+"000"+id.charAt(4)+id.charAt(5);
                }
                if(e.getNewValue()==null)
                {
-                 st.executeUpdate("Update employee set DepID = '', IDCard = "+ hello +  " where SSN = " + old);
+
+                 st.executeUpdate("Update employee set DepID = '', IDCard = "+ newIDCard +  " where SSN = " + old);
                  st.executeUpdate("Update Department set ManagerID = '' where DID = " + s.getDID());
-                 System.out.println("deleted");
                }
                else
                {
@@ -597,7 +594,7 @@ public class DepartmentController implements Initializable{
                   card =  String.format("%03d",S.getLong("IDCard"));
                    if((S.getString("etype").equals("manager") && (S.getString("Depid")==null && S.getString("wareid")==null)))
                    {
-                       q.executeUpdate("Update employee set DepID = '', IDCard = "+hello+" where SSN = " + old);
+                       q.executeUpdate("Update employee set DepID = '', IDCard = "+newIDCard+" where SSN = " + old);
                        q.executeUpdate("Update Department set ManagerID = "+ e.getNewValue()+ " where DID = " + s.getDID());
                        q.executeUpdate("Update employee set IDCard = " +card.charAt(0)+String.format("%03d",s.getDID())+card.charAt(4)+card.charAt(5)+", DepID = "+s.getDID()+" where SSN = " + e.getNewValue());
                    }
@@ -617,6 +614,7 @@ public class DepartmentController implements Initializable{
              catch(Exception e){
              JOptionPane.showMessageDialog(null, "Wrong manager ID");
              }
+             con.close();
           }
         catch (SQLException ex) {
               ex.printStackTrace();
@@ -643,6 +641,7 @@ public class DepartmentController implements Initializable{
             System.out.println(d[0]);
             searchDeps.add(new Departments(id, dname, country, city, street, d[0], mid));       
         }
+             con.close();
     }
         @FXML
     void startSearch(ActionEvent event) throws SQLException {
@@ -663,6 +662,7 @@ public class DepartmentController implements Initializable{
     st.executeUpdate("Update employee set DepID = '', IDCard = " + idcard+ " Where SSN =" + selectedItem.getManagerID());
     Connect();
     tableView.setItems(searchDeps);
+    con.close();
     } 
     catch (SQLException ex) {
     Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);

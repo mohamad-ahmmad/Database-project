@@ -3,6 +3,7 @@ package com.app.garage.controllers.Owner;
 import com.app.garage.App;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import io.github.palexdev.materialfx.controls.MFXComboBox;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -99,7 +100,7 @@ public class WarehousesController implements Initializable{
     @FXML
     private TableView<Warehouses> tableView;
     @FXML
-    private TextField enterManagerID;
+    private MFXComboBox<String> comboboxManagerID;
     @FXML
     private TextField txtFieldCapacity;
 
@@ -122,15 +123,26 @@ public class WarehousesController implements Initializable{
     @FXML
     private AnchorPane searchPane;
     @FXML
-    private void deleteWarehouse(ActionEvent e){
+    private void deleteWarehouse(ActionEvent e) throws SQLException{
         Delete(tableView.getSelectionModel().getSelectedItem());
+        Connect();
+        tableView.setItems(searchWh);
+        tableView.refresh();
+       
     }
     private void Delete(Warehouses w) {
      try{
      Connection con= DriverManager.getConnection(App.ip,App.user,App.password);
     Statement st = con.createStatement();
+    ResultSet s1=st.executeQuery("Select IDCard from employee where SSN = " + w.getManagerID());
+     String ID ="";
+    while(s1.next()){
+       ID = s1.getString("IDCard").charAt(0)+"000"+s1.getString("IDCard").charAt(4)+s1.getString("IDCard").charAt(5);
+    }
     st.executeUpdate("Delete from Warehouse Where Wid = " + w.getWID());
+    st.executeUpdate("Update employee set IDCard = " + ID + " Where SSN = " + w.getManagerID());
     tableView.refresh();
+    con.close();
     } catch (SQLException ex) {
     Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
     }
@@ -250,30 +262,35 @@ public class WarehousesController implements Initializable{
         String Country = enterCountry.getText();
         String City = enterCity.getText();
         String Street = enterStreet.getText();
-         Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
-         Statement stmt = con.createStatement();
+        Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+        Statement stmt = con.createStatement();
          try{
-         Long ManagerID = Long.parseLong(enterManagerID.getText());
+         Long ManagerID = Long.parseLong(comboboxManagerID.getText());
          ResultSet s1=  stmt.executeQuery("Select SSN, Etype, WareID from Employee");
          while(s1.next()){
-             if((s1.getLong("SSN") == Long.parseLong(enterManagerID.getText())) && (s1.getString("WareID")!=null || !s1.getString("Etype").equals("warehouse")))
+             if((s1.getLong("SSN") == Long.parseLong(comboboxManagerID.getText())) && (s1.getString("WareID")!=null || !s1.getString("Etype").equals("warehouse")))
              {  
-                 System.out.println("test");
-                 enterManagerID.setStyle("-fx-border-color:RED");
+                 comboboxManagerID.setStyle("-fx-border-color:RED");
                  done = false;
                  break;
              }
          }
          if(done){
+         s1=stmt.executeQuery("Select IDCard from employee where ssn = " + ManagerID);
+         String id="";
+         String newIDCard="";
+         while(s1.next()){
+             newIDCard=s1.getString("IDCard").charAt(0)+enterID.getText()+s1.getString("IDCard").charAt(4)+s1.getString("IDCard").charAt(5);
+         }
          stmt.executeUpdate("insert into Warehouse values ("+ ID + ", '" + Country + "', '" + City + "', '" + Street + "',  '" + Name + "', " + ManagerID +", "+ Capacity +")");
-         stmt.executeUpdate("Update Employee set wareID = " + ID + " where SSN = " + ManagerID);
+         stmt.executeUpdate("Update Employee set IDCard = "+ newIDCard +", wareID = " + ID + " where SSN = " + ManagerID);
          }}
          catch(java.sql.SQLIntegrityConstraintViolationException e){
-             enterManagerID.setStyle("-fx-border-color:RED");
+             comboboxManagerID.setStyle("-fx-border-color:RED");
              done = false;
          }
          catch(java.lang.NumberFormatException exc){
-           enterManagerID.setStyle("-fx-border-color:RED");
+           comboboxManagerID.setStyle("-fx-border-color:RED");
            done = false;
          }
         if(done)
@@ -296,7 +313,7 @@ public class WarehousesController implements Initializable{
         tableView.refresh();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
-        
+        con.close();
          }
     }
     @FXML
@@ -315,7 +332,7 @@ public class WarehousesController implements Initializable{
      @FXML
     void Next(ActionEvent event) throws IOException, SQLException {
       
-        if(enterID.getText().isEmpty() && i==0)
+        if((enterID.getText().isEmpty() || enterID.getText().length()!=3) && i==0)
         {
              enterID.setStyle("-fx-border-color:RED"); flag = false;
         }
@@ -341,9 +358,9 @@ public class WarehousesController implements Initializable{
             enterCountry.setStyle("");
             flag = false;}
         }
-        else if ((enterManagerID==null || enterManagerID.getText().isEmpty()) && i == 3)
+        else if ((comboboxManagerID==null) && i == 3)
         {
-            enterManagerID.setStyle("-fx-border-color:RED");
+            comboboxManagerID.setStyle("-fx-border-color:RED");
             flag = false;
         }
         else
@@ -356,9 +373,6 @@ public class WarehousesController implements Initializable{
         Long t = Long.parseLong(enterCapacity.getText());
         enterCapacity.setStyle("");
         }
-        enterID.setStyle("");
-       
-        
         }
         catch(Exception e){
         enterID.setStyle("-fx-border-color:RED");
@@ -380,6 +394,7 @@ public class WarehousesController implements Initializable{
                        break;
                    }
                 }
+                con.close();
             }
         
         if(flag)
@@ -396,6 +411,16 @@ public class WarehousesController implements Initializable{
         loader = new FXMLLoader(getClass().getResource(next.get(i)));
         loader.setController(this);
         Parent root = loader.load();
+        if(i==2)
+        {
+           ResultSet rs= stmt.executeQuery("Select SSN from employee where WareID is null and Etype='warehouse'");
+            ObservableList<String> SSNs = FXCollections.observableArrayList();
+            while(rs.next()){
+                System.out.println("test");
+                SSNs.add(rs.getString("SSN"));
+            }
+            comboboxManagerID.setItems(SSNs);
+        }
         slidePane.getChildren().add(root);
         
         root.translateXProperty().set(500);
@@ -407,8 +432,9 @@ public class WarehousesController implements Initializable{
         t.setOnFinished(e->{
         slidePane.getChildren().remove(0);});
                   i++;
-
+                  con.close();
         }
+        
     }
     
         @FXML
@@ -419,9 +445,7 @@ public class WarehousesController implements Initializable{
          if(enterCountry!=null)
          enterCountry.setText("");
          if(enterStreet!=null)
-         enterStreet.setText("");
-         if(enterManagerID!=null)
-         enterManagerID.setText("");
+         enterStreet.setText("");;
          if(enterWHName!=null)
          enterWHName.setText("");
          if(enterID!=null)
@@ -523,24 +547,33 @@ public class WarehousesController implements Initializable{
              Warehouses w = e.getRowValue();
              Long old = e.getOldValue();
              w.setManagerID(e.getNewValue());
+             String id="";
+             String newIDCard= "";
              try{
-                 Statement st = con.createStatement();
+               String card;
+               Statement st = con.createStatement();
+               ResultSet ss = st.executeQuery("Select IDCard from employee where SSN =" + old);
+               while(ss.next()){
+                id = String.format("%03d",ss.getLong("IDCard"));
+                newIDCard = id.charAt(0)+"000"+id.charAt(4)+id.charAt(5);
+               }
                if(e.getNewValue()==null)
                {
-                 st.executeUpdate("Update employee set wareID = '' where SSN = " + old);
+                 st.executeUpdate("Update employee set IDCard = " + newIDCard + ", wareID = '' where SSN = " + old);
                  st.executeUpdate("Update warehouse set ManagerID = '' where WID = " + w.getWID());
                  System.out.println("deleted");
                }
                else
                {
-               ResultSet r=st.executeQuery("Select SSN,etype,depid,wareid from employee Where SSN = "+e.getNewValue());
+               ResultSet r=st.executeQuery("Select SSN,etype,depid,wareid,IDCard from employee Where SSN = "+e.getNewValue());
                while(r.next())
                {
+                   card =  String.format("%03d",r.getLong("IDCard"));
                    if((r.getString("etype").equals("warehouse") && (r.getString("Depid")==null && r.getString("wareid")==null)))
                    {
-                       st.executeUpdate("Update employee set wareID = '',IDCard =  where SSN = " + old);
+                       st.executeUpdate("Update employee set wareID = '', IDCard = " + newIDCard  + " where SSN = " + old);
                        st.executeUpdate("Update warehouse set ManagerID = "+ e.getNewValue()+ " where WID = " + w.getWID());
-                       st.executeUpdate("Update employee set IDcard =  wareID = "+w.getWID()+" where SSN = " + e.getNewValue());
+                       st.executeUpdate("Update employee set IDcard = " +card.charAt(0)+String.format("%03d",w.getWID())+card.charAt(4)+card.charAt(5) + ", wareID = "+w.getWID()+" where SSN = " + e.getNewValue());
                    }
                    else
                    {
@@ -557,6 +590,7 @@ public class WarehousesController implements Initializable{
              catch(Exception e){
              JOptionPane.showMessageDialog(null, "Wrong manager ID");
              }
+             con.close();
           }
         catch (SQLException ex) {
               ex.printStackTrace();
@@ -581,6 +615,7 @@ public class WarehousesController implements Initializable{
             Long capacity = rs.getLong("Wcapacity");
             searchWh.add(new Warehouses(id, wname, country, city, street, capacity, mid));
         }
+            con.close();
     }
     @FXML
     void startSearch(ActionEvent event) throws SQLException {
@@ -595,6 +630,7 @@ public class WarehousesController implements Initializable{
     Statement st = con.createStatement();
     st.executeUpdate("Update Warehouse set Country = '"+ w.getCountry() +"', City = '"+ w.getCity()+"', Street = '" + w.getStreet()+"', Wname = '"+w.getWName()+"', managerID = "+w.getManagerID() + ", WCapacity = "+ w.getWCapacity()+" Where WID = " + w.getWID());
     tableView.refresh();
+    con.close();
     } catch (SQLException ex) {
     JOptionPane.showMessageDialog(null, "Wrong manager ID");
     tableView.refresh();

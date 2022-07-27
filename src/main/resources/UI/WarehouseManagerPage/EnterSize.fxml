@@ -7,19 +7,19 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="496.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField layoutX="14.0" layoutY="65.0" prefHeight="34.0" prefWidth="152.0" />
+      <TextField fx:id="enterType" layoutX="14.0" layoutY="65.0" prefHeight="34.0" prefWidth="152.0" />
       <Label alignment="CENTER" layoutX="40.0" layoutY="37.0" prefHeight="34.0" prefWidth="100.0" text="Type">
          <font>
             <Font name="Berlin Sans FB" size="17.0" />
          </font>
       </Label>
-      <TextField layoutX="172.0" layoutY="65.0" prefHeight="34.0" prefWidth="152.0" />
+      <TextField fx:id="enterSize" layoutX="172.0" layoutY="65.0" prefHeight="34.0" prefWidth="152.0" />
       <Label alignment="CENTER" layoutX="205.0" layoutY="39.0" prefHeight="24.0" prefWidth="82.0" text="Size">
          <font>
             <Font name="Berlin Sans FB" size="17.0" />
          </font>
       </Label>
-      <TextField layoutX="331.0" layoutY="65.0" prefHeight="34.0" prefWidth="152.0" />
+      <TextField fx:id="enterColor" layoutX="331.0" layoutY="65.0" prefHeight="34.0" prefWidth="152.0" />
       <Label alignment="CENTER" layoutX="357.0" layoutY="34.0" prefHeight="34.0" prefWidth="100.0" text="Color">
          <font>
             <Font name="Berlin Sans FB" size="17.0" />

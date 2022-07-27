@@ -478,6 +478,7 @@ public class EmployeeController implements Initializable{
             LocationCountry.setStyle("");
             LocationStreet.setStyle("-fx-border-color:red");
             done=false;
+           
         }
 
         if(done){
@@ -1086,14 +1087,20 @@ private void Update() throws SQLException{
                  numbers.add(new Employees(SSN,phonenumber));
              }
             employeeIDCol.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+            employeeIDCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+            employeeIDCol.setOnEditCommit(e->{
+            tableView.refresh();
+            });
             numberCol.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
             numberCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
              numberCol.setOnEditCommit(e->{
+                 
              Employees s = e.getRowValue();
+             Long oldPhone = e.getOldValue();
              s.setPhoneNumber(e.getNewValue());
               try{
     Statement st = con.createStatement();
-    st.executeUpdate("Update employee_phonenumber set phonenumber = "+ s.getPhoneNumber() +"Where SSN = " + s.getSSN());
+    st.executeUpdate("Update employee_phonenumber set phonenumber = "+ s.getPhoneNumber() +" Where SSN = " + s.getSSN() +" and phonenumber = " + oldPhone);
     tableView.refresh();
     } catch (SQLException ex) {
     Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -1111,12 +1118,22 @@ private void Update() throws SQLException{
                  locations.add(new Employees(SSN,Country,city,street));
              }
             employeeID2Col.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+            employeeID2Col.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+            employeeID2Col.setOnEditCommit(e->{
+            tableView.refresh();
+            });
             countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
             countryCol.setCellFactory(TextFieldTableCell.forTableColumn());
              countryCol.setOnEditCommit(e->{
              Employees s = e.getRowValue();
              s.setCountry(e.getNewValue());
-              UpdateCell(s);
+              try{
+            Statement st = con.createStatement();
+            st.executeUpdate("Update employee_location set country = '"+s.getCountry()+"' Where SSN = " + s.getSSN() + " and street = '"+ s.getStreet()+"' and City = '" + s.getCity()+"'");
+            }
+            catch (SQLException ex) {
+            ex.printStackTrace();
+            }
              });
              
             cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
@@ -1124,7 +1141,13 @@ private void Update() throws SQLException{
              cityCol.setOnEditCommit(e->{
              Employees s = e.getRowValue();
              s.setCity(e.getNewValue());
-              UpdateCell(s);
+              try{
+            Statement st = con.createStatement();
+            st.executeUpdate("Update employee_location set city = '"+s.getCity()+"' Where SSN = " + s.getSSN() + " and COUNTRY = '"+ s.getCountry()+"' and Street = '" + s.getStreet()+"'");
+            }
+            catch (SQLException ex) {
+            ex.printStackTrace();
+            }
              });
              
             streetCol.setCellValueFactory(new PropertyValueFactory<>("street"));
@@ -1132,7 +1155,14 @@ private void Update() throws SQLException{
              streetCol.setOnEditCommit(e->{
              Employees s = e.getRowValue();
              s.setStreet(e.getNewValue());
-              UpdateCell(s);
+            try{
+            Statement st = con.createStatement();
+            st.executeUpdate("Update employee_location set Street = '"+s.getStreet()+"' Where SSN = " + s.getSSN() + " and COUNTRY = '"+ s.getCountry()+"' and City = '" + s.getCity()+"'");
+            }
+            catch (SQLException ex) {
+            ex.printStackTrace();
+            }
+            tableView.refresh();
              });
             locationTable.setItems(locations);
           }
@@ -1283,18 +1313,6 @@ private void Update() throws SQLException{
              }
             locationTable.setItems(locations);
     }
-
-    private void UpdateCell(Employees s) {
-        try{
-         Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
-         Statement stmt = con.createStatement();
-            Statement st = con.createStatement();
-            st.executeUpdate("Update employee_location set COUNTRY = '"+ s.getCountry()+"', City = '" + s.getCity()+"', Street = '"+s.getStreet()+"' Where SSN = " + s.getSSN());
-            tableView.refresh();
-            } catch (SQLException ex) {
-            Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            }
     private void colUpdate(Employees s) {
         try{
      Connection con= DriverManager.getConnection(App.ip,App.user,App.password);

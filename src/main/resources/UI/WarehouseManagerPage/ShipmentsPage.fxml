@@ -177,5 +177,17 @@
             <Image url="@../../ICONS/OwnerPage/Search.png" />
          </image>
       </ImageView>
+      <JFXButton layoutX="697.0" layoutY="125.0" onAction="#startSearch" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
+         <stylesheets>
+            <URL value="@../../CSS/ColorThemes.css" />
+            <URL value="@../../CSS/OwnerPage/Departments.css" />
+         </stylesheets>
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>

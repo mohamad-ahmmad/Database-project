@@ -17,7 +17,7 @@ public class App extends Application {
     public void Connect(){
     }
 
-    public static final String ip = "jdbc:oracle:thin:@192.168.86.134:1521:xe",
+    public static final String ip = "jdbc:oracle:thin:@192.168.86.140:1521:xe",
     user= "c##DaraghmehCompany",
     password= "12345" ;
 

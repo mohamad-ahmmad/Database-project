@@ -10,9 +10,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="bigPane" prefHeight="239.0" prefWidth="506.0" stylesheets="@../../CSS/OwnerPage/Logout.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.warehouseManager.SuppliersController">
+<AnchorPane id="AnchorPane" fx:id="bigPane" prefHeight="239.0" prefWidth="506.0" stylesheets="@../../CSS/OwnerPage/Logout.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="14.0" layoutY="183.0" mnemonicParsing="false" onAction="#DoneAdding" prefHeight="23.0" prefWidth="65.0" styleClass="AddDepartment" text="Cancel">
+      <Button layoutX="14.0" layoutY="183.0" mnemonicParsing="false" onAction="#Cancel" prefHeight="23.0" prefWidth="65.0" styleClass="AddDepartment" text="Cancel">
          <stylesheets>
             <URL value="@../../CSS/ColorThemes.css" />
             <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -62,7 +62,7 @@
                         <Font name="Berlin Sans FB" size="20.0" />
                      </font>
                   </Label>
-                  <TextField layoutY="56.0" prefHeight="47.0" prefWidth="265.0" />
+                  <TextField fx:id="enterID" layoutY="56.0" prefHeight="47.0" prefWidth="265.0" />
                </children>
             </Pane>
          </children>

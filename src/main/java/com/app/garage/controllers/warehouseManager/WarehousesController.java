@@ -1,13 +1,22 @@
 package com.app.garage.controllers.warehouseManager;
+import com.app.garage.App;
+import com.app.garage.controllers.Owner.Departments;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +28,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -29,58 +41,35 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class WarehousesController implements Initializable{
+    @FXML
+    private TableColumn<Warehouse, Long> IDCol;
 
     @FXML
-    private Pane BirthDatePane;
+    private TableColumn<Warehouse, String> countryCol;
 
     @FXML
-    private Pane OfficeTelephonePane;
-
+    private TableColumn<Warehouse, String> cityCol;
     @FXML
-    private Pane GenderPane;
-
+    private TableColumn<Warehouse, String> streetCol;
     @FXML
-    private Pane HireDatePane;
-
-    @FXML
-    private Pane IDCardPane;
-    @FXML
-    private Label lblClothes;
-    @FXML
-    private AnchorPane slidePane;
-    @FXML
-    private AnchorPane InfoslidePane;
-    @FXML
-    private Label lblInfo;
-    @FXML
-    private TableColumn<?, ?> SSNCol;
-
-    @FXML
-    private TableColumn<?, ?> addressCol;
-
-    @FXML
-    private TableColumn<?, ?> bDateCol;
+    private TableColumn<Warehouse, Long> capacityCol;
     @FXML
     private FlowPane flowPane;
     @FXML
-    private FlowPane ContactFlow;
-    @FXML
     private JFXCheckBox LocationField;
+    @FXML
+    private JFXCheckBox managerIDField;
     @FXML
     private JFXCheckBox NameField;
     @FXML
     private JFXCheckBox CapacityField;
-    @FXML
-    private AnchorPane ContactPane;
-    @FXML
-    private Pane InformationPane;
+
 
 
     @FXML
-    private TableColumn<?, ?> nameCol;
-
-    @FXML
-    private TableColumn<?, ?> phoneCol;
+    private TableColumn<Warehouse, String> nameCol;
+@FXML
+    private TableColumn<Warehouse, String> managerIDCol;
 
     @FXML
     private JFXCheckBox salaryField;
@@ -90,15 +79,22 @@ public class WarehousesController implements Initializable{
     @FXML
     private AnchorPane searchFilterContact;
     @FXML
-    private TableView<?> tableView;
+    private TableView<Warehouse> tableView;
 
     @FXML
     private Pane LocationPane;
     @FXML
     private Pane NamePane;
     @FXML
+    private Pane managerIDPane;
+    @FXML
     private Pane CapacityPane;
-
+    @FXML
+    void ManagerIDCheck(ActionEvent event) {
+    if(((JFXCheckBox)event.getSource()).isSelected())
+    flowPane.getChildren().add(managerIDPane);
+    else flowPane.getChildren().remove(managerIDPane);
+    }
     @FXML
     void CapacityCheck(ActionEvent event) {
      if(((JFXCheckBox)event.getSource()).isSelected())
@@ -125,6 +121,13 @@ public class WarehousesController implements Initializable{
     CapacityField.setSelected(false);
     LocationField.setSelected(false);
     searchFilter.setVisible(false);
+    managerIDField.setSelected(false);
+    txtfieldCapacity.setText("");
+    txtfieldID.setText("");
+    txtfieldName.setText("");
+    txtfieldLocation.setText("");
+    txtfieldManagerID.setText("");
+    tableView.setItems(Warehouses);
     }
     @FXML
     void DoneContact(ActionEvent event) throws IOException {
@@ -135,17 +138,65 @@ public class WarehousesController implements Initializable{
          searchFilter.setVisible(false);
     }
 
-    
+    @FXML
+    private TextField txtfieldCapacity;
+@FXML
+    private TextField txtfieldManagerID;
+    @FXML
+    private TextField txtfieldID;
+
+    @FXML
+    private TextField txtfieldLocation;
+
+    @FXML
+    private TextField txtfieldName;
     @FXML
     void showSearchFilter(ActionEvent event) {  
     searchFilter.setVisible(true);
     }
-    
-
+    ObservableList<Warehouse> Warehouses = FXCollections.observableArrayList();
+    ObservableList<Warehouse> warehousesSearch = FXCollections.observableArrayList();
+    boolean initial=true;
+    @FXML
+    public void startSearch(ActionEvent e) throws SQLException{
+        warehousesSearch.clear();
+    Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+    Statement stmt = con.createStatement();
+    ResultSet rs = stmt.executeQuery("SELECT * from Warehouse Where WID like '%" + txtfieldID.getText() + "%' and "
+            + "Wname like '%" + txtfieldName.getText() + "%' and "
+            + "(country like '%" + txtfieldLocation.getText()+"%' or city like '%" + txtfieldLocation.getText()+ "%' or street like '%" + txtfieldLocation.getText()+"%') and "
+            + "Wcapacity like '%" + txtfieldCapacity.getText()+"%' and ManagerID like '%"+ txtfieldManagerID.getText() + "%'");
+        while(rs.next()){
+            warehousesSearch.add(new Warehouse(rs.getLong("WID"), rs.getLong("WCapacity"), rs.getString("WName"), rs.getString("Country"), rs.getString("City"), rs.getString("Street"),rs.getLong("managerID")));  
+        }
+        tableView.setItems(warehousesSearch);
+    }
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if(initial)
+        {
+            try{
+              Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+              Statement stmt = con.createStatement();
+              ResultSet rs = stmt.executeQuery("SELECT * from Warehouse");
+              while(rs.next()){
+                  Warehouses.add(new Warehouse(rs.getLong("WID"), rs.getLong("WCapacity"), rs.getString("WName"), rs.getString("Country"), rs.getString("City"), rs.getString("Street"),rs.getLong("managerID")));
+              }
+              tableView.setItems(Warehouses);
+              IDCol.setCellValueFactory(new PropertyValueFactory<>("ID"));
+              nameCol.setCellValueFactory(new PropertyValueFactory<>("Name"));
+              managerIDCol.setCellValueFactory(new PropertyValueFactory<>("managerID"));
+              countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
+              cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
+              streetCol.setCellValueFactory(new PropertyValueFactory<>("street"));
+              capacityCol.setCellValueFactory(new PropertyValueFactory<>("Capacity"));
+            }
+            catch(SQLException ex){
+                
+            }
+        }
 
     }
- 
 
 }
