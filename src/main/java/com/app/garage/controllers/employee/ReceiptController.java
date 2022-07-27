@@ -275,7 +275,7 @@ public class ReceiptController implements Initializable  {
             long receiptNum = rs.getLong(2);
             long dressID = rs.getLong(4);
             String purDate = rs.getString(5).replace(".", ":");
-            int amount = rs.getInt(6);
+            int amount = rs.getInt("Amount");
             
             search.add(new Receipt(id, receiptNum, dressID, purDate, amount));
         }

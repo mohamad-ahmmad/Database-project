@@ -11,6 +11,19 @@ package com.app.garage.controllers.warehouseManager;
 public class Clothes {
     String dressName, dressSize,dressColor, brandName, preview;
     Long dressID, WSPrice, Price, Stock, SupplierID;
+    Long Wid;
+    public Clothes(Long Wid, Long ID){
+        this.dressID=ID;
+        this.Wid=Wid;
+    }
+
+    public Long getWid() {
+        return Wid;
+    }
+
+    public void setWid(Long Wid) {
+        this.Wid = Wid;
+    }
 
     public Clothes(String dressName, String dressSize, String dressColor, String brandName, String preview, Long dressID, Long WSPrice, Long Price, Long Stock, Long SupplierID) {
         this.dressName = dressName;

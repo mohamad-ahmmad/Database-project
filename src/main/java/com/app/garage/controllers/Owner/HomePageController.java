@@ -240,7 +240,7 @@ public class HomePageController implements Initializable {
             s.setTitle("Something Wrong !");
             s.setContentText("Contact the developers.");
             
-            ex.printStackTrace();
+            
         }
         
         return -1;

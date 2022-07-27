@@ -101,18 +101,6 @@
                   </TextField>
                </children>
             </Pane>
-            <JFXButton layoutX="1222.0" layoutY="250.0" onAction="#clearFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
-               <stylesheets>
-                  <URL value="@../../CSS/ColorThemes.css" />
-                  <URL value="@../../CSS/OwnerPage/Departments.css" />
-               </stylesheets>
-               <font>
-                  <Font name="Berlin Sans FB" size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
             <AnchorPane fx:id="searchFilter" layoutX="737.0" layoutY="258.0" prefHeight="124.0" prefWidth="420.0" translateY="20.0" visible="false">
                <children>
                   <AnchorPane layoutY="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="420.0" style="-fx-background-color: white; -fx-border-color: black;">
@@ -219,7 +207,31 @@
                   </TextField>
                </children>
             </Pane>
+            <JFXButton layoutX="1220.0" layoutY="260.0" onAction="#clearFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children>
       </Pane>
+      <JFXButton fx:id="contactManager" disable="true" layoutX="265.0" layoutY="634.0" onAction="#contactManager" prefHeight="36.0" prefWidth="284.0" styleClass="AddDepartment" text="Contact Manager">
+         <stylesheets>
+            <URL value="@../../CSS/ColorThemes.css" />
+            <URL value="@../../CSS/OwnerPage/Departments.css" />
+         </stylesheets>
+         <font>
+            <Font name="Berlin Sans FB" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>

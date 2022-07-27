@@ -28,9 +28,9 @@
             <Font name="Berlin Sans FB" size="25.0" />
          </font>
       </Label>
-      <Pane fx:id="InformationPane" layoutX="-528.0" layoutY="-36.0">
+      <Pane fx:id="InformationPane" layoutX="-523.0" layoutY="-38.0">
          <children>
-            <TableView fx:id="tableView" layoutX="539.0" layoutY="293.0" prefHeight="347.0" prefWidth="794.0" style="-fx-border-color: #333; -fx-border-radius: 6;">
+            <TableView fx:id="tableView" layoutX="539.0" layoutY="293.0" prefHeight="347.0" prefWidth="781.0" style="-fx-border-color: #333; -fx-border-radius: 6;">
               <columns>
                 <TableColumn fx:id="IDCol" prefWidth="68.79998779296875" text="ID" />
                   <TableColumn fx:id="sizeCol" prefWidth="67.99993896484375" text="Size" />
@@ -43,7 +43,7 @@
                   <TableColumn fx:id="supplierIDCol" minWidth="0.0" prefWidth="109.599853515625" text="Supplier ID" />
               </columns>
             </TableView>
-            <JFXButton fx:id="deleteClothes" disable="true" layoutX="1157.0" layoutY="675.0" onAction="#deleteClothes" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Clothes">
+            <JFXButton fx:id="deleteClothes" disable="true" layoutX="1149.0" layoutY="675.0" onAction="#deleteClothes" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Clothes">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -118,7 +118,7 @@
                   </TextField>
                </children>
             </Pane>
-            <JFXButton layoutX="1224.0" layoutY="250.0" onAction="#clearFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
+            <JFXButton layoutX="1212.0" layoutY="249.0" onAction="#clearFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -323,7 +323,7 @@
                   </TextField>
                </children>
             </Pane>
-            <JFXButton disable="true" layoutX="869.0" layoutY="676.0" prefHeight="34.0" prefWidth="135.0" styleClass="AddDepartment" text="Show Preview">
+            <JFXButton fx:id="showPreview" disable="true" layoutX="983.0" layoutY="676.0" onAction="#showPreview" prefHeight="34.0" prefWidth="135.0" styleClass="AddDepartment" text="Show Preview">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -335,7 +335,19 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="1224.0" layoutY="208.0" onAction="#startSearch" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search">
+            <JFXButton layoutX="1212.0" layoutY="208.0" onAction="#startSearch" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="addPreview" disable="true" layoutX="746.0" layoutY="676.0" onAction="#addPreview" prefHeight="34.0" prefWidth="135.0" styleClass="AddDepartment" text="Add/Edit Preview">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -373,7 +385,7 @@
                               <Font name="Berlin Sans FB" size="12.0" />
                            </font>
                         </Label>
-                        <TextField layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                        <TextField fx:id="txtfieldWID" layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
                            <font>
                               <Font size="10.0" />
                            </font>
@@ -387,7 +399,7 @@
                               <Font name="Berlin Sans FB" size="12.0" />
                            </font>
                         </Label>
-                        <TextField layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                        <TextField fx:id="txtfieldDID" layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
                            <font>
                               <Font size="10.0" />
                            </font>
@@ -396,12 +408,24 @@
                   </Pane>
                </children>
             </FlowPane>
-            <TableView layoutX="8.0" layoutY="153.0" prefHeight="359.0" prefWidth="794.0">
+            <TableView fx:id="storageTable" layoutX="8.0" layoutY="153.0" prefHeight="359.0" prefWidth="794.0">
                <columns>
-                  <TableColumn prefWidth="386.39996910095215" text="Warehouse ID" />
-                  <TableColumn prefWidth="407.2000427246094" text="Dress ID" />
+                  <TableColumn fx:id="wareIDCol" prefWidth="386.39996910095215" text="Warehouse ID" />
+                  <TableColumn fx:id="DidCol" prefWidth="407.2000427246094" text="Dress ID" />
                </columns>
             </TableView>
+            <JFXButton layoutX="688.0" layoutY="108.0" onAction="#startSearchStorage" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children>
       </AnchorPane>
       <Label fx:id="lblInfo" alignment="CENTER" layoutY="65.0" onMouseClicked="#openInformationPane" prefHeight="36.0" prefWidth="387.0" text="Clothes Information" textFill="#f8a918">

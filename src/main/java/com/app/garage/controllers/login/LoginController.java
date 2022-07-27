@@ -50,6 +50,7 @@ import javafx.util.Duration;
 
 public class LoginController implements Initializable {
     private final String ownerUser = "Owner",ownerPassword="123456";
+    public static String ownerName = "Mohammad";
     
     private Connection con;
     @FXML

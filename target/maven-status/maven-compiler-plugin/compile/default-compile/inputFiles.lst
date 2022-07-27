@@ -13,9 +13,11 @@ D:\DataBase Project\src\main\java\com\app\garage\controllers\derpartmentmanager\
 D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\CashierController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\Warehouses.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\Employees.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\warehouseManager\Shipments.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\Owner\SliderController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\warehouseManager\Warehouse.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\departmentManager\DepManagerController.java
+D:\DataBase Project\src\main\java\com\app\garage\controllers\Logout.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\ReceiptController.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\derpartmentmanager\Cloth.java
 D:\DataBase Project\src\main\java\com\app\garage\controllers\employee\EmployeeController.java

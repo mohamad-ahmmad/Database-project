@@ -15,6 +15,8 @@ import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -171,11 +173,57 @@ public class WarehousesController implements Initializable{
         }
         tableView.setItems(warehousesSearch);
     }
-   
+    @FXML
+    private Button contactManager;
+    @FXML
+    private TextField emailTXT;
+
+    @FXML
+    private TextField nameTXT;
+
+    @FXML
+    private TextField officeTXT;
+    @FXML
+     void Close(ActionEvent e) throws IOException, SQLException {
+         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+         stage.close();
+     }
+    @FXML
+     void contactManager(ActionEvent e) throws IOException, SQLException {
+        FXMLLoader loader;
+        loader = new FXMLLoader(getClass().getResource("/UI/WarehouseManagerPage/ContactManager.fxml"));
+        loader.setController(this);
+        Parent root = loader.load();
+        Stage stage = new Stage(StageStyle.UNDECORATED);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("Select * from WDManager where WDSSN = " + tableView.getSelectionModel().getSelectedItem().getManagerID());
+        rs.next();
+        emailTXT.setText(rs.getString("email"));
+        officeTXT.setText(rs.getString("telephonenumber"));
+        rs = stmt.executeQuery("Select firstname,middlename, lastname from employee where SSN = " + tableView.getSelectionModel().getSelectedItem().getManagerID());
+        rs.next();
+        nameTXT.setText(rs.getString("firstname") + " " + rs.getString("middlename")+ " " + rs.getString("lastname"));
+        
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if(initial)
         {
+            tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+    @Override
+    public void changed(ObservableValue observableValue, Object oldValue, Object newValue) {
+        //Check whether item is selected and set value of selected item to Label
+        if(tableView.getSelectionModel().getSelectedItem() != null) 
+        {    
+           contactManager.setDisable(false);
+         }
+         }
+    });
             try{
               Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
               Statement stmt = con.createStatement();

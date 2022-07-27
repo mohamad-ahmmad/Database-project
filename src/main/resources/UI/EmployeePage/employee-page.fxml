@@ -189,7 +189,7 @@
                </stylesheets>
             </Label>
 
-            <Label layoutX="33.0" layoutY="102.0" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Welcome, Yazan" textFill="#333333">
+            <Label fx:id="welcomeLabel" layoutX="33.0" layoutY="102.0" stylesheets="@../../CSS/OwnerPage/Owner-form.css" text="Welcome, Yazan" textFill="#333333">
 
                <font>
                   <Font size="14.0" />
