@@ -6,6 +6,7 @@ module com.app.garage {
     requires MaterialFX;
     requires java.sql;
     
+    
     opens com.app.garage.controllers.derpartmentmanager to javafx.fxml;
     opens com.app.garage.controllers.employee to javafx.fxml;
     opens com.app.garage to javafx.fxml;
@@ -13,6 +14,7 @@ module com.app.garage {
     opens com.app.garage.controllers.Owner to javafx.fxml;
     opens com.app.garage.controllers.departmentManager to javafx.fxml;
     opens com.app.garage.controllers.warehouseManager to javafx.fxml;
+    
     opens com.app.garage.controllers to javafx.base;
    
     

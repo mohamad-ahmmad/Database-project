@@ -2,12 +2,12 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPane" minHeight="700.0" minWidth="810.0" prefHeight="700.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.derpartmentmanager.EmployeesController">
+<AnchorPane id="AnchorPane" fx:id="mainPane" minHeight="700.0" minWidth="810.0" prefHeight="700.0" prefWidth="810.0" stylesheets="@../../CSS/ColorThemes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.derpartmentmanager.EmployeesController">
    <children>
       <Separator layoutX="-2.0" layoutY="64.0" prefHeight="0.0" prefWidth="810.0" />
       <Separator layoutY="102.0" prefHeight="3.0" prefWidth="810.0" />
@@ -49,18 +49,6 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <JFXButton layoutX="757.0" layoutY="675.0" onAction="#deleteEmployee" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Employee">
-               <stylesheets>
-                  <URL value="@../../CSS/ColorThemes.css" />
-                  <URL value="@../../CSS/OwnerPage/Departments.css" />
-               </stylesheets>
-               <font>
-                  <Font name="Berlin Sans FB" size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
             <FlowPane fx:id="flowPane" alignment="CENTER" layoutX="696.0" layoutY="146.0" prefHeight="143.0" prefWidth="539.0">
                <opaqueInsets>
                   <Insets />
@@ -124,24 +112,24 @@
                   </TextField>
                </children>
             </Pane>
-            <Pane fx:id="HireDatePane" layoutX="62.0" layoutY="55.0" prefHeight="51.0" prefWidth="170.0">
+            <Pane fx:id="HireDatePane" layoutX="102.0" layoutY="56.0" prefHeight="51.0" prefWidth="170.0">
                <children>
                   <Label layoutX="34.0" layoutY="3.0" text="HireDate">
                      <font>
                         <Font name="Berlin Sans FB" size="12.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="hirePicker" layoutY="18.0" prefHeight="0.0" prefWidth="125.0" />
+                  <TextField fx:id="hirePicker" layoutX="11.0" layoutY="19.0" prefHeight="25.0" prefWidth="125.0" />
                </children>
             </Pane>
-            <Pane fx:id="BirthDatePane" layoutY="69.0" prefHeight="51.0" prefWidth="170.0">
+            <Pane fx:id="BirthDatePane" layoutX="30.0" layoutY="132.0" prefHeight="51.0" prefWidth="170.0">
                <children>
                   <Label layoutX="32.0" layoutY="2.0" text="BirthDate">
                      <font>
                         <Font name="Berlin Sans FB" size="12.0" />
                      </font>
                   </Label>
-                  <DatePicker fx:id="birthPicker" layoutY="19.0" prefHeight="0.0" prefWidth="125.0" />
+                  <TextField fx:id="birthPicker" layoutX="6.0" layoutY="20.0" prefHeight="25.0" prefWidth="125.0" />
                </children>
             </Pane>
             <Pane fx:id="GenderPane" layoutX="171.0" layoutY="154.0" prefHeight="51.0" prefWidth="170.0">
@@ -151,7 +139,7 @@
                         <Font name="Berlin Sans FB" size="12.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="genderCombo" layoutY="19.0" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: #777; -fx-border-radius: 0;" />
+                  <ComboBox fx:id="genderCombo" layoutY="16.0" prefWidth="125.0" />
                </children>
             </Pane>
             <Pane fx:id="SalaryPane" layoutX="281.0" layoutY="81.0" prefHeight="51.0" prefWidth="170.0">
@@ -337,6 +325,19 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
+            <JFXButton layoutX="1235.0" layoutY="207.0" onAction="#searchEmp" prefHeight="36.0" prefWidth="104.0" styleClass="btns" text="Search!">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <MFXButton fx:id="deleteEmployee" layoutX="755.0" layoutY="675.0" onAction="#deleteEmployeeee" prefHeight="36.0" prefWidth="174.0" styleClass="btns" text="- Delete Employee" />
          </children>
       </Pane>
       <AnchorPane fx:id="ContactPane" layoutX="13.0" layoutY="115.0" prefHeight="591.0" prefWidth="810.0" visible="false">
@@ -361,7 +362,7 @@
                   </TextField>
                </children>
             </Pane>
-            <TableView fx:id="contactTable" layoutX="1.0" layoutY="194.0" prefHeight="347.0" prefWidth="387.0">
+            <TableView fx:id="contactTable" layoutX="1.0" layoutY="167.0" prefHeight="347.0" prefWidth="387.0">
                <columns>
                   <TableColumn fx:id="idContactCol" prefWidth="130.39998817443848" text="Employee ID" />
                   <TableColumn fx:id="numberContactCol" minWidth="0.0" prefWidth="255.20001220703125" text="Number" />
@@ -380,7 +381,7 @@
                   <Image url="@../../ICONS/OwnerPage/PhoneNumbers.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="1.0" layoutY="546.0" onAction="#addInfo" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add a new Info">
+            <JFXButton layoutX="1.0" layoutY="519.0" onAction="#addContact" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add a new Contact">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -392,7 +393,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="613.0" layoutY="548.0" onAction="#addEmployee" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Info.">
+            <JFXButton fx:id="deleteLocation" layoutX="613.0" layoutY="519.0" onAction="#deleteLocation" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Location.">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -416,7 +417,7 @@
                               <Font name="Berlin Sans FB" size="12.0" />
                            </font>
                         </Label>
-                        <TextField layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                        <TextField fx:id="ssnContactSearch" layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
                            <font>
                               <Font size="10.0" />
                            </font>
@@ -449,7 +450,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <TableView fx:id="locationTable" layoutX="397.0" layoutY="194.0" prefHeight="347.0" prefWidth="387.0">
+            <TableView fx:id="locationTable" layoutX="397.0" layoutY="167.0" prefHeight="347.0" prefWidth="387.0">
                <columns>
                   <TableColumn fx:id="idLocationCol" prefWidth="92.0" text="Employee ID" />
                   <TableColumn fx:id="countryCol" prefWidth="92.00003051757812" text="Country" />
@@ -557,6 +558,42 @@
                   </TextField>
                </children>
             </Pane>
+            <JFXButton layoutX="417.0" layoutY="519.0" onAction="#addLocation" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="+ Add a new Location">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="deleteContact" layoutX="195.0" layoutY="519.0" onAction="#deleteContact" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Contact">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="3.0" layoutY="76.0" onAction="#searchContactLocation" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children>
       </AnchorPane>
       <Label fx:id="lblInfo" alignment="CENTER" layoutY="65.0" onMouseClicked="#openInformationPane" prefHeight="36.0" prefWidth="387.0" text="Employees Information" textFill="#f8a918">

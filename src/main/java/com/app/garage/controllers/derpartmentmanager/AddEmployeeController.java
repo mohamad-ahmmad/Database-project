@@ -79,7 +79,7 @@ public class AddEmployeeController implements Initializable {
             Statement st = con.createStatement();
 //(3901820192, 'Mhammad', 'Azmi','Ahmad',to_date('23-05-2021','dd-mm-yyyy'),to_date('14-02-2002','dd-mm-yyyy'),'m',5500,311403,'warehouse','admin123',null,null);
             String empIdCard = empPass.equals("cash123")?"1":"4";
-            String empIdCard2 = empIdCard + LoginController.currentUser.substring(1,4)+empCard;
+            String empIdCard2 = empIdCard + LoginController.currentUser.substring(1,4)+String.format("%02d", empCard);
             String type = empPass.equals("cash123")?"cashier":"assistant";
             
             st.executeUpdate("insert into EMPLOYEE values( "+empSsn+" ,'"+empFirst+"', '"+empMiddle
@@ -301,6 +301,9 @@ public class AddEmployeeController implements Initializable {
     
     @FXML
     private MFXTextField idCard;
-
+    
+    
+    
+    
 
 }

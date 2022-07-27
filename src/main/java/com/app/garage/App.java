@@ -16,10 +16,10 @@ public class App extends Application {
     //Bdair:192.168.86.128
     public void Connect(){
     }
-
-    public static final String ip = "jdbc:oracle:thin:@192.168.86.140:1521:xe",
+    public static final String ip = "jdbc:oracle:thin:@192.168.86.149:1521:xe",
     user= "c##DaraghmehCompany",
     password= "12345" ;
+
 
     
     private static Stage ss;

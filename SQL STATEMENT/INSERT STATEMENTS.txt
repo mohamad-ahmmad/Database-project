@@ -129,8 +129,8 @@ insert into SUPPLIER_LOCATION values(111111, 'Japan', 'Tokyo', 'Center' , 4200);
 
 
 /*WAREHOUSE --------------------------------------*/
-insert into warehouse values(12028676 , 'Jordan' , 'Amman' , null , 'B20' ,  4203220352);
-insert into warehouse values(11928676 , 'Palestine' , 'Jericho' , 'Nablus' , 'B11' ,  4203220352);
+insert into warehouse values(130 , 'Jordan' , 'Amman' , null , 'B20' ,  4203220352 , 5000);
+insert into warehouse values(120 , 'Palestine' , 'Jericho' , 'Nablus' , 'B11' ,  4203220352 , 5000);
 
 
 /*WAREHOUSES_DEPARTMENT ------------------------------*/
@@ -146,14 +146,14 @@ insert into Warehouse_department values (12028676 , 1);
 
 
 /*WAREHOUSE DRESS -------------------------*/
-insert into warehouse_dress values(12028676 ,1243530251 );
-insert into warehouse_dress values(12028676 ,1224353025 );
-insert into warehouse_dress values(12028676 ,1224353024 );
+insert into warehouse_dress values(130 ,1243530251 , 600 );
+insert into warehouse_dress values(130 ,1224353025 , 600 );
+insert into warehouse_dress values(130 ,1224353024 , 600);
 
-insert into warehouse_dress values(11928676 ,1224353023 );
-insert into warehouse_dress values(11928676 ,1224350823 );
-insert into warehouse_dress values(11928676 ,1224350923 );
-insert into warehouse_dress values(11928676 ,1224350123 );
+insert into warehouse_dress values(120 ,1224353023 , 600);
+insert into warehouse_dress values(120 ,1224350823 , 600);
+insert into warehouse_dress values(120 ,1224350923 , 600);
+insert into warehouse_dress values(120 ,1224350123 , 600);
 
 
 

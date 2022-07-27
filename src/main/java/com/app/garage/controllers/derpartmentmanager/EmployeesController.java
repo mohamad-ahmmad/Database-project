@@ -10,6 +10,7 @@ package com.app.garage.controllers.derpartmentmanager;
  */
 import com.app.garage.App;
 import com.app.garage.controllers.login.LoginController;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import java.io.IOException;
 import java.net.URL;
@@ -38,6 +39,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import com.jfoenix.controls.JFXCheckBox;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import java.awt.Desktop;
 import java.io.File;
 import java.net.URI;
@@ -48,11 +51,13 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -81,7 +86,7 @@ public class EmployeesController implements Initializable{
     
     /*Employee First Siler From the Slider */
     @FXML
-    private DatePicker hirePicker, birthPicker;
+    private TextField hirePicker, birthPicker;
     
     @FXML
     private TextField ssnText, firstText, middleText, lastText, salaryText, cardText;
@@ -285,14 +290,28 @@ public class EmployeesController implements Initializable{
 
     }
     @FXML
-    void deleteEmployee(ActionEvent event) {
-
+    void deleteEmployeeee(ActionEvent event) {
+      Employee temp = tableView.getSelectionModel().getSelectedItem();
+      
+       try {
+           
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            
+            //st.executeUpdate("update EMPLOYEE set IDCARD = NULL");
+                    
+            st.executeUpdate("delete from EMPLOYEE where SSN="+temp.getSsn());
+            con.close();
+            searchAllEmp();
+            
+            //ps.close();
+            
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+       
     }
 
-    @FXML
-    void addInfo(ActionEvent event) {
-
-    }
 
     @FXML
     void clearContactFilter(ActionEvent event) {
@@ -372,17 +391,7 @@ public class EmployeesController implements Initializable{
                empTableContainer.add(new Employee(id, firstName, middleName, lastName, hireDate, birthDate, gender, salary, idCard, password));
             }
               tableView.setItems(empTableContainer);
-            SSNCol.setCellValueFactory(new PropertyValueFactory<>("ssn"));
-            nameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-            mNameCol.setCellValueFactory(new PropertyValueFactory<>("middleName"));
-            lNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-            hireDateCol.setCellValueFactory(new PropertyValueFactory<>("hireDate"));
-            birthDateCol.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
-            genderCol.setCellValueFactory(new PropertyValueFactory<>("gender"));
-            SalCol.setCellValueFactory(new PropertyValueFactory<>("salary"));
-            idCol.setCellValueFactory(new PropertyValueFactory<>("idCard"));
-            passCol.setCellValueFactory(new PropertyValueFactory<>("password"));
-            
+          
           
             
         } catch (SQLException ex) {
@@ -571,6 +580,20 @@ public class EmployeesController implements Initializable{
            idContactCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
            numberContactCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
            
+           
+           numberContactCol.setOnEditCommit(e->{
+           
+                try {
+                    con = DriverManager.getConnection(App.ip, App.user, App.password);
+                    Statement update = con.createStatement();
+                    update.executeUpdate("update EMPLOYEE_PHONENUMBER set PHONENUMBER ="+e.getNewValue()+" where SSN ="+e.getRowValue().getId());
+                    
+                    con.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+           });
+           
            contactTable.setItems(contactTableContainer);
              
         } catch (SQLException ex) {
@@ -611,6 +634,53 @@ public class EmployeesController implements Initializable{
             cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
             streetCol.setCellValueFactory(new PropertyValueFactory<>("street"));
             
+            countryCol.setCellFactory(TextFieldTableCell.forTableColumn());
+            countryCol.setOnEditCommit(e->{
+            
+                try {
+                    con = DriverManager.getConnection(App.ip, App.user, App.password);
+                    Statement update = con.createStatement();
+                    update.executeUpdate("update EMPLOYEE_LOCATION set COUNTRY ='"+e.getNewValue()+"' where SSN="+e.getRowValue().getId());
+                            
+                    
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                
+                
+            });
+            cityCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             cityCol.setOnEditCommit(e->{
+            
+                try {
+                    con = DriverManager.getConnection(App.ip, App.user, App.password);
+                    Statement update = con.createStatement();
+                    update.executeUpdate("update EMPLOYEE_LOCATION set CITY ='"+e.getNewValue()+"' where SSN="+e.getRowValue().getId());
+                            
+                    con.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                
+                
+            });
+             
+               streetCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             streetCol.setOnEditCommit(e->{
+            
+                try {
+                    con = DriverManager.getConnection(App.ip, App.user, App.password);
+                    Statement update = con.createStatement();
+                    update.executeUpdate("update EMPLOYEE_LOCATION set STREET ='"+e.getNewValue()+"' where SSN="+e.getRowValue().getId());
+                            
+                    con.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+                
+                
+            });
+            idLocationCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
             locationTable.setItems(locTableContainer);
     
         } catch (SQLException ex) {
@@ -618,7 +688,12 @@ public class EmployeesController implements Initializable{
         }
         
     }
-    
+    @FXML
+    private MFXButton deleteEmployee;
+    @FXML
+    private JFXButton deleteContact;
+    @FXML
+    private JFXButton deleteLocation;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ObservableList <String> genders = FXCollections.observableArrayList("None", "Female", "Male");
@@ -632,8 +707,35 @@ public class EmployeesController implements Initializable{
         searchAllEmp();
         searchAllCont();
         searchAllLoc();
-       
         
+          SSNCol.setCellValueFactory(new PropertyValueFactory<>("ssn"));
+            nameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+            mNameCol.setCellValueFactory(new PropertyValueFactory<>("middleName"));
+            lNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+            hireDateCol.setCellValueFactory(new PropertyValueFactory<>("hireDate"));
+            birthDateCol.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
+            genderCol.setCellValueFactory(new PropertyValueFactory<>("gender"));
+            SalCol.setCellValueFactory(new PropertyValueFactory<>("salary"));
+            idCol.setCellValueFactory(new PropertyValueFactory<>("idCard"));
+            passCol.setCellValueFactory(new PropertyValueFactory<>("password"));
+        
+        deleteContact.setDisable(true);
+        deleteEmployee.setDisable(true);
+        deleteLocation.setDisable(true);
+        
+        tableView.getSelectionModel().selectedItemProperty().addListener(e->{
+           deleteEmployee.setDisable(false);
+        });
+          contactTable.getSelectionModel().selectedItemProperty().addListener(e->{
+          deleteContact.setDisable(false);
+        });
+          locationTable.getSelectionModel().selectedItemProperty().addListener(e->{
+         deleteLocation.setDisable(false);
+        });
+          
+        
+        
+              
         
     }
     
@@ -708,14 +810,271 @@ public class EmployeesController implements Initializable{
                Desktop.getDesktop().browse(file.toURI());
            }
            catch(Exception e){
-            e.printStackTrace();
-   
+
+          Alert s = new Alert(Alert.AlertType.ERROR);
+          s.setTitle("NOT FOUND 404");
+          s.setContentText("CV doesn't exist,please add a cv.");
+          s.show();
+               return;
+           }
+ 
+
+         
         }
         
         
        }
-    }
-}
+    
+    @FXML
+    private MFXTextField phoneNumberContact;
+
+    @FXML
+    private MFXTextField ssnContact;
+       
+       @FXML
+       private void addContact(ActionEvent e){
+           
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/DepartmentManagerPage/add-contact.fxml"));
+           loader.setController(this);
+        try {
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage temp = new Stage();
+            temp.setScene(scene);
+            temp.initModality(Modality.APPLICATION_MODAL);
+            temp.initStyle(StageStyle.TRANSPARENT);
+            temp.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+           
+           
+       }
+       private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
+       @FXML 
+       private void contactDone(ActionEvent e){
+           String ssn = ssnContact.getText();
+           String phoneNumber = phoneNumberContact.getText();
+         if(ssn.length() != 10){
+             ssnContact.setStyle(cssErorr);
+             return;
+         }
+         try{
+             Long.parseLong(ssn);
+            
+         }catch(Exception ex){
+             ssnContact.setStyle("");
+             return;
+         }try{
+             Long.parseLong(phoneNumber);
+         }catch(Exception ex){
+             phoneNumberContact.setStyle(cssErorr);
+             return;
+         }
+         
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            
+            st.executeUpdate("insert into EMPLOYEE_PHONENUMBER (SSN, PHONENUMBER) values ( "+ssn+", "+phoneNumber+")");
+            
+            con.close();
+        } catch (SQLException ex) {
+           ssnContact.setStyle(cssErorr);
+           phoneNumberContact.setStyle("");
+           ex.printStackTrace();
+        }
+          ((Stage)((Node)e.getSource()).getScene().getWindow()).close();  
+          searchAllCont();
+           
+       }
+       
+       @FXML
+       private void contactCancel(ActionEvent e){
+          ((Stage)((Node)e.getSource()).getScene().getWindow()).close();  
+       }
+       
+       
+       @FXML
+       private void addLocation(ActionEvent e){
+             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/DepartmentManagerPage/add-location.fxml"));
+           loader.setController(this);
+        try {
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage temp = new Stage();
+            temp.setScene(scene);
+            temp.initModality(Modality.APPLICATION_MODAL);
+            temp.initStyle(StageStyle.TRANSPARENT);
+            temp.show();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+           
+       }
+       
+       @FXML
+       private MFXTextField ssnLocation, country, city, street;
+       
+       @FXML
+       private void locationCancel(ActionEvent e){
+           ((Stage)((Node)e.getSource()).getScene().getWindow()).close();  
+       }
+       @FXML
+       private void locationDone(ActionEvent e){
+           String ssn = ssnLocation.getText();
+           String sCountry = country.getText();
+           String sCity = city.getText();
+           String sStreet = street.getText();
+           
+           if(sCountry.isEmpty()){
+               country.setStyle(cssErorr);
+               return;
+           }
+           if(sCity.isEmpty()){
+               city.setStyle(cssErorr);
+               return;
+           }
+           
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            st.executeUpdate("insert into EMPLOYEE_LOCATION (SSN, COUNTRY, CITY, STREET) values ("+ssn+", '"+sCountry+"', '"+sCity+"', '"+sStreet+"')");
+            
+            con.close();
+        } catch (SQLException ex) {
+            ssnLocation.setStyle(cssErorr);
+            country.setStyle("");
+            city.setStyle("");
+            ex.printStackTrace();
+        }
+        ((Stage)((Node)e.getSource()).getScene().getWindow()).close();  
+          searchAllLoc();
+       }
+       
+       
+       
+       @FXML
+       private void deleteLocation(ActionEvent e){
+                EmpLocation temp = locationTable.getSelectionModel().getSelectedItem();
+           
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            st.executeUpdate("delete from EMPLOYEE_LOCATION where SSN="+temp.getId()+" AND COUNTRY='"+temp.getCountry()+"' AND CITY='"+temp.getCity()+"' AND STREET='"+temp.getStreet()+"' ");
+            searchAllLoc();
+            con.close();
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+       }
+       
+       @FXML
+       private void deleteContact (ActionEvent e){
+           Contact temp = contactTable.getSelectionModel().getSelectedItem();
+           
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            st.executeUpdate("delete from EMPLOYEE_PHONENUMBER where SSN="+temp.getId()+" AND PHONENUMBER="+temp.getNumber());
+            searchAllCont();
+            con.close();
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+           
+           
+       }
+       
+       
+       @FXML
+       private void searchEmp(ActionEvent e){
+           
+        try {
+            String bgen = (String)genderCombo.getSelectionModel().getSelectedItem();
+            String gen = bgen.equals("None")?"":bgen.toLowerCase().substring(0,1);
+
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st=con.createStatement();
+                ResultSet rs =  st.executeQuery("select SSN, FIRSTNAME, MIDDLENAME, LASTNAME, HIREDATE, BIRTHDATE, GENDER, SALARY, IDCARD, EPASSWORD from EMPLOYEE "
+                                             +" where DEPID ="+LoginController.currentUser.substring(1,4)+" AND SSN LIKE '%"+ssnText.getText()+"%' "
+                                             +" AND FIRSTNAME LIKE '%"+firstText.getText()+"%' AND MIDDLENAME LIKE '%"+middleText.getText()+"%' "
+                                             +" AND LASTNAME LIKE '%"+lastText.getText()+"%' AND HIREDATE LIKE '%"+hirePicker.getText()+"%' AND BIRTHDATE LIKE '%"+birthPicker.getText()+"%' "
+                                             +" AND GENDER LIKE '%"+gen+"%' AND SALARY LIKE '%"+salaryText.getText()+"%' AND IDCARD LIKE '%"+cardText.getText()+"%' "
+                                              );
+                
+                empTableContainer.clear();
+                while(rs.next()){
+                    Long ssn = rs.getLong(1);
+                    String f = rs.getString(2);
+                    String m = rs.getString(3);
+                    String l = rs.getString(4);
+                    String hire= rs.getString(5);
+                    String birth= rs.getString(6);
+                    String gender = rs.getString(7);
+                    int salary = rs.getInt(8);
+                    int idcard = rs.getInt(9);
+                    String pass = rs.getString(10);
+                    empTableContainer.add(new Employee(ssn, f, m, l, hire, birth, gender, salary, idcard, pass ));
+                }
+                
+                tableView.setItems(empTableContainer);
+            
+            con.close();
+            
+            
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+           
+       }
+       
+       @FXML
+       TextField ssnContactSearch, phoneField;
+       
+       @FXML
+       private void searchContactLocation(ActionEvent e){
+           contactTableContainer.clear();
+           locTableContainer.clear();
+           
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st= con.createStatement();
+            
+           // ResultSet loc = st.executeQuery("select ");
+            ResultSet cont = st.executeQuery("select ep.ssn, phonenumber from  EMPLOYEE_PHONENUMBER ep, EMPLOYEE e where ep.ssn = e.ssn and e.depid = "+LoginController.currentUser.substring(1,4)+" AND e.ssn like '%"+ssnContactSearch.getText()+"%' AND phonenumber like '%"+phoneField.getText()+"%' " );
+            while(cont.next()){
+                long ssnContact = cont.getLong(1);
+                long phoneContact = cont.getLong(2);
+               contactTableContainer.add(new Contact(ssnContact, phoneContact));
+            }
+            
+            //while loop for location to preform  prallel searching
+            ResultSet loc = st.executeQuery("select el.SSN, el.COUNTRY, el.CITY, el.STREET from EMPLOYEE_LOCATION el, EMPLOYEE e where el.ssn = e.ssn and e.depid = "+LoginController.currentUser.substring(1,4)+" AND el.COUNTRY like '%"+countryField.getText()+"%' AND el.CITY like '%"+cityField.getText()+"%' AND STREET like '%"+streetField.getText()+"%' ");
+            
+             while(loc.next())
+            {
+                Long idTemp = loc.getLong(1);
+                String country = loc.getString(2);
+                String city = loc.getString(3);
+                String street = loc.getString(4);
+                locTableContainer.add(new EmpLocation(idTemp, street, city, country));
+                
+            }
+            
+            locationTable.setItems(locTableContainer);
+            contactTable.setItems(contactTableContainer);
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+           
+       }
+       
+ }
+
 
     
 

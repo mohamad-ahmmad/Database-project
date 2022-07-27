@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -16,17 +15,19 @@
 
 <AnchorPane layoutX="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="810.0" style="-fx-background-color: white;" stylesheets="@../../CSS/ColorThemes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.derpartmentmanager.ClothesController">
    <children>
-      <TableView layoutX="4.0" layoutY="250.0" prefHeight="448.0" prefWidth="802.0" style="-fx-border-color: #333;">
+      <TableView fx:id="tableView" layoutX="-1.0" layoutY="247.0" prefHeight="448.0" prefWidth="802.0" style="-fx-border-color: #333;">
         <columns>
-          <TableColumn prefWidth="75.0" text="Dress ID" />
-          <TableColumn prefWidth="100.00003051757812" text="Name" />
-            <TableColumn prefWidth="52.79998779296875" text="Size" />
-            <TableColumn prefWidth="96.80006408691406" text="Color" />
-            <TableColumn prefWidth="100.800048828125" text="Wholesale price" />
-            <TableColumn prefWidth="57.60003662109375" text="Price" />
-            <TableColumn prefWidth="132.79998779296875" text="Brand Name" />
-            <TableColumn prefWidth="58.4000244140625" text="Stock" />
-            <TableColumn prefWidth="104.7999267578125" text="History" />
+          <TableColumn fx:id="dressIdCol" prefWidth="75.0" text="Dress ID" />
+          <TableColumn fx:id="nameCol" prefWidth="100.00003051757812" text="Name" />
+            <TableColumn fx:id="sizeCol" prefWidth="48.79998779296875" text="Size" />
+            <TableColumn fx:id="colorCol" prefWidth="96.80006408691406" text="Color" />
+            <TableColumn fx:id="whPriceCol" prefWidth="100.800048828125" text="WHSPrice" />
+            <TableColumn fx:id="priceCol" prefWidth="57.60003662109375" text="Price" />
+            <TableColumn fx:id="brandNameCol" prefWidth="98.39996337890625" text="Brand Name" />
+            <TableColumn fx:id="stockCol" prefWidth="60.79998779296875" text="Stock" />
+            <TableColumn fx:id="historyCol" prefWidth="100.0" text="History" />
+            <TableColumn fx:id="precentCol" prefWidth="96.800048828125" text="Sale Percentage" />
+            <TableColumn fx:id="warehouseIdCol" prefWidth="96.800048828125" text="WarehouseID" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -60,9 +61,7 @@
             <ColorAdjust brightness="1.0" />
          </effect>
       </ImageView>
-      <MFXButton layoutX="653.0" layoutY="130.0" onAction="#deleteButton" prefHeight="34.0" prefWidth="150.0" styleClass="delete-btns" text="Delete" />
-      <TextField fx:id="dressID" layoutX="653.0" layoutY="170.0" prefHeight="26.0" prefWidth="102.0" promptText="Dress ID" style="-fx-border-color: #888;" />
-      <TextField fx:id="quantity" layoutX="761.0" layoutY="170.0" prefHeight="26.0" prefWidth="42.0" promptText="#" style="-fx-border-color: #888;" />
+      <MFXButton layoutX="653.0" layoutY="160.0" onAction="#deleteButton" prefHeight="34.0" prefWidth="150.0" styleClass="delete-btns" text="Delete" />
       <FlowPane fx:id="flowPane" alignment="CENTER" layoutX="129.0" layoutY="67.0" prefHeight="177.0" prefWidth="515.0">
          <children>
             <Pane fx:id="idPane" prefHeight="51.0" prefWidth="142.0">
@@ -81,7 +80,7 @@
             </Pane>
          </children>
       </FlowPane>
-      <MFXButton layoutX="653.0" layoutY="202.0" onAction="#showPreview" prefHeight="34.0" prefWidth="150.0" styleClass="btns" text="Show preview" />
+      <MFXButton layoutX="653.0" layoutY="202.0" onAction="#clearFilter" prefHeight="34.0" prefWidth="150.0" styleClass="btns" text="Clear Filter" />
       <Pane fx:id="namePane" layoutX="153.0" layoutY="-348.0" prefHeight="51.0" prefWidth="142.0">
          <children>
             <Label layoutX="47.0" layoutY="1.0" text="Name">
@@ -145,7 +144,7 @@
                   <Font name="Berlin Sans FB" size="12.0" />
                </font>
             </Label>
-            <TextField layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+            <TextField fx:id="stockField" layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
                <font>
                   <Font size="10.0" />
                </font>
@@ -166,14 +165,14 @@
             </TextField>
          </children>
       </Pane>
-      <Pane fx:id="historyPane" layoutX="1277.0" layoutY="175.0" prefHeight="51.0" prefWidth="142.0">
+      <Pane fx:id="historyPane" layoutX="1033.0" layoutY="-9.0" prefHeight="51.0" prefWidth="142.0">
          <children>
             <Label layoutX="52.0" layoutY="-1.0" text="History">
                <font>
                   <Font name="Berlin Sans FB" size="12.0" />
                </font>
             </Label>
-            <DatePicker fx:id="historyField" layoutX="-8.0" layoutY="16.0" maxHeight="22.0" minHeight="23.0" prefHeight="25.0" prefWidth="142.0" />
+            <TextField fx:id="historyField" layoutX="16.0" layoutY="13.0" prefHeight="25.0" prefWidth="112.0" />
          </children>
       </Pane>
       <Pane fx:id="sizePane" layoutX="1199.0" layoutY="-194.0" prefHeight="51.0" prefWidth="142.0">
@@ -190,9 +189,7 @@
             </TextField>
          </children>
       </Pane>
-      <AnchorPane fx:id="filterPanee" layoutX="384.0" layoutY="465.0" prefHeight="230.0" prefWidth="420.0" />
-      <Label layoutX="594.0" layoutY="24.0" text="Sale Percentage" />
-      <Label layoutX="604.0" layoutY="37.0" text="Warehouseid" />
-      <Label layoutX="611.0" layoutY="50.0" text="Clear Filter" />
+      <AnchorPane fx:id="filterPanee" layoutX="375.0" layoutY="459.0" prefHeight="230.0" prefWidth="420.0" />
+      <MFXButton layoutX="4.0" layoutY="119.0" onAction="#searchButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" text="Search!" />
    </children>
 </AnchorPane>

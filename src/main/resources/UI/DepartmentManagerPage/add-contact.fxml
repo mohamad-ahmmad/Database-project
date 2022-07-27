@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="356.0" style="-fx-border-color: #333; -fx-background-color: white;" stylesheets="@../../CSS/ColorThemes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="1.0" prefHeight="33.0" prefWidth="168.0" styleClass="underline" text="      Add Contact:">
+         <font>
+            <Font name="Berlin Sans FB" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="28.0" fitWidth="31.0" layoutX="3.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../ICONS/OwnerPage/PhoneNumbers.png" />
+         </image>
+      </ImageView>
+      <MFXButton layoutX="31.0" layoutY="122.0" onAction="#contactCancel" styleClass="btns" text="Cancel" />
+      <MFXButton layoutX="265.0" layoutY="123.0" onAction="#contactDone" prefHeight="27.0" prefWidth="63.0" styleClass="btns" text="Done" />
+      <MFXTextField fx:id="ssnContact" floatMode="ABOVE" floatingText="SSN" layoutX="19.0" layoutY="66.0" prefHeight="30.0" prefWidth="150.0" styleClass="textfields" />
+      <MFXTextField fx:id="phoneNumberContact" floatMode="ABOVE" floatingText="Phone Number" layoutX="187.0" layoutY="66.0" prefHeight="30.0" prefWidth="150.0" styleClass="textfields" />
+   </children>
+</AnchorPane>
