@@ -63,7 +63,7 @@
                      <graphic>
                         <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../ICONS/warehouseManager/Shipment.png" />
+                              <Image url="@../../ICONS/warehouseManager/Shipments.png" />
                            </image>
                         </ImageView>
                      </graphic>

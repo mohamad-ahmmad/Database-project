@@ -1,10 +1,13 @@
 package com.app.garage.controllers.Owner;
 
 import com.app.garage.App;
+import com.app.garage.controllers.derpartmentmanager.Employee;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import io.github.palexdev.materialfx.controls.MFXDatePicker;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -33,6 +36,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -46,6 +50,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -304,7 +309,43 @@ public class EmployeeController implements Initializable{
     void showSearchFilter(ActionEvent event) throws IOException {
         searchFilter.setVisible(true);
     }
-    
+    @FXML
+    void addCV(ActionEvent e) {
+        if(!tableView.getSelectionModel().isEmpty()){
+        Employees temp = tableView.getSelectionModel().getSelectedItem();
+            
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        if(selectedFile!=null){
+        File address = new File ("D:\\DataBase Project\\src\\main\\resources\\CVs\\managers\\"+ Long.toString(temp.getSSN()) +"_CV.pdf") ;
+        selectedFile.renameTo(address);}
+        }
+    }
+    @FXML
+    void showCV(ActionEvent e) {
+        if(!tableView.getSelectionModel().isEmpty()){
+           Employees temp = tableView.getSelectionModel().getSelectedItem();
+            File file; 
+           try{
+           file = new File (("D:\\DataBase Project\\src\\main\\resources\\CVs\\managers\\"+Long.toString(temp.getSSN())+"_CV.pdf") );
+           
+              if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) 
+               Desktop.getDesktop().browse(file.toURI());
+           }
+           catch(Exception ex){
+
+          Alert s = new Alert(Alert.AlertType.ERROR);
+          s.setTitle("NOT FOUND 404");
+          s.setContentText("CV doesn't exist,please add a cv.");
+          s.show();
+               return;
+           }
+ 
+
+         
+        }
+        
+    }
      @FXML
     void showContactFilter(ActionEvent event) throws IOException {
         searchFilterContact.setVisible(true);

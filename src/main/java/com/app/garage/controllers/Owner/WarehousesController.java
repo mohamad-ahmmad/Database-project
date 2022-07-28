@@ -310,6 +310,7 @@ public class WarehousesController implements Initializable{
             Long capacity = rs.getLong("Wcapacity");
             warehouses.add(new Warehouses(id, wname, country, city, street, capacity, mid));
         }
+        tableView.setItems(warehouses);
         tableView.refresh();
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();

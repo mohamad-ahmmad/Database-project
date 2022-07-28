@@ -165,7 +165,7 @@ public class ReceiptController implements Initializable  {
                 long id = all.getLong(1);
                 long receiptNum = all.getLong(2);
                 long dressid = all.getLong(3);
-                String date = all.getString(4).replace(".", ":");
+                String date = all.getString("PURCHASED_DATE").replace(".", ":");
                 int amount = all.getInt(5);
                 
                 
@@ -274,7 +274,7 @@ public class ReceiptController implements Initializable  {
             long id = rs.getLong(1);
             long receiptNum = rs.getLong(2);
             long dressID = rs.getLong(4);
-            String purDate = rs.getString(5).replace(".", ":");
+            String purDate = rs.getString("PURCHASED_DATE").replace(".", ":");
             int amount = rs.getInt("Amount");
             
             search.add(new Receipt(id, receiptNum, dressID, purDate, amount));

@@ -265,23 +265,15 @@ public class HomePageController implements Initializable {
         
         
     }
-    static XYChart.Series  data = new XYChart.Series();
-    static boolean selected=true;
+   
     private void calculateSliderData(CardsSlider slide ) {
-        if(selected)
-        {
+         XYChart.Series  data = new XYChart.Series();
         data.setName("Profits/day");
         LineChart ref =  slide.getSlideController().getLineChart();
-        selected=false;
          for(int i=0 ; i<arrDays.length ; i++)
             data.getData().add(new XYChart.Data(Integer.toString(arrDays[i]),profitCalcDay(slide.getID(), arrDays[i])));
-        
-        ref.getData().add(data);
-        }
-        
-        
-       
-        
+        ref.getData().clear();
+        ref.getData().add(data);     
     }
 
     private void determinesTopDep() {
@@ -339,7 +331,7 @@ public class HomePageController implements Initializable {
             ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
             int i =0;
             while( i < 4 && rs.next()  ){
-                pieData.add(new PieChart.Data(rs.getString("DRESSNAME"),rs.getInt("NUMBEROFDRESS") ) );
+                pieData.add(new PieChart.Data(rs.getString("DRESSNAME").toLowerCase(),rs.getInt("NUMBEROFDRESS") ) );
                 i++;
             }
           

@@ -67,7 +67,6 @@ public class CardController implements Initializable {
         image.setImage(new Image(String.valueOf(getClass().getResource(url))));
         }
         catch(Exception e){
-            System.out.println("Hello");
             e.printStackTrace();
         }
         

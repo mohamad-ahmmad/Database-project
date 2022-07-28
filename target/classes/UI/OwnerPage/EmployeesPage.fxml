@@ -285,7 +285,7 @@
                   <Image url="@../../ICONS/OwnerPage/Search.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="showCV" disable="true" layoutX="957.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Show CV">
+            <JFXButton fx:id="showCV" disable="true" layoutX="957.0" layoutY="675.0" onAction="#showCV" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Show CV">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -309,7 +309,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="editCV" disable="true" layoutX="1157.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Edit CV">
+            <JFXButton fx:id="editCV" disable="true" layoutX="1157.0" layoutY="675.0" onAction="#addCV" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="Add/Edit CV">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
