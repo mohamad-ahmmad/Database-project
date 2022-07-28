@@ -15,15 +15,14 @@ public class App extends Application {
     //Mhammad:192.168.18.133
     //Bdair:192.168.86.128
     public void Connect(){
-        
     }
+
 
     public static final String ip = "jdbc:oracle:thin:@192.168.18.169:1521:xe",
     user= "c##daraghmeh",
     password= "123456" ;
 
 
-    
     
     private static Stage ss;
     

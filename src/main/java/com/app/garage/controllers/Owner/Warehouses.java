@@ -9,12 +9,12 @@ package com.app.garage.controllers.Owner;
  * @author Bdair
  */
 public class Warehouses {
-    Integer WID;
+    Long WID;
     String WName,Country,City,Street;
     Long WCapacity;
     Long ManagerID;
 
-    public Warehouses(Integer WID, String WName, String Country, String City, String Street, Long WCapacity, Long ManagerID) {
+    public Warehouses(Long WID, String WName, String Country, String City, String Street, Long WCapacity, Long ManagerID) {
         this.WID = WID;
         this.WName = WName;
         this.Country = Country;
@@ -24,7 +24,7 @@ public class Warehouses {
         this.ManagerID = ManagerID;
     }
 
-    public Integer getWID() {
+    public Long getWID() {
         return WID;
     }
 
@@ -52,7 +52,7 @@ public class Warehouses {
         return ManagerID;
     }
 
-    public void setWID(Integer WID) {
+    public void setWID(Long WID) {
         this.WID = WID;
     }
 

@@ -1,6 +1,7 @@
 package com.app.garage.controllers.Owner;
 import java.sql.Connection;
 import com.app.garage.App;
+import com.app.garage.controllers.login.LoginController;
 import com.jfoenix.controls.JFXButton;
 import java.awt.Desktop;
 import java.io.IOException;
@@ -8,6 +9,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
@@ -47,6 +49,9 @@ public class OwnerController implements Initializable {
     private JFXButton btnConfirm;
     @FXML
     private AnchorPane smallSlide;
+    
+    @FXML
+    private Label welcomeLabel;
     @FXML
     private Label labelEmployees;
     @FXML
@@ -243,7 +248,7 @@ public class OwnerController implements Initializable {
      
      @FXML
       void Logout(MouseEvent e) throws IOException {
-                  clearStyles();
+        clearStyles();
         labelLogout.setStyle("-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5");
           currentStage = (Stage)((Node) e.getSource()).getScene().getWindow();
            Stage logout = new Stage();
@@ -253,39 +258,20 @@ public class OwnerController implements Initializable {
             Scene logoutScene = new Scene(root);
             logoutScene.setFill(Color.TRANSPARENT);
             logout.setOpacity(0.85);
-       logout.setScene(logoutScene);
-       logout.setX(650);
-       logout.setY(220);
-       logout.show();
+            logout.setScene(logoutScene);
+            logout.setX(650);
+            logout.setY(220);
+            logout.show();
     }
-     @FXML
-    void Cancel(ActionEvent e) throws IOException {
-     Stage stage = (Stage)((Node) e.getSource()).getScene().getWindow();
-         stage.hide();
-        
-    }
-        @FXML
-    void Confirm(ActionEvent event) throws IOException {
-         //Closing Logout Stage
-    
-         //this method will return the App stage.
-       Stage appStage = App.getAppStage();//Method added to the App class 
+
        
-       Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-       appStage.hide();
-       stage.close();
-       
-       
-             Parent root = FXMLLoader.load(getClass().getResource("/UI/login/login-form.fxml"));
-       Scene temp = new Scene(root);
-      
-       App.setMainScene(temp);//Method in App class to change the current displaying scene
-       appStage.show(); 
-      
-    }
+    boolean initial=true;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        if(initial){
+              welcomeLabel.setText("Welcome, " + LoginController.ownerName);
+              initial = false;
+        }
         
     }
 

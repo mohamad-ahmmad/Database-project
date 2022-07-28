@@ -1,13 +1,35 @@
 package com.app.garage.controllers.warehouseManager;
-
+import com.app.garage.App;
+import com.app.garage.controllers.Owner.DepartmentController;
+import com.app.garage.controllers.Owner.Departments;
+import com.app.garage.controllers.login.LoginController;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
+import java.awt.Desktop;
+import static java.awt.SystemColor.desktop;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,24 +37,31 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javafx.util.converter.LongStringConverter;
 
 public class ClothesController implements Initializable{
 
     @FXML
     private JFXCheckBox BrandField;
-     @FXML
+    @FXML
     private JFXCheckBox TypeField;
 
     @FXML
@@ -69,9 +98,6 @@ public class ClothesController implements Initializable{
     private Pane PricePane;
 
     @FXML
-    private TableColumn<?, ?> SSNCol;
-
-    @FXML
     private Pane SSNPane1;
 
     @FXML
@@ -104,25 +130,33 @@ public class ClothesController implements Initializable{
     private Pane TypePane;
 
     @FXML
-    private TableColumn<?, ?> addressCol;
+    private TableColumn<Clothes, Long> IDCol;
 
     @FXML
-    private TableColumn<?, ?> bDateCol;
+    private TableColumn<Clothes, String> sizeCol;
 
     @FXML
-    private TableColumn<?, ?> bDateCol1;
+    private TableColumn<Clothes, String> colorCol;
 
     @FXML
-    private TableColumn<?, ?> bDateCol11;
+    private TableColumn<Clothes, String> typeCol;
 
     @FXML
-    private TableColumn<?, ?> bDateCol111;
+    private TableColumn<Clothes, String> brandNameCol;
+    @FXML
+    private TableColumn<Clothes, Long> DidCol;
+    @FXML
+    private TableColumn<Clothes, Long> wareIDCol;
 
     @FXML
-    private TableColumn<?, ?> bDateCol1111;
+    private TableColumn<Clothes, Long> WSPriceCol;
 
     @FXML
-    private TableColumn<?, ?> bDateCol11111;
+    private TableColumn<Clothes, Long> priceCol;
+    @FXML
+    private TableColumn<Clothes, Long> stockCol;
+    @FXML
+    private TableColumn<Clothes, Long> supplierIDCol;
 
     @FXML
     private FlowPane flowPane;
@@ -137,16 +171,15 @@ public class ClothesController implements Initializable{
     private AnchorPane mainPane;
 
     @FXML
-    private TableColumn<?, ?> nameCol;
-
-    @FXML
     private AnchorPane searchFilter;
 
     @FXML
     private AnchorPane searchFilterContact;
 
     @FXML
-    private TableView<?> tableView;
+    private TableView<Clothes> tableView;
+    @FXML
+    private TableView<Clothes> storageTable;
 
     @FXML
     void BrandCheck(ActionEvent event) {
@@ -210,11 +243,41 @@ public class ClothesController implements Initializable{
     flowPane.getChildren().add(TypePane);
     else flowPane.getChildren().remove(TypePane);       
     }
+    private Desktop desktop = Desktop.getDesktop();
+    @FXML
+    void addPreview(ActionEvent ev) throws IOException, SQLException {
+        Clothes temp = tableView.getSelectionModel().getSelectedItem();
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(new Stage());
+        File address = new File ("D:\\DataBase Project\\src\\main\\resources\\Previews\\Clothes\\"+ temp.getDressID()+"_PREVIEW.jpg");
+        selectedFile.renameTo(address);
+   }
 
     @FXML
+    void showPreview(ActionEvent ev) throws IOException, SQLException {
+        Clothes temp = tableView.getSelectionModel().getSelectedItem();
+        File f =new File ("D:\\DataBase Project\\src\\main\\resources\\Previews\\Clothes\\"+ temp.getDressID()+"_PREVIEW.jpg");
+        if(f.exists())
+        Desktop.getDesktop().open(f);
+        else
+            Desktop.getDesktop().open(new File ("D:\\DataBase Project\\src\\main\\resources\\Previews\\Clothes\\Default.jpg"));
+        
+    
+               
+        
+    }
+    private void openFile(File file) {
+        try {
+            desktop.open(file);
+        } catch (IOException ex) {
+        }
+    }
+    @FXML
     void addClothes(ActionEvent event) throws IOException {
+        initial=false;
         FXMLLoader loader;
         loader = new FXMLLoader(getClass().getResource("/UI/WarehouseManagerPage/AddClothes.fxml"));
+        loader.setController(this);
         Parent root = loader.load();
         Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -223,7 +286,13 @@ public class ClothesController implements Initializable{
         stage.show();
 
     }
-
+    @FXML
+     private void Cancel(ActionEvent e){
+         i=0;
+         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+         stage.close();
+         
+     }
     @FXML
     void clearFilter(ActionEvent event) {
         SizeField.setSelected(false);
@@ -234,6 +303,7 @@ public class ClothesController implements Initializable{
         TypeField.setSelected(false);
         StockField.setSelected(false);
         SupplierField.setSelected(false);
+        tableView.setItems(Clothes);
         flowPane.getChildren().removeAll(NamePane,SizePane,ColorPane,BrandPane,WSPricePane,PricePane,TypePane,StockPane,SupplierPane);
     }
 
@@ -289,26 +359,186 @@ public class ClothesController implements Initializable{
 
     @FXML
     private Button btnDoneInfo;
+    @FXML
+    private Button showPreview;
+    @FXML
+    private Button addPreview;
 
     @FXML
     private Button btnNextInfo;
 
     @FXML
     void DoneAdding(ActionEvent event) {
-   Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-   stage.close();
+        boolean cont=true;
+        if(enterWSPrice.getText().isEmpty()){
+            enterWSPrice.setStyle("-fx-border-color:red");
+            enterPrice.setStyle("");
+            comboboxSupplierID.setStyle("");cont=false;
+        }
+        else if(enterPrice.getText().isEmpty()){
+            enterWSPrice.setStyle("");
+            enterPrice.setStyle("-fx-border-color:red");
+            comboboxSupplierID.setStyle("");cont=false;
+        }
+        else if(comboboxSupplierID.getSelectionModel().getSelectedItem()==null){
+            enterWSPrice.setStyle("");
+            enterPrice.setStyle("");
+            comboboxSupplierID.setStyle("-fx-border-color:red");
+            cont=false;
+        }
+            else{ 
+                try{
+                Long n = Long.parseLong(enterPrice.getText());
+                }
+                catch(NumberFormatException e){ enterPrice.setStyle("-fx-border-color:red"); enterWSPrice.setStyle("");cont=false;}
+                }
+                 try{
+                Long n = Long.parseLong(enterWSPrice.getText());
+                }
+                catch(NumberFormatException e){ enterWSPrice.setStyle("-fx-border-color:red"); enterPrice.setStyle("");cont=false;}
+        
+        if(cont){
+            LocalDate todaysDate = LocalDate.now();
+            try{ 
+             Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+             Statement stmt = con.createStatement();
+             stmt.executeUpdate("Insert into dress values ("+ enterID.getText()
+             +", '" + enterType.getText()
+             +"', '" + enterSize.getText()
+             +"', '" + enterColor.getText()
+             +"', '" + enterBrandName.getText()
+             +"', '" + enterWSPrice.getText() 
+             +"', '" + enterPrice.getText()
+             +"', '" + enterStock.getText()
+             +"', '" + comboboxSupplierID.getSelectionModel().getSelectedItem()
+             +"', 'Default', to_date('" +todaysDate+"','yyyy-mm-dd'))");
+              stmt.executeUpdate("Insert into warehouse_dress values ("+LoginController.currentUser.substring(1,4)
+              + ", " + enterID.getText()
+              + ", "+enterStock.getText()+")");
+            insert();
+            i=0;
+            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            stage.close();
+            con.close();
+            }
+            catch(SQLException s){
+                s.printStackTrace();
+            }
+        }
     }
 int i=0;
     @FXML
-    void NextInfo(ActionEvent event) throws IOException {
-        if(i==3)
+    private TextField enterID;
+    @FXML
+    private TextField txtfieldDID;
+    @FXML
+    private TextField txtfieldWID;
+    
+    @FXML
+    private TextField enterColor;
+
+    @FXML
+    private TextField enterSize;
+
+    @FXML
+    private TextField enterType;
+    @FXML
+    private TextField enterBrandName;
+
+    @FXML
+    private TextField enterStock;
+     @FXML
+    private JFXComboBox<String> comboboxSupplierID;
+
+    @FXML
+    private TextField enterPrice;
+
+    @FXML
+    private TextField enterWSPrice;
+    @FXML
+    void Next(ActionEvent event) throws IOException, SQLException {
+        boolean cont=true;
+        Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+        Statement stmt = con.createStatement();
+         try{    
+         ResultSet rs = stmt.executeQuery("Select DressID from dress where DressID = '"+ enterID.getText()+"'");
+         if(rs.next()||enterID.getText().isEmpty())
+         {
+             enterID.setStyle("-fx-border-color:red");
+         }
+        else{
+             if(i==1){
+                 if(enterType.getText().isEmpty()){
+                     enterType.setStyle("-fx-border-color:red");
+                     enterSize.setStyle("");
+                     enterColor.setStyle("");
+                      cont=false;
+                 }
+                 else if (enterSize.getText().isEmpty()){
+                     enterType.setStyle("");
+                     enterSize.setStyle("-fx-border-color:red");
+                     enterColor.setStyle("");
+                      cont=false;
+                 }
+                 else if (enterColor.getText().isEmpty()){
+                     enterType.setStyle("");
+                     enterSize.setStyle("");
+                     enterColor.setStyle("-fx-border-color:red");
+                     cont=false;
+                 }
+        }
+             if(i==2){
+                 if (enterBrandName.getText().isEmpty()){
+                     enterStock.setStyle("");
+                     enterBrandName.setStyle("-fx-border-color:red");
+                      cont=false;
+                 }
+                 else if(enterStock.getText().isEmpty()){
+                     enterStock.setStyle("-fx-border-color:red");
+                     enterBrandName.setStyle("");
+                      cont=false;
+                 }
+                 else
+                 {
+                 Long stock=Long.parseLong(""+0);
+                 Long overAllStock=Long.parseLong(""+0);
+                 try{
+                 Long enteredStock=Long.parseLong(enterStock.getText());
+                 rs = stmt.executeQuery("Select sum(warehouse_stock) from warehouse_dress where WID = " + LoginController.currentUser.substring(1,4));
+                 if(rs.next()) stock = rs.getLong(1);
+                 rs = stmt.executeQuery("Select Wcapacity from warehouse where WID = " + LoginController.currentUser.substring(1,4));    
+                 if(rs.next()) overAllStock = rs.getLong(1);
+                   if(enteredStock>(overAllStock-stock) || enteredStock==0)
+                   {
+                     enterStock.setStyle("-fx-border-color:red");
+                     cont=false;
+                   }
+                   else {cont=true;}
+                 }
+                 catch(NumberFormatException ex) {
+                     enterStock.setStyle("-fx-border-color:red");
+                     cont=false;
+                 }
+                 }
+             }
+ 
+             if(cont){
+        if(i==2)
         {
             btnNextInfo.setVisible(false);
             btnDoneInfo.setVisible(true);
         }
         FXMLLoader loader;
         loader = new FXMLLoader(getClass().getResource(next.get(i)));
+        loader.setController(this);
         Parent root = loader.load();
+        if(i==2)
+        {
+            rs = stmt.executeQuery("Select SupplierID from supplier"); 
+            while(rs.next()){
+                comboboxSupplierID.getItems().add(rs.getString("SupplierID"));
+            }
+        }
         InfoslidePane.getChildren().add(root);
         
         root.translateXProperty().set(500);
@@ -320,19 +550,279 @@ int i=0;
         t.setOnFinished(e->{
         InfoslidePane.getChildren().remove(0);});
         i++;
+        con.close();
+             }
+          }
+         }
+         catch(SQLException ex){
+             enterID.setStyle("-fx-border-color:red");
+         }
     }
         ArrayList<String> next = new ArrayList<>();
+        ObservableList<Clothes> Clothes = FXCollections.observableArrayList();
+          HashMap<Long,Long> map=new HashMap<Long,Long>();
+        
+        ObservableList<Clothes> clothesSearch = FXCollections.observableArrayList();
+        ObservableList<Clothes> Clothes_WH = FXCollections.observableArrayList();
+        ObservableList<Clothes> Clothes_WH_Search = FXCollections.observableArrayList();
+        boolean initial=true;
+        @FXML
+        private JFXButton deleteClothes;
+        @FXML
+        private void deleteClothes(ActionEvent e){
+             Clothes temp=tableView.getSelectionModel().getSelectedItem();
+            File address = new File ("D:\\DataBase Project\\src\\main\\resources\\Previews\\Clothes\\"+ temp.getDressID()+"_PREVIEW.jpg");
+             if(address.exists())
+            address.delete();
+            Delete(tableView.getSelectionModel().getSelectedItem());
+           
+        }
         @Override
-    public void initialize(URL url, ResourceBundle rb) {
+        public void initialize(URL url, ResourceBundle rb) {
+        if(initial)
+        {
+            storageTable.setEditable(true);
+            try{
+         Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+         Statement stmt = con.createStatement();
+         ResultSet rs = stmt.executeQuery("Select * from warehouse_dress");
+         while(rs.next()){
+             Clothes_WH.add(new Clothes(rs.getLong("Wid"),rs.getLong("DressID")));
+         }
+         storageTable.setItems(Clothes_WH);
+         DidCol.setCellValueFactory(new PropertyValueFactory<>("dressID"));
+         wareIDCol.setCellValueFactory(new PropertyValueFactory<>("Wid"));
+            }
+            catch(SQLException ex){
+            }
+            tableView.setEditable(true);
+            tableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+    @Override
+    public void changed(ObservableValue observableValue, Object oldValue, Object newValue) {
+        //Check whether item is selected and set value of selected item to Label
+        if(tableView.getSelectionModel().getSelectedItem() != null) 
+        {    
+           deleteClothes.setDisable(false);
+           showPreview.setDisable(false);
+           addPreview.setDisable(false);
+         }
+         }
+    });
         String size = "/UI/WarehouseManagerPage/EnterSize.fxml";
         String Brand = "/UI/WarehouseManagerPage/EnterBrandName.fxml";
         String Price = "/UI/WarehouseManagerPage/EnterPrice.fxml";
-        String Supplier = "/UI/WarehouseManagerPage/EnterSupplier.fxml";
         next.add(size);
         next.add(Brand);
         next.add(Price);
-        next.add(Supplier);
         
+            try {
+                insert();
+            } catch (SQLException ex) {
+                Logger.getLogger(ClothesController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        tableView.setEditable(true);
+   
+         
+         IDCol.setCellValueFactory(new PropertyValueFactory<>("dressID"));
+         IDCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+             IDCol.setOnEditCommit(e->{
+             tableView.refresh();
+             });
+         sizeCol.setCellValueFactory(new PropertyValueFactory<>("dressSize"));
+         sizeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             sizeCol.setOnEditCommit(e->{
+             Clothes s = e.getRowValue();
+             s.setDressSize(e.getNewValue());
+             updateCol(s);
+             });
+         colorCol.setCellValueFactory(new PropertyValueFactory<>("dressColor"));
+         colorCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             colorCol.setOnEditCommit(e->{
+             Clothes s = e.getRowValue();
+             s.setDressColor(e.getNewValue());
+             updateCol(s);
+             });
+         typeCol.setCellValueFactory(new PropertyValueFactory<>("dressName"));
+         typeCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             typeCol.setOnEditCommit(e->{
+             Clothes s = e.getRowValue();
+             s.setDressName(e.getNewValue());
+             updateCol(s);
+             }); 
+         brandNameCol.setCellValueFactory(new PropertyValueFactory<>("brandName"));
+          brandNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
+             brandNameCol.setOnEditCommit(e->{
+             Clothes s = e.getRowValue();
+             s.setBrandName(e.getNewValue());
+             updateCol(s);
+             });
+          WSPriceCol.setCellValueFactory(new PropertyValueFactory<>("WSPrice"));
+          WSPriceCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+             WSPriceCol.setOnEditCommit(e->{
+             Clothes s = e.getRowValue();
+             s.setWSPrice(e.getNewValue());
+             updateCol(s);
+             });
+          priceCol.setCellValueFactory(new PropertyValueFactory<>("Price"));
+          priceCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+             priceCol.setOnEditCommit(e->{
+             Clothes s = e.getRowValue();
+             s.setPrice(e.getNewValue());
+             updateCol(s);
+             });
+         stockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+             stockCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+             stockCol.setOnEditCommit(e->{
+             Clothes s = e.getRowValue();
+             s.setPrice(e.getNewValue());
+             try{
+            Connection con= DriverManager.getConnection(App.ip,App.user,App.password);
+           Statement st = con.createStatement();
+           Long oldStock = e.getOldValue();
+           Long newStock = e.getNewValue();
+           Clothes c = e.getRowValue();
+           Long sum = 2L;
+           Long Capacity = 1L;
+           ResultSet rs=st.executeQuery("Select sum(warehouse_stock) from warehouse_dress where WID = " + LoginController.currentUser.substring(1,4));
+           if(rs.next()) {sum=rs.getLong(1);System.out.println("testt2");}
+           rs=st.executeQuery("Select WCapacity from warehouse where WID = " + LoginController.currentUser.substring(1,4));
+           if(rs.next()) {Capacity=rs.getLong(1);System.out.println("testt1");}
+           if((sum-oldStock+newStock)<Capacity){
+            st.executeUpdate("Update warehouse_dress set warehouse_stock = " + newStock + " where WID = " +LoginController.currentUser.substring(1,4) + " and dressID =  " + c.getDressID());
+           }
+           else
+           {
+               throw new SQLException();
+           }
+           con.close();
+           } catch (SQLException ex) {
+           Alert sa = new Alert(Alert.AlertType.ERROR);
+                   sa.setTitle("Something Wrong !");
+                   sa.setContentText("Not enough capacity, enter a valid number.");
+                   sa.show();
+             }
+             });
+         supplierIDCol.setCellValueFactory(new PropertyValueFactory<>("supplierID"));
+           
+        }
+    }
+        
+    private void insert() throws SQLException{
+        Clothes.clear();
+        Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+         Statement stmt = con.createStatement();
+         ResultSet rs = stmt.executeQuery("Select * From warehouse_Dress wd join DRESS d on d.DRESSID=wd.DRESSID  AND Wid = " + LoginController.currentUser.substring(1,4));
+         while(rs.next()){
+         Clothes.add(new Clothes(rs.getString("DressName"),
+                                 rs.getString("DressSize"),
+                                 rs.getString("DressColor"),
+                                 rs.getString("brandname"),
+                                 "Default URL",
+                                 rs.getLong("dressID"),
+                                 rs.getLong("WSPrice"),
+                                 rs.getLong("Price"),
+                                 rs.getLong("warehouse_stock"),
+                                 rs.getLong("SupplierID")));
+         }
+         tableView.setItems(Clothes);
+    }
+    @FXML
+    private TextField txtfieldBrandName;
+
+    @FXML
+    private TextField txtfieldColor;
+
+    @FXML
+    private TextField txtfieldID;
+    @FXML
+    private TextField txtfieldType;
+
+    @FXML
+    private TextField txtfieldPrice;
+
+    @FXML
+    private TextField txtfieldSize;
+
+    @FXML
+    private TextField txtfieldStock;
+
+    @FXML
+    private TextField txtfieldSupplierID;
+
+    @FXML
+    private TextField txtfieldWSPrice;
+    @FXML
+    private void startSearchStorage(ActionEvent e) throws SQLException{
+        Clothes_WH_Search.clear();
+        try{
+         Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+         Statement stmt = con.createStatement();
+         ResultSet rs = stmt.executeQuery("Select * from warehouse_dress where Wid like '%" + txtfieldWID.getText() + "%' and dressID like '%" + txtfieldDID.getText()+"%'");
+         while(rs.next()){
+             Clothes_WH_Search.add(new Clothes(rs.getLong("Wid"),rs.getLong("DressID")));
+         }
+         storageTable.setItems(Clothes_WH_Search);
+            }
+            catch(SQLException ex){
+            }
+    }
+    @FXML
+    private void startSearch(ActionEvent e) throws SQLException{
+        clothesSearch.clear();
+        Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("Select * From warehouse_Dress wd join DRESS d on d.DRESSID=wd.DRESSID  AND Wid = " + LoginController.currentUser.substring(1,4) +" where d.Dressid like '%" + txtfieldID.getText() +"%' and "
+                + "Dressname like '%" + txtfieldType.getText() +"%' and "
+                + "DressSize like '%" + txtfieldSize.getText() +"%' and "
+                + "DressColor like '%" + txtfieldColor.getText() +"%' and "
+                + "brandName like '%" + txtfieldBrandName.getText() +"%' and "
+                + "WSPrice like '%" + txtfieldWSPrice.getText() + "%' and "
+                + "Price like '%" + txtfieldPrice.getText() + "%' and "
+                + "warehouse_stock like '%" + txtfieldStock.getText() + "%' and "
+                + "SupplierID like '%" + txtfieldSupplierID.getText() + "%'");
+          while(rs.next()){
+              clothesSearch.add(new Clothes(rs.getString("DressName"),
+                                 rs.getString("DressSize"),
+                                 rs.getString("DressColor"),
+                                 rs.getString("brandname"),
+                                 "Default URL",
+                                 rs.getLong("dressID"),
+                                 rs.getLong("WSPrice"),
+                                 rs.getLong("Price"),
+                                 rs.getLong("warehouse_stock"),
+                                 rs.getLong("SupplierID")));
+        }
+         tableView.setItems(clothesSearch);
+         tableView.refresh();
+         con.close();
     }
 
+    private void Delete(Clothes selectedItem) {
+        try{
+     Connection con= DriverManager.getConnection(App.ip,App.user,App.password);
+    Statement st = con.createStatement();
+    st.executeUpdate("Delete from Dress Where dressID = " + selectedItem.getDressID());
+    st.executeUpdate("Delete from warehouse_dress  Where dressID = " + selectedItem.getDressID()+" and Wid = " + LoginController.currentUser.substring(1,4));
+    insert();
+    con.close();
+    } 
+    catch (SQLException ex) {
+    Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }
+
+    private void updateCol(Clothes s) {
+        try{
+     Connection con= DriverManager.getConnection(App.ip,App.user,App.password);
+    Statement st = con.createStatement();
+    st.executeUpdate("Update Dress set DressNAme = '"+ s.getDressName()+"', dresssize = '"+ s.getDressSize()+"', dresscolor = '" + s.getDressColor()+"', brandname = '"+s.getBrandName()+"', WSPrice = "+s.getWSPrice()+ ", price = " + s.getPrice()+"  Where DressID = " + s.getDressID());
+    tableView.refresh();
+    con.close();
+    } catch (SQLException ex) {
+    Alert sa = new Alert(Alert.AlertType.ERROR);
+            sa.setTitle("Something Wrong !");
+            sa.setContentText("Enter valid number");
+    }
+    }
+   
 }

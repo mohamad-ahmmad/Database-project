@@ -320,7 +320,7 @@ public class CashierController implements Initializable {
                  String amount = temp.getAmount();
                  
     
-                 stDone.executeUpdate("insert into sell_record values("
+                 stDone.executeUpdate("insert into sell_record (RID, RECEPIT_NUM, DEPID, DRESSID, PURCHASED_DATE, AMOUNT) values("
                          + " receipt_id.nextval, "
                          + " receipt_num.currval, "
                          + depid+", "

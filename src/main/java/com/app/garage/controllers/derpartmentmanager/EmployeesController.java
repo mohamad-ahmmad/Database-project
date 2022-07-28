@@ -792,7 +792,7 @@ public class EmployeesController implements Initializable{
             
         FileChooser fileChooser = new FileChooser();
         File selectedFile = fileChooser.showOpenDialog(new Stage());
-        File address = new File ("C:\\Users\\USER-M\\OneDrive\\Documents\\NetBeansProjects\\Ver2\\garage\\Database-project\\src\\main\\resources\\CVs\\users\\"+ Long.toString(temp.getSsn()) +"_CV.pdf") ;
+        File address = new File ("D:\\DataBase Project\\src\\main\\resources\\CVs\\users\\"+ Long.toString(temp.getSsn()) +"_CV.pdf") ;
             
         selectedFile.renameTo(address);
         }
@@ -804,13 +804,14 @@ public class EmployeesController implements Initializable{
            Employee temp = tableView.getSelectionModel().getSelectedItem();
             File file; 
            try{
-           file = new File (getClass().getResource("/CVs/USERS/"+Long.toString(temp.getSsn())+"_CV.pdf").getFile());
+           file = new File (("D:\\DataBase Project\\src\\main\\resources\\CVs\\users\\"+Long.toString(temp.getSsn())+"_CV.pdf") );
            
-                      if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) 
+              if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) 
                Desktop.getDesktop().browse(file.toURI());
            }
            catch(Exception e){
-                      Alert s = new Alert(Alert.AlertType.ERROR);
+
+          Alert s = new Alert(Alert.AlertType.ERROR);
           s.setTitle("NOT FOUND 404");
           s.setContentText("CV doesn't exist,please add a cv.");
           s.show();
@@ -1072,7 +1073,8 @@ public class EmployeesController implements Initializable{
            
        }
        
-    }
+ }
+
 
     
 

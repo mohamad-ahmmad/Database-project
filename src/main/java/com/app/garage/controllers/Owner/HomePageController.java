@@ -50,6 +50,7 @@ import javafx.scene.layout.Pane;
 
 
 public class HomePageController implements Initializable {
+    
     private Connection con;
     
     @FXML
@@ -79,11 +80,7 @@ public class HomePageController implements Initializable {
             currentPane.getChildren().add(CardsSlider.cards.get(0).getParent());
             
             DataInitilaizer();
-            
-     
-           
-            
-            
+   
         } catch (IOException ex) {
             System.out.println("Problems with loading the home-page-template.fxml");
         }
@@ -222,10 +219,12 @@ public class HomePageController implements Initializable {
             Date s = new Date();
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-YYYY");
             String currentDate = formatter.format(s);
+
             
             ResultSet result = st.executeQuery("select (ds.PRICE-(ds.PRICE* ((select salepercentage from department_dress dd where dd.did="+depId+" AND dd.dressid=s.dressid )/100) )-ds.WSPRICE ) * AMOUNT as SOLD " 
                     + " from SELL_RECORD s join Dress ds on s.dressid = ds.dressid "
                     + " where s.depid="+depId+" and s.purchased_date like '"+String.format("%02d", day)+ "-"+currentDate.substring(3,5)+"-"+currentDate.substring(6,10)+"%' ");
+
             
      
             long sum=0;
@@ -244,9 +243,7 @@ public class HomePageController implements Initializable {
             Alert s = new Alert(Alert.AlertType.ERROR);
             s.setTitle("Something Wrong !");
             s.setContentText("Contact the developers.");
-             
-            ex.printStackTrace();
-          
+
         }
         return 1;
        
@@ -257,8 +254,6 @@ public class HomePageController implements Initializable {
     private int[] topDep; 
     int i=0;
     private void DataInitilaizer() {
-        
-        
         determinesTopDep();
         
         for(int i =0 ; i < this.i;i++){
@@ -270,16 +265,22 @@ public class HomePageController implements Initializable {
         
         
     }
-
+    static XYChart.Series  data = new XYChart.Series();
+    static boolean selected=true;
     private void calculateSliderData(CardsSlider slide ) {
-     
+        if(selected)
+        {
+        data.setName("Profits/day");
         LineChart ref =  slide.getSlideController().getLineChart();
-        XYChart.Series  data = new XYChart.Series();
-        
-        for(int i=0 ; i<arrDays.length ; i++)
+        selected=false;
+         for(int i=0 ; i<arrDays.length ; i++)
             data.getData().add(new XYChart.Data(Integer.toString(arrDays[i]),profitCalcDay(slide.getID(), arrDays[i])));
         
         ref.getData().add(data);
+        }
+        
+        
+       
         
     }
 
@@ -307,12 +308,16 @@ public class HomePageController implements Initializable {
             //SQL QURIES TO GET THE NAME TELEPHONE NUMBER EMAIL...ETC AND ANY THING NOT NUMERIC RELATED TO THE DEPARTMENT
             con = DriverManager.getConnection(App.ip, App.user, App.password);
             Statement inf = con.createStatement();
-            ResultSet q = inf.executeQuery("select DNAME, Country,City from Department where DID ="+temp.getID());
+            Statement inf2 = con.createStatement();
+            ResultSet q = inf.executeQuery("select DNAME, Country,City,managerID from Department where DID ="+temp.getID());
             SliderController s = temp.getSlideController();
             if(q.next()){
-            
+            ResultSet q2 = inf2.executeQuery("select email, telephonenumber from wdmanager where wdssn ="+q.getString("managerID"));
+            q2.next();
             s.getTextLocationSite().setText(q.getString(2)+", "+q.getString(3));
             s.getHeader().setText(q.getString(1));
+            s.getTextTelephoneNumber().setText(q2.getString("telephonenumber"));
+            s.getHyperLink().setText(q2.getString("email"));
             }
             ResultSet Manager = inf.executeQuery("select FIRSTNAME, LASTNAME from Employee where DEPID="+temp.getID()+" AND ETYPE = 'manager'");
            if(Manager.next()) 

@@ -32,13 +32,13 @@
          <children>
             <TableView fx:id="tableView" layoutX="539.0" layoutY="293.0" prefHeight="347.0" prefWidth="794.0" style="-fx-border-color: #333; -fx-border-radius: 6;">
               <columns>
-                <TableColumn fx:id="SSNCol" prefWidth="176.80010986328125" text="ID" />
+                <TableColumn fx:id="IDCol" prefWidth="176.80010986328125" text="ID" />
                 <TableColumn fx:id="nameCol" prefWidth="220.7999267578125" text="Name" />
-                  <TableColumn fx:id="addressCol" prefWidth="223.2000732421875" text="Email" />
-                  <TableColumn fx:id="bDateCol" minWidth="0.0" prefWidth="189.5999755859375" text="Telephone Number" />
+                  <TableColumn fx:id="emailCol" prefWidth="223.2000732421875" text="Email" />
+                  <TableColumn fx:id="telephoneCol" minWidth="0.0" prefWidth="189.5999755859375" text="Telephone Number" />
               </columns>
             </TableView>
-            <JFXButton layoutX="1157.0" layoutY="675.0" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Supplier">
+            <JFXButton fx:id="deleteSupplier" disable="true" layoutX="1157.0" layoutY="675.0" onAction="#deleteSupplier" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Supplier">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -62,7 +62,7 @@
                               <Font name="Berlin Sans FB" size="12.0" />
                            </font>
                         </Label>
-                        <TextField layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                        <TextField fx:id="txtfieldID" layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
                            <font>
                               <Font size="10.0" />
                            </font>
@@ -78,7 +78,7 @@
                         <Font name="Berlin Sans FB" size="12.0" />
                      </font>
                   </Label>
-                  <TextField layoutY="17.0" prefHeight="0.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                  <TextField fx:id="txtfieldName" layoutY="17.0" prefHeight="0.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -92,7 +92,7 @@
                         <Font name="Berlin Sans FB" size="12.0" />
                      </font>
                   </Label>
-                  <TextField layoutY="17.0">
+                  <TextField fx:id="txtfieldEmail" layoutY="17.0">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -106,7 +106,7 @@
                         <Font name="Berlin Sans FB" size="12.0" />
                      </font>
                   </Label>
-                  <TextField layoutY="17.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                  <TextField fx:id="txtfieldNumber" layoutY="17.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -215,7 +215,7 @@
                         <Font name="Berlin Sans FB" size="12.0" />
                      </font>
                   </Label>
-                  <TextField layoutY="17.0">
+                  <TextField fx:id="txtfieldLocation" layoutY="17.0">
                      <font>
                         <Font size="10.0" />
                      </font>
@@ -229,16 +229,28 @@
                         <Font name="Berlin Sans FB" size="12.0" />
                      </font>
                   </Label>
-                  <TextField layoutY="17.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                  <TextField fx:id="txtfieldCost" layoutY="17.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </TextField>
                </children>
             </Pane>
+            <JFXButton layoutX="1224.0" layoutY="208.0" onAction="#startSearch" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children>
       </Pane>
-      <AnchorPane fx:id="ContactPane" layoutX="3.0" layoutY="105.0" prefHeight="591.0" prefWidth="810.0" visible="false">
+      <AnchorPane fx:id="ContactPane" layoutX="3.0" layoutY="105.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="591.0" prefWidth="810.0" visible="false">
          <children>
             <Label layoutX="59.0" layoutY="12.0" prefHeight="36.0" prefWidth="185.0" text="Locations" textFill="#333333">
                <font>
@@ -262,7 +274,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="630.0" layoutY="532.0" onAction="#addSupplier" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Info.">
+            <JFXButton fx:id="deleteInfo" disable="true" layoutX="622.0" layoutY="530.0" onAction="#deleteInfo" prefHeight="36.0" prefWidth="173.0" styleClass="AddDepartment" text="- Delete Info.">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -286,7 +298,7 @@
                               <Font name="Berlin Sans FB" size="12.0" />
                            </font>
                         </Label>
-                        <TextField layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                        <TextField fx:id="txtfieldLcationID" layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
                            <font>
                               <Font size="10.0" />
                            </font>
@@ -307,7 +319,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="700.0" layoutY="104.0" onAction="#clearContactFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
+            <JFXButton layoutX="692.0" layoutY="104.0" onAction="#clearContactFilter" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Clear Filter">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -319,13 +331,13 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <TableView layoutX="8.0" layoutY="153.0" prefHeight="359.0" prefWidth="794.0">
+            <TableView fx:id="locationsTable" layoutX="8.0" layoutY="153.0" prefHeight="359.0" prefWidth="794.0">
                <columns>
-                  <TableColumn prefWidth="176.7999324798584" text="Supplier ID" />
-                  <TableColumn prefWidth="139.2000732421875" text="Country" />
-                  <TableColumn minWidth="0.0" prefWidth="141.5999755859375" text="City" />
-                  <TableColumn minWidth="0.0" prefWidth="137.59994506835938" text="Street" />
-                  <TableColumn minWidth="0.0" prefWidth="201.60003662109375" text="Shipment Cost" />
+                  <TableColumn fx:id="locationIDCol" prefWidth="176.7999324798584" text="Supplier ID" />
+                  <TableColumn fx:id="countryCol" prefWidth="139.2000732421875" text="Country" />
+                  <TableColumn fx:id="cityCol" minWidth="0.0" prefWidth="141.5999755859375" text="City" />
+                  <TableColumn fx:id="streetCol" minWidth="0.0" prefWidth="137.59994506835938" text="Street" />
+                  <TableColumn fx:id="costCol" minWidth="0.0" prefWidth="201.60003662109375" text="Shipment Cost" />
                </columns>
             </TableView>
             <AnchorPane fx:id="searchFilterContact" layoutX="219.0" layoutY="166.0" prefHeight="122.0" prefWidth="420.0" visible="false">
@@ -369,6 +381,18 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
+            <JFXButton layoutX="692.0" layoutY="58.0" onAction="#startSearchLocations" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children>
       </AnchorPane>
       <Label fx:id="lblInfo" alignment="CENTER" layoutY="65.0" onMouseClicked="#openInformationPane" prefHeight="36.0" prefWidth="387.0" text="Suppliers Information" textFill="#f8a918">

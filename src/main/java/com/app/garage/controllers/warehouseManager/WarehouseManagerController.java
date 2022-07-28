@@ -1,11 +1,23 @@
 package com.app.garage.controllers.warehouseManager;
 
+import com.app.garage.App;
+import com.app.garage.controllers.login.LoginController;
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +30,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-public class WarehouseManagerController {
+public class WarehouseManagerController implements Initializable{
 
     @FXML
     private Label labelLogout;
@@ -173,6 +185,21 @@ public class WarehouseManagerController {
         clothesSelected = true;
         }
 
+    }
+    @FXML
+    private Label welcomeLabel;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        try {
+            Connection con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            ResultSet result = st.executeQuery("Select firstname from employee where IDCard = " + LoginController.currentUser);
+            result.next();
+            welcomeLabel.setText("Welcome, " + result.getString("firstname"));
+        } catch (SQLException ex) {
+            Logger.getLogger(WarehouseManagerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

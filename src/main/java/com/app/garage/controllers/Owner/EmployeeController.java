@@ -56,14 +56,16 @@ public class EmployeeController implements Initializable{
     
     
     
-    @FXML
-    private JFXRadioButton radioDepM;
+
     ToggleGroup tg = new ToggleGroup();
     ToggleGroup tg2 = new ToggleGroup();
-    @FXML
-    private JFXRadioButton radioWareM;
+    
     @FXML
     private TextField EnterSSN;
+    @FXML
+    private TextField enterEmail;
+    @FXML
+    private TextField enterPassword;
     @FXML
     private TextField enterFName;
     @FXML 
@@ -476,6 +478,7 @@ public class EmployeeController implements Initializable{
             LocationCountry.setStyle("");
             LocationStreet.setStyle("-fx-border-color:red");
             done=false;
+           
         }
 
         if(done){
@@ -514,13 +517,15 @@ public class EmployeeController implements Initializable{
         
         boolean done = true;
                
-        if(!radioDepM.isSelected() && !radioWareM.isSelected())
+        if(enterEmail.getText().isEmpty() || !enterEmail.getText().contains("@gmail.com"))
         {
-            
-                radioDepM.setStyle("-fx-border-color:red");
-                done=false;
-                radioWareM.setStyle("-fx-border-color:red");
-        }
+            enterEmail.setStyle("-fx-border-color:red");
+            done=false;
+        } 
+        else if(enterPassword.getText().isEmpty()){
+        enterPassword.setStyle("-fx-border-color:red");
+        done=false;
+       }      
         if(done){
            Long SSN,Salary,IDCard,telephoneNumber;
            String fName,mName,lName,bDate,Manager;
@@ -528,15 +533,15 @@ public class EmployeeController implements Initializable{
            SSN=Long.parseLong(EnterSSN.getText());
            Salary=Long.parseLong(enterSalary.getText());
            IDCard=Long.parseLong(enterIDCard.getText());
-          // telephoneNumber=Long.parseLong(enterTelephone.getText());
            fName=enterFName.getText();
            mName=enterMName.getText();
            lName=enterLName.getText();
            bDate=enterDate.getText();
            Manager = "";
-           
-           if(radioDepM.isSelected()) Manager = "manager";
-           else if (radioWareM.isSelected()) Manager= "warehous";
+           String card = enterIDCard.getText().charAt(0)+"000"+enterIDCard.getText().charAt(4)+enterIDCard.getText().charAt(5);
+           if(enterIDCard.getText().startsWith("2"))  Manager = "manager";
+           else if(enterIDCard.getText().startsWith("3"))  Manager = "warehouse";
+           else if(enterIDCard.getText().startsWith("3")) Manager= "warehouse";
            if(radioBtnFemale.isSelected()) Gender='f';
            else if(radioBtnMale.isSelected()) Gender = 'm';
             System.out.println(bDate);
@@ -546,11 +551,9 @@ public class EmployeeController implements Initializable{
            String f = "'"+dm[1]+"-"+dm[0]+"-"+date[1]+"'";
          Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
          Statement stmt = con.createStatement();
-         
-         stmt.executeQuery("Insert into employee values ("+SSN +", '"+fName+"', '" +mName+"', '" + lName +"', to_date('" +todaysDate+"','yyyy-mm-dd'), " + f + ", '"+Gender+"', "+ Salary +", " + IDCard + ", '" + Manager + "', 'admin123', " +"null, null, null)");
-         stmt.executeQuery("Insert into WDManager values (" + SSN + ", 'ANYTHING@Gmail.com', '" + enterTelephone.getText()+"')");
+         stmt.executeQuery("Insert into employee values ("+SSN +", '"+fName+"', '" +mName+"', '" + lName +"', to_date('" +todaysDate+"','yyyy-mm-dd'), " + f + ", '"+Gender+"', "+ Salary +", " + card + ", '" + Manager + "', '"+enterPassword.getText()+"', null, null, null)");
+         stmt.executeQuery("Insert into WDManager values (" + SSN + ", '" + enterEmail.getText()  +"', '" + enterTelephone.getText()+"')");
          Update();
-       
          i=0;
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
@@ -801,10 +804,16 @@ go = false;
                 enterIDCard.setStyle("-fx-border-color:red");
                 go = false;
             }
+            
             else
             {
                 try{
                 Long t = Long.parseLong(enterIDCard.getText());
+                if ((String.valueOf(t).startsWith("2") || String.valueOf(t).startsWith("3")) && (String.valueOf(t).length()==6) )
+                {
+                    go = true;
+                }
+                else { go = false; enterIDCard.setStyle("-fx-border-color:red"); System.out.println("test");}
                 Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
                 Statement stmt = con.createStatement();
                 ResultSet s1= stmt.executeQuery("Select IDcard from employee");
@@ -837,10 +846,6 @@ go = false;
         loader = new FXMLLoader(getClass().getResource(next.get(i)));
         loader.setController(this);
         Parent root = loader.load();
-         if(i==3)
-        {
-        radioDepM.setToggleGroup(tg);
-        radioWareM.setToggleGroup(tg);}
          if(i==0)
         {
         radioBtnFemale.setToggleGroup(tg2);
@@ -1007,6 +1012,13 @@ private void Update() throws SQLException{
         }
              tableView.setItems(emps);
              SSNCol.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+             SSNCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+             SSNCol.setOnEditCommit(e->{
+                 System.out.println("test");
+             });
+             
+             typeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
+             IDCardCol.setCellValueFactory(new PropertyValueFactory<>("IDCard"));
              fNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
              fNameCol.setCellFactory(TextFieldTableCell.forTableColumn());
              fNameCol.setOnEditCommit(e->{
@@ -1058,13 +1070,6 @@ private void Update() throws SQLException{
              colUpdate(s);
              });
              
-             IDCardCol.setCellValueFactory(new PropertyValueFactory<>("IDCard"));
-             IDCardCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
-             IDCardCol.setOnEditCommit(e->{
-             Employees s = e.getRowValue();
-             s.setIDCard(e.getNewValue());
-             colUpdate(s);
-             });
              
              officeTelephoneCol.setCellValueFactory(new PropertyValueFactory<>("officeTelephone"));
              officeTelephoneCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
@@ -1073,14 +1078,6 @@ private void Update() throws SQLException{
              s.setOfficeTelephone(e.getNewValue());
              colUpdate(s);
              });
-             typeCol.setCellValueFactory(new PropertyValueFactory<>("Type"));
-             typeCol.setCellFactory(TextFieldTableCell.forTableColumn());
-             typeCol.setOnEditCommit(e->{
-             Employees s = e.getRowValue();
-             s.setType(e.getNewValue());
-             colUpdate(s);
-             });
-             
             rs = stmt.executeQuery("select Employee_Phonenumber.SSN, etype, phonenumber from Employee_Phonenumber,employee where  (Etype = 'manager' or Etype = 'warehouse') and Employee_phonenumber.SSN = employee.ssn");
              while (rs.next())
              {
@@ -1090,14 +1087,20 @@ private void Update() throws SQLException{
                  numbers.add(new Employees(SSN,phonenumber));
              }
             employeeIDCol.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+            employeeIDCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+            employeeIDCol.setOnEditCommit(e->{
+            tableView.refresh();
+            });
             numberCol.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
             numberCol.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
              numberCol.setOnEditCommit(e->{
+                 
              Employees s = e.getRowValue();
+             Long oldPhone = e.getOldValue();
              s.setPhoneNumber(e.getNewValue());
               try{
     Statement st = con.createStatement();
-    st.executeUpdate("Update employee_phonenumber set phonenumber = "+ s.getPhoneNumber() +"Where SSN = " + s.getSSN());
+    st.executeUpdate("Update employee_phonenumber set phonenumber = "+ s.getPhoneNumber() +" Where SSN = " + s.getSSN() +" and phonenumber = " + oldPhone);
     tableView.refresh();
     } catch (SQLException ex) {
     Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
@@ -1115,12 +1118,22 @@ private void Update() throws SQLException{
                  locations.add(new Employees(SSN,Country,city,street));
              }
             employeeID2Col.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+            employeeID2Col.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
+            employeeID2Col.setOnEditCommit(e->{
+            tableView.refresh();
+            });
             countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
             countryCol.setCellFactory(TextFieldTableCell.forTableColumn());
              countryCol.setOnEditCommit(e->{
              Employees s = e.getRowValue();
              s.setCountry(e.getNewValue());
-              UpdateCell(s);
+              try{
+            Statement st = con.createStatement();
+            st.executeUpdate("Update employee_location set country = '"+s.getCountry()+"' Where SSN = " + s.getSSN() + " and street = '"+ s.getStreet()+"' and City = '" + s.getCity()+"'");
+            }
+            catch (SQLException ex) {
+            ex.printStackTrace();
+            }
              });
              
             cityCol.setCellValueFactory(new PropertyValueFactory<>("city"));
@@ -1128,7 +1141,13 @@ private void Update() throws SQLException{
              cityCol.setOnEditCommit(e->{
              Employees s = e.getRowValue();
              s.setCity(e.getNewValue());
-              UpdateCell(s);
+              try{
+            Statement st = con.createStatement();
+            st.executeUpdate("Update employee_location set city = '"+s.getCity()+"' Where SSN = " + s.getSSN() + " and COUNTRY = '"+ s.getCountry()+"' and Street = '" + s.getStreet()+"'");
+            }
+            catch (SQLException ex) {
+            ex.printStackTrace();
+            }
              });
              
             streetCol.setCellValueFactory(new PropertyValueFactory<>("street"));
@@ -1136,7 +1155,14 @@ private void Update() throws SQLException{
              streetCol.setOnEditCommit(e->{
              Employees s = e.getRowValue();
              s.setStreet(e.getNewValue());
-              UpdateCell(s);
+            try{
+            Statement st = con.createStatement();
+            st.executeUpdate("Update employee_location set Street = '"+s.getStreet()+"' Where SSN = " + s.getSSN() + " and COUNTRY = '"+ s.getCountry()+"' and City = '" + s.getCity()+"'");
+            }
+            catch (SQLException ex) {
+            ex.printStackTrace();
+            }
+            tableView.refresh();
              });
             locationTable.setItems(locations);
           }
@@ -1287,18 +1313,6 @@ private void Update() throws SQLException{
              }
             locationTable.setItems(locations);
     }
-
-    private void UpdateCell(Employees s) {
-        try{
-         Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
-         Statement stmt = con.createStatement();
-            Statement st = con.createStatement();
-            st.executeUpdate("Update employee_location set COUNTRY = '"+ s.getCountry()+"', City = '" + s.getCity()+"', Street = '"+s.getStreet()+"' Where SSN = " + s.getSSN());
-            tableView.refresh();
-            } catch (SQLException ex) {
-            Logger.getLogger(DepartmentController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            }
     private void colUpdate(Employees s) {
         try{
      Connection con= DriverManager.getConnection(App.ip,App.user,App.password);

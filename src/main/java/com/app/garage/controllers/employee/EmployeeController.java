@@ -2,9 +2,17 @@ package com.app.garage.controllers.employee;
 
 import com.app.garage.App;
 import com.app.garage.controllers.EmailSender;
+import com.app.garage.controllers.login.LoginController;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -178,19 +186,29 @@ public class EmployeeController implements Initializable {
        appStage.show(); 
       
     }
-
+    @FXML
+    private Label welcomeLabel;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
-        
-          //labelCashier.setStyle(cssPressed);
-     
-         // CashierController cont = (CashierController)  loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");
-          //System.out.println(idCard+"!!!!!!!");
-          //cont.setIdCard(idCard);
-       
-       // lockerTruer();
-         // locker[0]=false;
+        try {
+            Connection con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            ResultSet result = st.executeQuery("Select firstname from employee where IDCard = " + LoginController.currentUser);
+            result.next();
+            welcomeLabel.setText("Welcome, " + result.getString("firstname"));
+            
+            //labelCashier.setStyle(cssPressed);
+            
+            // CashierController cont = (CashierController)  loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");
+            //System.out.println(idCard+"!!!!!!!");
+            //cont.setIdCard(idCard);
+            
+            // lockerTruer();
+            // locker[0]=false;
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
       
           

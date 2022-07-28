@@ -135,4 +135,5 @@ public class CardController implements Initializable {
       public String getSale(){
           return dressSale.getText();
       }
+      
 }
