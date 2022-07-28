@@ -217,7 +217,7 @@ public class CashierController implements Initializable {
            totPrice.setText(Integer.toString(sum));
            
            crd.setPrice(String.valueOf((int)price));
-          crd.setImage("/IMG/Product_card/"+crd.getID()+"_IMG.jpg");
+          crd.setImage("/Previews/Clothes/"+crd.getID()+"_PREVIEW.jpg");
           btnDone.setDisable(false);
           btnCancel.setDisable(false);
           productAmount.setText("");

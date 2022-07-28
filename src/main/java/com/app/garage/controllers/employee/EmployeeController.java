@@ -64,7 +64,7 @@ public class EmployeeController implements Initializable {
     
      private String idCard;
     
-    private void loadAnimatedPane(String path) throws IOException{
+    private Parent loadAnimatedPane(String path) throws IOException{
                     Timeline t = new Timeline();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
         Parent root = loader.load();
@@ -79,7 +79,7 @@ public class EmployeeController implements Initializable {
         viewPanel.getChildren().clear();
         viewPanel.getChildren().add(root);
         
-       
+       return root;
     }
     
     private void lockerTruer(){
@@ -87,6 +87,7 @@ public class EmployeeController implements Initializable {
           locker[i]=true;
     }
     private void clearStyles(){
+        
         labelCashier.setStyle("");
         labelClothes.setStyle("");
         labelLogout.setStyle("");
@@ -94,22 +95,34 @@ public class EmployeeController implements Initializable {
         
     }
     private final String cssPressed = "-fx-border-color: #F8A918; -fx-border-width: 0 0 0 5";
-    
+    Parent cashierSave;
+    boolean opened=false;
         @FXML
     void openCashierPanel(MouseEvent event) throws IOException {
+        if(!opened){
         if(locker[0]){
          
          
           clearStyles();
           labelCashier.setStyle(cssPressed);
-          loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");
+         cashierSave= loadAnimatedPane("/UI/EmployeePage/cashier-page.fxml");
      
           
           lockerTruer();
           locker[0]=false;
-          System.out.println(locker[0]+" "+locker[1]+" "+locker[2]);
+          opened=true;
+          
         }
-  
+        }
+        else{
+            lockerTruer();
+              clearStyles();
+          labelCashier.setStyle(cssPressed);
+          viewPanel.getChildren().clear();
+          
+          viewPanel.getChildren().addAll(cashierSave);
+            
+        }
        
        
     }
