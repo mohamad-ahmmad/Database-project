@@ -305,12 +305,16 @@ public class HomePageController implements Initializable {
             //SQL QURIES TO GET THE NAME TELEPHONE NUMBER EMAIL...ETC AND ANY THING NOT NUMERIC RELATED TO THE DEPARTMENT
             con = DriverManager.getConnection(App.ip, App.user, App.password);
             Statement inf = con.createStatement();
-            ResultSet q = inf.executeQuery("select DNAME, Country,City from Department where DID ="+temp.getID());
+            Statement inf2 = con.createStatement();
+            ResultSet q = inf.executeQuery("select DNAME, Country,City,managerID from Department where DID ="+temp.getID());
             SliderController s = temp.getSlideController();
             if(q.next()){
-            
+            ResultSet q2 = inf2.executeQuery("select email, telephonenumber from wdmanager where wdssn ="+q.getString("managerID"));
+            q2.next();
             s.getTextLocationSite().setText(q.getString(2)+", "+q.getString(3));
             s.getHeader().setText(q.getString(1));
+            s.getTextTelephoneNumber().setText(q2.getString("telephonenumber"));
+            s.getHyperLink().setText(q2.getString("email"));
             }
             ResultSet Manager = inf.executeQuery("select FIRSTNAME, LASTNAME from Employee where DEPID="+temp.getID()+" AND ETYPE = 'manager'");
            if(Manager.next()) 

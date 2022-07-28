@@ -126,10 +126,38 @@ public class LoginController implements Initializable {
          String user = userName.getText();
          currentUser=user;
          String password = passField.getText();
+         if(userName.getText().isEmpty())
+         {
+              userName.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+              passField.setStyle("");
+         }
+         else if(passField.getText().isEmpty())
+         {
+             
+             passField.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+             userName.setStyle("");
+         }
+         else
+         {
+       if(user.equals(ownerUser) && password.equals(ownerPassword)){
+           load("/UI/OwnerPage/Owner-form.fxml");
+           return;
+       }
+       else if(user.equals(ownerUser) && !password.equals(ownerPassword))
+           {
+               invalidPass.setVisible(true);
+               passField.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+               invalidUser.setVisible(false);
+           }
+       
+       else{
        if(user.equals(ownerUser) && password.equals(ownerPassword)){
            System.out.println("Loging to Owner");
            load("/UI/OwnerPage/Owner-form.fxml");
            return;
+       }
+       else{
+           System.out.println("eyyo");
        }
        
        
@@ -142,7 +170,7 @@ public class LoginController implements Initializable {
             ResultSet loginQry = st.executeQuery(qry);
             loginQry.next();
             String qryPass = loginQry.getString(1);
-            System.out.println("qry");
+            
             
             if(qryPass.equals(password)){
                 String eType = loginQry.getString(2);
@@ -163,6 +191,7 @@ public class LoginController implements Initializable {
                     return;
                 }
             }else{
+                System.out.println("yessir");
                      userName.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
                      passField.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
                 }
@@ -170,7 +199,7 @@ public class LoginController implements Initializable {
             
              
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            System.out.println("eyyowsup");
          
         }
         }
@@ -178,19 +207,45 @@ public class LoginController implements Initializable {
        
        
     }
+        }
+    }
 
-    
+      @FXML
+    private Label invalidPass;
+
+    @FXML
+    private Label invalidUser;
    @FXML
    public void loginPressed(ActionEvent e) throws IOException{
       
          String user = userName.getText();
          currentUser=user;
          String password = passField.getText();
+         if(userName.getText().isEmpty())
+         {
+              userName.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+              passField.setStyle("");
+         }
+         else if(passField.getText().isEmpty())
+         {
+             
+             passField.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+             userName.setStyle("");
+         }
+         else
+         {
        if(user.equals(ownerUser) && password.equals(ownerPassword)){
-           System.out.println("Loging to Owner");
            load("/UI/OwnerPage/Owner-form.fxml");
            return;
        }
+       else if(user.equals(ownerUser) && !password.equals(ownerPassword))
+           {
+               invalidPass.setVisible(true);
+               passField.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+               invalidUser.setVisible(false);
+           }
+       
+       else{
        
        
         try {
@@ -202,7 +257,6 @@ public class LoginController implements Initializable {
             ResultSet loginQry = st.executeQuery(qry);
             loginQry.next();
             String qryPass = loginQry.getString(1);
-            System.out.println("qry");
             
             if(qryPass.equals(password)){
                 String eType = loginQry.getString(2);
@@ -223,21 +277,25 @@ public class LoginController implements Initializable {
                     return;
                 }
             }else{
-                     userName.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+                     invalidPass.setVisible(true);
+                     invalidUser.setVisible(false);
                      passField.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+                     userName.setStyle("");
                 }
             
             
              
         } catch (SQLException ex) {
+            invalidPass.setVisible(false);
+            invalidUser.setVisible(true);
             
            userName.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
-                     passField.setStyle("-fx-border-color: rgba(248,0,0,0.4);");
+           passField.setStyle("");
         }
       
        
-       
-       
+       }
+         }   
    }
     
     

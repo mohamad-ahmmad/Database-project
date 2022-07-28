@@ -24,7 +24,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnDone" layoutX="376.0" layoutY="177.0" mnemonicParsing="false" onAction="#DoneAdding" prefHeight="39.0" prefWidth="125.0" styleClass="AddDepartment" text="Done">
+      <Button fx:id="btnDone" layoutX="392.0" layoutY="177.0" mnemonicParsing="false" onAction="#DoneAdding" prefHeight="39.0" prefWidth="110.0" styleClass="AddDepartment" text="Done">
          <stylesheets>
             <URL value="@../../CSS/ColorThemes.css" />
             <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -36,7 +36,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnNext" layoutX="376.0" layoutY="177.0" mnemonicParsing="false" onAction="#Next" prefHeight="39.0" prefWidth="125.0" styleClass="AddDepartment" text="Next">
+      <Button fx:id="btnNext" layoutX="393.0" layoutY="177.0" mnemonicParsing="false" onAction="#Next" prefHeight="39.0" prefWidth="109.0" styleClass="AddDepartment" text="Next">
          <stylesheets>
             <URL value="@../../CSS/ColorThemes.css" />
             <URL value="@../../CSS/OwnerPage/Departments.css" />
@@ -71,5 +71,25 @@
       <Line endX="-15.999960899353027" endY="-13.999991416931152" layoutX="525.0" layoutY="18.0" startX="-16.999969482421875" startY="219.0786590576172" strokeWidth="3.0" />
       <Line endX="393.5000305175781" endY="-5.121307373046875" layoutX="115.0" layoutY="9.0" startX="-114.99999237060547" startY="-6.999991416931152" strokeWidth="3.0" />
       <Line endX="393.5000305175781" endY="-5.121307373046875" layoutX="114.0" layoutY="244.0" startX="-114.99999237060547" startY="-6.999991416931152" strokeWidth="3.0" />
+      <Label fx:id="enterValue" alignment="CENTER" layoutX="173.0" layoutY="174.0" prefHeight="39.0" prefWidth="154.0" style="-fx-border-color: red; -fx-background-color: #FFECE8;" text="Enter a value!" visible="false">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="wrongID" alignment="CENTER" layoutX="173.0" layoutY="174.0" prefHeight="39.0" prefWidth="154.0" style="-fx-border-color: red; -fx-background-color: #FFECE8;" text="Wrong department ID" visible="false">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="exists" layoutX="184.0" layoutY="216.0" prefHeight="18.0" prefWidth="118.0" text="This ID Already exists" visible="false">
+         <font>
+            <Font name="Berlin Sans FB" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="digits3" layoutX="145.0" layoutY="216.0" prefHeight="18.0" prefWidth="215.0" text="Department ID Should be 3 digits only" visible="false">
+         <font>
+            <Font name="Berlin Sans FB" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

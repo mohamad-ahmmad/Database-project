@@ -39,8 +39,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
@@ -279,6 +281,10 @@ public class DepartmentController implements Initializable{
         boolean Continue = true;
         if (comboboxManagerID.getSelectionModel().getSelectedItem()==null && i==3)
         {
+            enterValue.setVisible(true);
+             digits3.setVisible(false);
+             this.exists.setVisible(false);
+             wrongID.setVisible(false);
             comboboxManagerID.setStyle("-fx-border-color:RED");
         }
         else
@@ -289,7 +295,7 @@ public class DepartmentController implements Initializable{
         f= true;
         }
          catch(Exception e){
-             System.out.println("test");
+
              comboboxManagerID.setStyle("-fx-border-color:RED");
              f=false;
         }
@@ -345,7 +351,6 @@ public class DepartmentController implements Initializable{
             String date = rs.getString("OpeningDate");
             date=date.replaceAll("-", "/");
             String[] d = date.split(" ");
-            System.out.println(d[0]);
             deps.add(new Departments(id, dname, country, city, street, d[0], mid));
         }
         
@@ -380,24 +385,60 @@ public class DepartmentController implements Initializable{
      }
     boolean add=true;
     boolean flag = true;
+    @FXML
+    private Label digits3;
+
+    @FXML
+    private Label enterValue;
+
+    @FXML
+    private Label exists;
+
+    @FXML
+    private Label wrongID;
      @FXML
     void Next(ActionEvent event) throws IOException, SQLException {
         boolean exists=false;
         
-        if(EnterID.getText().isEmpty() && i==0 || EnterID.getText().length()!=3)
+        if(EnterID.getText().isEmpty() && i==0 )
         {
              EnterID.setStyle("-fx-border-color:RED");
+             enterValue.setVisible(true);
+             digits3.setVisible(false);
+             this.exists.setVisible(false);
+             wrongID.setVisible(false);
+        }
+        else if (EnterID.getText().length()!=3){
+             EnterID.setStyle("-fx-border-color:RED");
+             enterValue.setVisible(false);
+             digits3.setVisible(true);
+             this.exists.setVisible(false);
+             wrongID.setVisible(true);
         }
         else if((EnterName==null||EnterName.getText().isEmpty()) && i==1)
         {
+            enterValue.setVisible(true);
+             digits3.setVisible(false);
+             this.exists.setVisible(false);
+             wrongID.setVisible(false);
             EnterName.setStyle("-fx-border-color:RED");
         }
         else if((EnterCountry==null || EnterCity==null || EnterCountry.getText().isEmpty() || EnterCity.getText().isEmpty())  && i==2)
         {
+             enterValue.setVisible(true);
+             digits3.setVisible(false);
+             this.exists.setVisible(false);
+             wrongID.setVisible(false);
             if((EnterCountry==null ||EnterCountry.getText().isEmpty()))
+            {
             EnterCountry.setStyle("-fx-border-color:RED");
+            EnterCity.setStyle(""); 
+            }
             else
-            EnterCity.setStyle("-fx-border-color:RED");  
+            {
+            EnterCity.setStyle("-fx-border-color:RED"); 
+            EnterCountry.setStyle("");
+            }
         }
         else
         {
@@ -408,6 +449,10 @@ public class DepartmentController implements Initializable{
         }
          catch(Exception e){
              EnterID.setStyle("-fx-border-color:RED");
+             enterValue.setVisible(false);
+             digits3.setVisible(true);
+             this.exists.setVisible(false);
+             wrongID.setVisible(true);
              flag = false;    
         }
         if(i==2)
@@ -427,20 +472,28 @@ public class DepartmentController implements Initializable{
                  break;
              }
          }
-         if(exists)
+         if(exists){
          EnterID.setStyle("-fx-border-color:RED");
+             enterValue.setVisible(false);
+             digits3.setVisible(false);
+             this.exists.setVisible(true);
+             wrongID.setVisible(true);
+         }
+         
              else
          {
         FXMLLoader loader;
         loader = new FXMLLoader(getClass().getResource(next.get(i)));
-        
+             enterValue.setVisible(false);
+             digits3.setVisible(false);
+             this.exists.setVisible(false);
+             wrongID.setVisible(false);
         loader.setController(this);
         Parent root = loader.load();
         if(i==2){
             rs= stmt.executeQuery("Select SSN from employee where Depid is null and Etype='manager'");
             ObservableList<String> SSNs = FXCollections.observableArrayList();
             while(rs.next()){
-                System.out.println("yo");
                 SSNs.add(rs.getString("SSN"));
             }
             comboboxManagerID.setItems(SSNs);
@@ -520,7 +573,7 @@ public class DepartmentController implements Initializable{
             String date = rs.getString("OpeningDate");
             date=date.replaceAll("-", "/");
             String[] d = date.split(" ");
-            System.out.println(d[0]);
+
             deps.add(new Departments(id, dname, country, city, street, d[0], mid));
             }
              tableView.setItems(deps);
@@ -589,7 +642,7 @@ public class DepartmentController implements Initializable{
                
                ResultSet S = st.executeQuery("Select SSN,etype,depid,wareid, IDCard from employee Where SSN = "+e.getNewValue());
                Statement q= con.createStatement();
-               while(S.next())
+               if(S.next())
                {
                   card =  String.format("%03d",S.getLong("IDCard"));
                    if((S.getString("etype").equals("manager") && (S.getString("Depid")==null && S.getString("wareid")==null)))
@@ -600,21 +653,36 @@ public class DepartmentController implements Initializable{
                    }
                    else
                    {
-                       System.out.println("wrong id");
+                   Alert sa = new Alert(Alert.AlertType.ERROR);
+                   sa.setTitle("Wrong Manager ID");
+                   sa.setContentText("This manager id either does not exists or is alread a manager on another department, please enter a correct manager id, you can find it in employees tab, where ID Card has (000) (2nd,3rd and 4th digits) ");
+                   sa.show();
+            
                    }
  
+               }
+               else
+               {
+                   Alert sa = new Alert(Alert.AlertType.ERROR);
+                   sa.setTitle("Wrong Manager ID");
+                   sa.setHeaderText("Error, Wrong Manager ID!");
+                   sa.setContentText("This manager id either does not exists or is already a manager on another department\nplease enter a correct manager id\nyou can find it in employees tab where ID Card has (000) as 2nd,3rd and 4th digits\n\n\n");
+                   sa.show();
                }
                tableView.refresh();
                }
                } catch (SQLException ex) {
-                 ex.printStackTrace();
+                 Alert sa = new Alert(Alert.AlertType.ERROR);
+                   sa.setTitle("Wrong Manager ID");
+                   sa.setContentText("This manager id either does not exists or is alread a manager on another department, please enter a correct manager id, you can find it in employees tab, where ID Card has (000) (2nd,3rd and 4th digits) ");
+                   sa.show();
                }
              });
              }
              catch(Exception e){
-             JOptionPane.showMessageDialog(null, "Wrong manager ID");
+                 System.out.println("Something wrong");
              }
-             con.close();
+             
           }
         catch (SQLException ex) {
               ex.printStackTrace();
@@ -638,7 +706,6 @@ public class DepartmentController implements Initializable{
             String date = rs.getString("OpeningDate");
             date=date.replaceAll("-", "/");
             String[] d = date.split(" ");
-            System.out.println(d[0]);
             searchDeps.add(new Departments(id, dname, country, city, street, d[0], mid));       
         }
              con.close();
