@@ -417,7 +417,7 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
             
             if(wholeQuantity >= quantity){
             st.executeUpdate("update DRESS set stock=stock-"+stockIm+" where DRESSID="+dressId);
-            st.executeUpdate("update WAREHOUSE_DRESS set WAREHOUSE_STOCK =WAREHOUSE_STOCK"+stockIm);//TRY IT BEFORE U ABSR SHO
+            st.executeUpdate("update WAREHOUSE_DRESS set WAREHOUSE_STOCK =WAREHOUSE_STOCK"+stockIm+" WHERE DRESSID="+dressId);//TRY IT BEFORE U ABSR SHO
             st.executeUpdate("insert into DEPARTMENT_DRESS (DRESSID, DID, SALEPERCENTAGE, DEPARTMENTSTOCK) values ( "+dressId+", "+LoginController.currentUser.substring(1,4)+", "+percent+", "+stockIm+" )");
             
 
