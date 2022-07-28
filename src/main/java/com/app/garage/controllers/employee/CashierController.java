@@ -41,6 +41,12 @@ public class CashierController implements Initializable {
      private Connection con;
      ArrayList<CardController> conts = new ArrayList<CardController>();
    
+     
+    @FXML
+    private Label totPrice;
+    private int sum;
+    
+    
     @FXML
     private Label receiptID;
      
@@ -185,7 +191,7 @@ public class CashierController implements Initializable {
            
            crd.setColor(dressQry.getString(4));
            crd.setID(dressQry.getLong(1));
-           //crd.setImage(null);
+           
            crd.setName(dressQry.getString(2));
            crd.setPrice(dressQry.getString(6));
            crd.setSale(dressQry.getString(8)+"%");
@@ -201,7 +207,17 @@ public class CashierController implements Initializable {
            j=0;
            }
            }
+           //here we add image from resources
+           double price = Double.parseDouble(crd.getPrice()); 
+           double sale = Double.parseDouble(crd.getSale().replace("%", ""));
            
+           price = price - (price*(sale/100) );
+            
+           sum = sum +( (int)price*toCount);
+           totPrice.setText(Integer.toString(sum));
+           
+           crd.setPrice(String.valueOf((int)price));
+          crd.setImage("/IMG/Product_card/"+crd.getID()+"_IMG.jpg");
           btnDone.setDisable(false);
           btnCancel.setDisable(false);
           productAmount.setText("");
@@ -224,6 +240,11 @@ public class CashierController implements Initializable {
        for(int i =conts.size()-1 ; i>=0 ; i--){
            if(conts.get(i).isSelected()){
             counter= counter -  Integer.parseInt(conts.get(i).getAmount());
+            int amount = Integer.parseInt(conts.get(i).getAmount());
+            int price = Integer.parseInt(conts.get(i).getPrice());
+            
+            sum = sum - (amount*price);
+            totPrice.setText(Integer.toString(sum));
             
             conts.remove(i);
             
@@ -335,7 +356,7 @@ public class CashierController implements Initializable {
     @FXML
     private void cancelPurchase(ActionEvent e){
         //NOTHING RELATED TO SQL OR DB
-        
+        totPrice.setText("0");
         btnDone.setDisable(true);
         btnCancel.setDisable(true);
         productAmount.setText("");
@@ -359,9 +380,14 @@ public class CashierController implements Initializable {
             if(temp.isSelected()){
 
             int prev= Integer.parseInt(temp.getAmount());
-
             int cur = Integer.parseInt(productAmount.getText());
-            counter = counter + (cur-prev);
+            
+            int updatingAmount = cur-prev;
+            int price = Integer.parseInt(temp.getPrice());
+            sum = sum + (price*updatingAmount);
+            totPrice.setText(Integer.toString(sum));
+            
+            counter = counter + (updatingAmount);
             count.setText(String.valueOf(counter) );
             temp.setAmount(productAmount.getText());
             

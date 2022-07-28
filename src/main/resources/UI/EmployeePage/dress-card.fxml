@@ -19,7 +19,7 @@
          <children>
             <ImageView fx:id="image" fitHeight="137.0" fitWidth="160.0" layoutX="3.0" layoutY="5.0" pickOnBounds="true">
                <image>
-                  <Image url="@../OwnerPage/HomePageAssets/WallpaperDog-17114930.jpg" />
+                  <Image url="@../../IMG/Product_card/not_found.jpg" />
                </image>
             </ImageView>
             <Label layoutX="15.0" layoutY="147.0" text="Name:">

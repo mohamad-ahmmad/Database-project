@@ -88,6 +88,16 @@
       <Separator layoutX="528.0" layoutY="572.0" prefHeight="5.0" prefWidth="287.0" />
       <MFXButton fx:id="btnDone" layoutX="681.0" layoutY="632.0" onAction="#purchase" prefHeight="30.0" prefWidth="100.0" styleClass="btns" text="Done" />
       <MFXButton fx:id="btnCancel" layoutX="561.0" layoutY="632.0" onAction="#cancelPurchase" prefHeight="30.0" prefWidth="100.0" styleClass="btns" text="Cancel" />
+      <Label layoutX="541.0" layoutY="400.0" text="Total Price:">
+         <font>
+            <Font name="Berlin Sans FB" size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="totPrice" layoutX="623.0" layoutY="401.0" prefHeight="20.0" prefWidth="62.0" text="0">
+         <font>
+            <Font name="Berlin Sans FB" size="17.0" />
+         </font>
+      </Label>
    </children>
    <stylesheets>
       <URL value="@../../CSS/EmployeePage/cashier.css" />

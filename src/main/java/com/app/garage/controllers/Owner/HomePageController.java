@@ -36,7 +36,11 @@ import javafx.util.Duration;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
@@ -240,11 +244,12 @@ public class HomePageController implements Initializable {
             Alert s = new Alert(Alert.AlertType.ERROR);
             s.setTitle("Something Wrong !");
             s.setContentText("Contact the developers.");
-            
+             
             ex.printStackTrace();
+          
         }
-        
-        return -1;
+        return 1;
+       
     }
     
    
@@ -260,7 +265,7 @@ public class HomePageController implements Initializable {
             CardsSlider.cards.get(i).setID(topDep[i]);
             calculateSliderData(CardsSlider.cards.get(i));
             departmentInformationInit(CardsSlider.cards.get(i));
-            
+            pieChartCalculation(CardsSlider.cards.get(i));
         }
         
         
@@ -286,7 +291,7 @@ public class HomePageController implements Initializable {
             ResultSet result = st.executeQuery("select DEPID , SUM(AMOUNT) as aa from SELL_RECORD GROUP BY DEPID ORDER BY aa desc");
             
             i=0;
-            while(result.next() && i < 2 ){
+            while(result.next() && i < 3 ){
                 topDep[i]=result.getInt(1);
                 i++;
             }
@@ -313,6 +318,29 @@ public class HomePageController implements Initializable {
            if(Manager.next()) 
             s.getTextManagerName().setText(Manager.getString(1)+" "+Manager.getString(2));
             
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+    }
+
+    private void pieChartCalculation(CardsSlider get) {
+        
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select count(sd.DRESSID) as NUMBEROFDRESS,d.DRESSNAME  from sell_record sd join DRESS d on d.DRESSID=sd.DRESSID where Depid = "+get.getID()+" group by d.DRESSNAME order by count(sd.DRESSID) desc ");
+            ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+            int i =0;
+            while( i < 4 && rs.next()  ){
+                pieData.add(new PieChart.Data(rs.getString("DRESSNAME"),rs.getInt("NUMBEROFDRESS") ) );
+                i++;
+            }
+          
+          
+            get.getSlideController().getPieChart().setData(pieData);
+            get.getSlideController().getPieChart().setTitle("Top.4 Dress Amount sold");
             con.close();
         } catch (SQLException ex) {
             ex.printStackTrace();

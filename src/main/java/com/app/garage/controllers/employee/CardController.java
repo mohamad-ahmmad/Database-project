@@ -58,11 +58,19 @@ public class CardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        cardFrame.opacityProperty().set(0.95);
-       image.setImage(new Image(String.valueOf(getClass().getResource("/UI/OwnerPage/HomePageAssets/MSI.jpg"))));
+       //image.setImage(new Image(String.valueOf(getClass().getResource("/UI/OwnerPage/HomePageAssets/MSI.jpg"))));
     }
     
     public void setImage(String url){
+        try{
+            System.out.println(url);
         image.setImage(new Image(String.valueOf(getClass().getResource(url))));
+        }
+        catch(Exception e){
+            System.out.println("Hello");
+            e.printStackTrace();
+        }
+        
     }
     
     public void setAmount(String num){
@@ -120,5 +128,11 @@ public class CardController implements Initializable {
       }
       public String getAmount(){
           return amountNum.getText();
+      }
+      public String getPrice(){
+          return dressPrice.getText();
+      }
+      public String getSale(){
+          return dressSale.getText();
       }
 }

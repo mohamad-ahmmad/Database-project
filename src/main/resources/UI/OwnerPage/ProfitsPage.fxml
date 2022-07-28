@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.chart.StackedAreaChart?>
 <?import javafx.scene.chart.StackedBarChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -17,99 +20,112 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="810.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.ProfitsController">
+<AnchorPane stylesheets="@../../CSS/ColorThemes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.Owner.ProfitsController">
    <children>
-      <VBox layoutX="469.0" layoutY="63.0" prefHeight="297.0" prefWidth="326.0" styleClass="Boxes">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="43.0" prefWidth="326.0" text="Profits PieChart" textFill="#333333">
-               <font>
-                  <Font name="Berlin Sans FB" size="18.0" />
-               </font>
-               <stylesheets>
-                  <URL value="@../../CSS/ColorThemes.css" />
-                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
-               </stylesheets>
-            </Label>
-            <Separator prefWidth="200.0" />
-            <PieChart fx:id="pieChart" prefHeight="261.0" prefWidth="325.0" />
-         </children>
-         <stylesheets>
-            <URL value="@../../CSS/OwnerPage/Profits.css" />
-            <URL value="@../../CSS/ColorThemes.css" />
-         </stylesheets>
-      </VBox>
-      <VBox layoutX="20.0" layoutY="64.0" prefHeight="300.0" prefWidth="419.0" styleClass="Boxes">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="420.0" text="Profits AreaChart" textFill="#333333">
-               <font>
-                  <Font name="Berlin Sans FB" size="18.0" />
-               </font>
-               <stylesheets>
-                  <URL value="@../../CSS/ColorThemes.css" />
-                  <URL value="@../../CSS/OwnerPage/Owner-form.css" />
-                  <URL value="@../../CSS/OwnerPage/Profits.css" />
-               </stylesheets>
-            </Label>
-            <Separator prefWidth="200.0" />
-            <StackedAreaChart prefHeight="260.0" prefWidth="418.0">
-              <xAxis>
-                <NumberAxis prefWidth="359.0" side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </StackedAreaChart>
-         </children>
-         <stylesheets>
-            <URL value="@../../CSS/OwnerPage/Profits.css" />
-            <URL value="@../../CSS/ColorThemes.css" />
-         </stylesheets>
-      </VBox>
-      <TextField layoutX="259.0" layoutY="14.0" prefHeight="27.0" prefWidth="259.0" promptText="Search" styleClass="Search">
-         <stylesheets>
-            <URL value="@../../CSS/OwnerPage/Profits.css" />
-            <URL value="@../../CSS/ColorThemes.css" />
-         </stylesheets>
-      </TextField>
-      <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="238.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../ICONS/OwnerPage/Search.png" />
-         </image>
-      </ImageView>
-      <VBox layoutX="469.0" layoutY="371.0" prefHeight="325.0" prefWidth="326.0" styleClass="Boxes">
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="325.0" text="Profits BarChart" textFill="#333333">
-               <font>
-                  <Font name="Berlin Sans FB" size="18.0" />
-               </font>
-            </Label>
-            <Separator prefWidth="200.0" />
-            <StackedBarChart prefHeight="282.0" prefWidth="325.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </StackedBarChart>
-         </children>
-         <stylesheets>
-            <URL value="@../../CSS/OwnerPage/Profits.css" />
-            <URL value="@../../CSS/ColorThemes.css" />
-         </stylesheets>
-      </VBox>
-
-      <TableView layoutX="20.0" layoutY="372.0" prefHeight="325.0" prefWidth="419.0" styleClass="Table">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-         <stylesheets>
-            <URL value="@../../CSS/ColorThemes.css" />
-            <URL value="@../../CSS/OwnerPage/Profits.css" />
-         </stylesheets>
-      </TableView>
-
-
+      <MFXScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="810.0" vbarPolicy="ALWAYS">
+         <content>
+            <AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="810.0" style="-fx-background-color: white;">
+               <children>
+                  <VBox layoutX="469.0" layoutY="63.0" prefHeight="297.0" prefWidth="326.0" styleClass="Boxes">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="43.0" prefWidth="326.0" text="Most Popular Clothes" textFill="#333333">
+                           <font>
+                              <Font name="Berlin Sans FB" size="18.0" />
+                           </font>
+                           <stylesheets>
+                              <URL value="@../../CSS/ColorThemes.css" />
+                              <URL value="@../../CSS/OwnerPage/Owner-form.css" />
+                           </stylesheets>
+                        </Label>
+                        <Separator prefWidth="200.0" />
+                        <PieChart fx:id="pieChart" prefHeight="261.0" prefWidth="325.0" />
+                     </children>
+                     <stylesheets>
+                        <URL value="@../../CSS/OwnerPage/Profits.css" />
+                        <URL value="@../../CSS/ColorThemes.css" />
+                     </stylesheets>
+                  </VBox>
+                  <TextField fx:id="searchField" layoutX="238.0" layoutY="19.0" maxHeight="27.0" minHeight="27.0" prefHeight="27.0" prefWidth="259.0" promptText="Department ID:">
+                     <stylesheets>
+                        <URL value="@../../CSS/OwnerPage/Profits.css" />
+                        <URL value="@../../CSS/ColorThemes.css" />
+                     </stylesheets>
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </TextField>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="242.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../ICONS/OwnerPage/Search.png" />
+                     </image>
+                  </ImageView>
+                  <VBox layoutX="469.0" layoutY="371.0" prefHeight="325.0" prefWidth="326.0" styleClass="Boxes">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="325.0" text="Top 4 Selling Departments" textFill="#333333">
+                           <font>
+                              <Font name="Berlin Sans FB" size="18.0" />
+                           </font>
+                        </Label>
+                        <Separator prefWidth="200.0" />
+                        <StackedBarChart fx:id="barChart" prefHeight="282.0" prefWidth="325.0" stylesheets="@../../CSS/OwnerPage/barchart.css">
+                           <xAxis>
+                              <CategoryAxis side="BOTTOM" />
+                           </xAxis>
+                           <yAxis>
+                              <NumberAxis side="LEFT" />
+                           </yAxis>
+                        </StackedBarChart>
+                     </children>
+                     <stylesheets>
+                        <URL value="@../../CSS/OwnerPage/Profits.css" />
+                        <URL value="@../../CSS/ColorThemes.css" />
+                     </stylesheets>
+                  </VBox>
+                  <TableView fx:id="tableView" layoutX="14.0" layoutY="64.0" prefHeight="634.0" prefWidth="434.0" styleClass="Table">
+                     <columns>
+                        <TableColumn fx:id="dressName" minWidth="40.0" prefWidth="97.60000038146973" text="Name" />
+                        <TableColumn fx:id="dressAmount" prefWidth="75.20001983642578" text="Amount" />
+                        <TableColumn fx:id="wprice" prefWidth="125.59999084472656" text="WPrice" />
+                        <TableColumn fx:id="pricePerpiece" minWidth="15.0" prefWidth="46.4000244140625" text="Price/Piece" />
+                        <TableColumn fx:id="totPrice" prefWidth="71.99993896484375" text="Total Price" />
+                        <TableColumn fx:id="netProfit" prefWidth="71.99993896484375" text="Net Profit" />
+                        <TableColumn fx:id="dateCol" prefWidth="75.20001983642578" text="Date" />
+                     </columns>
+                     <stylesheets>
+                        <URL value="@../../CSS/ColorThemes.css" />
+                        <URL value="@../../CSS/OwnerPage/Profits.css" />
+                     </stylesheets>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <LineChart fx:id="lineChart" layoutX="1.0" layoutY="763.0" prefHeight="400.0" prefWidth="795.0">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <Label layoutX="372.0" layoutY="735.0" text="Profit/Day">
+                     <font>
+                        <Font name="Berlin Sans FB" size="23.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="44.0" fitWidth="63.0" layoutX="304.0" layoutY="725.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../ICONS/OwnerPage/ProfitsIcon.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="29.0" layoutY="43.0" text="Dress sales:">
+                     <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                     </font>
+                  </Label>
+                  <MFXButton layoutX="504.0" layoutY="19.0" maxHeight="26.0" minHeight="26.0" onAction="#searchClicked" prefHeight="26.0" styleClass="btns" text="Search" />
+               </children>
+            </AnchorPane>
+         </content>
+      </MFXScrollPane>
    </children>
 </AnchorPane>
