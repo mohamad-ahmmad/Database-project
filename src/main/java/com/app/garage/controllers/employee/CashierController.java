@@ -375,9 +375,9 @@ public class CashierController implements Initializable {
         
         try{
           ods = new OracleDataSource();
-          ods.setURL("jdbc:oracle:thin:@192.168.18.169:1521:xe");
-          ods.setUser("c##daraghmeh");
-          ods.setPassword("123456");
+          ods.setURL(App.ip);
+          ods.setUser(App.user);
+          ods.setPassword(App.password);
           con = ods.getConnection();
           
           design = JRXmlLoader.load(getClass().getResource("/Reports/Employee/receipt-report.jrxml").getFile());
