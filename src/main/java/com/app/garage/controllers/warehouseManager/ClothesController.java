@@ -252,7 +252,7 @@ public class ClothesController implements Initializable{
         File address = new File ("D:\\DataBase Project\\src\\main\\resources\\Previews\\Clothes\\"+ temp.getDressID()+"_PREVIEW.jpg");
         selectedFile.renameTo(address);
    }
-
+   //PREVIEW/IMAGE FOR CLOTHES NEED TO CHANGE THE ROOT
     @FXML
     void showPreview(ActionEvent ev) throws IOException, SQLException {
         Clothes temp = tableView.getSelectionModel().getSelectedItem();

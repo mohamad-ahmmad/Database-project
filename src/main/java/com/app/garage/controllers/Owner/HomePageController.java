@@ -265,19 +265,19 @@ public class HomePageController implements Initializable {
         
         
     }
-    static XYChart.Series  data = new XYChart.Series();
-    static boolean selected=true;
+    
     private void calculateSliderData(CardsSlider slide ) {
-        if(selected)
-        {
+         XYChart.Series  data = new XYChart.Series();
+        boolean selected=true;
         data.setName("Profits/day");
         LineChart ref =  slide.getSlideController().getLineChart();
         selected=false;
          for(int i=0 ; i<arrDays.length ; i++)
             data.getData().add(new XYChart.Data(Integer.toString(arrDays[i]),profitCalcDay(slide.getID(), arrDays[i])));
         
+         ref.getData().clear();
         ref.getData().add(data);
-        }
+        
         
         
        
