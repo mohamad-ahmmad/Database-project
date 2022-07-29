@@ -797,7 +797,7 @@ public class EmployeesController implements Initializable{
         selectedFile.renameTo(address);
         }
     }
-
+    //CV EMPLOYEES
     @FXML
     void showCV(ActionEvent event) {
        if(!tableView.getSelectionModel().isEmpty()){

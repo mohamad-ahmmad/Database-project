@@ -8,7 +8,11 @@ import com.app.garage.App;
 import com.app.garage.controllers.login.LoginController;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,12 +33,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
+import oracle.jdbc.pool.OracleDataSource;
 
 
 public class CashierController implements Initializable {
@@ -340,11 +356,48 @@ public class CashierController implements Initializable {
          } catch (SQLException ex) {
             productID.setStyle("-fx-border-color: rgba(248,0,0,0.6);"); ex.printStackTrace();
          }
+        loadReceipt();
         setReceiptNumLABEL();
         selectAllCards();
         deleteSelectedCards();
         update();
+        
          
+    }
+    
+    private void loadReceipt(){
+        OracleDataSource ods;
+        InputStream input;
+        JasperDesign design;
+        JasperReport rep;
+        JasperPrint jPrint;
+        OutputStream output;
+        
+        try{
+          ods = new OracleDataSource();
+          ods.setURL(App.ip);
+          ods.setUser(App.user);
+          ods.setPassword(App.password);
+          con = ods.getConnection();
+          
+          File f = new File("D:\\DataBase Project\\src\\main\\resources\\Reports\\Employee\\receipt-report.jrxml");
+          design = JRXmlLoader.load(f);
+          
+                design.setPageHeight(250 + conts.size()*27);
+          rep = JasperCompileManager.compileReport(design);
+          jPrint=JasperFillManager.fillReport(rep,null,con);
+          //output=new FileOutputStream(new File("RECEIPT6.pdf"));
+          //JasperExportManager.exportReportToPdfStream(jPrint, output);
+            
+            JasperViewer receiptView = new JasperViewer(jPrint, false);
+          receiptView.setVisible(true);
+          
+        }catch(Exception e){
+        e.printStackTrace();
+        }
+        
+        
+        
     }
     
     private void selectAllCards(){

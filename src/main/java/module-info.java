@@ -5,7 +5,10 @@ module com.app.garage {
     requires org.controlsfx.controls;
     requires MaterialFX;
     requires java.sql;
- 
+    requires jasperreports;
+    requires java.naming;
+    requires ojdbc10;
+    
     exports com.app.garage.controllers to javafx.fxml;
     opens com.app.garage.controllers to javafx.fxml;
     opens com.app.garage.controllers.derpartmentmanager to javafx.fxml;
