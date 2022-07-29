@@ -334,8 +334,7 @@ public class CashierController implements Initializable {
                  String dressID = Long.toString(temp.getID());
                  String depid = this.idCard.substring(1, 4);
                  String amount = temp.getAmount();
-                 
-    
+               
                  stDone.executeUpdate("insert into sell_record (RID, RECEPIT_NUM, DEPID, DRESSID, PURCHASED_DATE, AMOUNT) values("
                          + " receipt_id.nextval, "
                          + " receipt_num.currval, "

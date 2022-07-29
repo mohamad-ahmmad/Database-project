@@ -203,8 +203,13 @@ public class ClothesController implements Initializable {
         try {
             con = DriverManager.getConnection(App.ip, App.user, App.password);
             Statement st = con.createStatement();
-            
+            int delta = e.getNewValue()-e.getOldValue();
             st.executeUpdate("update DEPARTMENT_DRESS set DEPARTMENTSTOCK ="+e.getNewValue()+" where DRESSID ="+temp.getDressId()+" AND DID="+LoginController.currentUser.substring(1,4) );
+            st.executeUpdate("update DRESS set stock=stock+"+delta+" where DRESSID="+temp.getDressId());
+            st.executeUpdate("update WAREHOUSE_DRESS set WAREHOUSE_STOCK =WAREHOUSE_STOCK +"+delta+" WHERE DRESSID="+temp.getDressId());//TRY IT BEFORE U ABSR SHO
+            
+            
+            
             temp.setStock(e.getNewValue());
             
             tableView.refresh();
@@ -417,7 +422,9 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
             
             if(wholeQuantity >= quantity){
             st.executeUpdate("update DRESS set stock=stock-"+stockIm+" where DRESSID="+dressId);
-            st.executeUpdate("update WAREHOUSE_DRESS set WAREHOUSE_STOCK = WAREHOUSE_STOCK-"+stockIm+" WHERE DRESSID="+dressId);//TRY IT BEFORE U ABSR SHO
+
+            st.executeUpdate("update WAREHOUSE_DRESS set WAREHOUSE_STOCK =WAREHOUSE_STOCK -"+stockIm+" WHERE DRESSID="+dressId);//TRY IT BEFORE U ABSR SHO
+
             st.executeUpdate("insert into DEPARTMENT_DRESS (DRESSID, DID, SALEPERCENTAGE, DEPARTMENTSTOCK) values ( "+dressId+", "+LoginController.currentUser.substring(1,4)+", "+percent+", "+stockIm+" )");
             
 
@@ -429,22 +436,13 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
             con.close();
         } catch (SQLException ex) {
             
-            try {
-                con = DriverManager.getConnection(App.ip, App.user, App.password);
-                Statement st = con.createStatement();
-                ex.printStackTrace();
-                st.executeUpdate("update DEPARTMENT_DRESS set DEPARTMENTSTOCK=DEPARTMENTSTOCK+"+stockIm+" where DRESSID="+dressId+" AND DID="+LoginController.currentUser.substring(1,4));
-                temp.close();
-                con.close();
-              
-            } catch (SQLException ex1) {
+        
                  Alert s= new Alert(Alert.AlertType.ERROR);
-            s.setContentText("Invalid Inputs Check Warehouse Table.");
+            s.setContentText("Invalid Inputs The dress already exist check your inputs.");
             s.setTitle("Error");
             s.show();
-            ex1.printStackTrace();
-            }
-            
+            return;
+                        
         }
         
     }
