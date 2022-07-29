@@ -45,7 +45,7 @@
             <Font name="Berlin Sans FB" size="14.0" />
          </font>
       </Label>
-      <MFXDatePicker fx:id="enterDate" borderGap="5.0" layoutX="72.0" layoutY="92.0" prefHeight="0.0" prefWidth="171.0">
+      <MFXDatePicker fx:id="enterDate" borderGap="5.0" layoutX="72.0" layoutY="92.0" prefHeight="0.0" prefWidth="171.0" styleClass="date-box" stylesheets="@../../CSS/ColorThemes.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></MFXDatePicker>
