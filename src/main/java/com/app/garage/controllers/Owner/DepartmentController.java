@@ -7,7 +7,11 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import io.github.palexdev.materialfx.dialogs.MFXDialogs;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -63,6 +67,15 @@ import javafx.util.Duration;
 import javafx.util.StringConverter;
 import javafx.util.converter.LongStringConverter;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+import oracle.jdbc.pool.OracleDataSource;
 
 
 public class DepartmentController implements Initializable{
@@ -689,6 +702,50 @@ public class DepartmentController implements Initializable{
           } 
         }
     }
+    
+    private void loadReport(Departments temp){
+        Long id = temp.getDID();
+            OracleDataSource ods;
+        InputStream input;
+        JasperDesign design;
+        JasperReport rep;
+        JasperPrint jPrint;
+        OutputStream output;
+        
+        try{
+          ods = new OracleDataSource();
+          ods.setURL(App.ip);
+          ods.setUser(App.user);
+          ods.setPassword(App.password);
+          Connection con = ods.getConnection();
+          
+          design = JRXmlLoader.load(getClass().getResource("/Reports/Deleted_Departments/Department_Document.jrxml").getFile());
+          
+          String sql = "SELECT  d.DID, d.COUNTRY, d.CITY, d.STREET, d.DNAME, d.OPENINGDATE, e.SSN, e.FIRSTNAME, e.LASTNAME, e.SALARY, e.ETYPE " +
+               " ,(SELECT STREET FROM EMPLOYEE_LOCATION el where el.ssn=e.ssn AND ROWNUM <2)AS LOC_STREET " +
+               " ,(SELECT CITY FROM EMPLOYEE_LOCATION el where el.ssn=e.ssn AND ROWNUM <2 ) as LOC_CITY, " +
+               " (SELECT PHONENUMBER FROM EMPLOYEE_PHONENUMBER ep where ep.ssn = e.ssn and ROWNUM <2 ) AS ONE_PHONENUMBER  " +
+               " FROM DEPARTMENT d JOIN EMPLOYEE e ON d.DID=e.DEPID where d.DID="+id;
+         
+          JRDesignQuery newQ= new JRDesignQuery();
+          newQ.setText(sql);
+          design.setQuery(newQ);
+          rep = JasperCompileManager.compileReport(design);
+          jPrint=JasperFillManager.fillReport(rep,null,con);
+          output=new FileOutputStream(new File("src/main/resources/Reports/Deleted_Departments/"+temp.getDID()+"_DELETED.pdf"));
+          //JasperExportManager.exportReportToPdfStream(jPrint, output);
+            
+            JasperViewer receiptView = new JasperViewer(jPrint, false);
+          receiptView.setVisible(true);
+          
+        }catch(Exception e){
+            System.out.println("shittt");
+        e.printStackTrace();
+        }
+        
+        
+    }
+    
     private void Connect() throws SQLException{
         searchDeps.clear();
         Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
@@ -725,8 +782,12 @@ public class DepartmentController implements Initializable{
     if(t.next()){ a=t.getString("IDCard");
     idcard=a.charAt(0)+"000"+a.charAt(4)+a.charAt(5);
     }
+    
+    loadReport( selectedItem);
+    
     st.executeUpdate("Delete from Department Where Did = " + selectedItem.getDID());
-    st.executeUpdate("Update employee set DepID = '', IDCard = " + idcard+ " Where SSN =" + selectedItem.getManagerID());
+    
+    st.executeUpdate("Update employee set DepID = '', IDCard ='' " + idcard+ " Where SSN =" + selectedItem.getManagerID());
     Connect();
     tableView.setItems(searchDeps);
     con.close();
