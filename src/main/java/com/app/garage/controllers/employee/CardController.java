@@ -64,8 +64,12 @@ public class CardController implements Initializable {
     }
     
     public void setImage(String url){
-       
-        image.setImage(new Image(String.valueOf(getClass().getResource(url))));
+       try{
+       image.setImage(new Image(String.valueOf(getClass().getResource(url))));
+       }catch(Exception e){
+           
+       }
+        
 
     }
     public void setAmount(String num){

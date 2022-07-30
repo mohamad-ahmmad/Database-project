@@ -146,6 +146,8 @@ public class ClothesController implements Initializable{
     @FXML
     private TableColumn<Clothes, Long> DidCol;
     @FXML
+    private TableColumn<Clothes, Long> stockCol2;
+    @FXML
     private TableColumn<Clothes, Long> wareIDCol;
 
     @FXML
@@ -597,10 +599,11 @@ int i=0;
          Statement stmt = con.createStatement();
          ResultSet rs = stmt.executeQuery("Select * from warehouse_dress");
          while(rs.next()){
-             Clothes_WH.add(new Clothes(rs.getLong("Wid"),rs.getLong("DressID")));
+             Clothes_WH.add(new Clothes(rs.getLong("Wid"),rs.getLong("DressID"),rs.getLong("Warehouse_stock")));
          }
          storageTable.setItems(Clothes_WH);
          DidCol.setCellValueFactory(new PropertyValueFactory<>("dressID"));
+         stockCol2.setCellValueFactory(new PropertyValueFactory<>("Stock"));
          wareIDCol.setCellValueFactory(new PropertyValueFactory<>("Wid"));
             }
             catch(SQLException ex){
@@ -746,6 +749,8 @@ int i=0;
     @FXML
     private TextField txtfieldID;
     @FXML
+    private TextField txtfieldStock2;
+    @FXML
     private TextField txtfieldType;
 
     @FXML
@@ -762,15 +767,22 @@ int i=0;
 
     @FXML
     private TextField txtfieldWSPrice;
+     @FXML
+    private void clearSearch(ActionEvent e) throws SQLException{
+        txtfieldStock2.setText("");
+        txtfieldWID.setText("");
+        txtfieldDID.setText("");
+        storageTable.setItems(Clothes_WH);
+    }
     @FXML
     private void startSearchStorage(ActionEvent e) throws SQLException{
         Clothes_WH_Search.clear();
         try{
          Connection con = DriverManager.getConnection(App.ip,App.user,App.password);
          Statement stmt = con.createStatement();
-         ResultSet rs = stmt.executeQuery("Select * from warehouse_dress where Wid like '%" + txtfieldWID.getText() + "%' and dressID like '%" + txtfieldDID.getText()+"%'");
+         ResultSet rs = stmt.executeQuery("Select * from warehouse_dress where warehouse_stock like '%" + txtfieldStock2.getText() +"%' and Wid like '%" + txtfieldWID.getText() + "%' and dressID like '%" + txtfieldDID.getText()+"%'");
          while(rs.next()){
-             Clothes_WH_Search.add(new Clothes(rs.getLong("Wid"),rs.getLong("DressID")));
+             Clothes_WH_Search.add(new Clothes(rs.getLong("Wid"),rs.getLong("DressID"),rs.getLong("warehouse_stock")));
          }
          storageTable.setItems(Clothes_WH_Search);
             }

@@ -12,9 +12,10 @@ public class Clothes {
     String dressName, dressSize,dressColor, brandName, preview;
     Long dressID, WSPrice, Price, Stock, SupplierID;
     Long Wid;
-    public Clothes(Long Wid, Long ID){
+    public Clothes(Long Wid, Long ID, Long stock){
         this.dressID=ID;
         this.Wid=Wid;
+        this.Stock=stock;
     }
 
     public Long getWid() {

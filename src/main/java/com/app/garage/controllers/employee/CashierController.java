@@ -144,7 +144,7 @@ public class CashierController implements Initializable {
     
     @FXML
     void btnPressed(ActionEvent event) throws IOException,SQLException  {
-       
+
          try {
              con=DriverManager.getConnection(App.ip, App.user, App.password );
          } catch (SQLException ex) {

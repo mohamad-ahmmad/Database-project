@@ -404,7 +404,7 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
         String wId = importWID.getText();
         String percent = importPercent.getText();
         
-
+        
 
            
         try {
@@ -457,7 +457,7 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
         } catch (SQLException ex) {
               flowPaneImport.getChildren().remove(errLabel);
               errLabel.setText("Invalid Warehouse ID");
-              importWID.setStyle(cssErorr);
+           
               flowPaneImport.getChildren().add(errLabel);
 //            Alert s= new Alert(Alert.AlertType.ERROR);
 //            s.setContentText("Invalid Inputs.\nYou have entered an invalid warehouse id please check your inputs.");
