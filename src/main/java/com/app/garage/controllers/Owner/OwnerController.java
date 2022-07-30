@@ -85,8 +85,7 @@ public class OwnerController implements Initializable {
     private boolean isOpened= false;
     @FXML
     void openProfitsPanel(MouseEvent event) throws IOException {
-        if(!isOpened){
-            
+
             if(!profitsSelected)
         {
             isOpened=true;
@@ -110,9 +109,6 @@ public class OwnerController implements Initializable {
         departmentsSelected = false;
         employeesSelected = false;
         warehousesSelected=false;
-        }}else{
-            viewPanel.getChildren().clear();
-            viewPanel.getChildren().add(root);
         }
         
     }

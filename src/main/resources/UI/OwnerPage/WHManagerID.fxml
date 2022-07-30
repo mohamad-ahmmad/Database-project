@@ -12,6 +12,6 @@
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
       </Label>
-      <MFXComboBox fx:id="comboboxManagerID" layoutX="113.0" layoutY="47.0" prefHeight="40.0" prefWidth="266.0" />
+      <MFXComboBox fx:id="comboboxManagerID" layoutX="113.0" layoutY="47.0" prefHeight="40.0" prefWidth="266.0" stylesheets="@../../CSS/ColorThemes.css" />
    </children>
 </AnchorPane>

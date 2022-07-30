@@ -12,6 +12,6 @@
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="comboboxManagerID" layoutX="112.0" layoutY="56.0" prefHeight="29.0" prefWidth="271.0" />
+      <JFXComboBox fx:id="comboboxManagerID" focusColor="#f8a918" layoutX="112.0" layoutY="56.0" prefHeight="29.0" prefWidth="271.0" unFocusColor="#333333" />
    </children>
 </AnchorPane>
