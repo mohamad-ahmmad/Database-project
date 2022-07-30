@@ -222,11 +222,21 @@ public class WarehousesController implements Initializable {
     }
 
     @FXML
-    void showPreview(ActionEvent event) {
-
-    }
-    @FXML
     void clearFilter(){
+        idField.setText("");
+        nameField.setText("");
+        sizeField.setText("");
+        countryField.setText("");
+        cityField.setText("");
+        streetField.setText("");
+        priceField.setText("");
+        brandField.setText("");
+        colorField.setText("");
+        nameField.setText("");
+        wPriceField.setText("");
+        stockField.setText("");
+        wIDField.setText("");
+        searchAll();
         Object[] arr = filterPane.getChildren().toArray();
         
         for(Object temp : arr){

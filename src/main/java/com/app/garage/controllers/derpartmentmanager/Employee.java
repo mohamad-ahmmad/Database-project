@@ -18,30 +18,34 @@ public class Employee {
     private String lastName;
     private String hireDate;
     private String birthDate;
-
+    private String section;
     private String gender;
     private int salary;
     private int idCard;
     private String password;
 
 
-    public Employee(long ssn, String firstName, String middleName, String lastNamel, String hireDate, String birthDate, String gender, int salary, int idCard, String password) {
+    public Employee(long ssn, String firstName, String section, String middleName, String lastNamel, String hireDate, String birthDate, String gender, int salary, int idCard, String password) {
         this.ssn = ssn;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastNamel;
         this.hireDate = hireDate;
         this.birthDate = birthDate;
-
+        this.section=section;
         this.gender = gender;
         this.salary = salary;
         this.idCard = idCard;
         this.password = password;
     }
 
-    
-    
-    
+    public String getSection() {
+        return section;
+    }
+
+    public void setSection(String section) {
+        this.section = section;
+    }
     
     public void setSsn(long ssn){
         this.ssn=ssn;

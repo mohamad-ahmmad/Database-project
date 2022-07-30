@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -33,7 +34,10 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <MFXButton layoutX="4.0" layoutY="202.0" onAction="#importButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" stylesheets="@../../CSS/ColorThemes.css" text="  Import" />
+      <MFXButton layoutX="4.0" layoutY="202.0" onAction="#importButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" stylesheets="@../../CSS/ColorThemes.css" text="  Import">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></MFXButton>
       <Label layoutX="-1.0" layoutY="1.0" prefHeight="30.0" prefWidth="328.0" style="-fx-border-color: #333; -fx-border-width: 0 0 1 0;" text="     Clothes in the Department:">
          <font>
             <Font name="Berlin Sans FB" size="26.0" />
@@ -52,7 +56,10 @@
             <ColorAdjust brightness="1.0" />
          </effect>
       </ImageView>
-      <MFXButton layoutX="4.0" layoutY="160.0" onAction="#filterButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" text="Filter" />
+      <MFXButton layoutX="4.0" layoutY="160.0" onAction="#filterButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" text="Filter">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></MFXButton>
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="13.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../ICONS/employee/filter.png" />
@@ -61,7 +68,10 @@
             <ColorAdjust brightness="1.0" />
          </effect>
       </ImageView>
-      <MFXButton layoutX="653.0" layoutY="160.0" onAction="#deleteButton" prefHeight="34.0" prefWidth="150.0" styleClass="delete-btns" text="Delete" />
+      <MFXButton layoutX="653.0" layoutY="160.0" onAction="#deleteButton" prefHeight="34.0" prefWidth="150.0" styleClass="delete-btns" text="Delete">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></MFXButton>
       <FlowPane fx:id="flowPane" alignment="CENTER" layoutX="129.0" layoutY="67.0" prefHeight="177.0" prefWidth="515.0">
          <children>
             <Pane fx:id="idPane" prefHeight="51.0" prefWidth="142.0">
@@ -80,7 +90,10 @@
             </Pane>
          </children>
       </FlowPane>
-      <MFXButton layoutX="653.0" layoutY="202.0" onAction="#clearFilter" prefHeight="34.0" prefWidth="150.0" styleClass="btns" text="Clear Filter" />
+      <MFXButton layoutX="653.0" layoutY="202.0" onAction="#clearFilter" prefHeight="34.0" prefWidth="150.0" styleClass="btns" text="Clear Filter">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></MFXButton>
       <Pane fx:id="namePane" layoutX="153.0" layoutY="-348.0" prefHeight="51.0" prefWidth="142.0">
          <children>
             <Label layoutX="47.0" layoutY="1.0" text="Name">
@@ -189,7 +202,10 @@
             </TextField>
          </children>
       </Pane>
-      <AnchorPane fx:id="filterPanee" layoutX="375.0" layoutY="459.0" prefHeight="230.0" prefWidth="420.0" />
-      <MFXButton layoutX="4.0" layoutY="119.0" onAction="#searchButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" text="Search!" />
+      <AnchorPane fx:id="filterPanee" layoutX="174.0" layoutY="219.0" prefHeight="230.0" prefWidth="420.0" />
+      <MFXButton layoutX="4.0" layoutY="119.0" onAction="#searchButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" text="Search!">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></MFXButton>
    </children>
 </AnchorPane>

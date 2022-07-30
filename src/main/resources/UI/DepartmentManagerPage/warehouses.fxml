@@ -42,7 +42,10 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <MFXButton layoutX="9.0" layoutY="196.0" onAction="#filterButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" text="Filter" />
+      <MFXButton layoutX="9.0" layoutY="196.0" onAction="#filterButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" text="Filter">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></MFXButton>
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="18.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../ICONS/employee/filter.png" />
@@ -51,7 +54,10 @@
             <ColorAdjust brightness="1.0" />
          </effect>
       </ImageView>
-      <MFXButton layoutX="675.0" layoutY="196.0" onAction="#showPreview" prefHeight="34.0" prefWidth="125.0" styleClass="btns" text="Show preview" />
+      <MFXButton layoutX="675.0" layoutY="196.0" onAction="#clearFilter" prefHeight="34.0" prefWidth="125.0" styleClass="btns" text="Clear Filter">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></MFXButton>
       <FlowPane fx:id="flowPane" alignment="CENTER" layoutX="128.0" layoutY="41.0" prefHeight="195.0" prefWidth="518.0">
          <children>
             <Pane fx:id="idPane" prefHeight="51.0" prefWidth="142.0">
@@ -197,7 +203,10 @@
          </children>
       </Pane>
       <AnchorPane fx:id="filterPane" layoutX="379.0" layoutY="455.0" prefHeight="230.0" prefWidth="420.0" />
-      <MFXButton layoutX="675.0" layoutY="152.0" onAction="#showInfo" prefHeight="34.0" prefWidth="125.0" styleClass="btns" text="Show Info." />
+      <MFXButton layoutX="675.0" layoutY="152.0" onAction="#showInfo" prefHeight="34.0" prefWidth="125.0" styleClass="btns" text="Show Info.">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></MFXButton>
       <Pane fx:id="pricePane" layoutX="1037.0" layoutY="-557.0" prefHeight="51.0" prefWidth="142.0">
          <children>
             <Label layoutX="48.0" layoutY="1.0" text="Price">
@@ -226,14 +235,9 @@
             </TextField>
          </children>
       </Pane>
-      <Label layoutX="123.0" layoutY="216.0" onMouseClicked="#clearFilter" text="Clear">
-         <font>
-            <Font name="Berlin Sans FB" size="14.0" />
-         </font>
+      <MFXButton layoutX="9.0" layoutY="153.0" onAction="#searchButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" text="Search!">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor>
-      </Label>
-      <MFXButton layoutX="9.0" layoutY="153.0" onAction="#searchButton" prefHeight="34.0" prefWidth="112.0" styleClass="btns" text="Search!" />
+         </cursor></MFXButton>
    </children>
 </AnchorPane>

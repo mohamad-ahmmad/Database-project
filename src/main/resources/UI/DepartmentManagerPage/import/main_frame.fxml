@@ -2,29 +2,21 @@
 
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="389.0" style="-fx-background-color: white; -fx-border-color: #444;" stylesheets="@../../../CSS/ColorThemes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" prefHeight="321.0" prefWidth="389.0" spacing="20.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <children>
-            <MFXTextField fx:id="importDress" floatMode="ABOVE" floatingText="Dress ID" floatingTextGap="2.0" maxHeight="26.0" minHeight="25.0" prefHeight="0.0" prefWidth="135.0" styleClass="textfields" />
-            <MFXTextField fx:id="importStock" floatMode="ABOVE" floatingText="Stock" floatingTextGap="2.0" maxHeight="25.0" minHeight="25.0" prefWidth="135.0" styleClass="textfields" />
-            <MFXTextField fx:id="importWID" floatMode="ABOVE" floatingText="Warehouse ID" floatingTextGap="2.0" maxHeight="25.0" minHeight="25.0" prefWidth="135.0" styleClass="textfields" />
-            <MFXTextField fx:id="importPercent" floatMode="ABOVE" floatingText="Sale Percentage" floatingTextGap="2.0" maxHeight="25.0" minHeight="25.0" prefWidth="135.0" styleClass="textfields" />
-         </children>
-      </VBox>
+      <MFXTextField fx:id="importDress" floatMode="ABOVE" floatingText="Dress ID" floatingTextGap="2.0" layoutX="127.19999694824219" layoutY="56.0" maxHeight="26.0" minHeight="25.0" prefHeight="0.0" prefWidth="135.0" styleClass="textfields" />
+      <MFXTextField fx:id="importStock" floatMode="ABOVE" floatingText="Stock" floatingTextGap="2.0" layoutX="127.19999694824219" layoutY="101.5999984741211" maxHeight="25.0" minHeight="25.0" prefWidth="135.0" styleClass="textfields" />
+      <MFXTextField fx:id="importWID" floatMode="ABOVE" floatingText="Warehouse ID" floatingTextGap="2.0" layoutX="127.19999694824219" layoutY="147.1999969482422" maxHeight="25.0" minHeight="25.0" prefWidth="135.0" styleClass="textfields" />
+      <MFXTextField fx:id="importPercent" floatMode="ABOVE" floatingText="Sale Percentage" floatingTextGap="2.0" layoutX="127.19999694824219" layoutY="192.8000030517578" maxHeight="25.0" minHeight="25.0" prefWidth="135.0" styleClass="textfields" />
       <MFXButton layoutX="292.0" layoutY="267.0" onAction="#finish" prefWidth="63.0" styleClass="btns" text="Done">
          <effect>
             <DropShadow>
@@ -51,5 +43,10 @@
             <Image url="@../../../ICONS/employee/clothes.png" />
          </image>
       </ImageView>
+      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutY="231.0" prefHeight="23.0" prefWidth="390.0">
+         <children>
+            <Label fx:id="errLabel" styleClass="label-error" text="HELLO BDAIRO" visible="false" />
+         </children>
+      </FlowPane>
    </children>
 </AnchorPane>

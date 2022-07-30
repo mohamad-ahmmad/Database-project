@@ -155,6 +155,14 @@ public class WarehousesController implements Initializable{
         streetField.setSelected(false);
         managerField.setSelected(false);
         CapacityField.setSelected(false);
+        txtFieldCapacity.setText("");
+        txtFieldCity.setText("");
+        txtFieldCountry.setText("");
+        txtFieldId.setText("");
+        txtFieldManagerId.setText("");
+        txtFieldName.setText("");
+        txtFieldStreet.setText("");
+        tableView.setItems(warehouses);
         flowPane.getChildren().removeAll(namePane,cityPane,streetPane,countryPane,managerPane,CapacityPane);
     }
     public void clearSearch() throws IOException{

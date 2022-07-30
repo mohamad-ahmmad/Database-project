@@ -245,6 +245,11 @@ public class EmployeeController implements Initializable{
        LocationField.setSelected(false);
        PhoneField.setSelected(false);
        searchFilterContact.setVisible(false);
+       txtFieldLocation.setText("");
+       txtFieldNumber.setText("");
+       txtFieldID.setText("");
+      numbersTable.setItems(numbers);
+      locationTable.setItems(locations);
        ContactFlow.getChildren().removeAll(LocationPane,PhonePane);
    }
      @FXML
@@ -289,6 +294,16 @@ public class EmployeeController implements Initializable{
         bdField.setSelected(false);
         hdField.setSelected(false);
         idField.setSelected(false);
+        txtFieldBDate.setText("");
+        txtFieldGender.setText("");
+        txtFieldHDate.setText("");
+    
+        txtFieldIDCard.setText("");
+        txtFieldName.setText("");
+        txtFieldSSN.setText("");
+        txtFieldSalary.setText("");
+        txtFieldType.setText("");
+        tableView.setItems(emps);
         flowPane.getChildren().removeAll(OfficeTelephonePane,TypePane,NamePane,SalaryPane,GenderPane,IDCardPane,HireDatePane,BirthDatePane);
     }
     public void clearSearch(){

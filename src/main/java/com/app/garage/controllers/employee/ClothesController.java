@@ -305,7 +305,7 @@ public class ClothesController implements Initializable {
     
     @FXML
     void clearPressed(ActionEvent event){
-        
+        if(flowPane!=null){
         Object[] s = flowPane.getChildren().toArray();
         
         for(Object temp : s){
@@ -322,8 +322,10 @@ public class ClothesController implements Initializable {
             }
                 
         }
+        dressTable.setItems(all);
+      
         
-        
+        }     
     }
     
 }

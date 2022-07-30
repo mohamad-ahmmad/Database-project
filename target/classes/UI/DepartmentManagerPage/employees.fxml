@@ -38,6 +38,7 @@
                   <TableColumn fx:id="nameCol" prefWidth="79.20001220703125" text="First Name" />
                   <TableColumn fx:id="mNameCol" prefWidth="108.79998779296875" text="Middle Name" />
                   <TableColumn fx:id="lNameCol" minWidth="0.0" prefWidth="94.4000244140625" text="Last Name" />
+                  <TableColumn fx:id="sectionCol" prefWidth="105.5999755859375" text="Section" />
                   <TableColumn fx:id="hireDateCol" prefWidth="94.39990234375" text="Hiredate" />
                   <TableColumn fx:id="birthDateCol" prefWidth="85.5999755859375" text="Birthdate" />
                   <TableColumn fx:id="genderCol" prefWidth="77.60009765625" text="Gender" />
@@ -49,7 +50,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <FlowPane fx:id="flowPane" alignment="CENTER" layoutX="696.0" layoutY="146.0" prefHeight="143.0" prefWidth="539.0">
+            <FlowPane fx:id="flowPane" alignment="CENTER" layoutX="705.0" layoutY="148.0" prefHeight="143.0" prefWidth="539.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -194,7 +195,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <AnchorPane fx:id="filterPopUpPane" layoutX="914.0" layoutY="470.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="166.0" prefWidth="420.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5;" visible="false">
+            <AnchorPane fx:id="filterPopUpPane" layoutX="750.0" layoutY="270.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="166.0" prefWidth="420.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 5;" visible="false">
                <children>
                   <Label layoutX="100.0" layoutY="14.0" text="Choose a Search Coloumn">
                      <font>

@@ -303,7 +303,17 @@ public class ClothesController implements Initializable{
         TypeField.setSelected(false);
         StockField.setSelected(false);
         SupplierField.setSelected(false);
+        txtfieldID.setText("");
         tableView.setItems(Clothes);
+        txtfieldBrandName.setText("");
+        txtfieldColor.setText("");
+        txtfieldPrice.setText("");
+        txtfieldSize.setText("");
+        txtfieldStock.setText("");
+        txtfieldSupplierID.setText("");
+        txtfieldType.setText("");
+        txtfieldWSPrice.setText("");
+      
         flowPane.getChildren().removeAll(NamePane,SizePane,ColorPane,BrandPane,WSPricePane,PricePane,TypePane,StockPane,SupplierPane);
     }
 

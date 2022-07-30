@@ -138,6 +138,10 @@ public class SuppliersController implements Initializable{
        LocationField.setSelected(false);
        ShipmentField.setSelected(false);
        searchFilterContact.setVisible(false);
+       txtfieldLcationID.setText("");
+       txtfieldLocation.setText("");
+       txtfieldCost.setText("");
+       locationsTable.setItems(Locations);
        ContactFlow.getChildren().removeAll(ShipmentPane,LocationPane);
    }
      @FXML
@@ -193,6 +197,11 @@ public class SuppliersController implements Initializable{
     TelephoneField.setSelected(false);
     EmailField.setSelected(false);
     searchFilter.setVisible(false);
+    txtfieldEmail.setText("");
+    txtfieldID.setText("");
+    txtfieldName.setText("");
+    txtfieldNumber.setText("");
+    tableView.setItems(suppliers);
 
     }
     @FXML

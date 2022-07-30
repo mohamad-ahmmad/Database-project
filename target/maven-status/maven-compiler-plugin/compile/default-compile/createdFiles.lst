@@ -1,10 +1,14 @@
 com\app\garage\controllers\derpartmentmanager\Cloth.class
+module-info.class
+com\app\garage\controllers\Owner\Employees.class
 com\app\garage\controllers\employee\Dress.class
+com\app\garage\controllers\derpartmentmanager\EmpLocation.class
 com\app\garage\controllers\Owner\WarehousesController.class
 com\app\garage\controllers\Owner\SliderController$1.class
 com\app\garage\controllers\warehouseManager\SuppliersController.class
 com\app\garage\controllers\Owner\WarehousesController$1.class
 com\app\garage\controllers\derpartmentmanager\Warehouse.class
+com\app\garage\controllers\Owner\LogProfit.class
 com\app\garage\controllers\warehouseManager\SuppliersController$1.class
 com\app\garage\controllers\Owner\SliderController.class
 com\app\garage\controllers\warehouseManager\SuppliersController$2.class

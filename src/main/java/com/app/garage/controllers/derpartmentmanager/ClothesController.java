@@ -25,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -390,6 +391,8 @@ public class ClothesController implements Initializable {
     void cancel(ActionEvent event) {
     temp.close();
     }
+    @FXML
+    private Label errLabel;
 private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
     @FXML
     void finish(ActionEvent event) {
@@ -398,26 +401,43 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
         String wId = importWID.getText();
         String percent = importPercent.getText();
         
+           try{
+                    Double.parseDouble(dressId);
+                }catch(Exception ex){
+                    importDress.setStyle(cssErorr);
+                    errLabel.setText("Contains only digits.");
+                    errLabel.setVisible(true);
+                    return;
+                }
+           
+           errLabel.setVisible(false);
         try {
-            
-            
             con = DriverManager.getConnection(App.ip, App.user, App.password);
             Statement st = con.createStatement();
             int quantity ;
             try{
                 quantity = Integer.parseInt(stockIm);
+               importStock.setStyle("");
             }catch(Exception e){
                 importStock.setStyle(cssErorr);
-                e.printStackTrace();
+                errLabel.setText("Contains only digits.");
+                errLabel.setVisible(true);
+                importDress.setStyle("");
                 return;
             }
+            errLabel.setVisible(false);
             
             ResultSet rs = st.executeQuery("select stock from dress where dressid="+dressId);
             boolean found= rs.next();
             if(!found){
                 importDress.setStyle(cssErorr);
+                errLabel.setText("This dress doesn't exist.");
+                errLabel.setVisible(true);
                 return;
             }
+            
+            errLabel.setVisible(false);
+            importDress.setStyle("");
             int wholeQuantity = rs.getInt(1);
             
             if(wholeQuantity >= quantity){
@@ -430,7 +450,12 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
 
             
           }
-            else{ importStock.setStyle(cssErorr); return; }
+            else{ 
+            importStock.setStyle(cssErorr);
+            errLabel.setText("This stock larger than the warehouse stock.");
+            errLabel.setVisible(true);
+            return; }
+            errLabel.setVisible(false);
             
             temp.close();
             con.close();
@@ -438,7 +463,7 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
             
         
                  Alert s= new Alert(Alert.AlertType.ERROR);
-            s.setContentText("Invalid Inputs The dress already exist check your inputs.");
+            s.setContentText("Invalid Inputs.\n The dress already exist or entering invalid warehouse id please check your inputs\nor the dress id does not exist.");
             s.setTitle("Error");
             s.show();
             return;
@@ -449,6 +474,16 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
     @FXML
     private void clearFilter(ActionEvent e){
         Object[] arrCheckBox = filterPanee.getChildren().toArray();
+        nameField.setText("");
+        sizeField.setText("");
+        historyField.setText("");
+        priceField.setText("");
+        brandField.setText("");
+        colorField.setText("");
+        nameField.setText("");
+        wPriceField.setText("");
+        stockField.setText("");
+        searchAll();
         
         if(arrCheckBox.length == 1)
         {
