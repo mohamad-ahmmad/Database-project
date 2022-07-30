@@ -24,5 +24,6 @@
       </Label>
       <JFXCheckBox fx:id="cashierCheckBox" checkedColor="#f8a918" layoutX="160.0" layoutY="97.0" onAction="#typeCheckBox" selected="true" text="Cashier" />
       <JFXCheckBox fx:id="assistantCheckBox" checkedColor="#f8a918" layoutX="244.0" layoutY="97.0" onAction="#typeCheckBox" text="Assistant" />
+      <MFXTextField fx:id="sectionTextField" floatMode="ABOVE" floatingText="Section" floatingTextGap="2.0" layoutX="127.0" layoutY="243.0" maxHeight="26.0" minHeight="25.0" prefHeight="0.0" prefWidth="135.0" styleClass="textfields" visible="false" />
    </children>
 </AnchorPane>

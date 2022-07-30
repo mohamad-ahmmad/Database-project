@@ -107,6 +107,14 @@
     -fx-font-family:"Berlin Sans FB";
 }
 
+.label-error{
+    -fx-border-color:red;
+    -fx-padding:5;
+    -fx-background-color :rgba(255,0,0,0.1);
+    -fx-text-fill:red;
+    -fx-font-family:"Berlin Sans FB";
+}
+
 
 /* Useless cuz MFXButton has already pressed effect
 .btns:pressed{

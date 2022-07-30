@@ -24,6 +24,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -33,7 +35,13 @@ public class AddEmployeeController implements Initializable {
 
     private Connection con;
     
+    
+    
     private AnchorPane mainPane;
+    
+    @FXML
+    private Label errorLabel;
+    
     @FXML
     private AnchorPane secPane;
 
@@ -85,6 +93,15 @@ public class AddEmployeeController implements Initializable {
             st.executeUpdate("insert into EMPLOYEE values( "+empSsn+" ,'"+empFirst+"', '"+empMiddle
                     +        "', '"+empLast+"', to_date('"+empBirth+"','yyyy-mm-dd'), to_date('"+empHire+"','yyyy-mm-dd') "
                     +        ", '"+empGender+"', "+empSal+", "+empIdCard2+", '"+type+"', '"+empPass+"', null ,"+LoginController.currentUser.substring(1,4)+", null  )");
+            
+            if(sectionTextField.equals("")){
+                
+            }else
+            {
+              st.executeUpdate("insert into EMPLOYEE(SSN, SECTION) values ("+empSsn+", '"+sectionTextField.getText()+"') ");
+            }
+            
+       
             
             con.close();
         } catch (SQLException ex) {
@@ -174,9 +191,15 @@ public class AddEmployeeController implements Initializable {
         
         else if(i==1){
              
-             System.out.println(hireDate.getValue().toString().replace("/", "-"));
-              empHire = hireDate.getValue().toString().replace("/", "-");
+             try{
+                           empHire = hireDate.getValue().toString().replace("/", "-");
               empBirth = birthDate.getValue().toString().replace("/", "-");
+             } catch(Exception e){
+                 errorLabel.setVisible(true);
+                 return false;
+                 
+             }
+
               
         }
         else if(i == 2){
@@ -251,7 +274,9 @@ public class AddEmployeeController implements Initializable {
         arrFXML[1]="/UI/DepartmentManagerPage/add_employee/third_form.fxml";
            
         
-     
+        ssn.setTooltip(new Tooltip("Consist of 10 digits."));
+        firstName.setTooltip(new Tooltip("This field can not be empty"));
+        lastName.setTooltip(new Tooltip("This field can not be empty"));
         
     }
     
@@ -278,6 +303,8 @@ public class AddEmployeeController implements Initializable {
     
     @FXML
     private JFXCheckBox cashierCheckBox;
+    @FXML
+    private MFXTextField sectionTextField;
     
     @FXML
     private JFXCheckBox assistantCheckBox;
@@ -287,10 +314,15 @@ public class AddEmployeeController implements Initializable {
          if((JFXCheckBox)event.getSource() == cashierCheckBox)
          {
          assistantCheckBox.setSelected(!assistantCheckBox.isSelected());
+         sectionTextField.setText("");
+         sectionTextField.setVisible(false);
          }
          else if((JFXCheckBox)event.getSource() == assistantCheckBox)
          {
          cashierCheckBox.setSelected(!cashierCheckBox.isSelected());
+         
+         sectionTextField.setVisible(true);
+         
          }
     }
     

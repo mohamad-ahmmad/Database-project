@@ -108,7 +108,10 @@ public class EmployeesController implements Initializable{
     @FXML
     private TableColumn<Employee, Long> SSNCol;
 
-  
+   
+    @FXML
+    private TableColumn<Employee, String> sectionCol;
+    
     @FXML
     private TableColumn<Employee, Integer> SalCol;
 
@@ -372,7 +375,8 @@ public class EmployeesController implements Initializable{
             con = DriverManager.getConnection(App.ip, App.user, App.password);
             Statement sAll = con.createStatement();
             
-            ResultSet rs =  sAll.executeQuery("select SSN, FIRSTNAME, MIDDLENAME, LASTNAME, HIREDATE, BIRTHDATE, GENDER, SALARY, IDCARD, EPASSWORD from EMPLOYEE "
+            ResultSet rs =  sAll.executeQuery("select e.SSN, FIRSTNAME, MIDDLENAME, LASTNAME, HIREDATE, BIRTHDATE, GENDER, SALARY, IDCARD, EPASSWORD, SECTION from EMPLOYEE e left join ASSISTANT a "
+                                             + " ON a.ssn=e.ssn "
                                              +" where DEPID ="+LoginController.currentUser.substring(1,4));
             
             while(rs.next()){
@@ -386,9 +390,10 @@ public class EmployeesController implements Initializable{
                int salary = rs.getInt(8);
                int idCard = rs.getInt(9);
                String password = rs.getString(10);
-            
+               String section = rs.getString(11);
+               
                // public Employee(Long ssn, String firstName, String middleName, String lastName, String hireDate, String birthDate, int age, String gender, int salary, String idCard, String password) {
-               empTableContainer.add(new Employee(id, firstName, middleName, lastName, hireDate, birthDate, gender, salary, idCard, password));
+               empTableContainer.add(new Employee(id, firstName, section,middleName, lastName, hireDate, birthDate, gender, salary, idCard, password));
             }
               tableView.setItems(empTableContainer);
           
@@ -718,7 +723,23 @@ public class EmployeesController implements Initializable{
             SalCol.setCellValueFactory(new PropertyValueFactory<>("salary"));
             idCol.setCellValueFactory(new PropertyValueFactory<>("idCard"));
             passCol.setCellValueFactory(new PropertyValueFactory<>("password"));
-        
+          sectionCol.setCellValueFactory(new PropertyValueFactory<>("section"));
+          
+          sectionCol.setCellFactory(TextFieldTableCell.forTableColumn());
+          sectionCol.setOnEditCommit(e->{
+          
+            try {
+                con = DriverManager.getConnection(App.ip, App.user, App.password);
+                Statement st = con.createStatement();
+                st.executeUpdate("update ASSISTANT set SECTION ='"+e.getNewValue()+"' where ssn="+e.getRowValue().getSsn());
+                
+                searchAllEmp();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+              
+          });
+          
         deleteContact.setDisable(true);
         deleteEmployee.setDisable(true);
         deleteLocation.setDisable(true);
@@ -996,7 +1017,7 @@ public class EmployeesController implements Initializable{
 
             con = DriverManager.getConnection(App.ip, App.user, App.password);
             Statement st=con.createStatement();
-                ResultSet rs =  st.executeQuery("select SSN, FIRSTNAME, MIDDLENAME, LASTNAME, HIREDATE, BIRTHDATE, GENDER, SALARY, IDCARD, EPASSWORD from EMPLOYEE "
+                ResultSet rs =  st.executeQuery("select e.SSN, FIRSTNAME, MIDDLENAME, LASTNAME, HIREDATE, BIRTHDATE, GENDER, SALARY, IDCARD, EPASSWORD, SECTION from EMPLOYEE e left join ASSISTANT a on e.ssn = a.ssn  "
                                              +" where DEPID ="+LoginController.currentUser.substring(1,4)+" AND SSN LIKE '%"+ssnText.getText()+"%' "
                                              +" AND FIRSTNAME LIKE '%"+firstText.getText()+"%' AND MIDDLENAME LIKE '%"+middleText.getText()+"%' "
                                              +" AND LASTNAME LIKE '%"+lastText.getText()+"%' AND HIREDATE LIKE '%"+hirePicker.getText()+"%' AND BIRTHDATE LIKE '%"+birthPicker.getText()+"%' "
@@ -1015,7 +1036,8 @@ public class EmployeesController implements Initializable{
                     int salary = rs.getInt(8);
                     int idcard = rs.getInt(9);
                     String pass = rs.getString(10);
-                    empTableContainer.add(new Employee(ssn, f, m, l, hire, birth, gender, salary, idcard, pass ));
+                    String sec = rs.getString(11);
+                    empTableContainer.add(new Employee(ssn, f, sec, m, l, hire, birth, gender, salary, idcard, pass ));
                 }
                 
                 tableView.setItems(empTableContainer);

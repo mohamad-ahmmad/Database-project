@@ -38,6 +38,7 @@
                   <TableColumn fx:id="nameCol" prefWidth="79.20001220703125" text="First Name" />
                   <TableColumn fx:id="mNameCol" prefWidth="108.79998779296875" text="Middle Name" />
                   <TableColumn fx:id="lNameCol" minWidth="0.0" prefWidth="94.4000244140625" text="Last Name" />
+                  <TableColumn fx:id="sectionCol" prefWidth="105.5999755859375" text="Section" />
                   <TableColumn fx:id="hireDateCol" prefWidth="94.39990234375" text="Hiredate" />
                   <TableColumn fx:id="birthDateCol" prefWidth="85.5999755859375" text="Birthdate" />
                   <TableColumn fx:id="genderCol" prefWidth="77.60009765625" text="Gender" />
