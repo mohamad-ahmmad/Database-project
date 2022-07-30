@@ -406,15 +406,42 @@
                         </TextField>
                      </children>
                   </Pane>
+                  <Pane fx:id="SSNPane111" prefHeight="51.0" prefWidth="170.0">
+                     <children>
+                        <Label layoutX="43.0" prefHeight="14.0" prefWidth="73.0" text="Stock">
+                           <font>
+                              <Font name="Berlin Sans FB" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtfieldStock2" layoutY="17.0" prefHeight="21.0" prefWidth="125.0" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </Pane>
                </children>
             </FlowPane>
             <TableView fx:id="storageTable" layoutX="8.0" layoutY="153.0" prefHeight="359.0" prefWidth="794.0">
                <columns>
-                  <TableColumn fx:id="wareIDCol" prefWidth="386.39996910095215" text="Warehouse ID" />
-                  <TableColumn fx:id="DidCol" prefWidth="407.2000427246094" text="Dress ID" />
+                  <TableColumn fx:id="wareIDCol" prefWidth="240.8000364303589" text="Warehouse ID" />
+                  <TableColumn fx:id="DidCol" prefWidth="315.9999237060547" text="Dress ID" />
+                  <TableColumn fx:id="stockCol2" prefWidth="235.99997558593748" text="Stock" />
                </columns>
             </TableView>
-            <JFXButton layoutX="688.0" layoutY="108.0" onAction="#startSearchStorage" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
+            <JFXButton layoutX="688.0" layoutY="108.0" onAction="#clearSearch" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
+               <stylesheets>
+                  <URL value="@../../CSS/ColorThemes.css" />
+                  <URL value="@../../CSS/OwnerPage/Departments.css" />
+               </stylesheets>
+               <font>
+                  <Font name="Berlin Sans FB" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="688.0" layoutY="66.0" onAction="#startSearchStorage" prefHeight="36.0" prefWidth="104.0" styleClass="AddDepartment" text="Search!">
                <stylesheets>
                   <URL value="@../../CSS/ColorThemes.css" />
                   <URL value="@../../CSS/OwnerPage/Departments.css" />

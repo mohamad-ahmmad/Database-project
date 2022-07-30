@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="mainPanel" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.warehouseManager.WarehouseManagerController">
+<AnchorPane id="AnchorPane" fx:id="mainPanel" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;" stylesheets="@../../CSS/ColorThemes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.garage.controllers.warehouseManager.WarehouseManagerController">
    <children>
       <AnchorPane fx:id="viewPanel" layoutX="190.0" prefHeight="700.0" prefWidth="810.0">
          <children>

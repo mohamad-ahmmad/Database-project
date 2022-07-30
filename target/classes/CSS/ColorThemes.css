@@ -211,7 +211,7 @@
 /* Customize ScrollBars */
 
 .scroll-bar:horizontal .track {
-	-fx-background-color: #F8A918;
+	-fx-background-color: #333;
 	-fx-border-color: transparent;
 	-fx-background-radius: 2.0em;
 	-fx-border-radius: 2.0em;
@@ -219,7 +219,7 @@
 }
 
 .scroll-bar:vertical .track {
-	-fx-background-color: #F8A918;
+	-fx-background-color: #333;
 	-fx-border-color: transparent;
 	-fx-background-radius: 2.0em;
 	-fx-border-radius: 2.0em;
