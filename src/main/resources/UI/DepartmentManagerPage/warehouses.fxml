@@ -203,7 +203,7 @@
          </children>
       </Pane>
       <AnchorPane fx:id="filterPane" layoutX="379.0" layoutY="455.0" prefHeight="230.0" prefWidth="420.0" />
-      <MFXButton layoutX="675.0" layoutY="152.0" onAction="#showInfo" prefHeight="34.0" prefWidth="125.0" styleClass="btns" text="Show Info.">
+      <MFXButton fx:id="wareBtn" disable="true" layoutX="675.0" layoutY="152.0" onAction="#showInfo" prefHeight="34.0" prefWidth="125.0" styleClass="btns" text="Warehouse Info">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></MFXButton>
@@ -239,5 +239,6 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></MFXButton>
+      <MFXButton fx:id="previewBtn" disable="true" layoutX="675.0" layoutY="107.0" onAction="#showPreview" prefHeight="34.0" prefWidth="126.0" styleClass="btns" text="Show Preview" />
    </children>
 </AnchorPane>

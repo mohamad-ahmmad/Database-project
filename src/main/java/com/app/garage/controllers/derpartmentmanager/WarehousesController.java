@@ -5,7 +5,9 @@
 package com.app.garage.controllers.derpartmentmanager;
 
 import com.app.garage.App;
+import com.app.garage.controllers.employee.CardController;
 import com.jfoenix.controls.JFXCheckBox;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -22,7 +24,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -31,6 +36,9 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.converter.LongStringConverter;
 
 /**
@@ -91,7 +99,25 @@ public class WarehousesController implements Initializable {
         tableId.setCellFactory(TextFieldTableCell.forTableColumn(new LongStringConverter()));
         tableId.setOnEditCommit(e->{tableView.refresh();});
         
+        tableView.getSelectionModel().selectedItemProperty().addListener(e->{
+            if(tableView.getSelectionModel().getSelectedItem() == null){
+           previewBtn.setDisable(true);
+           wareBtn.setDisable(true);
+            }else{
+                    previewBtn.setDisable(false);
+           wareBtn.setDisable(false);
+            }
+            
+            
+        });
+         
+        
     }
+    
+    @FXML
+    private MFXButton previewBtn;
+    @FXML
+    private MFXButton wareBtn;
     
         @FXML
     private TableColumn<Warehouse, String> tableBrand;
@@ -216,11 +242,102 @@ public class WarehousesController implements Initializable {
         else{root.setVisible(true);}
     }
 
+    
     @FXML
-    void showInfo(ActionEvent event) {
+    private Label emailInfo;
 
+    @FXML
+    private Label locationInfo;
+
+    @FXML
+    private Label nameInfo;
+
+    @FXML
+    private Label numberInfo;
+    
+    
+    
+    @FXML
+    void showInfo(ActionEvent event) throws IOException{
+       
+          
+           Stage info = new Stage();
+           info.initModality(Modality.APPLICATION_MODAL);
+           info.initStyle(StageStyle.TRANSPARENT);
+           FXMLLoader loader =new FXMLLoader(getClass().getResource("/UI/DepartmentManagerPage/info-card.fxml"));
+            loader.setController(this);
+            Parent root = loader.load();
+            Scene infoScene = new Scene(root);
+            info.setScene(infoScene);
+            info.show();
+            
+            
+        try {
+            con=DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            
+            ResultSet r = st.executeQuery("select firstname, lastname, email, telephonenumber, w.country, w.city, w.street " +" from WAREHOUSE w left join employee e on w.managerid=e.ssn join wdmanager wd on w.managerid=wd.WDSSN and ROWNUM = 1 and w.WID="+tableView.getSelectionModel().getSelectedItem().getWarehouseId()
+                       );
+            if(r.next()){
+                nameInfo.setText(r.getString("firstname")+" "+r.getString("lastname"));
+                locationInfo.setText(r.getString("country")+", "+r.getString("city")+", "+r.getString("street"));
+                emailInfo.setText(r.getString("email"));
+                numberInfo.setText(r.getString("telephonenumber"));
+                
+            }else{
+                info.close();
+            }
+            con.close();
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+        }
+            
     }
-
+    
+    @FXML
+    private void showPreview(ActionEvent event) throws IOException{
+        
+         Stage info = new Stage();
+           info.initModality(Modality.APPLICATION_MODAL);
+           
+           FXMLLoader loader =new FXMLLoader(getClass().getResource("/UI/EmployeePage/dress-card.fxml")); 
+           Parent root = loader.load();
+           CardController cont =  loader.getController(); 
+           cont.delete(cont.getFXSaleId());
+           cont.delete(cont.getFXPrice());
+           Scene infoScene = new Scene(root);
+           info.setScene(infoScene);
+           info.show();
+           
+        try {
+            con = DriverManager.getConnection(App.ip, App.user, App.password);
+            Statement st = con.createStatement();
+            
+            ResultSet rs = st.executeQuery("select DRESSNAME, DRESSCOLOR, DRESSSIZE from DRESS where DRESSID="+tableView.getSelectionModel().getSelectedItem().getDressId());
+            if(rs.next()){
+                cont.setColor(rs.getString("DRESSCOLOR"));
+                cont.setName(rs.getString("DRESSNAME"));
+                cont.setSize(rs.getString("DRESSSIZE"));
+                try{
+                 cont.setImage("/Previews/Clothes/"+tableView.getSelectionModel().getSelectedItem().getDressId()+"_PREVIEW.jpg");    
+                }
+                catch(Exception e){
+                    
+                }
+                
+                
+            }else
+                info.close();
+            
+            con.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+           
+            
+        
+    }
+    
     @FXML
     void clearFilter(){
         idField.setText("");
@@ -364,5 +481,8 @@ public class WarehousesController implements Initializable {
         }
         
     }
-
+    @FXML
+    private void closeInfo(ActionEvent e){
+        ((Stage)((Node)e.getSource()).getScene().getWindow()).close();
+    }
 }

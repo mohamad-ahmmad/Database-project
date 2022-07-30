@@ -391,6 +391,9 @@ public class ClothesController implements Initializable {
     void cancel(ActionEvent event) {
     temp.close();
     }
+    
+    @FXML
+    private FlowPane flowPaneImport;
     @FXML
     private Label errLabel;
 private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
@@ -401,16 +404,9 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
         String wId = importWID.getText();
         String percent = importPercent.getText();
         
-           try{
-                    Double.parseDouble(dressId);
-                }catch(Exception ex){
-                    importDress.setStyle(cssErorr);
-                    errLabel.setText("Contains only digits.");
-                    errLabel.setVisible(true);
-                    return;
-                }
+
+
            
-           errLabel.setVisible(false);
         try {
             con = DriverManager.getConnection(App.ip, App.user, App.password);
             Statement st = con.createStatement();
@@ -420,23 +416,22 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
                importStock.setStyle("");
             }catch(Exception e){
                 importStock.setStyle(cssErorr);
-                errLabel.setText("Contains only digits.");
-                errLabel.setVisible(true);
+
                 importDress.setStyle("");
                 return;
             }
-            errLabel.setVisible(false);
+
             
             ResultSet rs = st.executeQuery("select stock from dress where dressid="+dressId);
             boolean found= rs.next();
             if(!found){
                 importDress.setStyle(cssErorr);
-                errLabel.setText("This dress doesn't exist.");
-                errLabel.setVisible(true);
+                errLabel.setText("This dress doesn't exist");
+                flowPaneImport.getChildren().add(errLabel);
                 return;
             }
-            
-            errLabel.setVisible(false);
+            flowPaneImport.getChildren().remove(errLabel);
+
             importDress.setStyle("");
             int wholeQuantity = rs.getInt(1);
             
@@ -453,19 +448,21 @@ private static final String cssErorr = "-fx-border-color:rgba(255,0,0,0.4)";
             else{ 
             importStock.setStyle(cssErorr);
             errLabel.setText("This stock larger than the warehouse stock.");
-            errLabel.setVisible(true);
+            flowPaneImport.getChildren().add(errLabel);
             return; }
-            errLabel.setVisible(false);
             
+            flowPaneImport.getChildren().remove(errLabel);
             temp.close();
             con.close();
         } catch (SQLException ex) {
-            
-        
-                 Alert s= new Alert(Alert.AlertType.ERROR);
-            s.setContentText("Invalid Inputs.\n The dress already exist or entering invalid warehouse id please check your inputs\nor the dress id does not exist.");
-            s.setTitle("Error");
-            s.show();
+              flowPaneImport.getChildren().remove(errLabel);
+              errLabel.setText("Invalid Warehouse ID");
+              importWID.setStyle(cssErorr);
+              flowPaneImport.getChildren().add(errLabel);
+//            Alert s= new Alert(Alert.AlertType.ERROR);
+//            s.setContentText("Invalid Inputs.\nYou have entered an invalid warehouse id please check your inputs.");
+//            s.setTitle("Error");
+//            s.show();
             return;
                         
         }

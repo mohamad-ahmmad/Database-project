@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -127,6 +129,18 @@ public class CardController implements Initializable {
       }
       public String getSale(){
           return dressSale.getText();
+      }
+      public Label getFXSaleId(){
+          return dressSale;
+      }
+      @FXML
+      private Pane pricePane;
+      public Pane getFXPrice(){
+          return pricePane;
+      }
+      
+      public void delete(Node e){
+          cardPane.getChildren().removeAll(e);
       }
       
 }

@@ -38,15 +38,12 @@
             <Font name="Berlin Sans FB" size="20.0" />
          </font>
       </Label>
+      <Label fx:id="errLabel" layoutX="-718.0" layoutY="-499.0" styleClass="label-error" text="HELLO BDAIRO" />
       <ImageView fitHeight="23.0" fitWidth="26.0" layoutX="2.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../ICONS/employee/clothes.png" />
          </image>
       </ImageView>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" layoutY="231.0" prefHeight="23.0" prefWidth="390.0">
-         <children>
-            <Label fx:id="errLabel" styleClass="label-error" text="HELLO BDAIRO" visible="false" />
-         </children>
-      </FlowPane>
+      <FlowPane fx:id="flowPaneImport" alignment="CENTER" columnHalignment="CENTER" layoutY="231.0" prefHeight="23.0" prefWidth="390.0" />
    </children>
 </AnchorPane>

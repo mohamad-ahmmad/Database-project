@@ -62,19 +62,23 @@
                </font>
             </Label>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f7a619ba" height="21.0" layoutX="120.0" layoutY="148.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="43.0" />
-            <ImageView fitHeight="19.0" fitWidth="34.0" layoutX="147.0" layoutY="149.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../ICONS/employee/money_sign.png" />
-               </image>
-               <effect>
-                  <ColorAdjust brightness="1.0" />
-               </effect>
-            </ImageView>
-            <Label fx:id="dressPrice" layoutX="124.0" layoutY="148.0" text="00" textFill="WHITE">
-               <font>
-                  <Font name="Yu Gothic Bold" size="16.0" />
-               </font>
-            </Label>
+            <Pane fx:id="pricePane" layoutX="124.0" layoutY="148.0">
+               <children>
+                  <ImageView fitHeight="19.0" fitWidth="34.0" layoutX="23.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../ICONS/employee/money_sign.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" />
+                     </effect>
+                  </ImageView>
+                  <Label fx:id="dressPrice" text="00" textFill="WHITE">
+                     <font>
+                        <Font name="Yu Gothic Bold" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
          <cursor>
             <Cursor fx:constant="HAND" />

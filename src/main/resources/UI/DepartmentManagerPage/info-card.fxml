@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="398.0" style="-fx-background-color: white; -fx-border-color: #333;" stylesheets="@../../CSS/ColorThemes.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MFXButton layoutX="168.0" layoutY="234.0" onAction="#closeInfo" prefHeight="26.0" prefWidth="62.0" styleClass="btns" text="Close" />
+      <Label layoutX="62.0" layoutY="83.0" text="Loaction:">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="63.0" layoutY="110.0" text="Manager Name:">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="63.0" layoutY="137.0" text="Telephone Number:">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="62.0" layoutY="165.0" text="Email:">
+         <font>
+            <Font name="Berlin Sans FB" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="-1.0" layoutY="14.0" prefHeight="28.0" prefWidth="272.0" styleClass="underline" text="   Warehouse Informations:">
+         <font>
+            <Font name="Berlin Sans FB" size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="locationInfo" layoutX="135.0" layoutY="85.0" text="Empty">
+         <font>
+            <Font name="Gill Sans MT" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="25.0" text=".">
+         <font>
+            <Font name="Berlin Sans FB" size="82.0" />
+         </font>
+      </Label>
+      <Label layoutX="40.0" layoutY="54.0" text=".">
+         <font>
+            <Font name="Berlin Sans FB" size="82.0" />
+         </font>
+      </Label>
+      <Label layoutX="41.0" layoutY="80.0" text=".">
+         <font>
+            <Font name="Berlin Sans FB" size="82.0" />
+         </font>
+      </Label>
+      <Label layoutX="41.0" layoutY="107.0" text=".">
+         <font>
+            <Font name="Berlin Sans FB" size="82.0" />
+         </font>
+      </Label>
+      <Label fx:id="nameInfo" layoutX="190.0" layoutY="113.0" text="Empty">
+         <font>
+            <Font name="Gill Sans MT" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="numberInfo" layoutX="216.0" layoutY="139.0" text="Empty">
+         <font>
+            <Font name="Gill Sans MT" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="emailInfo" layoutX="114.0" layoutY="167.0" text="Empty">
+         <font>
+            <Font name="Gill Sans MT" size="16.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
