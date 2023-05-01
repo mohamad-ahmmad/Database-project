@@ -6,5 +6,3 @@
 2- MaterialFX.
 3-OJDBC
 
-You can find these dependencies in the pom.xml file.
-
